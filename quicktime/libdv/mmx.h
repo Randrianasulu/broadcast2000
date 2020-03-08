@@ -59,7 +59,7 @@ typedef	union {
 
 /*	Function to test if multimedia instructions are supported...
 */
-inline extern int
+inline static int
 mm_support(void)
 {
 	/* Returns 1 if MMX instructions are supported,
@@ -72,6 +72,9 @@ mm_support(void)
 	__asm__ __volatile__ (
 		/* See if CPUID instruction is supported ... */
 		/* ... Get copies of EFLAGS into eax and ecx */
+                "pushl %%ebx\n\t"
+                "pushl %%ecx\n\t"
+                "pushl %%edx\n\t"
 		"pushf\n\t"
 		"popl %%eax\n\t"
 		"movl %%eax, %%ecx\n\t"
@@ -147,10 +150,10 @@ mm_support(void)
 		"jz NotSupported5\n\t"		/* MMX not supported */
 		"testl $0x01000000, %%eax\n\t"	/* Test for Ext'd MMX */
 		"jnz EMMXSupported\n\t"
-		"movl $1, %0:\n\n\t"		/* MMX Supported */
+		"movl $1, %0\n\n\t"		/* MMX Supported */
 		"jmp Return\n\n"
 		"EMMXSupported:\n\t"
-		"movl $3, %0:\n\n\t"		/* EMMX and MMX Supported */
+		"movl $3, %0\n\n\t"		/* EMMX and MMX Supported */
 		"jmp Return\n\t"
 
 
@@ -170,10 +173,10 @@ mm_support(void)
 		"jz NotSupported6\n\t"		/* MMX not supported */
 		"testl $0x80000000, %%edx\n\t"	/* Test for 3DNow! */
 		"jnz ThreeDNowSupported\n\t"
-		"movl $1, %0:\n\n\t"		/* MMX Supported */
+		"movl $1, %0\n\n\t"		/* MMX Supported */
 		"jmp Return\n\n"
 		"ThreeDNowSupported:\n\t"
-		"movl $5, %0:\n\n\t"		/* 3DNow! and MMX Supported */
+		"movl $5, %0\n\n\t"		/* 3DNow! and MMX Supported */
 		"jmp Return\n\t"
 
 
@@ -186,30 +189,32 @@ mm_support(void)
 		"cpuid\n\t"
 		"testl $0x00800000, %%edx\n\t"	/* Test for MMX */
 		"jz NotSupported7\n\t"		/* MMX Not supported */
-		"movl $1, %0:\n\n\t"		/* MMX Supported */
+		"movl $1, %0\n\n\t"		/* MMX Supported */
 		"jmp Return\n\t"
 
 		/* Nothing supported */
 		"\nNotSupported1:\n\t"
-		"#movl $101, %0:\n\n\t"
+		"#movl $101, %0\n\n\t"
 		"\nNotSupported2:\n\t"
-		"#movl $102, %0:\n\n\t"
+		"#movl $102, %0\n\n\t"
 		"\nNotSupported3:\n\t"
-		"#movl $103, %0:\n\n\t"
+		"#movl $103, %0\n\n\t"
 		"\nNotSupported4:\n\t"
-		"#movl $104, %0:\n\n\t"
+		"#movl $104, %0\n\n\t"
 		"\nNotSupported5:\n\t"
-		"#movl $105, %0:\n\n\t"
+		"#movl $105, %0\n\n\t"
 		"\nNotSupported6:\n\t"
-		"#movl $106, %0:\n\n\t"
+		"#movl $106, %0\n\n\t"
 		"\nNotSupported7:\n\t"
-		"#movl $107, %0:\n\n\t"
-		"movl $0, %0:\n\n\t"
+		"#movl $107, %0\n\n\t"
+		"movl $0, %0\n\n\t"
 
 		"Return:\n\t"
+                "popl %%edx\n\t"
+                "popl %%ecx\n\t"
+                "popl %%ebx\n\t"
 		: "=a" (rval)
 		: /* no input */
-		: "eax", "ebx", "ecx", "edx"
 	);
 
 	/* Return */
@@ -218,7 +223,7 @@ mm_support(void)
 
 /*	Function to test if mmx instructions are supported...
 */
-inline extern int
+inline static int
 mmx_ok(void)
 {
 	/* Returns 1 if MMX instructions are supported, 0 otherwise */
@@ -267,15 +272,15 @@ mmx_ok(void)
 		fprintf(stderr, #op "_m2r(" #mem "=0x%08x%08x, ", \
 			mmx_trace.d[1], mmx_trace.d[0]); \
 		__asm__ __volatile__ ("movq %%" #reg ", %0" \
-				      : "=X" (mmx_trace) \
+				      : "=m" (mmx_trace) \
 				      : /* nothing */ ); \
 		fprintf(stderr, #reg "=0x%08x%08x) => ", \
 			mmx_trace.d[1], mmx_trace.d[0]); \
 		__asm__ __volatile__ (#op " %0, %%" #reg \
 				      : /* nothing */ \
-				      : "X" (mem)); \
+				      : "m" (mem)); \
 		__asm__ __volatile__ ("movq %%" #reg ", %0" \
-				      : "=X" (mmx_trace) \
+				      : "=m" (mmx_trace) \
 				      : /* nothing */ ); \
 		fprintf(stderr, #reg "=0x%08x%08x\n", \
 			mmx_trace.d[1], mmx_trace.d[0]); \
@@ -285,7 +290,7 @@ mmx_ok(void)
 	{ \
 		mmx_t mmx_trace; \
 		__asm__ __volatile__ ("movq %%" #reg ", %0" \
-				      : "=X" (mmx_trace) \
+				      : "=m" (mmx_trace) \
 				      : /* nothing */ ); \
 		fprintf(stderr, #op "_r2m(" #reg "=0x%08x%08x, ", \
 			mmx_trace.d[1], mmx_trace.d[0]); \
@@ -293,7 +298,7 @@ mmx_ok(void)
 		fprintf(stderr, #mem "=0x%08x%08x) => ", \
 			mmx_trace.d[1], mmx_trace.d[0]); \
 		__asm__ __volatile__ (#op " %%" #reg ", %0" \
-				      : "=X" (mem) \
+				      : "=m" (mem) \
 				      : /* nothing */ ); \
 		mmx_trace = (mem); \
 		fprintf(stderr, #mem "=0x%08x%08x\n", \
@@ -333,8 +338,8 @@ mmx_ok(void)
 		__asm__ __volatile__ ("movq %0, %%mm0\n\t" \
 				      #op " %1, %%mm0\n\t" \
 				      "movq %%mm0, %0" \
-				      : "=X" (memd) \
-				      : "X" (mems)); \
+				      : "=m" (memd) \
+				      : "m" (mems)); \
 		mmx_trace = (memd); \
 		fprintf(stderr, #memd "=0x%08x%08x\n", \
 			mmx_trace.d[1], mmx_trace.d[0]); \
@@ -348,16 +353,16 @@ mmx_ok(void)
 #define	mmx_i2r(op, imm, reg) \
 	__asm__ __volatile__ (#op " %0, %%" #reg \
 			      : /* nothing */ \
-			      : "X" (imm) )
+			      : "i" (imm) )
 
 #define	mmx_m2r(op, mem, reg) \
 	__asm__ __volatile__ (#op " %0, %%" #reg \
 			      : /* nothing */ \
-			      : "X" (mem))
+			      : "m" (mem))
 
 #define	mmx_r2m(op, reg, mem) \
 	__asm__ __volatile__ (#op " %%" #reg ", %0" \
-			      : "=X" (mem) \
+			      : "=m" (mem) \
 			      : /* nothing */ )
 
 #define	mmx_r2r(op, regs, regd) \
@@ -367,8 +372,8 @@ mmx_ok(void)
 	__asm__ __volatile__ ("movq %0, %%mm0\n\t" \
 			      #op " %1, %%mm0\n\t" \
 			      "movq %%mm0, %0" \
-			      : "=X" (memd) \
-			      : "X" (mems))
+			      : "=m" (memd) \
+			      : "m" (mems))
 
 #endif
 
