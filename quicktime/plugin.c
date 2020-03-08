@@ -243,7 +243,8 @@ void quicktime_register_internal_acodec()
 void quicktime_register_internal_vcodec()
 {
 	quicktime_register_vcodec(QUICKTIME_RAW, quicktime_init_codec_raw);
-	quicktime_register_vcodec(QUICKTIME_DV, quicktime_init_codec_dv); 
+	quicktime_register_vcodec(QUICKTIME_DV, quicktime_init_codec_dv);
+	quicktime_register_vcodec(QUICKTIME_DV_AVID_A, quicktime_init_codec_dv);
 	quicktime_register_vcodec(QUICKTIME_JPEG, quicktime_init_codec_jpeg); 
 	quicktime_register_vcodec(QUICKTIME_MJPA, quicktime_init_codec_jpeg); 
 	quicktime_register_vcodec(QUICKTIME_PNG, quicktime_init_codec_png); 
@@ -336,7 +337,7 @@ int quicktime_register_external_acodec(const char *codec_name)
     	acodecs[total_acodecs - 1].codec.decode_audio = decode_audio_external;
     	acodecs[total_acodecs - 1].codec.encode_audio = encode_audio_external;
 
-    	return total_vcodecs - 1;
+    	return total_acodecs - 1;
 	} 
 	else
     	return -1;
