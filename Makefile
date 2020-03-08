@@ -40,8 +40,10 @@ backup: clean
 
 clean:
 	rm -f *.o ipcclear soundtest
-	make -C cinelerra clean
+	make -C bcast clean
 	make -C plugins clean
+	make -C bcbase clean
+	make -C guicast clean
 	@ for i in $(DIRS) ; \
 	do \
 		 $(MAKE) -C $$i clean; \
