@@ -117,6 +117,7 @@ all: $(OUTPUT)
 $(OUTPUT): $(OBJS)
 	$(MAKE) -C jpeg
 	$(MAKE) -C libdv
+	objcopy -L dv_peek_vlc libdv/parse.o
 	$(MAKE) -C libraw1394
 	ar rcs $(OUTPUT) $(OBJS) $(JPEGOBJS) $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
 	g++ -shared -o libquicktime.so  $(OBJS) $(JPEGOBJS) $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
