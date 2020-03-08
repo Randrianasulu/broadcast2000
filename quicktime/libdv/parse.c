@@ -312,9 +312,9 @@ gint dv_parse_ac_coeffs(dv_videosegment_t *seg) {
 	vlc_error = TRUE;
 	if(pass == 1) goto mb_done;
 	else goto abort_segment;
-  bl_done:
+  bl_done:;
       } // for b 
-  mb_done: 
+  mb_done:;
     } // for m 
     vlc_trace("\n");
   } // for pass 
