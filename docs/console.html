@@ -1,0 +1,84 @@
+<TITLE>The Console</TITLE>
+
+
+<B>THE CONSOLE</B><P>
+
+<BLOCKQUOTE>
+
+When Broadcast 2000 plays back, it reads large chunks of data from
+disk, asynchronously sends small fragments through the console, and
+overlays the output of each module onto the output channels.  The same
+thing happens for video, but video is overlayed on a single output
+frame instead of channels.  Make sure <B>Window->show console</B> is
+checked, to bring up the console.  As you can see, each track on the
+timeline is routed through a module.<P>
+
+It's possible to even synthesize sounds from the console but you must
+turn off <B>disable tracks when no edits</B> in
+<B>preferences->playback</B>.<P>
+
+Start playing a file and tweek the faders.  The <B>O</B> buttons
+reset the meters in case you clip.  The <B>pan box</B> was designed to
+support more than 2 channels.  For 2 channel panning, more precision
+can be achieved by moving the cross to the bottom of the box and
+panning left and right.  Track titles can be entered from the console
+as well.<P>
+
+Resize the console window and see what happens.<P>
+
+</BLOCKQUOTE>
+
+<B>PLUGINS</B>
+
+<BLOCKQUOTE>
+The console is really a very powerful realtime signal processor.  By
+attaching plugins to the boxes labeled <B>"plugin"</B> you route
+signals through the plugins and back to the module.<P>
+
+The signal from a track first goes through <B>Inv</B> which inverts the
+signal.  This is used for phase cancellation.<P>
+
+Then the signal goes through each <B>plugin</B> button.  Press on a
+plugin button then <B>Attach...</B>.  You get a <B>Plugins</B> list,
+an empty <B>Shared Plugins</B> list, and a <B>Modules</B> list with
+some tracks in it.<P>
+
+Selecting an item in any list and hitting <B>Attach</B> causes the
+module to route signals through that item, whether it's another module,
+a plugin, or a previously attached plugin on another module.<P>
+
+Attaching a plugin is straightforward, but if you want to duplicate the
+effect for several tracks, adjusting the settings for every plugin can
+suck.  Instead, you can attach one plugin to one module.  For other
+modules, the original plugin pops up in the <B>shared</B> list. 
+Attaching it as a <B>shared plugin</B> causes the single plugin to
+process data for the second module, without a second set of controls. 
+Some plugins, like reverb, mix the signals from both modules so be
+careful.<P>
+
+The <B>Send</B> and <B>Recv</B> settings determine where the plugin gets
+its input and where it puts its output.  Deselecting <B>Send</B> stops
+the plugin from getting its input from the module it's attached to. 
+This is useful for a tone generator that doesn't take any input at
+all.  Deselecting <B>Recv</B> prevents the plugin from sending its
+output back to the current module.  This is used for bouncing a signal
+to another module, without destroying the original signal.<P>
+
+After passing through all the plugins, a sigal goes through the
+<B>Fade</B>.  When you attach a module as a plugin, the output of the
+plugin, if <B>Out</B> was activated, is the faded signal from the other
+module.<P>
+
+After fading, the final process is either <B>Panning</B> or
+<B>Muting</B> depending on the <B>Mute</B> setting.  If mute is
+selected, the signal is discarded.  Otherwise it is mixed into the
+final output channels according to the pan box setting.  <B>Muting</B>
+is useful when one module acts as the fader to another module's
+plugin.<P>
+
+Suppose you want a reverb, but you want to fade out the signal without
+fading out the reverberation.  By routing the signal through a muted
+second module, which fades out, and then through a reverb in the
+original module, the reverb continues after the signal is faded out.
+
+</BLOCKQUOTE>

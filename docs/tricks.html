@@ -1,0 +1,120 @@
+<TITLE>Secrets of Broadcast 2000</TITLE>
+
+
+<A NAME="Transport">
+
+<B>SECRETS OF BROADCAST 2000</B><P>
+
+<B>MAKING A CD</B>
+
+<BLOCKQUOTE>
+
+Create a project of 2 audio tracks 44100 kHz sampling and 2 output
+channels.  Paste in the complete contents of your CD on the timeline
+exactly as it should play back.  Insert silence between tracks. 
+Perform normalization on selected areas of the timeline to maximize the
+bit depth while not creating uneven volume levels.  Insert labels at
+track division points and remove any extranneous labels.<P>
+
+Position the cursor at the beginning of the program and select
+<B>File->render list...</B>  Specify a filename containing a two digit
+0 padded number like <B>track01.wav</B>.  This is the filename for the
+first track written to disk.  Select WAV format, 16 bits, undithered. 
+Render it and Broadcast 2000 will automatically create a new file
+wherever there is a label.
+
+</BLOCKQUOTE>
+
+<B>MAKING VIDEO EASIER TO SEE</B>
+
+<BLOCKQUOTE>
+
+It's easier to see video when the video windows are always on top. 
+This can be set by configuring your window manager.  For fvwm2 a line
+like this:<P>
+
+<CODE>
+Style "Bcast: Video*"   StaysOnTop<P>
+</CODE>
+
+in your <B>system.fvwmrc</B> file does it.
+
+
+</BLOCKQUOTE>
+
+<B>BLURRING OUT CERTAIN PARTS OF A FRAME</B>
+
+<BLOCKQUOTE>
+
+Boot up The Gimp.  Create an RGB image with transparent background. 
+Draw a white filled circle or box by first selecting a region then
+filling it white.  Save as .png.<P>
+
+Boot up Broadcast 2000.  Load up one track with the video.  Append the
+.png image you just created into another track.<P>
+
+Adjust <B>camera</B> automation on your .png image so that it blocks
+out the section of the video you want to blur.<P>
+
+Attach a <B>Swap channels</B> plugin to the .png track and arrange the
+channels thus:<P>
+<BLOCKQUOTE>
+<B>alpha -> red<BR>
+alpha -> green<BR>
+alpha -> blue<BR>
+100% -> alpha<BR></B>
+</BLOCKQUOTE>
+
+Change the <B>mode</B> on the .png image track to <B>multiply</B>.
+
+Render the video as a movie with high quality.  Alpha channels don't
+have to be enabled for this step.<P>
+
+Import the new movie as a new track below the original movie.  Apply
+<B>Chroma key</B> followed by <B>Blur</B> to the new track.  Set the
+chroma key to perfect black with a threshold of 1.  Turn off the
+<B>.png</B> track and play back.  Alpha channels have to be enabled. 
+For lossless alpha channels use floating point.<P>
+
+
+</BLOCKQUOTE>
+
+<B>BEEPING OUT WORDS</B>
+
+<BLOCKQUOTE>
+
+Load up the movie to be censored.  Mute its audio track but keep it
+playable.  Create a new audio track and disable its playback. 
+<B>Attach</B> the new track to the movie's audio track with <B>send</B>
+and <B>recieve</B> selected.<P>
+
+Create a third audio track, disable its playback, mute it and attach a
+<B>Synthesizer</B> to it with <B>Send</B> disabled but <B>Recieve</B>
+enabled.<P>
+
+Wherever you want to beep out the sound, paste a <B>transition</B> into
+the second audio track.  Attach the transition to the third module with
+<B>send</B> and <B>recieve</B> enabled.
+
+</BLOCKQUOTE>
+
+<B>LOADING A DIRECTORY FULL OF MP3s</B>
+
+<BLOCKQUOTE>
+
+cd into the directory and type bcast2000 *.  Wait for all the tracks to
+be inserted.<P>
+
+Disable recording on all tracks except the first two by shift clicking
+on the first track patch button and dragging over the second track's
+patch button.<P>
+
+Select <B>tracks->concatenate tracks</B>.<P>
+
+Make every track recordable by shift clicking the first track's patch
+button twice.  Then switch off recording for the first two tracks. 
+Select <B>tracks->delete tracks</B>.<P>
+
+</BLOCKQUOTE>
+
+

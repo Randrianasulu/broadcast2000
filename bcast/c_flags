@@ -1,0 +1,6 @@
+# LINUX
+echo $CFLAGS
+
+# SOLARIS
+#echo $CFLAGS -I../../tiff-v3.4/libtiff \
+#	-I../../jpeg-6b/ -I../../libpng-1.0.1/ -I../../zlib-1.1.2

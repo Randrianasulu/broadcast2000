@@ -1,0 +1,36 @@
+samplerate.o: samplerate.C ../../bcbase/errorbox.h \
+ ../../bcbase/bcbase.h ../../bcbase/arraylist.h \
+ ../../bcbase/defaults.h ../../bcbase/units.h \
+ ../../bcbase/filesystem.h ../../bcbase/stringfile.h \
+ ../../bcbase/bcbutton.h ../../bcbase/bccolors.h ../../bcbase/bctool.h \
+ ../../bcbase/bcfont.h ../../bcbase/bcsubwindow.h \
+ ../../bcbase/bcwindowbase.h ../../bcbase/linklist.h \
+ ../../bcbase/bcwindow.h ../../bcbase/timer.h ../../bcbase/bccanvas.h \
+ ../../bcbase/bcfilebox.h ../../bcbase/bclistbox.h \
+ ../../bcbase/bcscrollbar.h ../../bcbase/bckeys.h \
+ ../../bcbase/bctextbox.h ../../bcbase/bctitle.h \
+ ../../bcbase/bcmenubar.h ../../bcbase/bcpopup.h \
+ ../../bcbase/bcmeter.h ../../bcbase/bcpopupmenu.h \
+ ../../bcbase/bcpots.h ../../bcbase/bcprogress.h \
+ ../../bcbase/bcprogressbox.h ../../bcbase/thread.h \
+ ../../bcbase/bcsliders.h ../../bcbase/bctextarea.h \
+ ../../bcbase/bctoggles.h ../../bcbase/bcpan.h samplerate.h \
+ ../pluginclient.h ../../bcast/messages.h ../../bcast/pluginbuffer.h \
+ ../../bcast/sema.h ../../bcast/shmemory.h \
+ ../../bcast/plugincommands.h sratewindow.h
+sratewindow.o: sratewindow.C sratewindow.h ../../bcbase/bcbase.h \
+ ../../bcbase/arraylist.h ../../bcbase/defaults.h ../../bcbase/units.h \
+ ../../bcbase/filesystem.h ../../bcbase/stringfile.h \
+ ../../bcbase/bcbutton.h ../../bcbase/bccolors.h ../../bcbase/bctool.h \
+ ../../bcbase/bcfont.h ../../bcbase/bcsubwindow.h \
+ ../../bcbase/bcwindowbase.h ../../bcbase/linklist.h \
+ ../../bcbase/bcwindow.h ../../bcbase/timer.h ../../bcbase/bccanvas.h \
+ ../../bcbase/bcfilebox.h ../../bcbase/bclistbox.h \
+ ../../bcbase/bcscrollbar.h ../../bcbase/bckeys.h \
+ ../../bcbase/bctextbox.h ../../bcbase/bctitle.h \
+ ../../bcbase/bcmenubar.h ../../bcbase/bcpopup.h \
+ ../../bcbase/bcmeter.h ../../bcbase/bcpopupmenu.h \
+ ../../bcbase/bcpots.h ../../bcbase/bcprogress.h \
+ ../../bcbase/bcprogressbox.h ../../bcbase/thread.h \
+ ../../bcbase/bcsliders.h ../../bcbase/bctextarea.h \
+ ../../bcbase/bctoggles.h ../../bcbase/bcpan.h

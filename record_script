@@ -1,0 +1,32 @@
+(new_project)                # create a new project
+(set_atracks 1)              # number of audio tracks
+(set_vtracks 1)              # number of video tracks
+(set_channels 1)             # number of audio channels
+(set_samplerate 48000)       # sample rate
+(set_framerate 29.97)           # frame rate
+(set_trackw 720)             # track width
+(set_trackh 480)             # track height
+(set_outputw 720)             # output width
+(set_outputh 480)             # output height
+(set_aspectw 4)               # aspect ratio
+(set_aspecth 3)
+(ok)                         # Done creating new project
+(record)                     # Start the record dialog
+(set_channel WGN)            # The title of a channel you want to set
+(set_path /home/mov/xena1.mov)        # Filename to record to
+(set_audio 1)                 # record audio
+(set_video 1)                 # record video
+(set_format Quicktime)         # file format from the format menu
+(set_audio_compression IMA4)      # audio compression from the audio menu
+(set_audio_dither 0)             # dither audio if 8 or 16 bit
+(set_audio_signed 1)             # signed audio if PCM
+(set_audio_channels 1)           # number of audio channels to record
+(set_video_compression JPEG)      # video compression from the video menu
+(set_video_quality 80)            # quality for video compression
+(ok)                          # Done configuring the file.
+(set_mode timed)             # timed, untimed, or loop recording
+(set_duration 10)               # duration in seconds if timed or loop
+(set_monitor_audio 0)         # monitor audio.  Preferrably off.
+(set_monitor_video 0)         # monitor video.  Preferrably off.
+(start_recording)             # Start recording now.
+(ok)                          # Done configuring the window.

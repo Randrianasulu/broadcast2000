@@ -1,0 +1,21 @@
+/Makefile/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/ac3.c/1.1.1.1/Thu Nov  2 04:27:25 2000//
+/ac3.h/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/bit_allocation.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/c_flags/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/dct.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/exponents.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/header.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/huffman.h/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/layer1.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/layer2.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/layer3.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/mantissa.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/mpeg3audio.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/mpeg3audio.h/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/pcm.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/synthesizers.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/tables.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/tables.h/1.1.1.1/Thu Nov  2 04:27:26 2000//
+/uncouple.c/1.1.1.1/Thu Nov  2 04:27:26 2000//
+D

@@ -1,0 +1,122 @@
+#!/bin/sh
+USE_VA=0
+
+for ac_option
+do
+case "$ac_option" in
+	--va)
+		USE_VA=1
+		;;
+
+	*)
+		;;
+esac
+done
+
+if [ ${USE_VA} = 1 ]; then
+VERSION=2000c_va
+else
+VERSION=2000c
+fi
+
+
+DEST=/usr/src/redhat
+NAME=bcast-$VERSION
+
+# CLEAN SOURCE DIRECTORIES
+make clean
+
+# CREATE DIRECTORIES
+rm -r $DEST/$NAME
+mkdir $DEST/$NAME
+
+# COPY SOURCE FILES
+cp configure			$DEST/$NAME
+cp bcast2000.sh 		$DEST/$NAME
+cp *.c                  $DEST/$NAME
+cp Makefile             $DEST/$NAME
+cp COPYING              $DEST/$NAME
+cp record_script        $DEST/$NAME
+cp sync.sh              $DEST/$NAME
+cp make_packages*       $DEST/$NAME
+
+cp -rd audiofile        $DEST/$NAME
+cp -rd bcast            $DEST/$NAME
+cp -rd bcbase           $DEST/$NAME
+cp -rd docs             $DEST/$NAME
+cp -rd esound 			$DEST/$NAME
+cp -rd guicast          $DEST/$NAME
+cp -rd pluginpack       $DEST/$NAME
+cp -rd plugins          $DEST/$NAME
+cp -rd tiff        		$DEST/$NAME
+cd ..
+cp -rd libmpeg3         $DEST/$NAME
+cp -rd quicktime        $DEST/$NAME
+
+# MAKE TARBALL
+
+cd $DEST/
+chmod -R u+w $NAME
+
+if [ ${USE_VA} = 1 ]; then
+mv $NAME/libmpeg3/mpeg3css_fake.c $NAME/libmpeg3/mpeg3css.c
+fi
+
+tar zcf SOURCES/$NAME-src.tar.gz $NAME
+
+
+
+
+
+# MAKE SPEC FILE
+cat > $NAME-1.spec << EOF
+
+Summary: Complete production environment for audio and video
+Name: bcast
+Version: $VERSION
+Release: 1
+Copyright: GPL
+Group: Applications/Video
+Source: http://heroinewarrior.com/$NAME-src.tar.gz
+BuildRoot: /var/tmp/%{name}-buildroot
+Provides: libbcbase.so
+Prefix: /usr/local
+
+%description
+
+It's not about bits and bytes.  It's about transforming the impossible
+into reality.  We all have impossible dreams.  Broadcast 2000 gives you
+the tools you need to envision your wildest dreams.
+
+%prep
+%setup -q
+%build
+./configure
+make
+
+%install
+	mkdir -p /var/tmp/%{name}-buildroot/usr/local/bcast/plugins
+	mkdir -p /var/tmp/%{name}-buildroot/usr/local/bin
+	cp bcast/bcast2000 /var/tmp/%{name}-buildroot/usr/local/bcast
+	cp bcbase/libbcbase.so /var/tmp/%{name}-buildroot/usr/local/bcast
+	cp guicast/libguicast.so /var/tmp/%{name}-buildroot/usr/local/bcast
+	strip plugins/*.plugin
+	cp plugins/*.plugin /var/tmp/%{name}-buildroot/usr/local/bcast/plugins
+	cp bcast2000.sh /var/tmp/%{name}-buildroot/usr/local/bcast
+	cp record_script /var/tmp/%{name}-buildroot/usr/local/bcast
+	cp -rd docs /var/tmp/%{name}-buildroot/usr/local/bcast
+	cd /var/tmp/%{name}-buildroot/usr/local/bin
+	ln -sf ../bcast/bcast2000.sh bcast
+
+%clean
+rm -rf /var/tmp/%{name}-buildroot
+
+%files
+%defattr(-,root,root)
+
+/usr/local/bin/bcast
+/usr/local/bcast
+
+%changelog
+
+EOF

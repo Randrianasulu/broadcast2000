@@ -1,0 +1,94 @@
+<TITLE>Using the LML33</TITLE>
+
+
+
+<B>THE LML33</B><P>
+
+The <A HREF="http://linuxmedialabs.com">LML33</A> can be used for video
+I/O between Broadcast 2000 and analog devices.<P>
+
+
+<B>DRIVER INSTALLATION</B>
+
+<BLOCKQUOTE>
+
+There are about half a dozen drivers for the LML33 each with different
+interfaces.  Broadcast 2000 uses the <A
+HREF="http://linuxmedialabs.com/lml33src/"><B>"VideoStreams"</B></A>
+driver.  On a multiprocessor machine, compile the driver with <B>make
+-j 1</B>.  The driver takes many options at load time for the I/O
+ports, bitrate, and standard.  A sample installation using the S-Video
+ports, D1 resolution, and high quality JPEG compression is<P>
+
+<B>insmod lml33 bitrate=400000 video_stream=1 video_input=2
+video_output=2</B><P>
+
+You also have to create device nodes using <B>mkvidnodes</B><P>
+
+</BLOCKQUOTE>
+
+<B>BROADCAST 2000 CONFIGURATION</B>
+
+<BLOCKQUOTE>
+
+In <B>settings->preferences->video</B> are the settings for video input
+and output.  Set the paths to <B>/dev/jvideo</B> and set the drivers to
+<B>LML33</B>.  You can optionally set just the playback or just the record to
+LML33.<P>
+
+Trying to play anything but bare MJPEG Quicktime movies to LML33
+results in a blank screen.<P>
+
+All operations involving the LML33 must be in 720x480 resolution.<P>
+
+</BLOCKQUOTE>
+
+<B>RECORDING VIDEO</B>
+
+<BLOCKQUOTE>
+
+Recording from the LML33 is only possible when using <B>Quicktime</B>. 
+The compressor automatically defaults to <B>MJPG</B>.<P>
+
+The record preview contains an extra button: <B>swap fields</B>.  Since
+the field order on the LML33 is undefined the <B>swap fields</B> button
+allows you to define the field order manually.  After recording, the
+field order can still be swapped by using the <B>deinterlace</B>
+plugin.<P>
+
+Because of the way the LML33 is designed, any glitch causes the driver
+to crash and reset, and usually changes the field order.<P>
+
+The record preview automatically previews in RGB luminance while saving
+data in 601 luminance.  To make the video suitable for display on
+computers you'll need to apply the <B>RGB <-> 601</B> plugin.  For
+playing back to the LML33, leave it alone.<P>
+
+The LML driver buffers a certain number frames behind the audio, so
+after recording, you'll need to shift the video forward by several
+frames.<P>
+
+</BLOCKQUOTE>
+
+<B>PLAYING VIDEO</B>
+
+<BLOCKQUOTE>
+
+Playing video is a little more reliable.  Only sections of the timeline
+consisting of bare Quicktime MJPA data are sent to the LML33.  To get
+good results you must keep the output in 601 luminance.  If you have a
+movie in RGB luminance you'll need to render it to an MJPA Quicktime
+movie using the <B>RGB <-> 601</B> plugin.  Applying any realtime
+plugins diverts the output from MJPA and causes a blank screen so
+everything must be rendered to Quicktime and loaded back in.<P>
+
+By default the LML33 can only play JPEG frames smaller than 128k.  Any
+frame larger than 128k locks up the driver.  You can either render all
+your movies in extremely low quality or increase the buffering
+capability of the LML driver.  This can only be done when compiling the
+LML33 driver by enlarging <B>lml33RamPerBoard</B> in <B>main.c</B> to
+<B>0x10000</B> so the maximum frame size becomes 256k.
+
+
+</BLOCKQUOTE>
+

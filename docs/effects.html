@@ -1,0 +1,91 @@
+<TITLE>Effects</TITLE>
+
+
+
+<B>EFFECTS</B><P>
+
+<BLOCKQUOTE>
+
+All the effects in Broadcast 2000 are provided by plugins.  While many
+effects can run in realtime, on the console, effects that change the
+duration of a selection or require some random access must be done from
+the effect menus.  Audio and video effects are organized seperately.<P>
+
+</BLOCKQUOTE>
+
+<B>NON-REALTIME EFFECTS</B><P>
+
+<BLOCKQUOTE>
+
+Effects which can't run in realtime are organized seperately into the
+<B>Audio</B> and <B>Video</B> menus.  When selecting the
+<B>Effects...</B> menu option, you get a list of effects to process on
+the selected region and <A HREF="formatwindow.html">information for a
+file</A> to write the processed data to.  Notice the effects include
+realtime plugins, transitions and non realtime effects.<P>
+
+The data to be processed is selected first by which tracks are
+<B>playable</B> and next by which <B>region</B> is selected.<P>
+
+If <B>Overwrite project with output</B> is selected, the output is
+written to only the <B>recordable</B> tracks.  Thus footage on playable
+tracks need not be overwritten by an effect but the effect output can
+be written to other tracks.  Suppose you want to normalize tracks on a
+CD you just ripped.  You would create two new tracks, unrecord the two
+existing tracks and unplay the two new tracks.  Then perform normalize
+so the normalized output is pasted on the new tracks for comparison
+with the old tracks.
+</BLOCKQUOTE>
+
+<B>REALTIME EFFECTS</B><P>
+
+<BLOCKQUOTE>
+
+These can be run on the console.  The normal way to run an effect is to
+click a <B>Plugin</B> button on the console and select <B>Attach</B>. 
+More information on this kind of processing is in <A
+HREF="console.html">the console</A><P>
+
+</BLOCKQUOTE>
+
+<B>TRANSITIONS</B><P>
+
+<BLOCKQUOTE>
+
+Transitions in Broadcast 2000 are implemented by creating an extra
+video or audio track to paste transitions on.  You can optionally paste
+footage on the same track as your transitions or use the track
+specifically for transitions.  Next you route footage from other tracks
+through the transition track, forcing it to be processed by the
+transition.<P>
+
+There are many ways of routing footage through the transition track. 
+The method I use is creating 3 video tracks such that two contain
+footage and the third track contains only transitions.  Attach the
+transition module to both footage tracks with <B>in</B> and <B>out</B>
+selected.  Mute the footage tracks but not the transition track.  Set
+the footage tracks as <B>playable</B> but set the transition track as
+<B>not playable</B>.<P>
+
+<A HREF="transitionconsole.png">Here</A> is what the console looks
+like.<P>
+
+Now footage from both footage tracks passes through the transition
+module and any transitions that you paste on the transition track.<P>
+
+The next step is <B>pasting transitions</B>.  Select a region on the
+timeline.  Make sure only the <B>transition track</B> is recordable. 
+Select <B>Paste transition</B> from the video menu.  The same plugins
+that are available on the console can be pasted as transitions.<P>
+
+<A HREF="transitiontimeline.jpg">Here</A> is what the timeline looks
+like with a transition.<P>
+
+Once you paste a transition, <B>right click</B> on it to get a list of
+options for the transition.  The behavior is the same as console
+plugins.  The transition is rendered first in the module except the
+transition is only processed where it is pasted.<P>
+
+Audio plugins can also be pasted as transitions for audio.<P>
+
+</BLOCKQUOTE>

@@ -1,0 +1,364 @@
+<TITLE>Troubleshooting</TITLE>
+
+
+
+
+<H1>TROUBLESHOOTING</H1><P>
+
+"Your professors are wrong.  Every question is a stupid question." --
+gcc version 2.95.2 <P>
+
+<B>Most of the problems userse encounter are due to operating system
+limitations.  Since Linux was designed for embedded systems, video
+applications tend to go against the grain but there are ways around the
+compacted nature of the operating system.</B>
+
+<A NAME="RECORDING">
+<H2>RECORDING</H2>
+<BLOCKQUOTE>
+
+<B>PROBLEM: THE DC10/BUZ/ZORAN/LML33/MJPEG ETC DRIVER LOCKS UP</B> 
+
+<BLOCKQUOTE>
+
+The following derivatives of the dc10/buz/zoran/lml33/mjpeg etc driver need to be patched:<P>
+
+Version 0.6<BR>
+Version 0.7<P>
+
+Comment out the following segment in dc10.c:<P>
+
+<PRE>
+/*
+ * 			if (zr->codec_mode != BUZ_MODE_IDLE) {
+ * 				if (v.norm != zr->params.norm || v.channel != zr->params.input) {
+ * 					printk(KERN_ERR "%s: VIDIOCSCHAN called while the card in capture/playback mode\n", zr->name);
+ * 					return -EINVAL;
+ * 				} else {
+ * 					printk(BUZ_WARNING
+ * 					       "%s: Warning: VIDIOCSCHAN called while the card in capture/playback mode\n", zr->name);
+ * 				}
+ * 			}
+ */
+
+</PRE>
+
+</BLOCKQUOTE>
+
+<B>PROBLEM: THE BTTV DRIVER LOCKS UP</B> 
+
+<BLOCKQUOTE>
+
+The following derivatives of the bttv driver need to be replaced:<P>
+
+Kernel 2.2.* Video4Linux 1<P>
+
+
+Replace the bttv.c file with the patched version of bttv.c at <A
+HREF="http://heroinewarrior.com/bcast2000.html">http://heroinewarrior.com/bcast2000.html</A>
+to defeat most of the bttv lockups.  Overwrite the copy of bttv.c in
+/usr/src/linux/drivers/char and recompile the kernel.  This driver is omitted
+from the shipped kernel for various pedantic reasons.<P>
+
+</BLOCKQUOTE>
+
+<B>TRYING TO RECORD FROM AN UNCOMPRESSED VIDEO SOURCE CRASHES IT</B>
+
+<BLOCKQUOTE>
+
+<B>Reason 1:</B> Issue <B>echo "0x7fffffff">/proc/sys/kernel/shmmax</B> to increase the
+amount of shared memory the operating system can allocate.<P>
+
+<B>Reason 2:</B> There are separate configuration settings for audio
+and video recording.  If you select video4linux for video capture the
+audio may still attempt to capture from firewire.  Be sure to set the
+<B>preferences->audio in</B>.<P>
+
+</BLOCKQUOTE>
+
+
+
+<B>RECORDING SPITS OUT FRAMES AND THEN PAUSES AND THEN SPITS OUT FRAMES</B>
+
+<BLOCKQUOTE>
+
+<B>Reason 1:</B> Your using software compression, attempting a higher
+framerate and more compression than your computer is capable of.  Lower
+the frame rate or compression quality or use a less demanding codec.<P>
+
+<B>Reason 2:</B> Your hard drive is too slow.  Lower the framerate or
+use a smaller format.<P>
+
+<B>Reason 3:</B> Your hard drive is benchmarked fast enough but is
+still responding too slowly.  Use the following script to flush the
+operating system's cache every second, ensuring more consistant hard
+drive performance.<P>
+
+<CODE><PRE>
+#!/bin/sh
+
+while : ; do
+	sync
+	sleep 1
+done</PRE>
+</CODE>
+
+</BLOCKQUOTE>
+
+
+
+
+<B>RECORDING 29.97fps DROPS FRAMES IN LINUX BUT WORKS FINE IN WIN95</B>
+
+<BLOCKQUOTE>
+
+<B>Reason 1:</B> You're using a derivative of the bttv driver which only allows
+2 frames of buffering.  The following derivatives defeat this problem:<P>
+
+Linux 2.4.* Video4Linux 1<BR>
+Linux 2.2.* Video4Linux 2<P>
+
+Load the Linux 2.4.0 Video4Linux 1 derivative with "gbuffers=32
+gbufsize=0x100000" to allocate 32 frame buffers instead of 2.<P>
+
+In Linux 2.2 install the Video4linux 2 derivative of the bttv driver.<P>
+
+</BLOCKQUOTE>
+
+<B>MY BT8** CARD ISN'T CAPTURING D-1 RESOLUTION</B>
+
+<BLOCKQUOTE>
+
+The following derivatives of the bttv driver need to be hacked to support D-1
+resolution:<P>
+
+Linux 2.2.* Video4Linux 2<P>
+
+You need to hack <B>btv/bttv-v4l2.c</B> to support it.  Change all the
+occurances of <B>640</B> in <B>btv/bttv-v4l2.c</B> to <B>720</B>.
+
+</BLOCKQUOTE>
+
+<B>THE LML33 DRIVER PRODUCES GARBAGE ON THE LEFT SIDE OF THE FRAME OR
+DOESN'T FILL THE  ENTIRE FRAME</B>
+
+<BLOCKQUOTE>
+
+The LML33 supports only 720x480 resolution.  Be sure to set the frame size
+accordingly in <B>File->new</B> before you start to record.
+
+</BLOCKQUOTE>
+
+
+<B>RECORDING FROM MY FIREWIRE CAMCORDER DOESN'T WORK!</B>
+
+<BLOCKQUOTE>
+
+<B>Reason 1:</B> The operating system failed to detect the device when
+you loaded the firewire modules, which is normal.  Linux1394 was mainly
+designed for computer networking not camcorders.  You need to cancel
+recording and reload the modules until it works.<P>
+
+<B>Reason 2:</B> You power cycled your camcorder with the firewire
+modules loaded and the operating system failed to redetect the device. 
+You need to cancel the recording and reload the firewire modules.<P>
+
+<B>Reason 3:</B> You plugged in your camcorder after the firewire
+modules loaded and the device was never detected.  You need to cancel
+the recording and reload the firewire modules every time you power
+cycle the camera.<P>
+
+<B>Reason 4:</B> You're not playing any video on the camcorder.  You
+need either live video or tape playback for the firewire system to
+work.  Once you start playing video, you'll automatically get a
+picture.<P>
+
+<B>Reason 5:</B> The audio must be set to 16 bit.  12 bit audio can't be
+detected.<P>
+
+<B>Reason 6:</B> Maybe you don't really like short haired blonds.<P>
+
+</BLOCKQUOTE>
+
+
+</BLOCKQUOTE>
+
+
+
+
+
+<A NAME="PLAYBACK">
+
+<H2>PLAYBACK</H2>
+
+<BLOCKQUOTE>
+
+<B>NOT ALL THE IMAGES IN MY COMPOSITE ARE DISPLAYED!</B>
+
+<BLOCKQUOTE>
+
+The <B>rendering strategy</B> in <B>settings->preferences->video</B> is
+set to <B>fastest rendering</B>.  In order to perform compositing you
+need to do something called <B>alpha blending</B>.  Every option except
+<B>fastest rendering</B> enables alpha blending to varying degrees of
+quality.
+
+</BLOCKQUOTE>
+
+<B>THE TRACK VIEW AND POSITION INDICATOR FAIL TO KEEP UP WITH THE
+MOVIE!</B>
+
+<BLOCKQUOTE> 
+
+You either have <B>play every frame</B> enabled in
+<B>settings->preferences->video</B> and your project contains audio or
+your sound driver doesn't work.  In one case the position indicator
+locks to the audio position regardless of which video frame is being
+rendered and you need to disable playback on the audio tracks.<P>
+
+In the other case you need to enable <B>use software for positioning
+information</B> in the <B>settings->preferences->audio out</B>.
+
+
+</BLOCKQUOTE>
+
+<B>WHEN I DEINTERLACE A MOVIE I GET GHOSTS WHENEVER A SCENE CHANGES OR
+THERE'S FAST MOTION!</B>
+
+<BLOCKQUOTE> 
+
+The two fields in an interlaced movie not only represent different
+pixels of the frame but different points in time, usually 1/60 seconds
+apart.<P>
+
+Your movie was compressed in such a way that the chrominance components
+for a single scan line are duplicated across two scan lines and thus
+two points in time.  When you deinterlace it you see the chrominance
+components of one point in time applied to the luminance components of
+another point in time.  A better alternative is to either scale the
+image to 1/2 or apply line average deinterlacing.
+
+</BLOCKQUOTE>
+
+</BLOCKQUOTE>
+
+
+
+
+
+
+<A NAME="EDITING">
+
+<H2>EDITING</H2>
+
+<BLOCKQUOTE>
+
+<B>PARTS OF THE AUDIO TRACKS ARE APPEARING EMPTY EVEN THOUGH THE TRACK WAS
+SELECTED DRAWABLE</B> 
+
+<BLOCKQUOTE> 
+
+The <B>Number of index files to keep</B> setting is too low.  When you
+closed another Broadcast 2000 session it deleted index files which your
+current session needs to draw the waveform.<P>
+
+</BLOCKQUOTE>
+
+<B>NOTHING I RENDER ENCODES ON REALPRODUCER</B>
+
+<BLOCKQUOTE>
+
+Render as RGB video and 16 bit audio to encode on that piece of
+crap.<P>
+
+</BLOCKQUOTE>
+
+</BLOCKQUOTE>
+
+
+
+
+
+
+
+<A NAME="AUDIO">
+<H2>AUDIO</H2>
+
+<BLOCKQUOTE> 
+
+<B>WHY DON'T YOU SUPPORT MULTIPLE SOUNDCARDS?</B>
+
+<BLOCKQUOTE>
+
+Because there's no way to synchronize them.  An offset of as little as
+1/40000 seconds causes something called <B>phase cancellation</B>.  4
+channel soundcards are already becoming ubiquitous anyway.<P>
+
+</BLOCKQUOTE>
+
+
+<B>YOUR FSCKING SYNTHESIZER PLUGIN DOESN'T WORK!</B>
+
+<BLOCKQUOTE>
+
+Deselect "Disable tracks when no edits" in preferences->playback and
+select a region on the timeline to play back.<P>
+
+</BLOCKQUOTE>
+
+
+</BLOCKQUOTE>
+
+<A NAME="VIDEO">
+<H2>VIDEO</H2>
+
+<BLOCKQUOTE> 
+
+<B>THE FRAMES LOOK COMPRESSED VERTICALLY OR HORIZONTALLY</B>
+
+<BLOCKQUOTE>
+Set the aspect ratio in video->resize to what the movie should be viewed in.<P>
+</BLOCKQUOTE>
+
+<B>PLAYBACK JUST FREEZES UP AND DOESN'T STOP</B>
+
+<BLOCKQUOTE>
+
+You've got a plugin attached and configured to run impossibly slow. 
+You should save the project, ctrl-C it on the command line, and
+reconfigure the plugin.<P>
+
+Alternatively you reproduced an idiopathic bug in single frame playback
+which causes it to freeze up, usually during Xena.<P>
+
+</BLOCKQUOTE>
+
+<B>REVERSING VIDEO OR PLAYING VIDEO BACKWARDS PRODUCES GARBAGE</B>
+
+<BLOCKQUOTE>
+
+Some file formats like MPEG require temporal information to render
+frames, which isn't available when the file is read backward.  Render
+the movie forward as Quicktime before reversing it.<P>
+
+</BLOCKQUOTE>
+
+
+<B>RENDERING AND PASTING TO THE TIMELINE PRODUCES ONLY BLANK FRAMES</B>
+
+<BLOCKQUOTE> 
+
+If a movie exceeds 2 GB during a render or recording only the last
+subfile is pasted into the project and the end padded with blank
+frames.  You need to load from disk all the subfiles which made up the
+recording and concatenate them.
+
+</BLOCKQUOTE>
+
+</BLOCKQUOTE> 
+
+<A NAME="#STUPIDQUESTIONS">
+<H2>STUPID QUESTIONS</H2>
+
+<BLOCKQUOTE> 
+

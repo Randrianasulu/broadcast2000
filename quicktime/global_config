@@ -1,0 +1,14 @@
+# DO NOT EDIT.  EDIT ./configure INSTEAD AND RERUN IT.
+CFLAGS += -DHAVE_FIREWIRE
+CFLAGS += -DUSE_MMX
+CFLAGS += -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+CFLAGS += -I. -Ijpeg -Ilibdv $(shell glib-config --cflags)
+export CFLAGS
+CC = gcc
+DVMMXOBJS = 	libdv/idct_block_mmx.o 	libdv/quant_x86.o
+
+DVMMX_OBJS2 = idct_block_mmx.o 	quant_x86.o
+FIREWIREOBJS = 	libraw1394/eventloop.o 	libraw1394/fcp.o 	libraw1394/iso.o 	libraw1394/main.o 	libraw1394/readwrite.o
+
+FIREWIREOBJS2 = 	eventloop.o 	fcp.o 	iso.o 	main.o 	readwrite.o
+

@@ -1,0 +1,71 @@
+<TITLE>Loading and Saving</TITLE>
+
+<H1>LOADING AND SAVING FILES</H1>
+
+"There is 1 possibility.  Do you really wish to see them all? (y or n)" --
+bash 1.14.7<P>
+
+<A NAME="LOADING">
+<B>LOADING FILES</B>
+<BLOCKQUOTE>
+
+All data that you work with in Broadcast 2000 is loaded using
+<B>load</B> and <B>append</B>.<P>
+
+The loading and playing of files is just as you would expect.  Just go
+to <B>File->Load</B> and select a file for loading.  Hit the forward
+play button <IMG SRC="play.png"> and it should start playing,
+regardless of whether a progress bar has popped up.  If it pops up a
+progress bar, it's because Broadcast 2000 decided an index file would
+be faster to draw than reading every audio sample directly.<P>
+
+Loading usually changes the current project's attributes to match the
+loaded file.  Loading still images creates a new project with default
+values.<P>
+
+The <B>Append</B> command adds tracks containing a new file without
+deleting the current project.  Appending doesn't change the current
+project's attributes.<P>
+
+</BLOCKQUOTE>
+
+<A NAME="SAVING">
+<B>SAVING FILES</B>
+<BLOCKQUOTE>
+
+Eventually you'll want to save your work.  Saving files in the
+post-production world doesn't work like it does in the computer science
+textbook.  When you select <B>File->save as</B> you don't save data. 
+You save pointers to areas on disk where your assets are located.  When
+you load these pointers, your project reappears just like you saved the
+data itself.<P>
+
+If you want to save audio and video data you need to do a
+<B>render</B>.
+
+</BLOCKQUOTE>
+
+
+<A NAME="RENDERING">
+<B>RENDERING</B>
+<BLOCKQUOTE>
+
+Selecting <B>File->Render...</B> causes Broadcast 2000 to create an
+audio or video file that you can play on a movie player and all your
+roommates can use but <B>doesn't</B> save any console or edit
+information.  The region of the timeline you highlight is important.<P>
+
+If a region is selected <B>Rendering</B> saves the selected part of the
+timeline.  If nothing is selected rendering saves the entire region
+after the cursor.<P>
+
+Rendering presents you with a <A HREF="formatwindow.html">File format
+dialog</A>.  If <B>Overwrite project with output</B> is selected the
+rendered output is pasted onto the recordable tracks.<P>
+
+Broadcast 2000 tries really hard to copy video directly from the source
+assets to the output file without recompressing it but this is only
+possible when the asset and output file use the same compression among
+other things.<P>
+
+</BLOCKQUOTE>

@@ -1,0 +1,187 @@
+#!/bin/sh
+
+USE_MMX=1
+
+for ac_option
+do
+case "$ac_option" in
+	--no-mmx)
+		USE_MMX=0
+		;;
+
+	-h | --help | -help)
+	cat << EOF
+Options:
+	--no-mmx           Compile with no MMX support.
+EOF
+		exit 0
+		;;
+
+	*)
+		;;
+esac
+done
+
+
+
+
+
+echo " > global_config"
+cat > global_config << EOF
+# DO NOT EDIT.  EDIT ./configure INSTEAD AND RERUN IT.
+############################# C++ and C COMPILERS
+
+CC = g++
+GCC = gcc
+
+############################# FINAL DESTINATION FOR INSTALLATION BINARIES
+
+PREFIX = /usr/local
+LIBPREFIX = \$(PREFIX)/lib
+
+########################## COMPILER
+EOF
+
+if test -z "$CFLAGS"; then
+	echo >> global_config "CFLAGS = -O2 -fomit-frame-pointer -malign-loops=2 -malign-jumps=2 -malign-functions=2 -march=i486 -I/usr/local/include"
+fi
+
+echo >> global_config "CFLAGS += -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
+
+########################## DEVICE DRIVERS
+cat >> global_config << EOF
+CFLAGS += -I. 
+CFLAGS += -DHAVE_OSS
+CFLAGS += -DHAVE_ESOUND
+#CFLAGS += -DHAVE_ALSA
+CFLAGS += -DHAVE_FIREWIRE
+
+
+########################## LINKER
+
+LFLAGS = -L/usr/X11R6/lib
+PLUGINLFLAGS = -L../../bcbase -L/usr/X11R6/lib
+LDLINKER = g++ -shared 
+
+########################## LIBRARIES
+
+XLIBS = -lX11 -lXext -lXv -lpthread -lm
+LIBS = \$(XLIBS)
+//ALPHAOBJS = cxx_repository/*.o
+
+############### MAKEFILE MACROS
+
+LOOP_BEGIN = @ for i in \$(DIRS) ; \
+	do \
+	
+
+LOOP_END = done
+EOF
+
+
+
+
+
+
+
+
+
+
+
+
+
+echo " > plugin_config"
+cat > plugin_config << EOF
+CFLAGS += -I../ -I../../pluginpack -I../../bcbase -I/usr/local/include
+
+export CFLAGS
+
+PLUGINAUDIOOBJS = \
+	-L../../bcbase -lbcbase \
+	../../pluginpack/pluginclient.o \
+	../../pluginpack/pluginaclient.o \
+	../../pluginpack/sharedpluginobjs.a \
+	\$(XLIBS)
+
+PLUGINVIDEOOBJS = \
+	-L../../bcbase -lbcbase \
+	../../pluginpack/pluginclient.o \
+	../../pluginpack/pluginvclient.o \
+	../../pluginpack/sharedpluginobjs.a \
+	\$(XLIBS)
+
+PLUGINIOOBJS = \
+	-L../../bcbase -lbcbase \
+	../../pluginpack/pluginclient.o \
+	../../pluginpack/pluginioclient.o \
+	../../pluginpack/sharedpluginobjs.a \
+	\$(XLIBS)
+
+install:
+	cp \$(OUTPUT) \$(PREFIX)/bin
+
+.C.o:
+	\$(CC) -c \`../c_flags\` \$*.C
+
+clean:
+	rm -f core
+	rm -f *.o *.a
+	rm -f \$(OUTPUT)
+
+wc:
+	cat *.C *.h | wc
+EOF
+
+
+
+
+
+
+
+echo " > plugin_config2"
+cat > plugin_config2 << EOF
+# DO NOT EDIT.  EDIT ./configure INSTEAD AND RERUN IT.
+
+CFLAGS += -I../ -I../../pluginpack -I../../guicast -I/usr/local/include
+
+export CFLAGS
+
+PLUGINAUDIOOBJS = -L../../guicast -lguicast ../../quicktime/libquicktime.a ../../pluginpack/pluginclient.o ../../pluginpack/pluginaclient.o ../../pluginpack/sharedpluginobjs.a \$(XLIBS) -lpng
+
+PLUGINVIDEOOBJS = ../../pluginpack/pluginclient.o ../../quicktime/libquicktime.a ../../pluginpack/pluginvclient.o	 ../../pluginpack/sharedpluginobjs.a	 \$(XLIBS)
+
+PLUGINIOOBJS = ../../pluginpack/pluginclient.o ../../quicktime/libquicktime.a ../../pluginpack/pluginioclient.o 	../../pluginpack/sharedpluginobjs.a 	\$(XLIBS)
+
+install:
+	cp \$(OUTPUT) \$(PREFIX)/bin
+
+.C.o:
+	\$(CC) -c \`../c_flags\` \$*.C
+
+clean:
+	rm -f core
+	rm -f *.o *.a
+	rm -f \$(OUTPUT)
+
+wc:
+	cat *.C *.h | wc
+EOF
+
+
+echo "done"
+
+
+
+
+
+
+
+cd libmpeg3
+./configure $ac_option
+cd ..
+
+
+cd quicktime
+./configure $ac_option
+cd ..
+

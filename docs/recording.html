@@ -1,0 +1,149 @@
+<TITLE>Recording</TITLE>
+
+
+<H1>RECORDING</H1><P>
+
+Hit the <B>record button</B><IMG SRC="recordbutton.png"> to bring up
+the record dialog.  Here you select a format for the file you want to
+record to.  You can't record directly to the timeline.  You record to a
+file and the software automatically pastes your recording on the
+timeline.<P>
+
+You can record any combination of <B>audio</B> and <B>video</B> but
+only one track of video at a time.  Specify the parameters of a file to
+record to then hit <B>Do it</B>.  Most users have trouble understanding
+the format settings, which is why Broadcast 2000 uses a <A
+HREF="formatwindow.html">standard format dialog</A>.<P>
+
+After the file format is specified you're presented the recording
+engine.<P>
+
+<IMG SRC="recordwindow.jpg"><P>
+
+The <B>samplerate, framerate, and frame size</B> are taken from the
+project settings.  The best way to change these is to cancel your
+current recording, go to <B>File->new</B> to create a new project with
+the desired settings.  Then hit the record button again.<P>
+
+The recording engine changes appearance depending on whether you're
+recording audio or video.  The record engine has VCR controls.  The VCR
+controls provide record, rewind, fast forward, and preview.  After
+recording a segment, you can rewind and preview it.<P>
+
+The full duplex button <IMG SRC="fullduplex.png"> starts recording and
+playback from the timeline.<P>
+
+The <B>label</B> button inserts a label the current recording position.<P>
+
+There are 3 different <B>record modes</B>.  You can have the recording
+continue until you run out of hard drive space, stop after a specified
+time, or loop over a specified time infinitely.<P>
+
+Be aware that although you can <B>loop</B> video recordings all day and
+keep the commercials you like, there is no way to synchronize audio in
+a loop recording.<P>
+
+For recording video, the monitor window has different functions
+depending on what driver you're using.<P>
+
+
+<A NAME="VIDEO4LINUX">
+<B>VIDEO4LINUX</B>
+
+<BLOCKQUOTE>
+
+<IMG SRC="video4linux.jpg"><P>
+
+By pressing on the <B>channel</B> you get the channel table.  Here you
+must enter a channel for every TV station you want to see.  Separate
+channels are also required for alternative inputs.  Composite and S-VHS
+are alternative inputs.  The channel window contains a <B>picture</B>
+button.  This allows you to adjust the color balance.<P>
+
+Video4linux also supports image translation.  By holding the middle
+mouse button and dragging, you translate the image.  By holding the
+shift key during the translation, you control the zoom.
+
+</BLOCKQUOTE>
+
+
+<A NAME="SCREENCAPTURE">
+<B>SCREENCAPTURE</B>
+
+<BLOCKQUOTE>
+
+<IMG SRC="screencapture.jpg"><P>
+
+The screen capture offers no channel box, but it relies heavily on your
+ability to adjust the translation.  By holding down the middle mouse
+button and dragging, you control what portion of the screen is
+captured.  Your capture resolution is going to be limited because
+AGP is only optimized for output.
+
+</BLOCKQUOTE>
+
+<A NAME="LML33">
+<B>LML33</B>
+
+<BLOCKQUOTE>
+
+<IMG SRC="lml33capture.jpg"><P>
+
+The LML33 has one option for swapping fields.  Since the LML33 tends to
+inadvertently swap the field order, this option manually swaps the
+field order back.<P>
+
+The LML33 supports only two resolutions: 720x480 for NTSC and 720x576
+for PAL.  It supports either composite or S-VHS inputs.  The settings 
+must be supplied when you load the module.  At Heroine Virtual we
+usually load the module with <P>
+
+<B>insmod lml33 screen_width=720 screen_height=480 bitrate=200000
+video_input=1 video_output=1</B>
+
+</BLOCKQUOTE>
+
+
+<A NAME="FIREWIRE">
+<B>FIREWIRE</B>
+
+<BLOCKQUOTE>
+
+<IMG SRC="firewirecapture.jpg"><P>
+
+Firewire under Linux is flakey.  If it doesn't work, your first
+strategy is to make sure the camcorder is generating a picture.  If
+it's generating a picture your second strategy is to quit recording and
+reload the modules until it starts working.  The resolution is fixed at
+720x480 for NTSC and 720x576 for PAL.<P>
+
+The framerate should be 29.97 for NTSC and 25 for PAL.  If you try a
+lower framerate you'll get noise in the picture.<P>
+
+Firewire also has audio recording.  If you selected <B>firewire</B> for
+the audio input you won't record audio from a sound card but a digital
+stream from the firewire card.  You must be using 16 bit 48000 Hz for
+the audio.
+
+</BLOCKQUOTE>
+
+
+<B>SCRIPTED RECORDING</B><P>
+
+<BLOCKQUOTE>
+
+After many Xena episodes were missed for lack of unattended recording
+features, scripted recording was implemented.  Broadcast 2000 can
+configure an output file and start recording with a single command line
+invocation.<P>
+
+Start Broadcast 2000 with the <B>-b</B> flag for <B>batch</B> mode. 
+The next argument is a script file much like the included <B><A
+HREF="record_script.txt">/usr/local/bast/record_script</A></B> file. 
+This file contains all the options for starting a recording.<P>  If you
+omit options, the defaults will be used, which can be quite
+unpredictable.<P>
+
+The output file is overwritten without question when recording from a
+script.  The script exits after the recording is started and returns
+control to the user.<P>

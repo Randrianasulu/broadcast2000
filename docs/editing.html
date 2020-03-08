@@ -1,0 +1,222 @@
+<TITLE>Editing</TITLE>
+
+
+
+<A NAME="Editing">
+
+<H1>EDITING</H1>
+
+The biggest pitfall for CS majors who want to make movies is editing. 
+Broadcast 2000 treats editing like a text editor, hiding the EDL
+management and presenting tracks as sequential sequences of frames. 
+You select footage by highlighting regions and cutting and pasting. <P>
+
+
+This was the conventional wisdom for audio up to 1996.  Today the trend
+seems to be exposing the user to the EDL and future interfaces may
+reflect that.<P>
+
+The editing functions have been optimized for precise, rapid editing of
+large files.  None of the changes you make ever touches a source
+file.<P>
+
+The editing functions on Broadcast 2000 are split between the
+<B>Edit</B> menu, buttonbar, and the timeline.  You'll eventually do
+most of your editing using keyboard shortcuts.<P>
+
+
+
+
+
+
+
+<A NAME="SELECTINGREGIONS">
+<B>
+SELECTING REGIONS
+</B><P>
+<BLOCKQUOTE>
+
+You know how to highlight regions of text in a text editor.  The second
+problem is determining which tracks inside your highlighted section are
+affected.  The record button to the left of each track protects the
+track from any operations you may do on it.  Only when it is
+highlighted is the track affected by editing operations.<P>
+
+The <B>shift</B> key extends whatever end of the selection you're
+closest to.<P>
+
+<B>Double clicking</B> selects the entire range of the edit your
+pointer is over.<P>
+
+When working with video, you should always activate <B>Settings->align
+cursor on frames</B> unless you're only editing the audio tracks.<P>
+
+</BLOCKQUOTE>
+
+
+
+
+
+
+
+
+<A NAME="CUTANDPASTE">
+<B>
+CUT AND PASTE
+</B><P>
+<BLOCKQUOTE>
+
+
+The <B>cut, copy, paste, and clear</B> functions do what you'd expect
+them to do, with <B>X, V, C, and backspace</B> doing the equivalent
+actions.  Only tracks with a highlighted record patch are affected.<P>
+
+</BLOCKQUOTE>
+
+
+
+
+
+<A NAME="SHIFTINGREGIONS">
+
+<B>SHIFTING REGIONS HORIZONTALLY ON THE TIMELINE</B>
+
+<BLOCKQUOTE>
+
+In Broadcast 2000 horizontal positioning of tracks is accomplished by
+pasting and deleting data before the region you want to shift.  First
+disable recording on all but the tracks you want to shift.  To shift
+the tracks right, select a region of the duration you want to shift by
+and select <B>edit->paste silence</B>.  To shift the tracks left select
+a region of the duration you want to shift by and select
+<B>edit->clear</B><P>
+
+If you have silence before a scene, you can drag the out point in the
+region of silence to move the scene around.<P>
+
+</BLOCKQUOTE>
+
+
+
+<A NAME="INOUTPOINTS">
+
+<B>IN/OUT POINTS</B><P>
+
+<BLOCKQUOTE> 
+
+Go to <B>View->Show Edits</B> and make sure it's checked. 
+You should see in/out points <IMG SRC="inouts.png"> on the tracks.<P>
+
+Because when you edit, you really change numbers in an EDL, Broadcast
+2000 is able to mark the boundaries between different edits.  Clicking
+on an in/out point positions the cursor exactly on the edit boundary. 
+Dragging edit handles either shrinks or extends the boundary of an
+edit.<P>
+
+When you drag the starting and ending point on one track of a freshly
+loaded stereo file, it adjusts both tracks.  If you do the same thing
+after appending a second file of different length to the current
+project, you'll still only affect one file.  Broadcast 2000
+automatically decides which tracks are affected by an edit handle by
+which edit handles are lined up on the same sample or frame.<P>
+
+You can force tracks to be ignored by deselecting record toggles on the
+<B>patchbay.</B><P>
+
+<B>Double clicking</B> between two edit points selects the entire
+region between those points.<P>
+
+</BLOCKQUOTE>
+
+<B>THE 3 EDITING MODES OF IN/OUT POINTS</B><P>
+
+<BLOCKQUOTE>
+
+In <B>Preferences->interface</B> 3 behaviors for the in/out points were
+bound to the mouse buttons.  The three editing modes cause different
+things to happen when you drag an edit and by default were assigned by
+their invasiveness.<P>
+
+<B>Drag all following edits</B> repositions every edit after the cursor.<P>
+
+<B>Drag only one edit</B> repositions only the boundary selected.  All
+the other edits stay in place.<P>
+
+<B>Drag source only</B> locks all the edit boundaries and repositions
+the source material instead.<P>
+
+</BLOCKQUOTE>
+
+</BLOCKQUOTE>
+
+<B>
+LABELS
+</B><P>
+<BLOCKQUOTE>
+
+While editing, you're going to want to mark specific points on the
+timeline which you can precisely align selections to or seek to.  The
+<B>lbl</B> button or the <B>L</B> key toggles a label on or off at the
+cursor position.  If you selected a region, it toggles labels at both
+ends of the selection.  Usually you'll scrub through a region and hit
+<B>lbl</B> at some cue point.  Alternatively, you'll zoom to single
+sample level and label a starting point for a cut.<P>
+
+<B>Double clicking</B> on the timebar between two labels selects the
+entire region between the two labels.<P>
+
+The seek buttons:<IMG SRC="seekbuttons.png"> seek to the next or
+previous label.  <B>Shift</B> extends the region to the label you click
+on.<P>
+
+<B>Edit->Clear labels</B> clears all the labels in the selected
+region.<P>
+
+<B>Settings->Labels follow edits</B> determines whether cuts and pastes
+also cut and paste labels.<P>
+
+
+</BLOCKQUOTE>
+
+
+<B>THE PATCHBAY</B><P>
+
+<BLOCKQUOTE>
+
+
+Before every track is a patch <IMG SRC="patch.png"> with buttons
+clearly delineated to indicate their functions.<P>  In it's simplest
+role, the play button determines whether you hear a track or not but
+fundamentally it also determines whether CPU time is devoted to
+rendering that track.   You should disable playback on any tracks which
+don't contain footage you want to see.<P>
+
+The record button determines whether the track is affected by editing. 
+The <B>A</B> button determines whether the automation for a track is on
+or off.  The <B>D</B> button determines if a track is drawn or left
+blank on the timeline.  You'll use the D button a lot for large video
+projects on slow computers.  Clicking on the title allows you to enter
+a new title.<P> </BLOCKQUOTE>
+
+
+
+<A NAME="TRACKS">
+<B>TRACK MANIPULATIONS</B><P>
+
+<BLOCKQUOTE>
+
+Broadcast 2000 has features for shuffling the hundreds of tracks you're
+likely to encounter in your post production career.<P>
+
+Go to <B>Audio->add track</B> or <B>Video->add track</B> to add a
+track.<P>
+
+Delete all the recordable tracks using <B>Settings->delete tracks</B>.<P>
+
+Move the recordable tracks around using <B>Settings->move tracks up</B>
+or <B>Settings->move tracks down</B>.<P>
+
+You could just type a <B>D</B> to delete the last track on the timeline.<P>
+
+There is theoretically no limit to the number of tracks available, but
+if you run out of memory you'll have to give up.<P>

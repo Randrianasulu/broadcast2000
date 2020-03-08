@@ -1,0 +1,123 @@
+<TITLE>Plugin usage</TITLE>
+
+
+<B>PLUGINS A-Z</B><P>
+
+To understand how signals are routed through plugins go to <A
+HREF="console.html">console.html</A>.  Now a word on plugin usage. 
+Some plugins are self explanatory and aren't explained here.  Others
+need quite a bit of explaining to get the most out of them.<P>
+
+<B>BLUR</B>
+<BLOCKQUOTE>
+
+Blur performs gaussian blur on the image.  It is capable of using
+unlimited processors in parallel.<P>
+
+</BLOCKQUOTE>
+
+<B>DENOISE</B>
+<BLOCKQUOTE>
+
+Denoise performs wavelet transform, subtracts the entropic part of the
+signal, and performs inverse wavelet transform.  The sensitivity of the
+noise reduction is set by <B>Nose level</B>.  The <B>Window size</B>
+has no effect on the sound other than to speed up processing.<P>
+
+</BLOCKQUOTE>
+
+<B>FREEZE FRAME</B>
+<BLOCKQUOTE>
+
+This is usually used as a transition and only reads the first frame. 
+It then outputs the first frame for every frame after it.  <B>Disable
+tracks when no edits</B> should be disabled in preferences->playback
+and <B>Play every frame</B> should be selected in preferences->video
+for this to work.<P>
+
+</BLOCKQUOTE>
+
+<B>PITCH SHIFT</B>
+<BLOCKQUOTE>
+
+Pitch shift performs a fast fourier transform, scales the array
+subscripts of the coefficients, and performs an inverse fast fourier
+transform.  Much of the outcome depends on the window size.  For 44100
+audio a window size of 4096 seems to work best.  Downward shift
+requires larger window sizes and upward shifting requires smaller
+window sizes.  Voices shift better than music.<P>
+
+</BLOCKQUOTE>
+
+<B>REVERB</B>
+<BLOCKQUOTE>
+
+Getting good reverb is more of an artform even for the most automated
+signal processors.  The output consists of an initial signal followed
+by many reflections.  As the reflections move out in time, a lowpass
+filter is usually applied with decreasing cutoff frequency.  If more
+than one track is attached to a single reverb plugin, the reflections
+for both tracks are swapped to simulate stereo.  Simulated stereo is
+capable of using a separate CPU for each track.<P>
+
+</BLOCKQUOTE>
+
+
+<B>RGB <-> 601</B>
+<BLOCKQUOTE>
+
+When recording video from certain devices you'll get black at either 0
+or 16 and white at either 255 or 235.  The 16-235 colorspace is called
+<B>ITU-R.BT601</B> and the 0-255 colorspace is called <B>RGB</B>.  The
+purpose here is to give professional TV gurus headroom and footroom for
+their whites and blacks.  Alternatively you may be doing compositing
+and want the extra headroom for an intermediate step.  Either way
+you'll want only RGB video on a computer monitor and only 601 video
+when you print to video.<P>
+
+To convert between the two, Broadcast 2000 supplies the <B>RGB <->
+601</B> plugin.  By simply attaching this to your video tracks or
+routing all your video tracks through it you can convert between either
+colorspace.<P>
+
+</BLOCKQUOTE>
+
+
+
+<B>STABILIZE</B>
+<BLOCKQUOTE>
+
+Image stabilization reads a window from one image and performs an
+exhaustive search of the next image to try to find where the window
+went.  The search area is in the center of the image.  Once it finds a
+new location it calculates a motion vector and offsets the image.<P>
+
+The <B>Search radius</B> determines how far out from the original
+window it should search.  A higher search radius allows more jittery
+motion to be compensated at the expense of more clock cycles.<P>
+
+The <B>window size</B> determines how many pixels the window should be
+per edge.  A larger window size allows more accurate placement of the
+motion vector but increases computation exponentially.<P>
+
+The <B>Acceleration</B> determines the maximum distance to offset the
+new frame from the old frame.  If the new location of a window is
+farther out than the acceleration value, the motion vector is shortened
+to the acceleration value.  The automation on this setting is intended
+for turning image stabilization on or off.  Where you don't want image
+stabilization you set the automation to -1 and where you want image
+stabilization you set the automation to 0.<P>
+
+The exhaustive search is capable of using unlimited numbers of
+processors and achieves huge benefits from doing so.  Another problem
+you'll encounter is that image stabilization can't recognize repeating
+patterns so if the center is on a repeating pattern or straight line
+it'll shake violently.  The image stabilization also becomes erratic if
+the center is on a moving object.<P>
+
+</BLOCKQUOTE>
+
+<BLOCKQUOTE>
+
+
+</BLOCKQUOTE>

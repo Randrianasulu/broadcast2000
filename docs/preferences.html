@@ -1,0 +1,43 @@
+<TITLE>Getting Started / Preferences</TITLE>
+
+
+
+<A NAME="Preferences">
+<H1>PREFERENCES</H1>
+<BLOCKQUOTE>
+
+<B>VIDEO</B>
+
+<BLOCKQUOTE>
+
+Video operations have a seperate section from audio.  Like audio, video
+is recorded in a pipeline but unlike audio, the video device has a
+configurable buffer size.  <B>Frames to buffer in device</B> determines
+how many frames ahead of the current capture position the device should
+buffer but not write to disk.  Setting this to a large number and
+capturing below the maximum framerate of the device will cause video to
+be delayed.  This is only available when using a Video4Linux 2 driver. 
+Unfortunately for most purposes Video4Linux 2 has never achieved usable
+functionality.<P>
+
+<B>Frames to record to disk</B> determines the number of frames to read
+from the device and compress to disk at a time.  This number doesn't
+cause a delay.<P>
+
+The rendering speed can be improved by selecting one of the 4 rendering
+modes:  <B>fastest, alpha channels, floating point, and
+interpolated</B>  The quality improves and speed decreases as you go
+down.  <B>Alpha channels</B> without floats is lossy.  <B>Fastest
+rendering</B> is lossless and should always be used when you have no
+scaling or alpha channels.<P>
+
+The <B>record driver</B> selects which driver to capture video from. 
+When <B>Video4Linux</B> is selected Broadcast 2000 automatically
+determines what variant is installed and tries to match it.<P>
+
+</BLOCKQUOTE>
+
+</BLOCKQUOTE>
+
+
+

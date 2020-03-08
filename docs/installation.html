@@ -1,0 +1,337 @@
+<TITLE>Configuration</TITLE>
+
+
+
+<H1>CONFIGURATION</H1>
+
+"[*] RAM (Memory) support" -- make menuconfig<P>
+
+<B>Because of the fragmentation of Linux distributions, Broadcast 2000 can
+not be run optimally without some intimate configuration for your
+specific distribution.  Runtime configuration is the only option for
+configuration because of the multitude of parameters.  Recompiling from
+scratch won't fix a broken configuration and might cost you a
+semester.<P>
+
+Assuming the <B>rpm</B> installed correctly, you can run it with the
+<B>bcast</B> command.  Then run down the preferences.</B><P>
+
+<A NAME="AUDIOOUT">
+<B>AUDIO OUT</B><P>
+
+These parameters control what happens when you <B>play sound from the
+timeline</B>.<P>
+
+<BLOCKQUOTE>
+<IMG SRC="audioprefs.png"><P>
+
+<B>PLAYBACK DRIVER</B> - The <B>playback driver</B> driver is used when
+playing sound from the timeline.  Set the parameters for audio output. 
+Broadcast 2000 has three modes in which it uses an audio device:
+<B>Playback, Record, and Duplex.</B><P>
+
+Each mode supports a subset of the many sound drivers available for
+Linux.  The drivers are described <A HREF="#SOUNDDRIVERS">below</A>. 
+<P>
+
+
+
+
+
+
+<B>SAMPLES TO READ FROM DISK:</B> Broadcast 2000 uses a pipeline for
+rendering audio.  The first stage is reading large chunks of audio from
+disk, the <B>samples to read from disk</B>.<P>
+
+
+
+
+
+<B>SAMPLES TO SEND TO CONSOLE</B> - The second stage is rendering small
+fragments through the console to the sound driver.  A larger value here
+causes more latency when you change mixing parameters but gives more
+reliable playback.<P>
+
+
+
+
+
+
+<B>PRELOAD SIZE</B> - determines the minimum number of bytes in a
+SEEK_SET before switching to a sequential read.  A typical value is
+2000000.  For playing movies, the preload buffer allows audio and video
+to play back without seeking back and forth.  This eliminates seeking
+on slow CD-ROM drives while increasing latency.  Set to 0 to
+eliminate prebuffering.<P>
+
+
+<B>DISABLE TRACKS WHEN NO EDITS</B> - During parts of the timeline
+which don't have any footage, Broadcast 2000 can either render silence
+or not render the track at all.  Selecting <B>Disable tracks when no
+edits</B> causes tracks to be turned off when they have only silence. 
+This speeds up video rendering considerably, allows more scenes to be
+viewed without alpha channels, but can cause transitions and plugins to
+turn off when they should be on.<P>
+
+
+
+
+
+
+<B>VIEW FOLLOWS PLAYBACK</B> - Causes the timeline window to scroll
+when the playback cursor moves out of view.<P>
+
+
+
+
+
+
+
+
+<B>USE SOFTWARE FOR POSITIONING INFORMATION</B> - Many soundcards and
+sound drivers don't give reliable information on the number of samples
+the card has played.  When playing video you need this information for
+synchronization.  This option causes the sound driver to be ignored and
+a software timer to be used for synchronization.<P>
+
+
+
+
+
+
+<B>AUDIO PLAYBACK IN REALTIME</B> - Back in the days when the AMD K6
+was king, this allowed uninterrupted playback on heavy loads.  Now
+you'll never need it.<P>
+
+</BLOCKQUOTE>
+
+
+
+
+
+<A NAME="AUDIOIN">
+<B>AUDIO IN</B><P>
+
+These parameters control what happens when you <B>record sound</B>.<P>
+
+<BLOCKQUOTE>
+<IMG SRC="audioprefs.png"><P>
+
+<B>RECORD DRIVER</B> - 
+
+Determines the device used to bring audio into the system.<P>
+
+<B>DUPLEX DRIVER</B> - 
+
+Device used to play back while a recording is in progress.<P>
+
+<B>SAMPLES TO WRITE TO DISK AT A TIME</B> - Recording audio is
+performed using a pipeline.  Fragments are rapidly read from the sound
+driver but only committed to disk in large chunks.  This determines how
+large the chunks written to disk are.<P>
+
+<B>ENABLE FULL DUPLEX</B> - enables or disables the full duplex button
+when you record sound.  This is from the days when full duplex on Linux
+crashed the entire system and probably doesn't apply anymore.<P>
+
+<B>RECORD IN REALTIME PRIORITY</B> - Another carryover from when kernel
+2.2.0 was first released, this eliminated latency problems on that
+kernel.  You should never need this feature on modern systems.<P>
+
+</BLOCKQUOTE>
+
+
+
+
+
+
+
+<A NAME="PERFORMANCE">
+<B>PERFORMANCE</B>
+
+<BLOCKQUOTE>
+<IMG SRC="performanceprefs.png"><P>
+
+<B>Index files go here</B> - Back in the days when 4 MB/sec was
+unearthly speed for a hard drive, index files were introduced to speed
+up drawing the audio tracks.  This option determines where index files
+are placed on the hard drive<P>
+
+<B>Size of index file</B> - Determines the size of an index file. 
+Larger index sizes allow smaller files to be drawn faster while slowing
+down the drawing of large files.  Smaller index sizes allow large files
+to be drawn faster while slowing down small files.<P>
+
+<B>Number of index files to keep</B> - To keep the index directory from
+becoming unruly, old index files are deleted.  This determines the
+maximum number of index files to keep in the directory.<P>
+
+<B>Delete all indexes</B> - When you change the index size or you want
+to clean out excessive index files, this deletes all the index files.<P>
+
+<B>Cache items</B> - To speed up rendering, several assets are kept
+open simultaneously.  This determines how many are kept open.<P>
+
+<B>Number of CPUs</B> - When SMP was first standardized in the Linux
+kernel, it was thought that duals, quads, and 8 way Xeons would soon
+rule the world.  The number of CPUs option was introduced to devote
+arbitrary numbers of CPUs to rendering and compression.  The speed gain
+is tremendous but the SMP craze seems to have died off with the AMD
+Athlon.<P>
+
+</BLOCKQUOTE>
+
+
+
+
+
+<A NAME="INTERFACE">
+<B>INTERFACE</B>
+
+<BLOCKQUOTE>
+
+<IMG SRC="interfaceprefs.png"><P>
+
+The time format can be represented in any number of formats.  Select a
+format for the time indicators here.  The frame base when using
+hours:minutes:seconds:frames is the frame rate of the project.<P>
+
+<B>Clicking in/out points does what</B> - Broadcast 2000 not only allows you to perform editing by dragging
+in/out points but also defines three seperate operations which occur
+when you drag an in/out point.  For each mouse button you select the
+behavior in this window.  The usage of each editing mode is described
+in <A HREF="editing.html">editing</A><P>
+
+<B>Format for meter</B> - This option allows you to select the format
+for all the VU meters.  If you're a CS major select percentage and if
+you're a EE major select DB.<P>
+
+<B>Min DB for meter</B> - The minimum DB to display on a meter for EE
+majors.<P>
+
+</BLOCKQUOTE>
+
+
+
+<A NAME="PLUGINS">
+<B>PLUGINS</B>
+
+<BLOCKQUOTE>
+
+<IMG SRC="pluginprefs.png"><P>
+
+This selects where Broadcast 2000 looks for plugins.  It looks in two
+directories, the <B>Global plugin directory</B> and the <B>personal
+plugin directory</B>.  The global plugin directory should be set by
+default.  The personal plugin directory was originally intended to
+allow more flexibility in which plugins you use.<P>
+
+It turned out that since many plugins are required to open project
+files you should only store plugins in a <B>global plugin
+directory</B>.  Storing plugins in a <B>personal plugin directory</B>
+causes your projects to be unreadable by anyone else.<P>
+
+</BLOCKQUOTE>
+
+<A NAME="VIDEO">
+<B>VIDEO</B>
+
+<BLOCKQUOTE>
+
+<IMG SRC="videoprefs.png"><P>
+
+<B>Actual framerate being achieved</B> - When playing back, the
+framerate is not always the specified framerate for the project.  This
+displays the actual framerate being achieved during playback.<P>
+
+<B>Play every frame</B> - Broadcast 2000 drops frames to keep the video
+synchronized with the audio when the video can't be rendered fast
+enough.  This option causes it to play every frame even if it means
+losing synchronization.<P>
+
+<B>Fastest rendering, alpha channels, floating point alpha channels,
+bilinear interpolation</B> - Determines the quality and hence the speed
+of rendering.<P>
+
+<B>Fastest rendering</B> - performs low quality scaling, and no alpha
+channels.<P>
+
+<B>Alpha channels</B> - performs low quality scaling and a lossy
+integer alpha blend.<P>
+
+<B>Floating point alpha channels</B> - performs low quality scaling
+and a floating point alpha blend.<P>
+
+<B>Bilinear interpolation</B> - perform a high quality scale with
+floating point alpha blending.<P>
+
+
+
+
+</BLOCKQUOTE>
+
+
+
+<A NAME="SOUNDDRIVERS">
+<B>ABOUT THE SOUND DRIVERS</B>
+
+<BLOCKQUOTE>
+
+<B>OSS</B> - The first sound driver for Linux was developed out of the
+idea that you could have a single sound driver for all the UNIX
+platforms.  OSS was the most reliable sound driver. <B><A
+HREF="http://www.opensound.com">The commercial OSS driver</A></B>
+Supports the most soundcards and resolves most audio problems by
+itself.<P>
+
+<B>ALSA</B> - set to replace OSS eventually.  Does the same thing as
+OSS but different programming language and specific to Linux.  This
+might be supported eventually if it isn't phased out beforehand.<P>
+
+<B>ESOUND</B> - A stripped down sound driver which ran on top of OSS. 
+This allowed playing sound over a network, mixing multiple audio
+sources, but lacked synchronization.<P>
+
+<B>IEEE1394</B> - Allows you to record audio from a digital camcorder. 
+The camcorder must be set for 16 bit 48kHz 2 channel for this to work.<P>
+
+</BLOCKQUOTE>
+
+
+
+
+
+<A NAME="VIDEODRIVERS">
+<B>ABOUT THE VIDEO DRIVERS</B>
+<BLOCKQUOTE>
+
+
+<B>Video4Linux 1</B> - Was developed when analog video capture boards
+were popping up on computers.  It was intended to be a single common
+programming interface to all the capture boards and was designed for
+watching TV on a computer.  Supports no hardware compression and only 2
+frames of buffering.  The old analog <B><A
+HREF="http://hauppage.com">WinTV</A></B> cards were the best
+supported.<P>
+
+<B>Video4Linux 2</B> - Was intended to replace Video4Linux 1 but for
+academic reasons was abandonned.  Had identical functionality to
+Video4Linux 1 but a different programming language.  Supported more
+than two frames of buffering.<P>
+
+<B>Screen Capture</B> - Records video from your desktop.<P>
+
+<B>LML33</B> - A capture board from <A
+HREF="http://linuxmedialabs.com">Linux Media Labs</A></B> which offered
+hardware compression.  This was a practical way of recording analog
+video at high framerates.<P>
+
+<B>IEEE 1394</B> - This is the communication protocol between digital
+camcorders and computers.  It was marketed as <B>Firewire</B> and
+<B>ILink</B> but more commonly <B>IEEE 1394</B> in the Linux world for
+political reasons.  This produces the highest quality of all the
+capture drivers.<P>
+
+Recording is supported but not playback to IEEE1394.  Because IEEE1394
+is rapidly approaching the end of its product cycle, it's unclear
+whether playback will ever be supported.<P>
