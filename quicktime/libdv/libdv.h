@@ -7,7 +7,7 @@ extern "C" {
 
 // Buffer sizes
 #define DV_NTSC_SIZE 120000
-#define DV_PAL_SIZE 140000
+#define DV_PAL_SIZE 144000
 
 // Norms
 #define DV_NTSC 0
