@@ -1,6 +1,6 @@
 #!/bin/sh
 
-USE_MMX=1
+USE_MMX=0
 
 for ac_option
 do
@@ -43,7 +43,7 @@ LIBPREFIX = \$(PREFIX)/lib
 EOF
 
 if test -z "$CFLAGS"; then
-	echo >> global_config "CFLAGS = -O2 -fomit-frame-pointer -malign-loops=2 -malign-jumps=2 -malign-functions=2 -march=i486 -I/usr/local/include"
+	echo >> global_config "CFLAGS = -O2 -fpermissive -fomit-frame-pointer -malign-loops=2 -malign-jumps=2 -malign-functions=2 -march=i486 -I/usr/local/include"
 fi
 
 echo >> global_config "CFLAGS += -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
@@ -52,9 +52,9 @@ echo >> global_config "CFLAGS += -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FI
 cat >> global_config << EOF
 CFLAGS += -I. 
 CFLAGS += -DHAVE_OSS
-CFLAGS += -DHAVE_ESOUND
+### CFLAGS += -DHAVE_ESOUND
 #CFLAGS += -DHAVE_ALSA
-CFLAGS += -DHAVE_FIREWIRE
+##CFLAGS += -DHAVE_FIREWIRE
 
 
 ########################## LINKER
