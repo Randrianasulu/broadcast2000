@@ -19,6 +19,9 @@
  *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. 
  *
  */
+ 
+ 
+#define MIN(x, y) ((x) > (y) ? (y) : (x))
 
 #include "mpeg3audio.h"
 #include <stdio.h>
@@ -69,11 +72,15 @@ static inline int mpeg3audio_ac3_exp_unpack_ch(unsigned int type,
 		switch(expstr)
 		{
 			case MPEG3_EXP_D45:
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
 			case MPEG3_EXP_D25:
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
 			case MPEG3_EXP_D15:
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
 		}
 
@@ -82,11 +89,15 @@ static inline int mpeg3audio_ac3_exp_unpack_ch(unsigned int type,
 		switch(expstr)
 		{
 			case MPEG3_EXP_D45:
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
 			case MPEG3_EXP_D25:
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
 			case MPEG3_EXP_D15:
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
 		}
 
@@ -95,11 +106,15 @@ static inline int mpeg3audio_ac3_exp_unpack_ch(unsigned int type,
 		switch(expstr)
 		{
 			case MPEG3_EXP_D45:
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
 			case MPEG3_EXP_D25:
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
 			case MPEG3_EXP_D15:
+				j = MIN(255, j);
 				dest[j++] = exp_acc;
 		}
 	}

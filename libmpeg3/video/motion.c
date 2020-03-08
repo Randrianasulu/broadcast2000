@@ -1,4 +1,5 @@
-#include "mpeg3video.h"
+#include "mpeg3private.h"
+#include "mpeg3protos.h"
 #include "vlc.h"
 
 #include <stdio.h>
@@ -6,7 +7,7 @@
 
 /* calculate motion vector component */
 
-static inline void mpeg3video_calc_mv(int *pred, int r_size, int motion_code, int motion_r, int full_pel_vector)
+void mpeg3video_calc_mv(int *pred, int r_size, int motion_code, int motion_r, int full_pel_vector)
 {
 	int lim = 16 << r_size;
 	int vec = full_pel_vector ? (*pred >> 1) : (*pred);
@@ -30,7 +31,7 @@ static inline void mpeg3video_calc_mv(int *pred, int r_size, int motion_code, in
 int *dmvector, * differential motion vector *
 int mvx, int mvy  * decoded mv components (always in field format) *
 */
-inline void mpeg3video_calc_dmv(mpeg3video_t *video, 
+void mpeg3video_calc_dmv(mpeg3video_t *video, 
 		int DMV[][2], 
 		int *dmvector, 
 		int mvx, 
@@ -73,7 +74,7 @@ inline void mpeg3video_calc_dmv(mpeg3video_t *video,
 	}
 }
 
-static inline int mpeg3video_get_mv(mpeg3_slice_t *slice)
+int mpeg3video_get_mv(mpeg3_slice_t *slice)
 {
   	int code;
 	mpeg3_slice_buffer_t *slice_buffer = slice->slice_buffer;
@@ -110,7 +111,7 @@ static inline int mpeg3video_get_mv(mpeg3_slice_t *slice)
 
 /* get differential motion vector (for dual prime prediction) */
 
-static inline int mpeg3video_get_dmv(mpeg3_slice_t *slice)
+int mpeg3video_get_dmv(mpeg3_slice_t *slice)
 {
 	mpeg3_slice_buffer_t *slice_buffer = slice->slice_buffer;
   	if(mpeg3slice_getbit(slice_buffer))

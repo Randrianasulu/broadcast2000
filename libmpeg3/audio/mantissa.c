@@ -124,14 +124,19 @@ static const u_int32_t mpeg3_scale_factors[25] =
 
 static MPEG3_FLOAT32 *mpeg3_scale_factor = (MPEG3_FLOAT32*)mpeg3_scale_factors;
 
-static inline float mpeg3audio_ac3_tofloat(unsigned short exponent, int mantissa)
+#define CLIP(x, y, z)  ((x) < (y) ? (y) : ((x) > (z) ? (z) : (x)))
+
+static float mpeg3audio_ac3_tofloat(unsigned short exponent, int mantissa)
 {
 	float x;
-	x = mantissa * mpeg3_scale_factor[exponent];
+	
+	x = mantissa * mpeg3_scale_factor[CLIP(exponent, 0, 25)];
+//printf(__FUNCTION__ " %f\n", x);
+
 	return x;
 }
 
-static inline void mpeg3audio_ac3_mantissa_reset(mpeg3_ac3_mantissa_t *mantissa)
+static void mpeg3audio_ac3_mantissa_reset(mpeg3_ac3_mantissa_t *mantissa)
 {
 	mantissa->m_1[2] = mantissa->m_1[1] = mantissa->m_1[0] = 0;
 	mantissa->m_2[2] = mantissa->m_2[1] = mantissa->m_2[0] = 0;
@@ -148,7 +153,7 @@ static inline void mpeg3audio_ac3_mantissa_reset(mpeg3_ac3_mantissa_t *mantissa)
  * The distribution is uniform, over the range [-0.707,0.707]
  *
  */
-inline unsigned int mpeg3audio_ac3_dither_gen(mpeg3audio_t *audio)
+static unsigned int mpeg3audio_ac3_dither_gen(mpeg3audio_t *audio)
 {
 	int i;
 	unsigned int state;
@@ -172,7 +177,7 @@ inline unsigned int mpeg3audio_ac3_dither_gen(mpeg3audio_t *audio)
 
 
 /* Fetch an unpacked, left justified, and properly biased/dithered mantissa value */
-static inline unsigned short mpeg3audio_ac3_mantissa_get(mpeg3audio_t *audio, 
+static unsigned short mpeg3audio_ac3_mantissa_get(mpeg3audio_t *audio, 
 	unsigned short bap, 
 	unsigned short dithflag)
 {
@@ -377,8 +382,12 @@ int mpeg3audio_ac3_coeff_unpack(mpeg3audio_t *audio,
 	{
 /* There are always 7 mantissas for lfe, no dither for lfe */
 		for(j = 0; j < 7 && !mpeg3bits_error(audio->astream); j++)
+		{
 			mantissa = mpeg3audio_ac3_mantissa_get(audio, audblk->lfe_bap[j], 0);
 			samples[5][j] = mpeg3audio_ac3_tofloat(audblk->lfe_exp[j], mantissa);
+//printf("%f ", samples[5][j]);
+		}
+//printf("\n");
 	}
 
 	return mpeg3bits_error(audio->astream);

@@ -16,19 +16,6 @@
 
 
 // for debug and error output
-#ifdef DEBUG
-#define LOG_DEBUG 7
-#define LOG_ERROR 0
-#define ifoPrint(level,fmt,arg...)                                      \
-        do {                                                            \
-                fprintf (stderr, "%d\t%s:%d\t", level, __FILE__, __LINE__);\
-                fprintf (stderr, fmt, ##arg);                           \
-                fprintf (stderr, "\n");                                 \
-        } while (0)
-#else  
-#define ifoPrint(level,fmt,arg...)
-#endif
-//
 
 /**
  * Video Info Table 
@@ -65,7 +52,7 @@ typedef struct {
  */
 
 typedef struct {
-#if BYTE_ORDER == LITTLE_ENDIAN
+#if MPEG3_LITTLE_ENDIAN
 	u_char num_channels	: 3;    // number of channels (n+1)
 	u_char sample_freq	: 2;    // sampling frequency
 	u_char quantization	: 2;    // quantization

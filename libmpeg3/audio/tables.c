@@ -1,4 +1,5 @@
-#include "mpeg3audio.h"
+#include "mpeg3private.h"
+#include "mpeg3protos.h"
 #include "tables.h"
 
 #include <math.h>
@@ -134,7 +135,7 @@ int *mpeg3_mapend[9][3];
 unsigned int mpeg3_n_slen2[512]; /* MPEG 2.0 slen for 'normal' mode */
 unsigned int mpeg3_i_slen2[256]; /* MPEG 2.0 slen for intensity stereo */
 
-int mpeg3audio_init_layer2(mpeg3audio_t *audio)
+static int init_layer2(mpeg3_layer_t *audio)
 {
 	static double mulmul[27] = 
 	{
@@ -181,7 +182,7 @@ int mpeg3audio_init_layer2(mpeg3audio_t *audio)
 	return 0;
 }
 
-int mpeg3audio_init_layer3(mpeg3audio_t *audio)
+static int init_layer3(mpeg3_layer_t *audio)
 {
 	int i, j, k, l;
 	int down_sample_sblimit = 32;
@@ -411,12 +412,12 @@ int mpeg3audio_init_layer3(mpeg3audio_t *audio)
 	return 0;
 }
 
-int mpeg3audio_new_decode_tables(mpeg3audio_t *audio)
+int mpeg3_new_decode_tables(mpeg3_layer_t *audio)
 {
 	int i, j, k, kr, divv;
 	float *costab;
 	int idx;
-	long scaleval = audio->outscale;
+	long scaleval = 1;
 	
   
 	for(i = 0; i < 5; i++)
@@ -470,10 +471,9 @@ int mpeg3audio_new_decode_tables(mpeg3audio_t *audio)
 #endif
 
 /* Initialize AC3 */
-	audio->ac3_lfsr_state = 1;
-	mpeg3audio_imdct_init(audio);
+//	mpeg3audio_imdct_init(audio);
 /* Initialize MPEG */
-	mpeg3audio_init_layer2(audio); /* inits also shared tables with layer1 */
-	mpeg3audio_init_layer3(audio);
+	init_layer2(audio); /* inits also shared tables with layer1 */
+	init_layer3(audio);
 	return 0;
 }

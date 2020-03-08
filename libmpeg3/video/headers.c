@@ -1,5 +1,6 @@
 #include "../mpeg3demux.h"
 #include "../mpeg3private.h"
+#include "../mpeg3protos.h"
 #include "mpeg3video.h"
 
 #include <stdio.h>
@@ -14,6 +15,7 @@ int mpeg3video_getseqhdr(mpeg3video_t *video)
 	int constrained_parameters_flag;
 	int load_intra_quantizer_matrix, load_non_intra_quantizer_matrix;
 
+//printf("mpeg3video_getseqhdr 1\n");
 	video->horizontal_size = mpeg3bits_getbits(video->vstream, 12);
 	video->vertical_size = mpeg3bits_getbits(video->vstream, 12);
 	aspect_ratio = mpeg3bits_getbits(video->vstream, 4);
@@ -55,6 +57,7 @@ int mpeg3video_getseqhdr(mpeg3video_t *video)
    	 	video->chroma_non_intra_quantizer_matrix[i] = video->non_intra_quantizer_matrix[i];
   	}
 
+//printf("mpeg3video_getseqhdr 100\n");
 	return 0;
 }
 
@@ -191,10 +194,15 @@ int mpeg3video_picture_display_extension(mpeg3video_t *video)
 	short frame_centre_horizontal_offset[3];
 	short frame_centre_vertical_offset[3];
 
+
+
 	if(video->prog_seq || video->pict_struct != FRAME_PICTURE)
 		n = 1;
 	else 
 		n = video->repeatfirst ? 3 : 2;
+
+
+
 
 	for(i = 0; i < n; i++)
 	{
@@ -212,7 +220,7 @@ int mpeg3video_picture_display_extension(mpeg3video_t *video)
 int mpeg3video_picture_coding_extension(mpeg3video_t *video)
 {
 	int chroma_420_type, composite_display_flag;
-	int v_axis = 0, field_sequence = 0, sub_carrier = 0, burst_amplitude = 0, sub_carrier_phase = 0;
+	int v_axis = 0, sub_carrier = 0, burst_amplitude = 0, sub_carrier_phase = 0;
 
 	video->h_forw_r_size = mpeg3bits_getbits(video->vstream, 4) - 1;
 	video->v_forw_r_size = mpeg3bits_getbits(video->vstream, 4) - 1;
@@ -226,7 +234,11 @@ int mpeg3video_picture_coding_extension(mpeg3video_t *video)
 	video->qscale_type = mpeg3bits_getbit_noptr(video->vstream);
 	video->intravlc = mpeg3bits_getbit_noptr(video->vstream);
 	video->altscan = mpeg3bits_getbit_noptr(video->vstream);
+
+
 	video->repeatfirst = mpeg3bits_getbit_noptr(video->vstream);
+
+
 	chroma_420_type = mpeg3bits_getbit_noptr(video->vstream);
 	video->prog_frame = mpeg3bits_getbit_noptr(video->vstream);
 
@@ -236,32 +248,38 @@ int mpeg3video_picture_coding_extension(mpeg3video_t *video)
 
 	video->current_repeat = 0;
 
-	if(video->prog_seq)
+/*
+ * printf("%d %d %d %d\n", 
+ * video->prog_seq ? 1 : 0, 
+ * video->prog_frame ? 1 : 0, 
+ * video->topfirst ? 1 : 0, 
+ * video->repeatfirst ? 1 : 0);
+ */
+
+
+
+	if(video->repeatfirst)
 	{
-		if(video->repeatfirst)
+		if(video->prog_seq)
 		{
 			if(video->topfirst)
 				video->repeat_count += 200;
 			else
 				video->repeat_count += 100;
 		}
-	}
-	else
-	if(video->prog_frame)
-	{
-		if(video->repeatfirst)
+		else
+		if(video->prog_frame)
 		{
 			video->repeat_count += 50;
 		}
 	}
 
-/*printf("mpeg3video_picture_coding_extension %d\n", video->repeat_count); */
 	composite_display_flag = mpeg3bits_getbit_noptr(video->vstream);
 
 	if(composite_display_flag)
 	{
     	v_axis = mpeg3bits_getbit_noptr(video->vstream);
-    	field_sequence = mpeg3bits_getbits(video->vstream, 3);
+    	video->field_sequence = mpeg3bits_getbits(video->vstream, 3);
     	sub_carrier = mpeg3bits_getbit_noptr(video->vstream);
     	burst_amplitude = mpeg3bits_getbits(video->vstream, 7);
     	sub_carrier_phase = mpeg3bits_getbyte_noptr(video->vstream);
@@ -351,6 +369,12 @@ int mpeg3video_ext_user_data(mpeg3video_t *video)
    		}
    		code = mpeg3bits_next_startcode(video->vstream);
   	}
+
+/*
+ * printf("mpeg3video_ext_user_data prog_seq=%d prog_frame=%d\n", 
+ * video->prog_seq, 
+ * video->prog_frame);
+ */
 	return 0;
 }
 
@@ -361,7 +385,8 @@ int mpeg3video_getgophdr(mpeg3video_t *video)
 {
 	int drop_flag, closed_gop, broken_link;
 
-//printf("%x\n", mpeg3bits_tell(video->vstream));
+//printf("mpeg3video_getgophdr 1\n");
+	video->has_gops = 1;
 	drop_flag = mpeg3bits_getbit_noptr(video->vstream);
 	video->gop_timecode.hour = mpeg3bits_getbits(video->vstream, 5);
 	video->gop_timecode.minute = mpeg3bits_getbits(video->vstream, 6);
@@ -371,6 +396,7 @@ int mpeg3video_getgophdr(mpeg3video_t *video)
 	closed_gop = mpeg3bits_getbit_noptr(video->vstream);
 	broken_link = mpeg3bits_getbit_noptr(video->vstream);
 
+//printf("mpeg3video_getgophdr 100\n");
 /*
  * printf("%d:%d:%d:%d %d %d %d\n", video->gop_timecode.hour, video->gop_timecode.minute, video->gop_timecode.second, video->gop_timecode.frame, 
  *  	drop_flag, closed_gop, broken_link);
@@ -404,7 +430,8 @@ int mpeg3video_getpicturehdr(mpeg3video_t *video)
 
 /* get extra bit picture */
 	while(mpeg3bits_getbit_noptr(video->vstream) &&
-		!mpeg3bits_eof(video->vstream)) mpeg3bits_getbyte_noptr(video->vstream);
+		!mpeg3bits_eof(video->vstream)) 
+		mpeg3bits_getbyte_noptr(video->vstream);
 	return 0;
 }
 
@@ -412,8 +439,12 @@ int mpeg3video_getpicturehdr(mpeg3video_t *video)
 int mpeg3video_get_header(mpeg3video_t *video, int dont_repeat)
 {
 	unsigned int code;
+	mpeg3_t *file = video->file;
+	mpeg3_vtrack_t *track = video->track;
+	mpeg3_bits_t *vstream = video->vstream;
+	mpeg3_demuxer_t *demuxer = track->demuxer;
 
-/* a sequence header should be found before returning from `getheader' the */
+/* a sequence header should be found before returning from get_header the */
 /* first time (this is to set horizontal/vertical size properly) */
 
 /* Repeat the frame until it's less than 1 count from repeat_count */
@@ -430,13 +461,20 @@ int mpeg3video_get_header(mpeg3video_t *video, int dont_repeat)
 	else
 		video->repeat_count -= video->current_repeat;
 
+// Case of no picture coding extension
+	if(video->repeat_count < 0) video->repeat_count = 0;
+
 	while(1)
 	{
 /* look for startcode */
-    	code = mpeg3bits_next_startcode(video->vstream);
-		if(mpeg3bits_eof(video->vstream)) return 1;
-		if(code != MPEG3_SEQUENCE_END_CODE) mpeg3bits_refill(video->vstream);
- 
+    	code = mpeg3bits_next_startcode(vstream);
+
+
+		if(mpeg3bits_eof(vstream)) return 1;
+
+
+		if(code != MPEG3_SEQUENCE_END_CODE) mpeg3bits_refill(vstream);
+
     	switch(code)
 		{
     		case MPEG3_SEQUENCE_START_CODE:
@@ -451,7 +489,6 @@ int mpeg3video_get_header(mpeg3video_t *video, int dont_repeat)
     			break;
 
     		case MPEG3_PICTURE_START_CODE:
-//printf("%x\n", mpeg3bits_tell(video->vstream));
     			mpeg3video_getpicturehdr(video);
     			mpeg3video_ext_user_data(video);
     			if(video->found_seqhdr) return 0;       /* Exit here */
@@ -459,13 +496,15 @@ int mpeg3video_get_header(mpeg3video_t *video, int dont_repeat)
 
     		case MPEG3_SEQUENCE_END_CODE:
 // Continue until the end
-				mpeg3bits_refill(video->vstream);
+				mpeg3bits_refill(vstream);
 				break;
 
     		default:
     			break;
     	}
-  	}
+ 	}
+
+
  	return 1;      /* Shouldn't be reached. */
 }
 
@@ -500,3 +539,5 @@ int mpeg3video_getslicehdr(mpeg3_slice_t *slice, mpeg3video_t *video)
 
 	return slice_vertical_position_extension;
 }
+
+

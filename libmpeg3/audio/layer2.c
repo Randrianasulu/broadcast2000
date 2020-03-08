@@ -4,10 +4,11 @@
  * Layer-3 huffman table is in huffman.h
  */
 
-#include "mpeg3audio.h"
+#include "mpeg3private.h"
+#include "mpeg3protos.h"
 #include "tables.h"
 
-struct al_table alloc_0[] = {
+static struct al_table alloc_0[] = {
 	{4,0},{5,3},{3,-3},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},{9,-255},{10,-511},
 	{11,-1023},{12,-2047},{13,-4095},{14,-8191},{15,-16383},{16,-32767},
 	{4,0},{5,3},{3,-3},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},{9,-255},{10,-511},
@@ -47,7 +48,7 @@ struct al_table alloc_0[] = {
 	{2,0},{5,3},{7,5},{16,-32767},
 	{2,0},{5,3},{7,5},{16,-32767} };
 
-struct al_table alloc_1[] = {
+static struct al_table alloc_1[] = {
 	{4,0},{5,3},{3,-3},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},{9,-255},{10,-511},
 	{11,-1023},{12,-2047},{13,-4095},{14,-8191},{15,-16383},{16,-32767},
 	{4,0},{5,3},{3,-3},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},{9,-255},{10,-511},
@@ -90,7 +91,7 @@ struct al_table alloc_1[] = {
 	{2,0},{5,3},{7,5},{16,-32767},
 	{2,0},{5,3},{7,5},{16,-32767} };
 
-struct al_table alloc_2[] = {
+static struct al_table alloc_2[] = {
 	{4,0},{5,3},{7,5},{10,9},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},{9,-255},
 	{10,-511},{11,-1023},{12,-2047},{13,-4095},{14,-8191},{15,-16383},
 	{4,0},{5,3},{7,5},{10,9},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},{9,-255},
@@ -102,7 +103,7 @@ struct al_table alloc_2[] = {
 	{3,0},{5,3},{7,5},{10,9},{4,-7},{5,-15},{6,-31},{7,-63},
 	{3,0},{5,3},{7,5},{10,9},{4,-7},{5,-15},{6,-31},{7,-63} };
 
-struct al_table alloc_3[] = {
+static struct al_table alloc_3[] = {
 	{4,0},{5,3},{7,5},{10,9},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},{9,-255},
 	{10,-511},{11,-1023},{12,-2047},{13,-4095},{14,-8191},{15,-16383},
 	{4,0},{5,3},{7,5},{10,9},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},{9,-255},
@@ -118,7 +119,7 @@ struct al_table alloc_3[] = {
 	{3,0},{5,3},{7,5},{10,9},{4,-7},{5,-15},{6,-31},{7,-63},
 	{3,0},{5,3},{7,5},{10,9},{4,-7},{5,-15},{6,-31},{7,-63} };
 
-struct al_table alloc_4[] = {
+static struct al_table alloc_4[] = {
 	{4,0},{5,3},{7,5},{3,-3},{10,9},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},
 		{9,-255},{10,-511},{11,-1023},{12,-2047},{13,-4095},{14,-8191},
 	{4,0},{5,3},{7,5},{3,-3},{10,9},{4,-7},{5,-15},{6,-31},{7,-63},{8,-127},
@@ -155,7 +156,7 @@ struct al_table alloc_4[] = {
     {2,0},{5,3},{7,5},{10,9}  };
 
 
-int mpeg3audio_II_select_table(mpeg3audio_t *audio)
+static int select_table(mpeg3_layer_t *audio)
 {
   	static int translate[3][2][16] =
 	   {{{ 0,2,2,2,2,2,2,0,0,0,1,1,1,1,1,0},
@@ -180,9 +181,11 @@ int mpeg3audio_II_select_table(mpeg3audio_t *audio)
 	return 0;
 }
 
-int mpeg3audio_II_step_one(mpeg3audio_t *audio, unsigned int *bit_alloc, int *scale)
+static int step_one(mpeg3_layer_t *audio, 
+	unsigned int *bit_alloc, 
+	int *scale)
 {
-    int stereo = audio->channels - 1;
+   	int stereo = audio->channels - 1;
     int sblimit = audio->II_sblimit;
     int jsbound = audio->jsbound;
     int sblimit2 = audio->II_sblimit << stereo;
@@ -190,37 +193,44 @@ int mpeg3audio_II_step_one(mpeg3audio_t *audio, unsigned int *bit_alloc, int *sc
     int i, result = 0;
     unsigned int *scfsi_buf = audio->layer2_scfsi_buf;
     unsigned int *scfsi, *bita;
+	unsigned int *bita_end = bit_alloc + 64;
     int sc, step;
 
     bita = bit_alloc;
     if(stereo)
     {
 /* Stereo */
-    	for(i = jsbound;i ; i--, alloc1 += (1 << step))
+    	for(i = jsbound; 
+			i && bita < bita_end - 2; 
+			i--, alloc1 += (1 << step))
     	{
-        	*bita++ = (char)mpeg3bits_getbits(audio->astream, step = alloc1->bits);
-        	*bita++ = (char)mpeg3bits_getbits(audio->astream, step);
+        	*bita++ = (char)mpeg3bits_getbits(audio->stream, step = alloc1->bits);
+        	*bita++ = (char)mpeg3bits_getbits(audio->stream, step);
     	}
-    	for(i = sblimit-jsbound; i; i--, alloc1 += (1 << step))
+    	for(i = sblimit - jsbound; 
+			i && bita < bita_end - 2; 
+			i--, alloc1 += (1 << step))
     	{
-        	bita[0] = (char)mpeg3bits_getbits(audio->astream, step = alloc1->bits);
+        	bita[0] = (char)mpeg3bits_getbits(audio->stream, 
+				step = alloc1->bits);
         	bita[1] = bita[0];
         	bita += 2;
     	}
-    	bita = bit_alloc;
+   		bita = bit_alloc;
     	scfsi = scfsi_buf;
     	for(i = sblimit2; i; i--)
-        	if(*bita++) *scfsi++ = (char)mpeg3bits_getbits(audio->astream, 2);
+        	if(*bita++) *scfsi++ = (char)mpeg3bits_getbits(audio->stream, 2);
     }
     else 
     {
 /* mono */
-      	for(i = sblimit; i; i--, alloc1 += (1 << step))
-        *bita++ = (char)mpeg3bits_getbits(audio->astream, step = alloc1->bits);
+       	for(i = sblimit; i; i--, alloc1 += (1 << step))
+         	*bita++ = (char)mpeg3bits_getbits(audio->stream, step = alloc1->bits);
+
       	bita = bit_alloc;
       	scfsi = scfsi_buf;
-      	for(i = sblimit; i; i--) if (*bita++) *scfsi++ = (char)mpeg3bits_getbits(audio->astream, 2);
-    }
+       	for(i = sblimit; i; i--) if (*bita++) *scfsi++ = (char)mpeg3bits_getbits(audio->stream, 2);
+     }
 
     bita = bit_alloc;
     scfsi = scfsi_buf;
@@ -230,31 +240,31 @@ int mpeg3audio_II_step_one(mpeg3audio_t *audio, unsigned int *bit_alloc, int *sc
         	switch(*scfsi++) 
         	{
         	  case 0: 
-                	*scale++ = mpeg3bits_getbits(audio->astream, 6);
-                	*scale++ = mpeg3bits_getbits(audio->astream, 6);
-                	*scale++ = mpeg3bits_getbits(audio->astream, 6);
+                	*scale++ = mpeg3bits_getbits(audio->stream, 6);
+                	*scale++ = mpeg3bits_getbits(audio->stream, 6);
+                	*scale++ = mpeg3bits_getbits(audio->stream, 6);
                 	break;
         	  case 1 : 
-                	*scale++ = sc = mpeg3bits_getbits(audio->astream, 6);
+                	*scale++ = sc = mpeg3bits_getbits(audio->stream, 6);
                 	*scale++ = sc;
-                	*scale++ = mpeg3bits_getbits(audio->astream, 6);
+                	*scale++ = mpeg3bits_getbits(audio->stream, 6);
                 	break;
         	  case 2: 
-                	*scale++ = sc = mpeg3bits_getbits(audio->astream, 6);
+                	*scale++ = sc = mpeg3bits_getbits(audio->stream, 6);
                 	*scale++ = sc;
                 	*scale++ = sc;
                 	break;
         	  default:              /* case 3 */
-                	*scale++ = mpeg3bits_getbits(audio->astream, 6);
-                	*scale++ = sc = mpeg3bits_getbits(audio->astream, 6);
+                	*scale++ = mpeg3bits_getbits(audio->stream, 6);
+                	*scale++ = sc = mpeg3bits_getbits(audio->stream, 6);
                 	*scale++ = sc;
                 	break;
         	}
 	}
-	return result | mpeg3bits_error(audio->astream);
+	return result;
 }
 
-int mpeg3audio_II_step_two(mpeg3audio_t *audio, unsigned int *bit_alloc, float fraction[2][4][SBLIMIT], int *scale, int x1)
+static int step_two(mpeg3_layer_t *audio, unsigned int *bit_alloc, float fraction[2][4][SBLIMIT], int *scale, int x1)
 {
     int i, j, k, ba, result = 0;
     int channels = audio->channels;
@@ -276,9 +286,9 @@ int mpeg3audio_II_step_two(mpeg3audio_t *audio, unsigned int *bit_alloc, float f
         		{
             		float cm = mpeg3_muls[k][scale[x1]];
 
-            		fraction[j][0][i] = ((float)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
-            		fraction[j][1][i] = ((float)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
-            		fraction[j][2][i] = ((float)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
+            		fraction[j][0][i] = ((float)((int)mpeg3bits_getbits(audio->stream, k) + d1)) * cm;
+            		fraction[j][1][i] = ((float)((int)mpeg3bits_getbits(audio->stream, k) + d1)) * cm;
+            		fraction[j][2][i] = ((float)((int)mpeg3bits_getbits(audio->stream, k) + d1)) * cm;
         		}
         		else 
         		{
@@ -286,7 +296,7 @@ int mpeg3audio_II_step_two(mpeg3audio_t *audio, unsigned int *bit_alloc, float f
 						{0, 0, 0, mpeg3_grp_3tab, 0, mpeg3_grp_5tab, 0, 0, 0, mpeg3_grp_9tab};
             		unsigned int idx, *tab, m = scale[x1];
 					
-            		idx = (unsigned int)mpeg3bits_getbits(audio->astream, k);
+            		idx = (unsigned int)mpeg3bits_getbits(audio->stream, k);
             		tab = (unsigned int*)(table[d1] + idx + idx + idx);
             		fraction[j][0][i] = mpeg3_muls[*tab++][m];
             		fraction[j][1][i] = mpeg3_muls[*tab++][m];
@@ -312,9 +322,9 @@ int mpeg3audio_II_step_two(mpeg3audio_t *audio, unsigned int *bit_alloc, float f
         		float cm;
 				
         		cm = mpeg3_muls[k][scale[x1 + 3]];
-        		fraction[1][0][i] = (fraction[0][0][i] = (float)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
-        		fraction[1][1][i] = (fraction[0][1][i] = (float)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
-        		fraction[1][2][i] = (fraction[0][2][i] = (float)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
+        		fraction[1][0][i] = (fraction[0][0][i] = (float)((int)mpeg3bits_getbits(audio->stream, k) + d1)) * cm;
+        		fraction[1][1][i] = (fraction[0][1][i] = (float)((int)mpeg3bits_getbits(audio->stream, k) + d1)) * cm;
+        		fraction[1][2][i] = (fraction[0][2][i] = (float)((int)mpeg3bits_getbits(audio->stream, k) + d1)) * cm;
         		cm = mpeg3_muls[k][scale[x1]];
         		fraction[0][0][i] *= cm; 
 				fraction[0][1][i] *= cm; 
@@ -327,7 +337,7 @@ int mpeg3audio_II_step_two(mpeg3audio_t *audio, unsigned int *bit_alloc, float f
 			  
         	  m1 = scale[x1]; 
 			  m2 = scale[x1+3];
-        	  idx = (unsigned int)mpeg3bits_getbits(audio->astream, k);
+        	  idx = (unsigned int)mpeg3bits_getbits(audio->stream, k);
         	  tab = (unsigned int*)(table[d1] + idx + idx + idx);
         	  fraction[0][0][i] = mpeg3_muls[*tab][m1]; 
 			  fraction[1][0][i] = mpeg3_muls[*tab++][m2];
@@ -359,10 +369,14 @@ int mpeg3audio_II_step_two(mpeg3audio_t *audio, unsigned int *bit_alloc, float f
       	for(j = 0; j < channels; j++)
         	fraction[j][0][i] = fraction[j][1][i] = fraction[j][2][i] = 0.0;
 
-	return result | mpeg3bits_error(audio->astream);
+	return result;
 }
 
-int mpeg3audio_dolayer2(mpeg3audio_t *audio)
+int mpeg3audio_dolayer2(mpeg3_layer_t *audio, 
+	char *frame, 
+	int frame_size, 
+	float **output,
+	int render)
 {
 	int i, j, result = 0;
 	int channels = audio->channels;
@@ -370,11 +384,19 @@ int mpeg3audio_dolayer2(mpeg3audio_t *audio)
 	unsigned int bit_alloc[64];
 	int scale[192];
 	int single = audio->single;
+	int output_position = 0;
+
+
+	frame += 4;
+/* Set up bitstream to use buffer */
+	mpeg3bits_use_ptr(audio->stream, frame);
+
+
 
  	if(audio->error_protection)
-		mpeg3bits_getbits(audio->astream, 16);
+		mpeg3bits_getbits(audio->stream, 16);
 
-	mpeg3audio_II_select_table(audio);
+	select_table(audio);
 
   	audio->jsbound = (audio->mode == MPG_MD_JOINT_STEREO) ?
      	(audio->mode_ext << 2) + 4 : audio->II_sblimit;
@@ -382,35 +404,52 @@ int mpeg3audio_dolayer2(mpeg3audio_t *audio)
   	if(channels == 1 || single == 3)
     	single = 0;
 
-  	result |= mpeg3audio_II_step_one(audio, bit_alloc, scale);
+  	result |= step_one(audio, bit_alloc, scale);
 
 	for(i = 0; i < SCALE_BLOCK && !result; i++)
 	{
-    	result |= mpeg3audio_II_step_two(audio, bit_alloc, fraction, scale, i >> 2);
+    	result |= step_two(audio, bit_alloc, fraction, scale, i >> 2);
 
     	for(j = 0; j < 3; j++) 
     	{
     		if(single >= 0)
     		{
 /* Monaural */
-        		mpeg3audio_synth_mono(audio, fraction[single][j], audio->pcm_sample, &(audio->pcm_point));
-    		}
+        		if(render)
+        			mpeg3audio_synth_stereo(audio, 
+						fraction[0][j], 
+						0, 
+						output[0], 
+						&(output_position));
+    			else
+					output_position += 32;
+			}
     		else 
 			{
 /* Stereo */
-        		int p1 = audio->pcm_point;
-        		mpeg3audio_synth_stereo(audio, fraction[0][j], 0, audio->pcm_sample, &p1);
-        		mpeg3audio_synth_stereo(audio, fraction[1][j], 1, audio->pcm_sample, &(audio->pcm_point));
+        		int p1 = output_position;
+				if(render)
+				{
+//printf(__FUNCTION__ " 3\n");
+        			mpeg3audio_synth_stereo(audio, 
+						fraction[0][j], 
+						0, 
+						output[0], 
+						&p1);
+//printf(__FUNCTION__ " 4\n");
+        			mpeg3audio_synth_stereo(audio, 
+						fraction[1][j], 
+						1, 
+						output[1], 
+						&(output_position));
+//printf(__FUNCTION__ " 5\n");
+				}
+				else
+					output_position += 32;
     		}
-
-    		if(audio->pcm_point / audio->channels >= audio->pcm_allocated - MPEG3AUDIO_PADDING * audio->channels)
-			{
-/* Need more room */
-				mpeg3audio_replace_buffer(audio, audio->pcm_allocated + MPEG3AUDIO_PADDING * audio->channels);
-			}
-    	}
+		}
 	}
 
 
-  	return result;
+  	return output_position;
 }

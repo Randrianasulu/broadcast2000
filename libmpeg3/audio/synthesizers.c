@@ -1,4 +1,5 @@
-#include "mpeg3audio.h"
+#include "mpeg3private.h"
+#include "mpeg3protos.h"
 #include "tables.h"
 
 #define WRITE_SAMPLE(samples, sum) \
@@ -6,9 +7,12 @@
 	(*samples) = (sum); \
 }
 
-int mpeg3audio_synth_stereo(mpeg3audio_t *audio, float *bandPtr, int channel, float *out, int *pnt)
+int mpeg3audio_synth_stereo(mpeg3_layer_t *audio, 
+	float *bandPtr, 
+	int channel, 
+	float *out, 
+	int *pnt)
 {
-	const int step = 2;
 	float *samples = out + *pnt;
     register float sum;
 	float *b0, (*buf)[0x110];
@@ -22,7 +26,6 @@ int mpeg3audio_synth_stereo(mpeg3audio_t *audio, float *bandPtr, int channel, fl
 	}
 	else 
 	{
-    	samples++;
     	buf = audio->synth_stereo_buffs[1];
 	}
 
@@ -42,10 +45,10 @@ int mpeg3audio_synth_stereo(mpeg3audio_t *audio, float *bandPtr, int channel, fl
 /*printf("%f %f %f\n", buf[0][0], buf[1][0], bandPtr[0]); */
 
 	{
-    	register int j;
+    	int j;
     	float *window = mpeg3_decwin + 16 - bo1;
 
-    	for(j = 16; j; j--, b0 += 0x10, window += 0x20, samples += step)
+    	for(j = 16; j; j--, b0 += 0x10, window += 0x20, samples++)
     	{
     		sum  = window[0x0] * b0[0x0];
     		sum -= window[0x1] * b0[0x1];
@@ -78,10 +81,10 @@ int mpeg3audio_synth_stereo(mpeg3audio_t *audio, float *bandPtr, int channel, fl
     	WRITE_SAMPLE(samples, sum);
     	b0 -= 0x10;
 		window -= 0x20;
-		samples += step;
+		samples++;
       	window += bo1 << 1;
 
-    	for(j = 15; j; j--, b0 -= 0x10, window -= 0x20, samples += step)
+    	for(j = 15; j; j--, b0 -= 0x10, window -= 0x20, samples++)
     	{
     		sum = -window[-0x1] * b0[0x0];
     		sum -= window[-0x2] * b0[0x1];
@@ -103,35 +106,15 @@ int mpeg3audio_synth_stereo(mpeg3audio_t *audio, float *bandPtr, int channel, fl
     		WRITE_SAMPLE(samples, sum);
     	}
 	}
-	*pnt += 64;
+	*pnt += 32;
 
 	return 0;
 }
 
-int mpeg3audio_synth_mono(mpeg3audio_t *audio, float *bandPtr, float *samples, int *pnt)
-{
-	float *samples_tmp = audio->synth_mono_buff;
-	float *tmp1 = samples_tmp;
-	int i, ret;
-	int pnt1 = 0;
-
-	ret = mpeg3audio_synth_stereo(audio, bandPtr, 0, samples_tmp, &pnt1);
-	samples += *pnt;
-
-	for(i = 0; i < 32; i++)
-	{
-    	*samples = *tmp1;
-    	samples++;
-    	tmp1 += 2;
-	}
-	*pnt += 32;
-
-	return ret;
-}
 
 
 /* Call this after every seek to reset the buffers */
-int mpeg3audio_reset_synths(mpeg3audio_t *audio)
+int mpeg3audio_reset_synths(mpeg3_layer_t *audio)
 {
 	int i, j, k;
 	for(i = 0; i < 2; i++)
@@ -161,12 +144,5 @@ int mpeg3audio_reset_synths(mpeg3audio_t *audio)
 	}
 	audio->mp3_blc[0] = 0;
 	audio->mp3_blc[1] = 0;
-	for(i = 0; i < audio->channels; i++)
-	{
-		for(j = 0; j < AC3_N / 2; j++)
-		{
-			audio->ac3_delay[i][j] = 0;
-		}
-	}
 	return 0;
 }

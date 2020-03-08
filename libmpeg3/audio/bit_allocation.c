@@ -154,7 +154,7 @@ static short mpeg3_baptab[] =
 };
 
 
-inline int logadd(int a, int b)
+static int logadd(int a, int b)
 { 
 	int c;
 	int address;
@@ -451,7 +451,7 @@ int mpeg3audio_ac3_bit_allocate(mpeg3audio_t *audio,
 
 		mpeg3audio_ac3_ba_compute_psd(start, 
 				end, 
-				audblk->fbw_exp[i], 
+				(short*)audblk->fbw_exp[i], 
 				audio->ac3_bit_allocation.psd, 
 				audio->ac3_bit_allocation.bndpsd);
 
@@ -471,9 +471,9 @@ int mpeg3audio_ac3_bit_allocate(mpeg3audio_t *audio,
 				fscod, 
 				audblk->deltbae[i], 
 				audblk->deltnseg[i], 
-				audblk->deltoffst[i], 
-				audblk->deltba[i], 
-				audblk->deltlen[i], 
+				(short*)audblk->deltoffst[i], 
+				(short*)audblk->deltba[i], 
+				(short*)audblk->deltlen[i], 
 				audio->ac3_bit_allocation.excite, 
 				audio->ac3_bit_allocation.mask);
 
@@ -483,7 +483,7 @@ int mpeg3audio_ac3_bit_allocate(mpeg3audio_t *audio,
 				snroffset, 
 				audio->ac3_bit_allocation.psd, 
 				audio->ac3_bit_allocation.mask, 
-				audblk->fbw_bap[i]);
+				(short*)audblk->fbw_bap[i]);
 	}
 
 	if(audblk->cplinu)
@@ -497,7 +497,7 @@ int mpeg3audio_ac3_bit_allocate(mpeg3audio_t *audio,
 
 		mpeg3audio_ac3_ba_compute_psd(start, 
 				end, 
-				audblk->cpl_exp, 
+				(short*)audblk->cpl_exp, 
 				audio->ac3_bit_allocation.psd, 
 				audio->ac3_bit_allocation.bndpsd);
 
@@ -517,9 +517,9 @@ int mpeg3audio_ac3_bit_allocate(mpeg3audio_t *audio,
 				fscod, 
 				audblk->cpldeltbae, 
 				audblk->cpldeltnseg, 
-				audblk->cpldeltoffst, 
-				audblk->cpldeltba, 
-				audblk->cpldeltlen, 
+				(short*)audblk->cpldeltoffst, 
+				(short*)audblk->cpldeltba, 
+				(short*)audblk->cpldeltlen, 
 				audio->ac3_bit_allocation.excite, 
 				audio->ac3_bit_allocation.mask);
 
@@ -529,7 +529,7 @@ int mpeg3audio_ac3_bit_allocate(mpeg3audio_t *audio,
 				snroffset, 
 				audio->ac3_bit_allocation.psd, 
 				audio->ac3_bit_allocation.mask, 
-				audblk->cpl_bap);
+				(short*)audblk->cpl_bap);
 	}
 
 	if(bsi->lfeon)
@@ -543,7 +543,7 @@ int mpeg3audio_ac3_bit_allocate(mpeg3audio_t *audio,
 
 		mpeg3audio_ac3_ba_compute_psd(start, 
 				end, 
-				audblk->lfe_exp, 
+				(short*)audblk->lfe_exp, 
 				audio->ac3_bit_allocation.psd, 
 				audio->ac3_bit_allocation.bndpsd);
 
@@ -576,7 +576,7 @@ int mpeg3audio_ac3_bit_allocate(mpeg3audio_t *audio,
 				snroffset, 
 				audio->ac3_bit_allocation.psd, 
 				audio->ac3_bit_allocation.mask, 
-				audblk->lfe_bap);
+				(short*)audblk->lfe_bap);
 	}
 
 	return result;

@@ -1,4 +1,5 @@
-#include "mpeg3video.h"
+#include "mpeg3private.h"
+#include "mpeg3protos.h"
 #include "vlc.h"
 
 /* variable length code tables                                    */

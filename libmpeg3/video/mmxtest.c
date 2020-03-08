@@ -1,4 +1,5 @@
-#include "../mpeg3private.inc"
+#include "mpeg3private.h"
+#include "mpeg3protos.h"
 
 #include <stdio.h>
 #include <string.h>

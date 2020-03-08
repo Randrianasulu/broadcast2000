@@ -1,11 +1,13 @@
 #include "huffman.h"
-#include "mpeg3audio.h"
+#include "mpeg3private.h"
+#include "mpeg3protos.h"
 #include "tables.h"
 
 #include <stdio.h>
 #include <string.h>
 
-struct gr_info_s {
+struct gr_info_s 
+{
       int scfsi;
       unsigned part2_3_length;
       unsigned big_values;
@@ -26,7 +28,7 @@ struct gr_info_s {
       float *pow2gain;
 };
 
-struct mpeg3_III_sideinfo
+struct sideinfo_s
 {
 	unsigned main_data_begin;
 	unsigned private_bits;
@@ -36,7 +38,15 @@ struct mpeg3_III_sideinfo
 	} ch[2];
 };
 
-int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
+
+
+
+
+
+
+
+
+static int get_scale_factors_1(mpeg3_layer_t *audio,
 		int *scf, 
 		struct gr_info_s *gr_info, 
 		int ch, 
@@ -57,16 +67,16 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
 		if (gr_info->mixed_block_flag) 
 		{
 			for(i = 8; i; i--)
-				*scf++ = mpeg3bits_getbits(audio->astream, num0);
+				*scf++ = mpeg3bits_getbits(audio->stream, num0);
 			i = 9;
 /* num0 * 17 + num1 * 18 */
 			numbits -= num0; 
 		}
 
 		for( ; i; i--)
-			*scf++ = mpeg3bits_getbits(audio->astream, num0);
+			*scf++ = mpeg3bits_getbits(audio->stream, num0);
 		for(i = 18; i; i--)
-			*scf++ = mpeg3bits_getbits(audio->astream, num1);
+			*scf++ = mpeg3bits_getbits(audio->stream, num1);
 /* short[13][0..2] = 0 */
 		*scf++ = 0; 
 		*scf++ = 0; 
@@ -82,10 +92,10 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
 /* scfsi < 0 => granule == 0 */
 			for(i = 11; i; i--)
 			{
-				*scf++ = mpeg3bits_getbits(audio->astream, num0);
+				*scf++ = mpeg3bits_getbits(audio->stream, num0);
 			}
 			for(i = 10; i; i--)
-				*scf++ = mpeg3bits_getbits(audio->astream, num1);
+				*scf++ = mpeg3bits_getbits(audio->stream, num1);
 			numbits = (num0 + num1) * 10 + num0;
 			*scf++ = 0;
     	}
@@ -96,7 +106,7 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
 			{
         		for(i = 0; i < 6; i++)
 				{
-        			*scf++ = mpeg3bits_getbits(audio->astream, num0);
+        			*scf++ = mpeg3bits_getbits(audio->stream, num0);
 				}
         		numbits += num0 * 6;
     		}
@@ -108,7 +118,7 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
     		if(!(scfsi & 0x4)) 
 			{
         		for(i = 0; i < 5; i++)
-        		  *scf++ = mpeg3bits_getbits(audio->astream, num0);
+        		  *scf++ = mpeg3bits_getbits(audio->stream, num0);
         		numbits += num0 * 5;
     		}
     		else 
@@ -119,7 +129,7 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
     		if(!(scfsi & 0x2)) 
 			{
         	    for(i = 0; i < 5; i++)
-        			*scf++ = mpeg3bits_getbits(audio->astream, num1);
+        			*scf++ = mpeg3bits_getbits(audio->stream, num1);
         	    numbits += num1 * 5;
     		}
     		else 
@@ -130,7 +140,7 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
     		if(!(scfsi & 0x1)) 
 			{
         	    for(i = 0; i < 5; i++)
-        			*scf++ = mpeg3bits_getbits(audio->astream, num1);
+        			*scf++ = mpeg3bits_getbits(audio->stream, num1);
         	    numbits += num1 * 5;
     		}
     		else 
@@ -143,7 +153,7 @@ int mpeg3audio_III_get_scale_factors_1(mpeg3audio_t *audio,
     return numbits;
 }
 
-int mpeg3audio_III_get_scale_factors_2(mpeg3audio_t *audio,
+static int get_scale_factors_2(mpeg3_layer_t *audio,
 		int *scf,
 		struct gr_info_s *gr_info,
 		int i_stereo)
@@ -184,7 +194,7 @@ int mpeg3audio_III_get_scale_factors_2(mpeg3audio_t *audio,
     	if(num) 
 		{
     		for(j = 0; j < (int)(pnt[i]); j++)
-        	    *scf++ = mpeg3bits_getbits(audio->astream, num);
+        	    *scf++ = mpeg3bits_getbits(audio->stream, num);
     		numbits += pnt[i] * num;
     	}
     	else 
@@ -214,12 +224,13 @@ static int pretab2[22] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 #define REFRESH_MASK \
 	while(num < BITSHIFT) \
 	{ \
-		mask |= mpeg3bits_getbits(audio->astream, 8) << (BITSHIFT - num); \
+		mask |= mpeg3bits_getbits(audio->stream, 8) << (BITSHIFT - num); \
 		num += 8; \
 		part2remain -= 8; \
 	}
 
-int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
+
+static int dequantize_sample(mpeg3_layer_t *audio,
 		float xr[SBLIMIT][SSLIMIT],
 		int *scf,
    		struct gr_info_s *gr_info,
@@ -231,8 +242,8 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 	int l[3],l3;
 	int part2remain = gr_info->part2_3_length - part2bits;
 	int *me;
-	int num = mpeg3bits_getbitoffset(audio->astream);
-	int32_t mask = mpeg3bits_getbits(audio->astream, num);
+	int num = mpeg3bits_getbitoffset(audio->stream);
+	int32_t mask = mpeg3bits_getbits(audio->stream, num);
 //printf("III_dequantize_sample 1 %08x %d\n", mask, num);
 	mask = mask << (BITSHIFT + 8 - num);
 	part2remain -= num;
@@ -339,7 +350,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 				{
         			max[lwin] = cb;
         			REFRESH_MASK;
-        			x += ((u_int32_t)mask) >> (BITSHIFT + 8 - h->linbits);
+        			x += ((uint32_t)mask) >> (BITSHIFT + 8 - h->linbits);
         			num -= h->linbits + 1;
         			mask <<= h->linbits;
         			if(mask < 0)
@@ -367,7 +378,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 				{
         			max[lwin] = cb;
         			REFRESH_MASK;
-        			y += ((u_int32_t) mask) >> (BITSHIFT + 8 - h->linbits);
+        			y += ((uint32_t) mask) >> (BITSHIFT + 8 - h->linbits);
         			num -= h->linbits + 1;
         			mask <<= h->linbits;
         			if(mask < 0)
@@ -543,7 +554,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 				{
         			max = cb;
 					REFRESH_MASK;
-        			x += ((u_int32_t) mask) >> (BITSHIFT + 8 - h->linbits);
+        			x += ((uint32_t) mask) >> (BITSHIFT + 8 - h->linbits);
         			num -= h->linbits + 1;
         			mask <<= h->linbits;
         			if(mask < 0)
@@ -570,7 +581,7 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 				{
         			max = cb;
 					REFRESH_MASK;
-        			y += ((u_int32_t) mask) >> (BITSHIFT + 8 - h->linbits);
+        			y += ((uint32_t) mask) >> (BITSHIFT + 8 - h->linbits);
         			num -= h->linbits + 1;
         			mask <<= h->linbits;
         			if(mask < 0)
@@ -657,11 +668,11 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 
 	part2remain += num;
 
-//printf("III_dequantize_sample 2 %d %04x\n", num, mpeg3bits_showbits(audio->astream, 16));
-	mpeg3bits_start_reverse(audio->astream);
-	mpeg3bits_getbits_reverse(audio->astream, num);
-	mpeg3bits_start_forward(audio->astream);
-//printf("III_dequantize_sample 3 %d %04x\n", audio->astream->bit_number, mpeg3bits_showbits(audio->astream, 16));
+//
+	mpeg3bits_start_reverse(audio->stream);
+	mpeg3bits_getbits_reverse(audio->stream, num);
+	mpeg3bits_start_forward(audio->stream);
+//printf("III_dequantize_sample 3 %d %04x\n", audio->stream->bit_number, mpeg3bits_showbits(audio->stream, 16));
 	num = 0;
 
 	while(xrpnt < &xr[SBLIMIT][0]) 
@@ -669,24 +680,30 @@ int mpeg3audio_III_dequantize_sample(mpeg3audio_t *audio,
 
 	while(part2remain > 16)
 	{
-    	mpeg3bits_getbits(audio->astream, 16); /* Dismiss stuffing Bits */
+    	mpeg3bits_getbits(audio->stream, 16); /* Dismiss stuffing Bits */
     	part2remain -= 16;
 	}
+
 	if(part2remain > 0)
 	{
-      	mpeg3bits_getbits(audio->astream, part2remain);
+      	mpeg3bits_getbits(audio->stream, part2remain);
 	}
 	else 
 	if(part2remain < 0) 
 	{
-      	fprintf(stderr,"mpeg3audio_III_dequantize_sample: Can't rewind stream %d bits!\n", -part2remain);
+      	printf("dequantize_sample: can't rewind stream %d bits! data=%02x%02x%02x%02x\n", 
+		-part2remain,
+		(unsigned char)audio->stream->input_ptr[-3], 
+		(unsigned char)audio->stream->input_ptr[-2], 
+		(unsigned char)audio->stream->input_ptr[-1], 
+		(unsigned char)audio->stream->input_ptr[0]);
       	return 1; /* -> error */
 	}
 	return 0;
 }
 
-int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
-		struct mpeg3_III_sideinfo *si,
+static int get_side_info(mpeg3_layer_t *audio,
+		struct sideinfo_s *si,
 		int channels,
  		int ms_stereo,
 		long sfreq,
@@ -698,17 +715,17 @@ int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
 	static const int tabs[2][5] = { { 2,9,5,3,4 } , { 1,8,1,2,9 } };
 	const int *tab = tabs[lsf];
 
-	si->main_data_begin = mpeg3bits_getbits(audio->astream, tab[1]);
+	si->main_data_begin = mpeg3bits_getbits(audio->stream, tab[1]);
 	if(channels == 1)
-		si->private_bits = mpeg3bits_getbits(audio->astream, tab[2]);
+		si->private_bits = mpeg3bits_getbits(audio->stream, tab[2]);
 	else 
-    	si->private_bits = mpeg3bits_getbits(audio->astream, tab[3]);
+    	si->private_bits = mpeg3bits_getbits(audio->stream, tab[3]);
 	if(!lsf)
 	{
 		for(ch = 0; ch < channels; ch++)
 		{
     		si->ch[ch].gr[0].scfsi = -1;
-    		si->ch[ch].gr[1].scfsi = mpeg3bits_getbits(audio->astream, 4);
+    		si->ch[ch].gr[1].scfsi = mpeg3bits_getbits(audio->stream, 4);
 		}
 	}
 
@@ -718,33 +735,33 @@ int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
 		{
 			register struct gr_info_s *gr_info = &(si->ch[ch].gr[gr]);
 
-			gr_info->part2_3_length = mpeg3bits_getbits(audio->astream, 12);
-			gr_info->big_values = mpeg3bits_getbits(audio->astream, 9);
+			gr_info->part2_3_length = mpeg3bits_getbits(audio->stream, 12);
+			gr_info->big_values = mpeg3bits_getbits(audio->stream, 9);
 			if(gr_info->big_values > 288) 
 			{
-				fprintf(stderr,"mpeg3_III_get_side_info: big_values too large!\n");
+				fprintf(stderr,"get_side_info: big_values too large!\n");
 				gr_info->big_values = 288;
 			}
-			gr_info->pow2gain = mpeg3_gainpow2 + 256 - mpeg3bits_getbits(audio->astream, 8) + powdiff;
+			gr_info->pow2gain = mpeg3_gainpow2 + 256 - mpeg3bits_getbits(audio->stream, 8) + powdiff;
 			if(ms_stereo)
 				gr_info->pow2gain += 2;
-			gr_info->scalefac_compress = mpeg3bits_getbits(audio->astream, tab[4]);
+			gr_info->scalefac_compress = mpeg3bits_getbits(audio->stream, tab[4]);
 
-			if(mpeg3bits_getbits(audio->astream, 1)) 
+			if(mpeg3bits_getbits(audio->stream, 1)) 
 			{
 /* window switch flag  */
 				int i;
-				gr_info->block_type       = mpeg3bits_getbits(audio->astream, 2);
-				gr_info->mixed_block_flag = mpeg3bits_getbits(audio->astream, 1);
-				gr_info->table_select[0]  = mpeg3bits_getbits(audio->astream, 5);
-				gr_info->table_select[1]  = mpeg3bits_getbits(audio->astream, 5);
+				gr_info->block_type       = mpeg3bits_getbits(audio->stream, 2);
+				gr_info->mixed_block_flag = mpeg3bits_getbits(audio->stream, 1);
+				gr_info->table_select[0]  = mpeg3bits_getbits(audio->stream, 5);
+				gr_info->table_select[1]  = mpeg3bits_getbits(audio->stream, 5);
 /*
  * table_select[2] not needed, because there is no region2,
  * but to satisfy some verifications tools we set it either.
  */
         		gr_info->table_select[2] = 0;
         		for(i = 0; i < 3; i++)
-        	    	gr_info->full_gain[i] = gr_info->pow2gain + (mpeg3bits_getbits(audio->astream, 3) << 3);
+        	    	gr_info->full_gain[i] = gr_info->pow2gain + (mpeg3bits_getbits(audio->stream, 3) << 3);
 
         		if(gr_info->block_type == 0) 
 				{
@@ -769,24 +786,24 @@ int mpeg3audio_III_get_side_info(mpeg3audio_t *audio,
 			{
 				int i, r0c, r1c;
 				for(i = 0; i < 3; i++)
-					gr_info->table_select[i] = mpeg3bits_getbits(audio->astream, 5);
+					gr_info->table_select[i] = mpeg3bits_getbits(audio->stream, 5);
 
-				r0c = mpeg3bits_getbits(audio->astream, 4);
-				r1c = mpeg3bits_getbits(audio->astream, 3);
+				r0c = mpeg3bits_getbits(audio->stream, 4);
+				r1c = mpeg3bits_getbits(audio->stream, 3);
 				gr_info->region1start = mpeg3_bandInfo[sfreq].longIdx[r0c + 1] >> 1 ;
 				gr_info->region2start = mpeg3_bandInfo[sfreq].longIdx[r0c + 1 + r1c + 1] >> 1;
 				gr_info->block_type = 0;
 				gr_info->mixed_block_flag = 0;
 			}
-			if(!lsf) gr_info->preflag = mpeg3bits_getbits(audio->astream, 1);
-			gr_info->scalefac_scale = mpeg3bits_getbits(audio->astream, 1);
-			gr_info->count1table_select = mpeg3bits_getbits(audio->astream, 1);
+			if(!lsf) gr_info->preflag = mpeg3bits_getbits(audio->stream, 1);
+			gr_info->scalefac_scale = mpeg3bits_getbits(audio->stream, 1);
+			gr_info->count1table_select = mpeg3bits_getbits(audio->stream, 1);
 		}
 	}
 	return 0;
 }
 
-int mpeg3audio_III_hybrid(mpeg3audio_t *audio,
+static int hybrid(mpeg3_layer_t *audio,
 		float fsIn[SBLIMIT][SSLIMIT],
 		float tsOut[SSLIMIT][SBLIMIT],
 	   int ch,
@@ -845,7 +862,7 @@ int mpeg3audio_III_hybrid(mpeg3audio_t *audio,
 	return 0;
 }
 
-int mpeg3audio_III_antialias(mpeg3audio_t *audio,
+static int antialias(mpeg3_layer_t *audio,
 		float xr[SBLIMIT][SSLIMIT],
 		struct gr_info_s *gr_info)
 {
@@ -879,7 +896,7 @@ int mpeg3audio_III_antialias(mpeg3audio_t *audio,
     		xr2 = xr1;
 
     		for(ss = 7; ss >= 0; ss--)
-    		{       
+    		{
 /* upper and lower butterfly inputs */
         		register float bu, bd;
         		bu = *--xr2;
@@ -895,7 +912,7 @@ int mpeg3audio_III_antialias(mpeg3audio_t *audio,
 /* 
  * III_stereo: calculate float channel values for Joint-I-Stereo-mode
  */
-int mpeg3audio_III_i_stereo(mpeg3audio_t *audio, 
+static int calc_i_stereo(mpeg3_layer_t *audio, 
 		float xr_buf[2][SBLIMIT][SSLIMIT],
 		int *scalefac,
    		struct gr_info_s *gr_info,
@@ -954,8 +971,7 @@ int mpeg3audio_III_i_stereo(mpeg3audio_t *audio,
         		}
 			}
 
-/* in the original: copy 10 to 11 , here: copy 11 to 12 
-maybe still wrong??? (copy 12 to 13?) */
+/* in the original: copy 10 to 11 , here: copy 11 to 12 maybe still wrong??? (copy 12 to 13?) */
 /* scale: 0-15 */
         	is_p = scalefac[11 * 3 + lwin - gr_info->mixed_block_flag]; 
         	sb   = bi->shortDiff[12];
@@ -1048,208 +1064,490 @@ maybe still wrong??? (copy 12 to 13?) */
 	return 0;
 }
 
-/* Read just the frame after a seek. */
-int mpeg3audio_read_layer3_frame(mpeg3audio_t *audio)
-{
-	int result = 0;
-
-	result = mpeg3audio_read_header(audio);
-	if(!result)
-	{
-		audio->bsbufold = audio->bsbuf;
-		audio->bsbuf = audio->bsspace[audio->bsnum] + 512;
-		audio->bsnum ^= 1;
-		result = mpeg3bits_read_buffer(audio->astream, audio->bsbuf, audio->framesize);
-	}
-
-	return result;
-}
-
-int mpeg3audio_dolayer3(mpeg3audio_t *audio)
+int mpeg3audio_dolayer3(mpeg3_layer_t *audio, 
+	char *frame, 
+	int frame_size, 
+	float **output,
+	int render)
 {
 	int gr, ch, ss;
-	int scalefacs[2][39]; /* max 39 for short[13][3] mode, mixed: 38, long: 22 */
-	struct mpeg3_III_sideinfo sideinfo;
-	int channels = audio->channels;
+/* max 39 for short[13][3] mode, mixed: 38, long: 22 */
+	int scalefacs[2][39]; 
+	struct sideinfo_s sideinfo;
 	int single = audio->single;
 	int ms_stereo, i_stereo;
 	int sfreq = audio->sampling_frequency_code;
 	int stereo1, granules;
 	int i;
+	int output_offset = 0;
+
+//printf("1\n");
+// Skip header
+	frame += 4;
+	frame_size -= 4;
 
 /* flip/init buffer */
 	audio->bsbufold = audio->bsbuf;
 	audio->bsbuf = audio->bsspace[audio->bsnum] + 512;
 	audio->bsnum ^= 1;
 
-/* read main data into memory */
-	if(mpeg3bits_read_buffer(audio->astream, audio->bsbuf, audio->framesize))
-		return 1;
-	mpeg3bits_use_ptr(audio->astream, audio->bsbuf);
+/* Copy frame into history buffer */
+	memcpy(audio->bsbuf, frame, frame_size);
 
+/*
+ * printf(__FUNCTION__ " %d %02x%02x%02x%02x\n", 
+ * audio->first_frame, 
+ * (unsigned char)audio->bsbuf[0],
+ * (unsigned char)audio->bsbuf[1],
+ * (unsigned char)audio->bsbuf[2],
+ * (unsigned char)audio->bsbuf[3]);
+ */
+
+
+	if(!audio->first_frame)
+	{
+/* Set up bitstream to use buffer */
+		mpeg3bits_use_ptr(audio->stream, audio->bsbuf);
+
+//printf(__FUNCTION__ " 4\n");
+//printf(__FUNCTION__ " 7 %x\n", mpeg3bits_showbits(audio->stream, 16));
 /* CRC must be skipped here for proper alignment with the backstep */
- 	if(audio->error_protection)
-		mpeg3bits_getbits(audio->astream, 16);
+ 		if(audio->error_protection)
+			mpeg3bits_getbits(audio->stream, 16);
+//printf(__FUNCTION__ " 8 %x\n", mpeg3bits_showbits(audio->stream, 16));
+//printf(__FUNCTION__ " 5\n");
 
-	if(channels == 1)
-	{
-/* stream is mono */
-    	stereo1 = 1;
-    	single = 0;
-	}
- 	else
-	{
-/* Stereo */
-    	stereo1 = 2;
-	}
-
-	if(audio->mode == MPG_MD_JOINT_STEREO)
-	{
-    	ms_stereo = (audio->mode_ext & 0x2) >> 1;
-    	i_stereo  = audio->mode_ext & 0x1;
-	}
-	else
-    	ms_stereo = i_stereo = 0;
-
-  	if(audio->lsf)
-	{
-    	granules = 1;
-  	}
-  	else 
-	{
-    	granules = 2;
-  	}
-
-  	if(mpeg3audio_III_get_side_info(audio, &sideinfo, channels, ms_stereo, sfreq, single, audio->lsf))
-		return 1;
-
-/* Step back */
-	if(sideinfo.main_data_begin >= 512)
-		return 1;
-
-	if(sideinfo.main_data_begin)
-	{
-		memcpy(audio->bsbuf + audio->ssize - sideinfo.main_data_begin, 
-			audio->bsbufold + audio->prev_framesize - sideinfo.main_data_begin, 
-			sideinfo.main_data_begin);
-		mpeg3bits_use_ptr(audio->astream, audio->bsbuf + audio->ssize - sideinfo.main_data_begin);
-	}
-
-  	for(gr = 0; gr < granules; gr++)
-	{
-    	float hybridIn [2][SBLIMIT][SSLIMIT];
-    	float hybridOut[2][SSLIMIT][SBLIMIT];
-
-    	{
-			struct gr_info_s *gr_info = &(sideinfo.ch[0].gr[gr]);
-			int32_t part2bits;
-			if(audio->lsf)
-				part2bits = mpeg3audio_III_get_scale_factors_2(audio, scalefacs[0], gr_info, 0);
-			else
-				part2bits = mpeg3audio_III_get_scale_factors_1(audio, scalefacs[0], gr_info, 0, gr);
-//printf("dolayer3 4 %04x\n", mpeg3bits_showbits(audio->astream, 16));
-
-			if(mpeg3audio_III_dequantize_sample(audio, hybridIn[0], scalefacs[0], gr_info, sfreq, part2bits))
-			{
-				mpeg3bits_use_demuxer(audio->astream);
-				return 1;
-			}
-//printf("dolayer3 5 %04x\n", mpeg3bits_showbits(audio->astream, 16));
-    	}
-
-      	if(channels == 2) 
+		if(audio->channels == 1)
 		{
-    		struct gr_info_s *gr_info = &(sideinfo.ch[1].gr[gr]);
-    		int32_t part2bits;
-    		if(audio->lsf) 
-        		part2bits = mpeg3audio_III_get_scale_factors_2(audio, scalefacs[1], gr_info, i_stereo);
-    		else
-        		part2bits = mpeg3audio_III_get_scale_factors_1(audio, scalefacs[1], gr_info, 1, gr);
-
-    		if(mpeg3audio_III_dequantize_sample(audio, hybridIn[1], scalefacs[1], gr_info, sfreq, part2bits))
-			{
-				mpeg3bits_use_demuxer(audio->astream);
-        		return 1;
-			}
-
-    		if(ms_stereo)
-			{
-        		int i;
-        		int maxb = sideinfo.ch[0].gr[gr].maxb;
-        		if(sideinfo.ch[1].gr[gr].maxb > maxb)
-            		maxb = sideinfo.ch[1].gr[gr].maxb;
-        		for(i = 0; i < SSLIMIT * maxb; i++)
-				{
-        			float tmp0 = ((float*)hybridIn[0])[i];
-        			float tmp1 = ((float*)hybridIn[1])[i];
-        			((float*)hybridIn[0])[i] = tmp0 + tmp1;
-        			((float*)hybridIn[1])[i] = tmp0 - tmp1;
-        		}
-    	  	}
-
-    		if(i_stereo)
-        		mpeg3audio_III_i_stereo(audio, hybridIn, scalefacs[1], gr_info, sfreq, ms_stereo, audio->lsf);
-
-    		if(ms_stereo || i_stereo || (single == 3)) 
-			{
-        		if(gr_info->maxb > sideinfo.ch[0].gr[gr].maxb) 
-        			sideinfo.ch[0].gr[gr].maxb = gr_info->maxb;
-        		else
-        			gr_info->maxb = sideinfo.ch[0].gr[gr].maxb;
-    		}
-
-    		switch(single) 
-			{
-        		case 3:
-        			{
-            			register int i;
-            			register float *in0 = (float*)hybridIn[0], *in1 = (float*)hybridIn[1];
-/* *0.5 done by pow-scale */
-            			for(i = 0; i < SSLIMIT * gr_info->maxb; i++, in0++)
-            				*in0 = (*in0 + *in1++); 
-        			}
-        			break;
-        		case 1:
-        			{
-            			register int i;
-            			register float *in0 = (float*)hybridIn[0], *in1 = (float*)hybridIn[1];
-            			for(i = 0; i < SSLIMIT * gr_info->maxb; i++)
-            				*in0++ = *in1++;
-        			}
-        			break;
-    		}
+/* stream is mono */
+    		stereo1 = 1;
+    		single = 0;
+		}
+ 		else
+		{
+/* Stereo */
+    		stereo1 = 2;
 		}
 
-    	for(ch = 0; ch < stereo1; ch++)
+		if(audio->mode == MPG_MD_JOINT_STEREO)
 		{
-    		struct gr_info_s *gr_info = &(sideinfo.ch[ch].gr[gr]);
-    		mpeg3audio_III_antialias(audio, hybridIn[ch], gr_info);
-    		mpeg3audio_III_hybrid(audio, hybridIn[ch], hybridOut[ch], ch, gr_info);
-    	}
+    		ms_stereo = (audio->mode_ext & 0x2) >> 1;
+    		i_stereo  = audio->mode_ext & 0x1;
+		}
+		else
+    		ms_stereo = i_stereo = 0;
 
-    	for(ss = 0; ss < SSLIMIT; ss++)
+  		if(audio->lsf)
 		{
-    		if(single >= 0)
-			{
-				mpeg3audio_synth_mono(audio, hybridOut[0][ss], audio->pcm_sample, &(audio->pcm_point));
-    		}
-    		else 
-			{
-        		int p1 = audio->pcm_point;
-        		mpeg3audio_synth_stereo(audio, hybridOut[0][ss], 0, audio->pcm_sample, &p1);
-        		mpeg3audio_synth_stereo(audio, hybridOut[1][ss], 1, audio->pcm_sample, &(audio->pcm_point));
+    		granules = 1;
+  		}
+  		else 
+		{
+    		granules = 2;
+  		}
+//printf(__FUNCTION__ " 6\n");
+
+  		if(get_side_info(audio, 
+			&sideinfo, 
+			audio->channels, 
+			ms_stereo, 
+			sfreq, 
+			single, 
+			audio->lsf))
+		{
+			mpeg3_layer_reset(audio);
+			return output_offset;
+		}
+
+//printf(__FUNCTION__ " 7\n");
+/* Step back */
+		if(sideinfo.main_data_begin >= 512)
+		{
+			return output_offset;
+		}
+
+		if(sideinfo.main_data_begin)
+		{
+/*
+ * printf(__FUNCTION__ " 7 %d %d %d\n", 
+ * audio->ssize, 
+ * sideinfo.main_data_begin,
+ * audio->prev_framesize);
+ */
+			memcpy(audio->bsbuf + audio->ssize - sideinfo.main_data_begin, 
+				audio->bsbufold + audio->prev_framesize - sideinfo.main_data_begin, 
+				sideinfo.main_data_begin);
+			mpeg3bits_use_ptr(audio->stream, 
+				audio->bsbuf + audio->ssize - sideinfo.main_data_begin);
+		}
+
+
+  		for(gr = 0; gr < granules; gr++)
+		{
+    		float hybridIn [2][SBLIMIT][SSLIMIT];
+    		float hybridOut[2][SSLIMIT][SBLIMIT];
+
+    		{
+				struct gr_info_s *gr_info = &(sideinfo.ch[0].gr[gr]);
+				int32_t part2bits;
+				if(audio->lsf)
+					part2bits = get_scale_factors_2(audio, scalefacs[0], gr_info, 0);
+				else
+					part2bits = get_scale_factors_1(audio, scalefacs[0], gr_info, 0, gr);
+//printf("dolayer3 4 %04x\n", mpeg3bits_showbits(audio->stream, 16));
+
+				if(dequantize_sample(audio, 
+					hybridIn[0], 
+					scalefacs[0], 
+					gr_info, 
+					sfreq, 
+					part2bits))
+				{
+					mpeg3_layer_reset(audio);
+					return output_offset;
+				}
+//printf("dolayer3 5 %04x\n", mpeg3bits_showbits(audio->stream, 16));
     		}
 
-    		if(audio->pcm_point / audio->channels >= audio->pcm_allocated - MPEG3AUDIO_PADDING * audio->channels)
+      		if(audio->channels == 2) 
 			{
-/* Need more room */
-				mpeg3audio_replace_buffer(audio, audio->pcm_allocated + MPEG3AUDIO_PADDING * audio->channels);
+    			struct gr_info_s *gr_info = &(sideinfo.ch[1].gr[gr]);
+    			int32_t part2bits;
+    			if(audio->lsf) 
+        			part2bits = get_scale_factors_2(audio, scalefacs[1], gr_info, i_stereo);
+    			else
+        			part2bits = get_scale_factors_1(audio, scalefacs[1], gr_info, 1, gr);
+
+    			if(dequantize_sample(audio, 
+					hybridIn[1], 
+					scalefacs[1], 
+					gr_info, 
+					sfreq, 
+					part2bits))
+				{
+					mpeg3_layer_reset(audio);
+        			return output_offset;
+				}
+
+    			if(ms_stereo)
+				{
+        			int i;
+        			int maxb = sideinfo.ch[0].gr[gr].maxb;
+        			if(sideinfo.ch[1].gr[gr].maxb > maxb)
+            			maxb = sideinfo.ch[1].gr[gr].maxb;
+        			for(i = 0; i < SSLIMIT * maxb; i++)
+					{
+        				float tmp0 = ((float*)hybridIn[0])[i];
+        				float tmp1 = ((float*)hybridIn[1])[i];
+        				((float*)hybridIn[0])[i] = tmp0 + tmp1;
+        				((float*)hybridIn[1])[i] = tmp0 - tmp1;
+        			}
+    	  		}
+
+    			if(i_stereo)
+        			calc_i_stereo(audio, hybridIn, scalefacs[1], gr_info, sfreq, ms_stereo, audio->lsf);
+
+    			if(ms_stereo || i_stereo || (single == 3)) 
+				{
+        			if(gr_info->maxb > sideinfo.ch[0].gr[gr].maxb) 
+        				sideinfo.ch[0].gr[gr].maxb = gr_info->maxb;
+        			else
+        				gr_info->maxb = sideinfo.ch[0].gr[gr].maxb;
+    			}
+
+    			switch(single) 
+				{
+        			case 3:
+        				{
+            				register int i;
+            				register float *in0 = (float*)hybridIn[0], *in1 = (float*)hybridIn[1];
+/* *0.5 done by pow-scale */
+            				for(i = 0; i < SSLIMIT * gr_info->maxb; i++, in0++)
+            					*in0 = (*in0 + *in1++); 
+        				}
+        				break;
+        			case 1:
+        				{
+            				register int i;
+            				register float *in0 = (float*)hybridIn[0], *in1 = (float*)hybridIn[1];
+            				for(i = 0; i < SSLIMIT * gr_info->maxb; i++)
+            					*in0++ = *in1++;
+        				}
+        				break;
+    			}
 			}
-    	}
+//printf(__FUNCTION__ " 9\n");
+
+    		for(ch = 0; ch < stereo1; ch++)
+			{
+    			struct gr_info_s *gr_info = &(sideinfo.ch[ch].gr[gr]);
+//printf(__FUNCTION__ " 9.1\n");
+    			antialias(audio, hybridIn[ch], gr_info);
+//printf(__FUNCTION__ " 9.2\n");
+    			hybrid(audio, hybridIn[ch], hybridOut[ch], ch, gr_info);
+//printf(__FUNCTION__ " 9.3\n");
+    		}
+
+//printf(__FUNCTION__ " 10\n");
+
+
+    		for(ss = 0; ss < SSLIMIT; ss++)
+			{
+    			if(single >= 0)
+				{
+					if(render) 
+						mpeg3audio_synth_stereo(audio, 
+							hybridOut[0][ss], 
+							0,
+							output[0], 
+							&(output_offset));
+					else
+						output_offset += 32;
+    			}
+    			else 
+				{
+        			int p1 = output_offset;
+        			if(render)
+					{
+						mpeg3audio_synth_stereo(audio, 
+							hybridOut[0][ss], 
+							0, 
+							output[0], 
+							&p1);
+        				mpeg3audio_synth_stereo(audio, 
+							hybridOut[1][ss], 
+							1, 
+							output[1], 
+							&(output_offset));
+					}
+					else
+						output_offset += 32;
+    			}
+    		}
+		}
+	}
+	else
+	{
+		audio->first_frame = 0;
 	}
 
-	mpeg3bits_use_demuxer(audio->astream);
-	return 0;
+//printf(__FUNCTION__ " 12\n");
+
+
+	return output_offset;
 }
+
+
+
+
+
+
+
+void mpeg3_layer_reset(mpeg3_layer_t *audio)
+{
+//printf("mpeg3_layer_reset 1\n");
+	audio->first_frame = 1;
+//	audio->prev_framesize = 0;
+//	bzero(audio->bsspace, sizeof(audio->bsspace));
+	bzero(audio->mp3_block, sizeof(audio->mp3_block));
+	bzero(audio->mp3_blc, sizeof(audio->mp3_blc));
+	mpeg3audio_reset_synths(audio);
+}
+
+
+
+
+
+
+/* Return 1 if the head check doesn't find a header. */
+int mpeg3_layer_check(unsigned char *data)
+{
+	uint32_t head = ((uint32_t)(data[0] << 24)) | 
+		((uint32_t)(data[1] << 16)) | 
+		((uint32_t)(data[2] << 8)) | 
+		((uint32_t)data[3]);
+
+    if((head & 0xffe00000) != 0xffe00000) return 1;
+
+    if(!((head >> 17) & 3)) return 1;
+
+    if(((head >> 12) & 0xf) == 0xf) return 1;
+
+	if(!((head >> 12) & 0xf)) return 1;
+
+    if(((head >> 10) & 0x3) == 0x3 ) return 1;
+
+	if(((head >> 19) & 1) == 1 && ((head >> 17) & 3) == 3 && ((head >> 16) & 1) == 1)
+		return 1;
+
+    if((head & 0xffff0000) == 0xfffe0000) return 1;
+// JPEG header
+	if((head & 0xffff0000) == 0xffed0000) return 1;
+
+    return 0;
+}
+
+
+/* Decode layer header */
+int mpeg3_layer_header(mpeg3_layer_t *audio, unsigned char *data)
+{
+	uint32_t header;
+	int sampling_frequency_code;
+	int layer;
+	int lsf;
+	int mpeg35;
+	int channels;
+	int mode;
+
+	if(mpeg3_layer_check(data))
+	{
+		return 0;
+	}
+
+	header = (data[0] << 24) | 
+		(data[1] << 16) | 
+		(data[2] << 8) | 
+		data[3];
+    if(header & (1 << 20)) 
+	{
+        lsf = (header & (1 << 19)) ? 0x0 : 0x1;
+        mpeg35 = 0;
+    }
+    else 
+	{
+    	lsf = 1;
+    	mpeg35 = 1;
+    }
+
+    layer = 4 - ((header >> 17) & 3);
+
+//printf("mpeg3_layer_header 1 %08x %d\n", header, layer);
+	if(audio->layer != 0 &&
+		layer != audio->layer)
+	{
+		return 0;
+	}
+
+    if(mpeg35) 
+        sampling_frequency_code = 6 + ((header >> 10) & 0x3);
+    else
+        sampling_frequency_code = ((header >> 10) & 0x3) + (lsf * 3);
+
+
+	if(audio->samplerate != 0 &&
+		sampling_frequency_code != audio->sampling_frequency_code)
+	{
+		return 0;
+	}
+
+    mode = ((header >> 6) & 0x3);
+	channels = (mode == MPG_MD_MONO) ? 1 : 2;
+/*
+ *     if(audio->channels < 0) 
+ * 	else
+ * 	if(audio->channels != channels)
+ * 		return 0;
+ */
+
+
+//	if(channels > audio->channels)
+//		audio->channels = channels;
+	audio->channels = channels;
+	audio->layer = layer;
+	audio->lsf = lsf;
+	audio->mpeg35 = mpeg35;
+	audio->mode = mode;
+	audio->sampling_frequency_code = sampling_frequency_code;
+	audio->samplerate = mpeg3_freqs[audio->sampling_frequency_code];
+    audio->error_protection = ((header >> 16) & 0x1) ^ 0x1;
+
+    audio->bitrate_index = ((header >> 12) & 0xf);
+    audio->padding   = ((header >> 9) & 0x1);
+    audio->extension = ((header >> 8) & 0x1);
+    audio->mode_ext  = ((header >> 4) & 0x3);
+    audio->copyright = ((header >> 3) & 0x1);
+    audio->original  = ((header >> 2) & 0x1);
+    audio->emphasis  = header & 0x3;
+	if(audio->channels > 1) 
+		audio->single = -1;
+	else
+		audio->single = 3;
+
+    if(!audio->bitrate_index) return 0;
+	audio->bitrate = 1000 * mpeg3_tabsel_123[audio->lsf][audio->layer - 1][audio->bitrate_index];
+
+	audio->prev_framesize = audio->framesize - 4;
+    switch(audio->layer) 
+	{
+      	case 1:
+        	audio->framesize  = (long)mpeg3_tabsel_123[audio->lsf][0][audio->bitrate_index] * 12000;
+        	audio->framesize /= mpeg3_freqs[audio->sampling_frequency_code];
+        	audio->framesize  = ((audio->framesize + audio->padding) << 2);
+        	break;
+      	case 2:
+        	audio->framesize = (long)mpeg3_tabsel_123[audio->lsf][1][audio->bitrate_index] * 144000;
+        	audio->framesize /= mpeg3_freqs[audio->sampling_frequency_code];
+        	audio->framesize += audio->padding;
+        	break;
+      	case 3:
+        	if(audio->lsf)
+        	  	audio->ssize = (audio->channels == 1) ? 9 : 17;
+        	else
+        	  	audio->ssize = (audio->channels == 1) ? 17 : 32;
+        	if(audio->error_protection)
+        	  	audio->ssize += 2;
+        	audio->framesize  = (long)mpeg3_tabsel_123[audio->lsf][2][audio->bitrate_index] * 144000;
+        	audio->framesize /= mpeg3_freqs[audio->sampling_frequency_code] << (audio->lsf);
+        	audio->framesize = audio->framesize + audio->padding;
+        	break; 
+      	default:
+        	return 0;
+    }
+
+
+
+/*
+ * printf(__FUNCTION__ " bitrate=%d framesize=%d samplerate=%d channels=%d layer=%d\n", 
+ * audio->bitrate, 
+ * audio->framesize, 
+ * audio->samplerate, 
+ * audio->channels,
+ * audio->layer);
+ */
+
+
+	if(audio->bitrate < 64000 && audio->layer != 3) return 0;
+	if(audio->framesize > MAXFRAMESIZE) return 0;
+//printf("mpeg3_layer_header 10 %d\n", layer);
+
+	return audio->framesize;
+}
+
+
+
+
+
+
+
+
+mpeg3_layer_t* mpeg3_new_layer()
+{
+	mpeg3_layer_t *result = calloc(1, sizeof(mpeg3_layer_t));
+	result->bsbuf = result->bsspace[1];
+	result->bo = 1;
+	result->channels = -1;
+	result->stream = mpeg3bits_new_stream(0, 0);
+	mpeg3_new_decode_tables(result);
+	return result;
+}
+
+
+
+void mpeg3_delete_layer(mpeg3_layer_t *audio)
+{
+	mpeg3bits_delete_stream(audio->stream);
+	free(audio);
+}
+
 
 

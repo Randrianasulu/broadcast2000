@@ -1,69 +1,110 @@
 #!/bin/sh
 
-USE_MMX=1
-USE_CSS=1
+# configuration is being done in a script because starting with GCC-3.2
+# the compiler flags are changing too much between minor releases to detect
+# with Makefile scripts alone.  For now it just tells you if you have the
+# prerequisite compilers.
 
-for ac_option
+ERROR=0
+
+# test for nasm
+
+if [ `arch` == i686 ];
+then
+
+	if [ -x /usr/bin/nasm -o -x /usr/local/bin/nasm ]; then HAVE_NASM=y; else HAVE_NASM=n; fi
+
+	if [ $HAVE_NASM == n ]; 
+	then echo " *** Nasm is required.  Download it from nasm.sourceforge.net"; 
+	exit
+	fi
+
+fi
+
+## init Spina
+shared_liba52="no"
+PREFIX=""
+BINDIR=""
+DEST_LIB_DIR=""
+INCLUDEDIR=""
+A52_SHARED=""
+
+for option 
 do
-case "$ac_option" in
-	--no-mmx)
-		USE_MMX=0
-		;;
+  case $option in
+    --bindir*)
+      BINDIR=`echo $option | cut -d'=' -f2`;;
 
-	--no-css)
-		USE_CSS=0
-		;;
+    --libdir*)
+      DEST_LIB_DIR=`echo $option | cut -d'=' -f2`;;
 
-	-h | --help | -help)
-	cat << EOF
-Options:
-	--no-mmx           Compile libmpeg3 with no MMX support.
-	--no-css           Compile libmpeg3 with no CSS support.
+    --includedir*)
+      INCLUDEDIR=`echo $option | cut -d'=' -f2`;;
+
+#   Use shared liba52 if exists
+    --enable-shared-liba52) shared_liba52="yes";;
+
+    --prefix*)
+      PREFIX=`echo $option | cut -d'=' -f2`;;
+
+    -h | --help)
+      cat <<EOF
+'configure' configures libmpeg3 1.7 to adapt to many kinds of systems.
+
+Usage: ./configure [OPTION]... [VAR=VALUE]...
+
+Defaults for the options are specified in brackets.
+
+Configuration:
+  -h, --help              display this help and exit
+
+Installation directories:
+  --prefix=PREFIX         install architecture-independent files in PREFIX
+                          [/usr/local]
+
+Fine tuning of the installation directories:
+  --bindir=DIR           user executables [PREFIX/bin]
+  --libdir=DIR           object code libraries [PREFIX/lib]
+  --includedir=DIR       C header files [PREFIX/include]
+
+Optional Features:
+  --enable-shared-liba52         use shared liba52 if exists (use static)
 EOF
-		exit 0
-		;;
-
-	*)
-		;;
-esac
+      exit;
+  esac
 done
 
-
-echo "Configuring libmpeg3"
-
-cat > global_config << EOF
-# DO NOT EDIT.  EDIT ./configure INSTEAD AND RERUN IT.
+if test "x"$shared_liba52 = "xyes"
+  then
+    # liba52 is shared
+    cat > a52_test.c <<EOF
+int main()
+{
+  a52_init(0);
+}
 EOF
 
+    if gcc -la52 a52_test.c -o a52_test; then
+      A52_SHARED="yes"
+    fi
 
-if test -z "$CFLAGS"; then
-	echo >> global_config "CFLAGS = -O2 -D_FILE_OFFSET_BITS=64 -funroll-loops -fomit-frame-pointer -malign-loops=2 -malign-jumps=2 -malign-functions=2 -march=i486 -I/usr/local/include"
-fi
-
-cat >> global_config << EOF
-CC = gcc
-NASM = nasm
-EOF
-
-if [ ${USE_CSS} = 1 ]; then
-cat >> global_config << EOF
-CFLAGS += -DHAVE_CSS
-EOF
-fi
-
-if [ ${USE_MMX} = 1 ]; then
-cat >> global_config << EOF
-CFLAGS += -DHAVE_MMX
-MMXOBJS = \
-	video/mmxidct.o \
-	video/reconmmx.o
-MMXOBJS2 = \
-	mmxidct.o \
-	reconmmx.o
-EOF
+    rm a52_test.c a52_test &>/dev/null
 fi
 
 
+sed "3a\
+PREFIX = $PREFIX\n\
+BINDIR = $BINDIR\n\
+DEST_LIB_DIR = $DEST_LIB_DIR\n\
+INCLUDEDIR = $INCLUDEDIR\n\
+A52_SHARED = $A52_SHARED
+" Makefile > Makefile.new
 
+mv Makefile.new Makefile;
 
-echo "done"
+## end Spina
+
+# success
+if [ $ERROR == 0 ];
+then echo "Configured successfully.  Type 'make' to build it.";
+fi
