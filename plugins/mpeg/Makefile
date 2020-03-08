@@ -10,6 +10,8 @@ AUDIOOBJS = \
 OUTPUT = ../mpeg.plugin
 
 $(OUTPUT): $(OBJS)
-	$(CC) $(PLUGINLFLAGS) -o $(OUTPUT) $(OBJS) libmpeg3/libmpeg3.a $(PLUGINIOOBJS)
+	$(CC) $(PLUGINLFLAGS) -o $(OUTPUT) $(OBJS) -la52 libmpeg3/libmpeg3.a $(PLUGINIOOBJS)
+
+
 
 include ../../plugin_config
