@@ -150,7 +150,8 @@ int MpegMain::open_file(char *path, int rd, int wr)
 // Read only
 	if(rd && !wr)
 	{
-		mpeg = mpeg3_open(path, 0);
+		int error = 0;
+		mpeg = mpeg3_open(path, &error);
 		mpeg3_set_cpus(mpeg, PluginIOClient::cpus);
 		//mpeg3_set_mmx(mpeg, 0);
 		if(!mpeg) return 1;
