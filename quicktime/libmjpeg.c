@@ -569,6 +569,7 @@ static void decompress_field(mjpeg_compressor *engine)
 	jpeg_finish_decompress(&engine->jpeg_decompress);
 //printf("decompress_field 5\n");
 finish:
+;
 }
 
 void mjpeg_decompress_loop(mjpeg_compressor *engine)
