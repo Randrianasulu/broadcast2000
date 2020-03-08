@@ -1,7 +1,7 @@
 #!/bin/sh
 
 USE_FIREWIRE=1
-USE_MMX=0
+USE_MMX=1
 
 for ac_option
 do
