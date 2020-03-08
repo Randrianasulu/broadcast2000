@@ -17,6 +17,8 @@ extern "C" {
 /* DV works only for decoding. */
 #define QUICKTIME_DV "dvc "
 
+#define QUICKTIME_DV_AVID_A "dvcp"
+
 /* RGB uncompressed.  Allows alpha */
 #define QUICKTIME_RAW  "raw "
 
