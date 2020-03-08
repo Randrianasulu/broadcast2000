@@ -57,6 +57,7 @@ int Preferences::calculate_smp()
 		}
 		fclose(proc);
 	}
+	printf("%i processors detected\n", result);
 	return result - 1;
 }
 
