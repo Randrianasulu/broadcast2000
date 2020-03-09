@@ -152,7 +152,7 @@ clean:
 	rm -f core
 	rm -f *.o *.so
 	rm -f $(OUTPUT)
-	rm -f dump make_streamable a.out qtinfo dechunk yuv4toyuv
+	rm -f qtdump make_streamable a.out qtinfo dechunk yuv4toyuv recover
 	rm -rf .deps
 	$(MAKE) -C libdv clean
 	$(MAKE) -C jpeg clean
