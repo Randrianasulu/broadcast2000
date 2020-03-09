@@ -44,6 +44,7 @@ clean:
 	make -C plugins clean
 	make -C bcbase clean
 	make -C guicast clean
+	rm -rf libmpeg3/i686
 	@ for i in $(DIRS) ; \
 	do \
 		 $(MAKE) -C $$i clean; \
