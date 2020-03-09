@@ -146,7 +146,6 @@ OBJS = \
 	threadindexer.o \
 	threadloader.o \
 	timebar.o \
-	timebomb.o \
 	toggleauto.o \
 	toggleautos.o \
 	trackcanvas.o \
