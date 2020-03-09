@@ -78,6 +78,9 @@ extern "C" {
 /* ulaw */
 #define QUICKTIME_ULAW "ulaw"
 
+/* Sowt compliment 8, 16, 24 */
+#define QUICKTIME_SOWT "sowt"
+
 /* =========================== public interface ========================= // */
 
 /* return 1 if the file is a quicktime file */
