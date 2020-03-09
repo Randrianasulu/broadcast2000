@@ -9,7 +9,6 @@
 #include "patchbay.h"
 #include "statusbar.h"
 #include "timebar.h"
-#include "timebomb.h"
 #include "tracks.h"
 #include "trackscroll.h"
 #include "transitionpopup.h"
