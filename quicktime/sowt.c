@@ -113,7 +113,7 @@ static int quicktime_decode_sowt(quicktime_t *file,
 	//quicktime_sowt_codec_t *codec = ((quicktime_codec_t*)track_map->codec)->priv;
 	int step = track_map->channels * quicktime_audio_bits(file, track) / 8;
 
-	swot_get_work_buffer(file, track, samples * step);
+	sowt_get_work_buffer(file, track, samples * step);
 /*
  * printf("decode 1 %d\n", quicktime_audio_bits(file, track));
  * sleep(1);
@@ -223,7 +223,7 @@ static int quicktime_encode_sowt(quicktime_t *file,
 	int sample;
 	float sample_f;
 
-	get_work_buffer(file, track, samples * step);
+	sowt_get_work_buffer(file, track, samples * step);
 
 	if(input_i)
 	{
