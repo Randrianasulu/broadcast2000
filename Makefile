@@ -2,7 +2,6 @@
 
 DIRS = libmpeg3 \
 	tiff \
-	esound \
 	audiofile \
 	quicktime \
 	bcbase \
