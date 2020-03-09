@@ -497,6 +497,11 @@ int DrawPatch::handle_event()
 	else
 	{
 		patch->draw = get_value();
+
+       // Redraw window after change to drawable; jbh 13/3/01
+       patch->mwindow->draw();
+
+
 	}
 	patches->button_down = 1;
 	patches->new_status = get_value();
