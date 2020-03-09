@@ -29,6 +29,7 @@ OBJS = \
 	raw.o \
 	rawaudio.o \
 	smhd.o \
+	sowt.o \
 	stbl.o \
 	stco.o \
 	stsc.o \
@@ -117,10 +118,10 @@ all: $(OUTPUT)
 $(OUTPUT): $(OBJS)
 	$(MAKE) -C jpeg
 	$(MAKE) -C libdv
-	objcopy -L dv_peek_vlc libdv/parse.o
+# objcopy -L dv_peek_vlc libdv/parse.o
 	$(MAKE) -C libraw1394
 	ar rcs $(OUTPUT) $(OBJS) $(JPEGOBJS) $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
-	g++ -shared -o libquicktime.so  $(OBJS) $(JPEGOBJS) $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
+	g++ -shared -o libquicktime.so $(JPEGOBJS) $(OBJS)  $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
 
 qtdump: dump.o $(OUTPUT)
 	$(CC) -o qtdump dump.o $(OUTPUT) -lm -lpng -lz -lpthread -lglib -ldl
