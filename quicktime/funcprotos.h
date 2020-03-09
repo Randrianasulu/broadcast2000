@@ -48,9 +48,11 @@ extern void quicktime_init_codec_yv12(quicktime_video_map_t *);
 extern void quicktime_init_codec_dv(quicktime_video_map_t *);
 
 extern void quicktime_init_codec_twos(quicktime_audio_map_t *);
+extern void quicktime_init_codec_sowt(quicktime_audio_map_t *);
 extern void quicktime_init_codec_rawaudio(quicktime_audio_map_t *);
 extern void quicktime_init_codec_ima4(quicktime_audio_map_t *); 
 extern void quicktime_init_codec_ulaw(quicktime_audio_map_t *); 
+
 
 
 /* Graphics */
