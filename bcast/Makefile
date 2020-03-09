@@ -187,10 +187,11 @@ STATICLIBS = ../pluginpack/sharedpluginobjs.a \
 	../quicktime/libquicktime.a \
         ../audiofile/libasound.a \
         ../esound/libesound.a \
-	../tiff/libtiff.a
+	../tiff/libtiff.a \
+	../quicktime/libjpeg-turbo-1.5.3/.libs/libjpeg.a
 
 # LINUX
-LIBS = -L../bcbase/ -lbcbase $(XLIBS) -lpng -lz -lglib -ldl
+LIBS = -L../bcbase/ -lbcbase $(XLIBS) -lpng -lz -lglib -ldl 
 
 CFLAGS += -I../bcbase \
 	-I../pluginpack \

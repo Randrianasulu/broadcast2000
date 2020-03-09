@@ -50,53 +50,53 @@ OBJS = \
 	yv12.o
 
 
-JPEGOBJS = \
-	jpeg/jcapimin.o \
-	jpeg/jcapistd.o \
-	jpeg/jctrans.o \
-	jpeg/jcparam.o \
-	jpeg/jdatadst.o \
-	jpeg/jcinit.o \
-	jpeg/jcmaster.o \
-	jpeg/jcmarker.o \
-	jpeg/jcmainct.o \
-	jpeg/jcprepct.o \
-	jpeg/jccoefct.o \
-	jpeg/jccolor.o \
-	jpeg/jcsample.o \
-	jpeg/jchuff.o \
-	jpeg/jcphuff.o \
-	jpeg/jcdctmgr.o \
-	jpeg/jfdctfst.o \
-	jpeg/jfdctflt.o \
-	jpeg/jfdctint.o \
-	jpeg/jdapimin.o \
-	jpeg/jdapistd.o \
-	jpeg/jdtrans.o \
-	jpeg/jdatasrc.o \
-	jpeg/jdmaster.o \
-	jpeg/jdinput.o \
-	jpeg/jdmarker.o \
-	jpeg/jdhuff.o \
-	jpeg/jdphuff.o \
-	jpeg/jdmainct.o \
-	jpeg/jdcoefct.o \
-	jpeg/jdpostct.o \
-	jpeg/jddctmgr.o \
-	jpeg/jidctfst.o \
-	jpeg/jidctflt.o \
-	jpeg/jidctint.o \
-	jpeg/jidctred.o \
-	jpeg/jdsample.o \
-	jpeg/jdcolor.o \
-	jpeg/jquant1.o \
-	jpeg/jquant2.o \
-	jpeg/jdmerge.o \
-	jpeg/jcomapi.o \
-	jpeg/jutils.o \
-	jpeg/jerror.o \
-	jpeg/jmemmgr.o \
-	jpeg/jmemnobs.o
+#JPEGOBJS = \
+#	jpeg/jcapimin.o \
+#	jpeg/jcapistd.o \
+#	jpeg/jctrans.o \
+#	jpeg/jcparam.o \
+#	jpeg/jdatadst.o \
+#	jpeg/jcinit.o \
+#	jpeg/jcmaster.o \
+#	jpeg/jcmarker.o \
+#	jpeg/jcmainct.o \
+#	jpeg/jcprepct.o \
+#	jpeg/jccoefct.o \
+#	jpeg/jccolor.o \
+#	jpeg/jcsample.o \
+#	jpeg/jchuff.o \
+#	jpeg/jcphuff.o \
+#	jpeg/jcdctmgr.o \
+#	jpeg/jfdctfst.o \
+#	jpeg/jfdctflt.o \
+#	jpeg/jfdctint.o \
+#	jpeg/jdapimin.o \
+#	jpeg/jdapistd.o \
+#	jpeg/jdtrans.o \
+#	jpeg/jdatasrc.o \
+#	jpeg/jdmaster.o \
+#	jpeg/jdinput.o \
+#	jpeg/jdmarker.o \
+#	jpeg/jdhuff.o \
+#	jpeg/jdphuff.o \
+#	jpeg/jdmainct.o \
+#	jpeg/jdcoefct.o \
+#	jpeg/jdpostct.o \
+#	jpeg/jddctmgr.o \
+#	jpeg/jidctfst.o \
+#	jpeg/jidctflt.o \
+#	jpeg/jidctint.o \
+#	jpeg/jidctred.o \
+#	jpeg/jdsample.o \
+#	jpeg/jdcolor.o \
+#	jpeg/jquant1.o \
+#	jpeg/jquant2.o \
+#	jpeg/jdmerge.o \
+#	jpeg/jcomapi.o \
+#	jpeg/jutils.o \
+#	jpeg/jerror.o \
+#	jpeg/jmemmgr.o \
+#	jpeg/jmemnobs.o
 
 DVOBJS = \
 	libdv/bitstream.o \
@@ -116,12 +116,13 @@ OUTPUT = libquicktime.a
 all: $(OUTPUT)
 
 $(OUTPUT): $(OBJS)
-	$(MAKE) -C jpeg
+#	$(MAKE) -C jpeg
 	$(MAKE) -C libdv
 # objcopy -L dv_peek_vlc libdv/parse.o
 	$(MAKE) -C libraw1394
-	ar rcs $(OUTPUT) $(OBJS) $(JPEGOBJS) $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
-	g++ -shared -o libquicktime.so $(JPEGOBJS) $(OBJS)  $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
+	$(MAKE) -C libjpeg-turbo-1.5.3
+	ar rcs $(OUTPUT) $(OBJS) $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
+	g++ -shared -o libquicktime.so  $(OBJS)  $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
 
 qtdump: dump.o $(OUTPUT)
 	$(CC) -o qtdump dump.o $(OUTPUT) -lm -lpng -lz -lpthread -lglib -ldl

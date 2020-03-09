@@ -43,6 +43,7 @@ clean:
 	make -C plugins clean
 	make -C bcbase clean
 	make -C guicast clean
+	make -C quicktime/libjpeg-turbo-1.5.3 distclean
 	rm -rf libmpeg3/i686
 	@ for i in $(DIRS) ; \
 	do \

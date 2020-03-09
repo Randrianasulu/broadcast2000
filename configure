@@ -168,7 +168,7 @@ wc:
 EOF
 
 
-echo "done"
+
 
 
 
@@ -183,5 +183,9 @@ cd ..
 
 cd quicktime
 ./configure $ac_option
+cd libjpeg-turbo-1.5.3/
+./configure --disable-shared --enable-static --without-turbojpeg
+cd ..
 cd ..
 
+echo "done"
