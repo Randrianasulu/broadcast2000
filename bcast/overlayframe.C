@@ -256,7 +256,7 @@ int OverlayFrame::transfer_scale_f(VFrame *output, VFrame *input_v, unsigned cha
 		int *yinput_pixel2;
 		float *yinput_fraction1;
 		float *yinput_fraction2;
-		register int y_out, x_out, h_out, w_out;
+		 int y_out, x_out, h_out, w_out;
 		
 		xinput_pixel1 = new int[output->get_w() + 1];
 		xinput_pixel2 = new int[output->get_w() + 1];
@@ -368,7 +368,7 @@ int OverlayFrame::transfer_scale_f(VFrame *output, VFrame *input_v, unsigned cha
 		float *yinput_fraction1;
 		float *yinput_fraction2;
 		float *yinput_fraction3;
-		register int y_out, x_out, h_out, w_out, i;
+		 int y_out, x_out, h_out, w_out, i;
 
 		xinput_pixel1 = new int[output->get_w() + 1];
 		xinput_pixel2 = new int[output->get_w() + 1];
@@ -466,7 +466,7 @@ int OverlayFrame::get_scale_array(int *column_table, int *row_table,
 			int out_x1, int out_y1, int out_x2, int out_y2)
 {
 	int y_out;
-	register int i;
+	 int i;
 	float w_in = in_x2 - in_x1;
 	float h_in = in_y2 - in_y1;
 	int w_out = out_x2 - out_x1;
@@ -631,7 +631,7 @@ int OverlayFrame::transfer_row_direct(VPixel *output, VPixel *input, int out_col
 		float a_float;
 		a_float = (float)alpha / VMAX;
 
-		for(register int i = 0; i < out_columns; i++)
+		for( int i = 0; i < out_columns; i++)
 		{
 			pixel_overlay->overlay_pixel_f(output[i], input[i], a_float);
 		}
@@ -642,7 +642,7 @@ int OverlayFrame::transfer_row_direct(VPixel *output, VPixel *input, int out_col
 #if (VMAX == 65535)
 		a_int >>= 8;    // Now 0 - 255
 #endif
-		for(register int i = 0; i < out_columns; i++)
+		for( int i = 0; i < out_columns; i++)
 		{
 			pixel_overlay->overlay_pixel_i(output[i], input[i], a_int);
 		}
@@ -658,7 +658,7 @@ int OverlayFrame::transfer_row_direct(VPixel *output, unsigned char *input, int 
 		float a_float;
 		a_float = (float)alpha / VMAX;
 
-		for(register int i = 0; i < out_columns; i++)
+		for( int i = 0; i < out_columns; i++)
 		{
 			pixel_overlay->overlay_pixel_f(output[i], &input[i * depth], a_float);
 		}
@@ -669,7 +669,7 @@ int OverlayFrame::transfer_row_direct(VPixel *output, unsigned char *input, int 
 #if (VMAX == 65535)
 		a_int >>= 8;    // Now 0 - 255
 #endif
-		for(register int i = 0; i < out_columns; i++)
+		for( int i = 0; i < out_columns; i++)
 		{
 			pixel_overlay->overlay_pixel_i(output[i], &input[i * depth], a_int);
 		}
@@ -684,7 +684,7 @@ int OverlayFrame::transfer_row_scale(VPixel *output, VPixel *input, int out_colu
 	{
 		float a_float = (float)alpha / VMAX;
 
-		for(register int i = 0; i < out_columns; i++)
+		for( int i = 0; i < out_columns; i++)
 		{
 			pixel_overlay->overlay_pixel_f(output[i], input[column_table[i]], a_float);
 		}
@@ -696,7 +696,7 @@ int OverlayFrame::transfer_row_scale(VPixel *output, VPixel *input, int out_colu
 		a_int >>= 8;     // Now 0 - 255
 #endif
 
-		for(register int i = 0; i < out_columns; i++)
+		for( int i = 0; i < out_columns; i++)
 		{
 			pixel_overlay->overlay_pixel_i(output[i], input[column_table[i]], a_int);
 		}
@@ -711,7 +711,7 @@ int OverlayFrame::transfer_row_scale(VPixel *output, unsigned char *input, int o
 	{
 		float a_float = (float)alpha / VMAX;
 
-		for(register int i = 0; i < out_columns; i++)
+		for( int i = 0; i < out_columns; i++)
 		{
 			pixel_overlay->overlay_pixel_f(output[i], &input[column_table[i] * depth], a_float);
 		}
@@ -723,7 +723,7 @@ int OverlayFrame::transfer_row_scale(VPixel *output, unsigned char *input, int o
 		a_int >>= 8;     // Now 0 - 255
 #endif
 
-		for(register int i = 0; i < out_columns; i++)
+		for( int i = 0; i < out_columns; i++)
 		{
 			pixel_overlay->overlay_pixel_i(output[i], &input[column_table[i] * depth], a_int);
 		}
@@ -757,7 +757,7 @@ int OverlayFrame::interpolate_pixel_enlarge(VPixel &output,
 	float total_fraction, 
 	float &alpha, int &in_w, int &in_h)
 {
-	for(register int j = 0; j < depth; j++)
+	for( int j = 0; j < depth; j++)
 	{
 		temp_f[0] = .5 + fraction1 * *input1++ + fraction2 * *input2++ + fraction3 * *input3++ + fraction4 * *input4++;
 		temp_c[j] = (VWORD)(temp_f[0] > VMAX ? VMAX : temp_f[0]);
@@ -849,14 +849,14 @@ return 0;
 /* Compiler error forces this ordering */ \
 /* Do first pixel */ \
 	input_row_c = &input[(i * in_w + xinput_pixel1) * depth]; \
-	for(register int j = 0; j < depth; j++) \
+	for( int j = 0; j < depth; j++) \
 		temp_f[j] += (float)(input_row_c[j]) * input_scale1; \
 \
 /* Do last pixel */ \
 	if(xinput_pixel1 < xinput_pixel2) \
 	{ \
 		input_row_c = &input[(i * in_w + xinput_pixel2) * depth]; \
-		for(register int j = 0; j < depth; j++) \
+		for( int j = 0; j < depth; j++) \
 			temp_f[j] += (float)(input_row_c[j]) * input_scale3; \
 \
 		if(xinput_pixel2 - xinput_pixel1 > 1) \
@@ -865,7 +865,7 @@ return 0;
 			input_end_c = &input[(i * in_w + xinput_pixel2 - 1) * depth]; \
 			while(input_row_c <= input_end_c) \
 			{ \
-				for(register int j = 0; j < depth; j++) \
+				for( int j = 0; j < depth; j++) \
 					temp_f[j] += (float)(*input_row_c++) * input_scale2; \
 			} \
 		} \
@@ -909,7 +909,7 @@ int OverlayFrame::interpolate_pixel_reduce(VPixel &output, unsigned char *input,
 		}
 	}
 
-	for(register int j = 0; j < depth; j++)
+	for( int j = 0; j < depth; j++)
 	{
 		if(temp_f[j] > 255) temp_f[j] = 255;
 		temp_c[j] = (unsigned char)(temp_f[j]);
