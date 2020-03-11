@@ -240,7 +240,7 @@ int ARenderThread::process_buffer(int buffer,
 			for(i = 0; i < arender->total_out_buffers; i++)
 			{
 				current_buffer = arender->audio_out[i];
-				register long in, out;
+				long in, out;
 				long fragment_end;
 
 // Time stretch the fragment to the real_output size

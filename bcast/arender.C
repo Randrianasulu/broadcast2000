@@ -272,7 +272,7 @@ return 0;
 
 int ARender::reverse_buffer(float *buffer, long len)
 {
-	register long start, end;
+	long start, end;
 	float temp;
 
 	for(start = 0, end = len - 1; end > start; start++, end--)

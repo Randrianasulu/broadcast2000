@@ -990,7 +990,7 @@ int VideoDevice::frame_to_vframe(VFrame *frame, unsigned char *input)
 	{
 		if(in_config->video_in_driver == VIDEO4LINUX || in_config->video_in_driver == VIDEO4LINUX2)
 		{
-			register int i, j, k, l;
+			int i, j, k, l;
 			InPixel *row_in;
 			unsigned char *row_out_start, *row_out_end;
 			int bytes_per_row;

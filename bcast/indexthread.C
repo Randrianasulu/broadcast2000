@@ -126,12 +126,12 @@ void IndexThread::run()
 
 			for(int channel = 0; channel < asset->channels; channel++)
 			{
-				register long *highpoint_channel = &highpoint[channel];
-				register long *lowpoint_channel = &lowpoint[channel];
-				register long *frame_position_channel = &frame_position[channel];
+				long *highpoint_channel = &highpoint[channel];
+				long *lowpoint_channel = &lowpoint[channel];
+				long *frame_position_channel = &frame_position[channel];
 				float *buffer_source = buffer_in[current_buffer][channel];
 
-				for(register long i = 0; i < fragment_size; i++)
+				for(long i = 0; i < fragment_size; i++)
 				{
 					if(*frame_position_channel == zoomx)
 					{

@@ -245,7 +245,7 @@ int VirtualANode::render_as_module(float **audio_out,
 
 	if(((AModule*)real_module)->inv)
 	{
-		for(register int i = 0; i < fragment_len; i++)
+		for(int i = 0; i < fragment_len; i++)
 		{
 			buffer_out[i] = -buffer_in[i];
 		}
@@ -273,7 +273,7 @@ int VirtualANode::render_as_module(float **audio_out,
 		long meter_render_end;   // next sample to update peak on
 		long current_peak = arender->current_peak;
 
-		for(register int i = 0; i < fragment_len; )
+		for(int i = 0; i < fragment_len; )
 		{
 			meter_render_end = i + arender->meter_render_fragment;
 			if(meter_render_end > fragment_len) meter_render_end = fragment_len;

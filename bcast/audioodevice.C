@@ -30,8 +30,8 @@ int AudioDevice::arm_buffer(int buffer_num, float **output, long samples, int ch
 	long new_size;
 	
 	long i, j;
-	register long input_offset;
-	register long output_offset;
+	long input_offset;
+	long output_offset;
 	int output_advance;
 	int channel, last_input_channel;
 	float sample;

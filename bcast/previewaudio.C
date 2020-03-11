@@ -88,7 +88,7 @@ return 0;
 int PreviewAudio::arm_buffer()
 {
 	int i, j, fragment_end;
-	register int k;
+	int k;
 	float min, max, *current_buffer;
 	int last_buffer = 0;
 
