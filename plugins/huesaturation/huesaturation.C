@@ -292,7 +292,7 @@ void HueEngine::run()
 		{
 			input_rows = ((VPixel**)input[i]->get_rows());
 			output_rows = ((VPixel**)output[i]->get_rows());
-
+#pragma omp parallel for schedule(static) private(j,k,r,g,b,h,s,v,r_i,g_i,b_i) num_threads(4) collapse(2)
 			for(j = start_y; j < end_y; j++)
 			{
 				for(k = 0; k < plugin->project_frame_w; k++)

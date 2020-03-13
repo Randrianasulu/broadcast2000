@@ -127,6 +127,7 @@ int ColorBalanceMain::process_realtime(long size, VFrame **input_ptr, VFrame **o
 
 		if(cyan != 0 || magenta != 0 || yellow != 0)
 		{
+#pragma omp parallel for schedule (static) private (j,k,r,g,b,r_n,g_n,b_n) collapse(2) num_threads(4)
 			for(j = 0; j < project_frame_h; j++)
 			{
 				for(k = 0; k < project_frame_w; k++)

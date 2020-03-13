@@ -44,15 +44,20 @@ int BrightnessMain::process_realtime(long size, VFrame **input_ptr, VFrame **out
 
 //printf("BrightnessMain::process_realtime %f %f\n", brightness, contrast);
 
+
 	for(i = 0; i < size; i++)
 	{
 		input_rows = ((VPixel**)input_ptr[i]->get_rows());
 		output_rows = ((VPixel**)output_ptr[i]->get_rows());
 
+
 		if(brightness != 0)
 		{
 // Use int since brightness is also subtractive.
 			int offset = (int)(brightness / 100 * VMAX);
+#pragma omp parallel for private(i,j,k,r,g,b)  \
+schedule(static) num_threads(4) collapse(2)
+
 			for(j = 0; j < project_frame_h; j++)
 			{
 				for(k = 0; k < project_frame_w; k++)
@@ -83,7 +88,8 @@ int BrightnessMain::process_realtime(long size, VFrame **input_ptr, VFrame **out
 // Floating point math.
 				float scalar = contrast_f;
 				float offset = VMAX / 2 - (VMAX * scalar) / 2;
-
+#pragma omp parallel for private (j,k,r,g,b)  \
+num_threads(4) collapse(2)
 				for(j = 0; j < project_frame_h; j++)
 				{
 					for(k = 0; k < project_frame_w; k++)
@@ -107,7 +113,8 @@ int BrightnessMain::process_realtime(long size, VFrame **input_ptr, VFrame **out
 				int r, g, b;
 				int scalar = (int)(contrast_f * 0x100);
 				int offset = VMAX * 0x100 / 2 - (VMAX * scalar) / 2;
-
+#pragma omp parallel for private(j,k,r,g,b)  \
+num_threads(4) collapse(2)
 				for(j = 0; j < project_frame_h; j++)
 				{
 					for(k = 0; k < project_frame_w; k++)
@@ -135,6 +142,9 @@ int BrightnessMain::process_realtime(long size, VFrame **input_ptr, VFrame **out
 // Data never processed so copy if necessary
 		if(!buffers_identical(0))
 		{
+//#pragma omp parallel for private(j,k)  \
+//schedule(dynamic) collapse(2)
+
 			for(j = 0; j < project_frame_h; j++)
 			{
 				for(k = 0; k < project_frame_w; k++)
