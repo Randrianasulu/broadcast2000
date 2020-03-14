@@ -38,7 +38,7 @@ void ScaleThread::run()
 	already_running = 1;
 	constrain_ratio = mwindow->defaults->get("SCALECONSTRAIN", 0);
 	scale_data = mwindow->defaults->get("SCALEDATA", 0);
-	auto_aspect = mwindow->defaults->get("AUDIOASPECT", 0);
+	auto_aspect = mwindow->defaults->get("AUTOASPECT", 0);
 	offsets[0] = offsets[1] = offsets[2] = offsets[3] = 0;
 
 	orig_dimension[0] = dimension[0] = mwindow->track_w;
