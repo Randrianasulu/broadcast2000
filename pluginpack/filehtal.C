@@ -538,7 +538,7 @@ long HTALTag::get_property(char *property, long default_)
 	else return atol(temp_string);
 }
 
-#ifndef __alpha__
+#if !defined __alpha__ && !defined __ia64__ && !defined __x86_64__ && !defined __powerpc64__
 longest HTALTag::get_property(char *property, longest default_)
 {
 	longest result;
@@ -581,7 +581,7 @@ int HTALTag::set_property(char *text, long value)
 	set_property(text, temp_string);
 }
 
-#ifndef __alpha__
+#if !defined __alpha__ && !defined __ia64__ && !defined __x86_64__ && !defined __powerpc64__
 int HTALTag::set_property(char *text, longest value)
 {
 	sprintf(temp_string, "%lld", value);

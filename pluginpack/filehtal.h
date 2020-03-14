@@ -30,7 +30,7 @@ public:
 	char *get_property(char *property);
 	int get_property(char *property, char *value);
 	long get_property(char *property, long default_);
-#ifndef __alpha__
+#if !defined __alpha__ && !defined __ia64__ && !defined __x86_64__ && !defined __powerpc64__
 	longest get_property(char *property, longest default_);
 #endif
 	int get_property(char *property, int default_);
@@ -39,7 +39,7 @@ public:
 	int set_title(char *text);       // set the title field
 	int set_property(char *text, char *value);
 	int set_property(char *text, long value);
-#ifndef __alpha__
+#if !defined __alpha__ && !defined __ia64__ && !defined __x86_64__ && !defined __powerpc64__
 	int set_property(char *text, longest value);
 #endif
 	int set_property(char *text, int value);
