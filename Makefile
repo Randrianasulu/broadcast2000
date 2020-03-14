@@ -15,6 +15,7 @@ DISTOBJS = \
 	$(INSTDIR)/bcast/bcast2000 \
 	$(INSTDIR)/plugins/*.plugin
 
+OBJDIR := $(shell uname --machine)
 
 include global_config
 
@@ -44,7 +45,7 @@ clean:
 	make -C bcbase clean
 	make -C guicast clean
 	make -C quicktime/libjpeg-turbo-1.5.3 distclean
-	rm -rf libmpeg3/i686
+	rm -rf libmpeg3/$(OBJDIR)
 	@ for i in $(DIRS) ; \
 	do \
 		 $(MAKE) -C $$i clean; \
