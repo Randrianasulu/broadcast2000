@@ -629,7 +629,7 @@ int VideoDevice::unmap_v4l2_shmem()
 	{
 		for(int i = 0; i < v4l2_buffers.count; i++)
 		{
-			if((int)v4l2_buffer_list[i].data != -1)
+			if(v4l2_buffer_list[i].data != (char *)-1)
 				munmap(v4l2_buffer_list[i].data, 
 					   v4l2_buffer_list[i].vidbuf.length);
 		}
@@ -796,7 +796,7 @@ int VideoDevice::init_video4linux2()
 								input_fd, 
 				    		  	v4l2_buffer_list[i].vidbuf.offset);
 
-				if((int)v4l2_buffer_list[i].data == -1)
+				if(v4l2_buffer_list[i].data != (char *)-1)
 					perror("VideoDevice::init_video4linux2 mmap");
 			}
 // Start all frames capturing
@@ -881,7 +881,7 @@ return 0;
 
 int VideoDevice::read_v4l2_frame(VFrame *frame)
 {
-	if(v4l2_buffer_list && (int)v4l2_buffer_list[capture_frame_number].data != -1)
+	if(v4l2_buffer_list && v4l2_buffer_list[capture_frame_number].data != (char *)-1)
 		frame_to_vframe(frame, (unsigned char*)v4l2_buffer_list[capture_frame_number].data);
 return 0;
 }
