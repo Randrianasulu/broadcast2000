@@ -223,6 +223,7 @@ int BC_Bitmap::read_drawable(Drawable &pixmap, int source_x, int source_y)
 		XShmGetImage(top_level->display, pixmap, ximage, source_x, source_y, 0xffffffff);
 	else
 		XGetSubImage(top_level->display, pixmap, source_x, source_y, w, h, 0xffffffff, ZPixmap, ximage, 0, 0);
+return 0;
 }
 
 // ============================ Communication with VFrames
@@ -261,6 +262,7 @@ int BC_Bitmap::read_frame(unsigned char **rows, int in_w, int in_h)
 		transfer_direct(rows, in_w, in_h);
 	else
 		transfer_scale(rows, in_w, in_h);
+return 0;
 }
 
 int BC_Bitmap::get_color_model()
@@ -462,16 +464,6 @@ int BC_Bitmap::transfer_scale(VFrame *frame, int x1, int y1, int x2, int y2, int
 	delete [] row_table;
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -686,16 +678,6 @@ int BC_Bitmap::transfer_row_scale_32(unsigned char *output, VPixel *input, int *
 		}
 return 0;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 // ============================ pixel operations
