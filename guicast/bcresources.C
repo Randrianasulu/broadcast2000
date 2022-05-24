@@ -38,12 +38,12 @@ VFrame* BC_Resources::type_to_icon[] =
 	new VFrame(file_sound_png)
 };
 
-char* BC_Resources::small_font = "-*-helvetica-medium-r-normal-*-10-*";
-char* BC_Resources::medium_font = "-*-helvetica-bold-r-normal-*-14-*";
-char* BC_Resources::large_font = "-*-helvetica-bold-r-normal-*-18-*";
-char* BC_Resources::small_fontset = "6x12,*";
-char* BC_Resources::medium_fontset = "7x14,*";
-char* BC_Resources::large_fontset = "8x16,*";
+const char* BC_Resources::small_font = "-*-helvetica-medium-r-normal-*-10-*";
+const char* BC_Resources::medium_font = "-*-helvetica-bold-r-normal-*-14-*";
+const char* BC_Resources::large_font = "-*-helvetica-bold-r-normal-*-18-*";
+const char* BC_Resources::small_fontset = "6x12,*";
+const char* BC_Resources::medium_fontset = "7x14,*";
+const char* BC_Resources::large_fontset = "8x16,*";
 
 suffix_to_type_t BC_Resources::suffix_to_type[] = 
 {

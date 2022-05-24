@@ -132,12 +132,12 @@ public:
 	int filebox_h;
 
 // fonts
-	static char *large_font;
-	static char *medium_font;
-	static char *small_font;
-	static char *large_fontset;
-	static char *medium_fontset;
-	static char *small_fontset;
+	static const char *large_font;
+	static const char *medium_font;
+	static const char *small_font;
+	static const char *large_fontset;
+	static const char *medium_fontset;
+	static const char *small_fontset;
 	VFrame **medium_7segment;
 	int use_fontset;
 
