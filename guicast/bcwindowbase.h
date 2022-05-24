@@ -300,7 +300,7 @@ public:
 //	long get_repeat_id();
 	int set_repeat(long duration);
 	int unset_repeat(long id);
-	int set_tooltip(char *text);
+	int set_tooltip(const char *text);
 	int show_tooltip(int w = -1, int h = -1);
 	int hide_tooltip();
 	int set_icon(VFrame *data);

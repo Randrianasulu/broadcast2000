@@ -28,7 +28,7 @@ public:
 	virtual float get_percentage() { return 0; };
 	virtual int percentage_to_value(float percentage) { return 0; };
 	virtual int handle_event() { return 0; };
-	virtual char* get_caption() { return ""; };
+	virtual const char* get_caption() { return ""; };
 	virtual int increase_value() { return 0; };
 	virtual int decrease_value() { return 0; };
 
