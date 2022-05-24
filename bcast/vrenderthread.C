@@ -47,7 +47,7 @@ int VRenderThread::build_virtual_console(int duplicate, long current_position)
 	total_virtual_modules = total_tracks;
 	virtual_modules = new VirtualNode*[total_virtual_modules];
 	PluginBuffer *buffer[MAX_BUFFERS];
-	int i, j;
+	int i=0, j=0;
 
 // build virtual console table
 	for(i = 0, j; i < playable_tracks->total; i++)

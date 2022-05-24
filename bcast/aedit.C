@@ -423,9 +423,9 @@ int AEdit::render(PluginBuffer *shared_output,
 		{
 // render the edit
 // add the feather range
-			long lfeather_start, lfeather_end, lfeather_len;
-			float lfeather_slope, lfeather_gain;
-			long rfeather_start, rfeather_end, rfeather_len;
+			long lfeather_start=0, lfeather_end=0, lfeather_len=0;
+			float lfeather_slope=0, lfeather_gain=0;
+			long rfeather_start=0, rfeather_end=0, rfeather_len=0;
 
 // get the left feather range and slope
 			lfeather_len = feather_left;

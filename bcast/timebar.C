@@ -106,7 +106,7 @@ return 0;
 
 int TimeBar::resize_event(int w, int h)
 {
-	int new_x, new_y, new_w, new_h;
+	int new_x=0, new_y=0, new_w=0, new_h=0;
 	if(gui)
 	{
 		if(mwindow->tracks_vertical)

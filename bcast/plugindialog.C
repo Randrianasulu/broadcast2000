@@ -21,7 +21,7 @@ PluginDialogThread::PluginDialogThread(MainWindow *mwindow, Plugin *plugin, Tran
 
 PluginDialogThread::~PluginDialogThread()
 {
-	delete this->title;
+	delete [] this->title;
 }
 
 int PluginDialogThread::set_dialog(Transition *transition, char *title)

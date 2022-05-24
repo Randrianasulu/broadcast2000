@@ -35,7 +35,7 @@ VModule::~VModule()
 int VModule::create_objects(int pixel)
 {
 // get the variables
-	int i, x, y;
+	int i, x=0, y=0;
 	fade = 100;
 	mute = 0;
 	strcpy(title, get_patch_of()->title);
