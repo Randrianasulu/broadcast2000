@@ -31,6 +31,7 @@ PluginBuffer::~PluginBuffer()
 int PluginBuffer::set_attached(int attached)
 {
 	this->attached = attached;
+return 0;
 }
 
 void* PluginBuffer::get_data()
@@ -41,25 +42,30 @@ void* PluginBuffer::get_data()
 int PluginBuffer::lock_write()
 {
 	//lock->lock(WRITE_LOCK);
+return 0;
 }
 
 int PluginBuffer::unlock_write()
 {
 	//lock->unlock(WRITE_LOCK);
+return 0;
 }
 
 int PluginBuffer::lock_read()
 {
 	//lock->lock(READ_LOCK);
+return 0;
 }
 
 int PluginBuffer::unlock_read()
 {
 	//lock->unlock(READ_LOCK);
+return 0;
 }
 
 int PluginBuffer::get_lock_id()
 {
 // locks aren't used
 	//return lock->get_id();
+return 0;
 }
