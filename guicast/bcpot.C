@@ -102,7 +102,7 @@ int BC_Pot::angle_to_coords(int &x1, int &y1, int &x2, int &y2, float angle)
 float BC_Pot::coords_to_angle(int x2, int y2)
 {
 	int x1, y1, x, y;
-	float angle;
+	float angle = 0;
 
 	x1 = get_resources()->pot_x1;
 	y1 = get_resources()->pot_y1;

@@ -29,8 +29,8 @@ BC_Pan::BC_Pan(int x,
 
 BC_Pan::~BC_Pan()
 {
-	delete values;
-	delete value_positions;
+	delete [] values;
+	delete [] value_positions;
 	delete value_x;
 	delete value_y;
 	delete bg_pixmap;

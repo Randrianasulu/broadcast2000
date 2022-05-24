@@ -370,7 +370,7 @@ long Units::tosamples(float frames, int sample_rate, float framerate)
 
 float Units::xy_to_polar(int x, int y)
 {
-	float angle;
+	float angle = 0;
 	if(x > 0 && y <= 0)
 	{
 		angle = atan((float)-y / x) / (2 * M_PI) * 360;
