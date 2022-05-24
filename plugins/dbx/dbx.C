@@ -6,7 +6,7 @@
 #include <math.h>
 #include <string.h>
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	DBXMain *plugin;
 	

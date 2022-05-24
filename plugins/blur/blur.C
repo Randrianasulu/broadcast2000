@@ -3,7 +3,7 @@
 #include "blur.h"
 #include "blurwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	BlurMain *plugin;
 

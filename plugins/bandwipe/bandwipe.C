@@ -2,7 +2,7 @@
 #include "bandwipe.h"
 #include "bandwipewin.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	BandWipeMain *plugin;
 

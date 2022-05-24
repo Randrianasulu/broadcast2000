@@ -1,7 +1,7 @@
 #include "filehtal.h"
 #include "irissquare.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	IrisSquareMain *plugin;
 

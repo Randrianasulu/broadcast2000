@@ -2,7 +2,7 @@
 #include "wipe.h"
 #include "wipewin.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	WipeMain *plugin;
 

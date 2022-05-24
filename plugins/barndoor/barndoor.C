@@ -2,7 +2,7 @@
 #include "barndoor.h"
 #include "barndoorwin.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	BarnDoorMain *plugin;
 

@@ -2,7 +2,7 @@
 #include "rgb601.h"
 #include "rgb601window.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	RGB601Main *plugin;
 

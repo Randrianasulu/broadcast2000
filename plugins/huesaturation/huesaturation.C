@@ -2,7 +2,7 @@
 #include "huesaturation.h"
 #include "huewindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	HueMain *plugin;
 

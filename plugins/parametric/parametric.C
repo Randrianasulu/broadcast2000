@@ -5,7 +5,7 @@
 #include "parametric.h"
 #include "parametricwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	ParametricMain *plugin;
 	

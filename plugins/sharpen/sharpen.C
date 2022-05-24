@@ -2,7 +2,7 @@
 #include "sharpen.h"
 #include "sharpenwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	SharpenMain *plugin;
 

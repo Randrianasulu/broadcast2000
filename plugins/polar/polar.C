@@ -5,7 +5,7 @@
 #define SQR(x) ((x) * (x))
 #define WITHIN(a, b, c) ((((a) <= (b)) && ((b) <= (c))) ? 1 : 0)
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	PolarMain *plugin;
 

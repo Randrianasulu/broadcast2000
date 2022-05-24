@@ -2,7 +2,7 @@
 #include "invert.h"
 #include "invertwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	InvertMain *plugin;
 	

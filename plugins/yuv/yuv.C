@@ -2,7 +2,7 @@
 #include "yuv.h"
 #include "yuvwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	YUVMain *plugin;
 

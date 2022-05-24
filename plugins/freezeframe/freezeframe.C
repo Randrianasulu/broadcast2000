@@ -1,7 +1,7 @@
 #include "filehtal.h"
 #include "freezeframe.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	FreezeFrameMain *plugin;
 

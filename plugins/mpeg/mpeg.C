@@ -5,7 +5,7 @@
 #include "vframe.h"
 #include "strategies.inc"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	MpegMain *plugin;
 

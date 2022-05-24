@@ -2,7 +2,7 @@
 #include "flip.h"
 #include "flipwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	FlipMain *plugin;
 

@@ -7,7 +7,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	CDRipMain *plugin;
 	plugin = new CDRipMain(argc, argv);

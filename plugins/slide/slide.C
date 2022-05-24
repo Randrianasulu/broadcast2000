@@ -2,7 +2,7 @@
 #include "slide.h"
 #include "slidewin.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	SlideMain *plugin;
 

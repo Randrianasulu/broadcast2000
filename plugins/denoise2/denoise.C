@@ -2,7 +2,7 @@
 #include "denoise.h"
 #include "filehtal.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	Denoise *plugin;
 

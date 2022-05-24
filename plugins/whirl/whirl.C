@@ -4,7 +4,7 @@
 
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	WhirlMain *plugin;
 

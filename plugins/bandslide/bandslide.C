@@ -2,7 +2,7 @@
 #include "bandslide.h"
 #include "bandslidewin.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	BandSlideMain *plugin;
 

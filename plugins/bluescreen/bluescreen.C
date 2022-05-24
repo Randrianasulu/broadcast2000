@@ -2,7 +2,7 @@
 #include "bluescreen.h"
 #include "bluewindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	BluescreenMain *plugin;
 

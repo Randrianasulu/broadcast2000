@@ -3,7 +3,7 @@
 
 #define SQR(a) (a) * (a)
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	ColorBalanceMain *plugin;
 

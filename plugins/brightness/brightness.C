@@ -2,7 +2,7 @@
 #include "brightness.h"
 #include "brightwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	BrightnessMain *plugin;
 

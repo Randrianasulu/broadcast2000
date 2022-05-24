@@ -3,7 +3,7 @@
 #include "filehtal.h"
 #include "vframe.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	Spectrogram *plugin;
 

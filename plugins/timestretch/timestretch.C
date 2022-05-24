@@ -6,7 +6,7 @@
 #include "timestretch.h"
 #include "timewindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	TimeStretch *plugin;
 	

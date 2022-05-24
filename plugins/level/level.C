@@ -2,7 +2,7 @@
 #include "level.h"
 #include "levelwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	LevelMain *plugin;
 	

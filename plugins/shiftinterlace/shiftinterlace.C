@@ -2,7 +2,7 @@
 #include "shiftinterlace.h"
 #include "shiftwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	ShiftInterlaceMain *plugin;
 

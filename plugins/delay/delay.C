@@ -2,7 +2,7 @@
 #include "delay.h"
 #include "delaywindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	DelayMain *plugin;
 	

@@ -2,7 +2,7 @@
 #include "timeavg.h"
 #include "timeavgwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	TimeAvgMain *plugin;
 

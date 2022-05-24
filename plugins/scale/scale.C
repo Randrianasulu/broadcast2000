@@ -2,7 +2,7 @@
 #include "scale.h"
 #include "scalewin.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	ScaleMain *plugin;
 

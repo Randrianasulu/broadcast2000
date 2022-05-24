@@ -2,7 +2,7 @@
 #include "deinterlace.h"
 #include "deinterwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	DeInterlaceMain *plugin;
 

@@ -6,7 +6,7 @@
 #include "compress.h"
 #include "compresswindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	Compress *plugin;
 

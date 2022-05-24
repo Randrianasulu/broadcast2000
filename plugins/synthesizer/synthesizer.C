@@ -7,7 +7,7 @@
 #include "synthmenu.h"
 #include "synthwindow.h"
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	Synth *plugin;
 

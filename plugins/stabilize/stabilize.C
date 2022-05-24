@@ -7,7 +7,7 @@
 									(p.g * 150) + \
 									(p.b * 29)) >> 8)
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	StabilizeMain *plugin;
 
