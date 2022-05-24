@@ -42,7 +42,6 @@ BC_ListBoxItem& BC_ListBoxItem::operator=(BC_ListBoxItem& item)
 	if(item.text) set_text(item.text);
 	color = item.color;
 	y = item.y;
-return 0;
 }
 
 
