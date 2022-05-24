@@ -109,6 +109,7 @@ int PluginIOClient::plugin_open_file()
 	}
 	
 	messages->write_message(result);
+return 0;
 }
 
 int PluginIOClient::send_header()
@@ -166,30 +167,33 @@ int PluginIOClient::get_header()
 int PluginIOClient::plugin_close_file()
 {
 	close_file();
+return 0;
 }
 
 int PluginIOClient::plugin_get_aparameters()
 {
 	int result = get_audio_parameters();
+return 0;
 }
 
 int PluginIOClient::plugin_get_vparameters()
 {
 	int result = get_video_parameters();
+return 0;
 }
 
 int PluginIOClient::plugin_interrupt_aparameters() { return interrupt_aparameters(); }
 int PluginIOClient::plugin_interrupt_vparameters() { return interrupt_vparameters(); }
-long PluginIOClient::plugin_get_alength() { messages->write_message(get_alength()); }
-long PluginIOClient::plugin_get_vlength() { messages->write_message(get_vlength()); }
-int PluginIOClient::plugin_seek_end() { messages->write_message(seek_end()); }
-int PluginIOClient::plugin_seek_start() { messages->write_message(seek_start()); }
-long PluginIOClient::plugin_get_vposition() { messages->write_message(get_vposition()); }
-long PluginIOClient::plugin_get_aposition() { messages->write_message(get_aposition()); }
-int PluginIOClient::plugin_set_vposition() { messages->write_message(set_vposition(messages->read_message())); }
-int PluginIOClient::plugin_set_aposition() { messages->write_message(set_aposition(messages->read_message())); }
-int PluginIOClient::plugin_set_channel() { messages->write_message(set_channel(messages->read_message())); }
-int PluginIOClient::plugin_set_layer() { messages->write_message(set_layer(messages->read_message())); }
+long PluginIOClient::plugin_get_alength() { messages->write_message(get_alength()); return 0;}
+long PluginIOClient::plugin_get_vlength() { messages->write_message(get_vlength()); return 0;}
+int PluginIOClient::plugin_seek_end() { messages->write_message(seek_end()); return 0; }
+int PluginIOClient::plugin_seek_start() { messages->write_message(seek_start()); return 0; }
+long PluginIOClient::plugin_get_vposition() { messages->write_message(get_vposition()); return 0;}
+long PluginIOClient::plugin_get_aposition() { messages->write_message(get_aposition()); return 0; }
+int PluginIOClient::plugin_set_vposition() { messages->write_message(set_vposition(messages->read_message())); return 0;}
+int PluginIOClient::plugin_set_aposition() { messages->write_message(set_aposition(messages->read_message())); return 0;}
+int PluginIOClient::plugin_set_channel() { messages->write_message(set_channel(messages->read_message())); return 0;}
+int PluginIOClient::plugin_set_layer() { messages->write_message(set_layer(messages->read_message())); return 0;}
 
 int PluginIOClient::plugin_write_samples()
 {

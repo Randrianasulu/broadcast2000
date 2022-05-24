@@ -67,6 +67,7 @@ int PluginVClient::create_buffer_ptrs()
 		}
 		output_ptr_render = new VFrame**[total_out_buffers];
 	}
+return 0;
 }
 
 // Run before every realtime buffer is to be rendered.
@@ -87,6 +88,7 @@ int PluginVClient::get_render_ptrs()
 		fragment_position = offset_out_render.values[i];
 		output_ptr_render[i] = &output_ptr_master.values[i][double_buffer][fragment_position];
 	}
+return 0;
 }
 
 int PluginVClient::init_nonrealtime_parameters()
@@ -219,6 +221,7 @@ int PluginVClient::delete_buffer_ptrs()
 		output_ptr_master.remove_all();
 		delete output_ptr_render;
 	}
+return 0;
 }
 
 int PluginVClient::init_realtime_parameters()
@@ -229,6 +232,7 @@ int PluginVClient::init_realtime_parameters()
 	use_alpha = get_use_alpha();
 	use_interpolation = get_use_interpolation();
 	get_aspect_ratio(aspect_w, aspect_h);
+return 0;
 }
 
 
@@ -240,14 +244,17 @@ int PluginVClient::process_realtime(long size)
 		process_realtime(size, input_ptr_render, output_ptr_render);
 	else
 		process_realtime(size, input_ptr_render[0], output_ptr_render[0]);
+return 0;
 }
 
 int PluginVClient::process_realtime(long size, VFrame ***input_ptr, VFrame ***output_ptr)
 {
 	printf("process_realtime(long size, VFrame ***input_ptr, VFrame ***output_ptr) not defined.\n");
+return 0;
 }
 // realtime process for a single channel plugin
 int PluginVClient::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
 	printf("process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr) not defined.\n");
+return 0;
 }

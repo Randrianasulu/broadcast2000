@@ -43,6 +43,7 @@ int PluginAClient::create_buffer_ptrs()
 	}
 	
 	output_ptr_render = new float*[total_out_buffers];
+return 0;
 }
 
 int PluginAClient::delete_buffer_ptrs()
@@ -61,6 +62,7 @@ int PluginAClient::delete_buffer_ptrs()
 	output_ptr_master.remove_all();
 	delete [] input_ptr_render;
 	delete [] output_ptr_render;
+return 0;
 }
 
 int PluginAClient::get_render_ptrs()
@@ -82,11 +84,13 @@ int PluginAClient::get_render_ptrs()
 		output_ptr_render[i] = &output_ptr_master.values[i][double_buffer][fragment_position];
 	}
 //printf("PluginAClient::get_render_ptrs %x %x\n", input_ptr_render[0], output_ptr_render[0]);
+return 0;
 }
 
 int PluginAClient::init_realtime_parameters()
 {
-	project_sample_rate = get_project_samplerate();	
+	project_sample_rate = get_project_samplerate();
+	return 0;
 }
 
 int PluginAClient::process_realtime(long size)
@@ -97,4 +101,5 @@ int PluginAClient::process_realtime(long size)
 		process_realtime(size, input_ptr_render, output_ptr_render);
 	else
 		process_realtime(size, input_ptr_render[0], output_ptr_render[0]);
+return 0;
 }
