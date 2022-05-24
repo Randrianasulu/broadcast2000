@@ -21,7 +21,7 @@ StringFile::StringFile(long length)
 StringFile::StringFile(char *filename)
 {
 	FILE *in;
-	if(in = fopen(filename, "rb"))
+	if((in = fopen(filename, "rb")))
 	{
 		fseek(in, 0, SEEK_END);
 		length = ftell(in);
@@ -53,7 +53,7 @@ StringFile::~StringFile()
 int StringFile::write_to_file(char *filename)
 {
 	FILE *out;
-	if(out = fopen(filename, "wb"))
+	if((out = fopen(filename, "wb")))
 	{
 		fwrite(string, pointer, 1, out);
 	}
