@@ -112,35 +112,35 @@ char* Defaults::get(char *name, char *default_)
 	return default_;  // failed
 }
 
-int Defaults::update(char *name, double value) // update a value if it exists
+int Defaults::update(const char *name, double value) // update a value if it exists
 {
 	char string[1024];
 	sprintf(string, "%f", value);
 	return update(name, string);
 }
 
-int Defaults::update(char *name, float value) // update a value if it exists
+int Defaults::update(const char *name, float value) // update a value if it exists
 {
 	char string[1024];
 	sprintf(string, "%f", value);
 	return update(name, string);
 }
 
-int Defaults::update(char *name, int value) // update a value if it exists
+int Defaults::update(const char *name, int value) // update a value if it exists
 {
 	char string[1024];
 	sprintf(string, "%d", value);
 	return update(name, string);
 }
 
-int Defaults::update(char *name, long value) // update a value if it exists
+int Defaults::update(const char *name, long value) // update a value if it exists
 {
 	char string[1024];
 	sprintf(string, "%ld", value);
 	return update(name, string);
 }
 
-int Defaults::update(char *name, char *value)
+int Defaults::update(const char *name, char *value)
 {
 	for(int i = 0; i < total; i++)
 	{

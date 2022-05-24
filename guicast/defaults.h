@@ -11,12 +11,12 @@ public:
 
 	int load();        // load from disk file
 	int save();        // save to disk file
-	int update(char *name, Freq value); // update a value if it exists
-	int update(char *name, double value); // update a value if it exists
-	int update(char *name, float value); // update a value if it exists
-	int update(char *name, int value); // update a value if it exists
-	int update(char *name, long value); // update a value if it exists
-	int update(char *name, char *value); // create it if it doesn't
+	int update(const char *name, Freq value); // update a value if it exists
+	int update(const char *name, double value); // update a value if it exists
+	int update(const char *name, float value); // update a value if it exists
+	int update(const char *name, int value); // update a value if it exists
+	int update(const char *name, long value); // update a value if it exists
+	int update(const char *name, char *value); // create it if it doesn't
 
 	double get(char *name, double default_);   // retrieve a value if it exists
 	float get(char *name, float default_);   // retrieve a value if it exists

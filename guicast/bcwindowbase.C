@@ -1033,7 +1033,7 @@ int BC_WindowBase::get_atoms()
 	SetDoneXAtom =  XInternAtom(display, "BC_REPEAT_EVENT", False);
 	RepeaterXAtom = XInternAtom(display, "BC_CLOSE_EVENT", False);
 	DelWinXAtom =   XInternAtom(display, "WM_DELETE_WINDOW", False);
-	if(ProtoXAtom = XInternAtom(display, "WM_PROTOCOLS", False))
+	if((ProtoXAtom = XInternAtom(display, "WM_PROTOCOLS", False))	)
 		XChangeProperty(display, win, ProtoXAtom, XA_ATOM, 32, PropModeReplace, (unsigned char *)&DelWinXAtom, True);
 	return 0;
 }
