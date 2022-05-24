@@ -703,7 +703,7 @@ int VideoDevice::init_video4linux()
 
 		capture_frame_number = 0;
 
-		if(capture_buffer < 0)
+		if(!capture_buffer)
 		{
 // Use read instead.
 			perror("VideoDevice::init_video4linux mmap");
