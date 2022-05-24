@@ -31,6 +31,7 @@ public:
 			set_done(0);
 			return 1;
 		}
+		return 0;
 	};
 
 	BC_Meter *meter;

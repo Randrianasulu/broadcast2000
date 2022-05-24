@@ -20,7 +20,7 @@ BC_Button::BC_Button(int x, int y, int w, char *text, int big)
 	down = button_down = cursor_over = highlighted = 0;
 }
 
-BC_Button::~BC_Button() { delete text; }
+BC_Button::~BC_Button() { delete [] text; }
 
 int BC_Button::create_tool_objects() { create_window(x, y, w, h, MEGREY); return 0;
 }

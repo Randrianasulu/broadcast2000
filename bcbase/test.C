@@ -16,10 +16,10 @@ class TestTextBox : public BC_TextBox
 {
 public:
 	TestTextBox(int x, int y) : BC_TextBox(x, y, 200, "TextBox", 1) {};
-	handle_event() { printf("%s\n", get_text()); };
+	handle_event() { printf("%s\n", get_text()); return 0; };
 };
 
-main()
+int main()
 {
 	BC_Window window("Test", 320, 320, 320, 320);
 	BC_MenuBar *menubar;
@@ -54,4 +54,6 @@ main()
 	popupmenu->add_item(new BC_PopupItem("Item 2"));
 	popupmenu->add_item(new BC_PopupItem("Item 3"));
 	window.run_window();
+	
+	return 0;
 }

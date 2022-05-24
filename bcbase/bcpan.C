@@ -351,7 +351,7 @@ int BC_Pan::get_stick_position(int total_values, int *value_positions, float *va
 // get highest value
 	int highest_number;
 	float highest_value = 0, next_highest = 0;
-	int angle;
+	int angle = 0;
 	int i, j;
 
 	for(i = 0; i < total_values; i++)

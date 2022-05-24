@@ -176,6 +176,7 @@ int BC_Bitmap::delete_data()
 // data is automatically freed by XDestroyImage
 		data = 0;
 	}
+return 0;
 }
 
 int BC_Bitmap::write_drawable(Drawable &pixmap, 
@@ -211,6 +212,7 @@ int BC_Bitmap::write_drawable(Drawable &pixmap,
     else
         XPutImage(top_level->display, pixmap, top_level->gc, ximage,
                   source_x, source_y, dest_x, dest_y, w, h);
+return 0;
 }
 
 
@@ -245,6 +247,7 @@ int BC_Bitmap::read_frame(VFrame *frame,
 		else
 			transfer_scale(frame, x1, y1, x2, y2, use_alpha);
 	}
+return 0;
 }
 
 int BC_Bitmap::read_frame(unsigned char **rows, int in_w, int in_h)

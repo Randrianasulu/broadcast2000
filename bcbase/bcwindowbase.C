@@ -77,7 +77,9 @@ BC_SubWindow* BC_WindowBase::add_subwindow(BC_SubWindow *subwindow)
 	subwindows->append(subwindow); 
 
 // build the subwindow
-	subwindow->create_objects_(top_level, this); 
+	subwindow->create_objects_(top_level, this);
+	
+return 0;
 }
 
 int BC_WindowBase::delete_subwindow(BC_SubWindow* subwindow)

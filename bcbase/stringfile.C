@@ -47,7 +47,7 @@ StringFile::StringFile(char *filename)
 
 StringFile::~StringFile()
 {
-	delete string;
+	delete [] string;
 }
 
 int StringFile::write_to_file(char *filename)
