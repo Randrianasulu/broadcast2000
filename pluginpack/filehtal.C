@@ -29,6 +29,7 @@ FileHTAL::~FileHTAL()
 int FileHTAL::terminate_string()
 {
 	append_text("", 1);
+return 0;
 }
 
 int FileHTAL::rewind()
@@ -36,12 +37,14 @@ int FileHTAL::rewind()
 	terminate_string();
 	length = strlen(string);
 	position = 0;
+return 0;
 }
 
 
 int FileHTAL::append_newline()
 {
 	append_text("\n", 1);
+return 0;
 }
 
 int FileHTAL::append_tag()
@@ -49,14 +52,16 @@ int FileHTAL::append_tag()
 	tag.write_tag();
 	append_text(tag.string, tag.len);
 	tag.reset_tag();
+return 0;
 }
 
-int FileHTAL::append_text(char *text)
+int FileHTAL::append_text(const char *text)
 {
 	append_text(text, strlen(text));
+return 0;
 }
 
-int FileHTAL::append_text(char *text, long len)
+int FileHTAL::append_text(const char *text, long len)
 {
 	while(position + len > available)
 	{
@@ -67,6 +72,7 @@ int FileHTAL::append_text(char *text, long len)
 	{
 		string[position] = text[i];
 	}
+return 0;
 }
 
 int FileHTAL::reallocate_string(long new_available)
@@ -161,6 +167,7 @@ int FileHTAL::read_text_until(char *tag_end, char *output)
 	}
 	output[out_position] = 0;
 // if end tag is reached, position is left on the < of the end tag
+return 0;
 }
 
 
@@ -168,7 +175,7 @@ int FileHTAL::write_to_file(char *filename)
 {
 	FILE *out;
 	strcpy(this->filename, filename);
-	if(out = fopen(filename, "wb"))
+	if((out = fopen(filename, "wb")))
 	{
 		if(!fwrite(string, position-1, 1, out))
 		{
@@ -210,7 +217,7 @@ int FileHTAL::read_from_file(char *filename, int ignore_error)
 	FILE *in;
 	
 	strcpy(this->filename, filename);
-	if(in = fopen(filename, "rb"))
+	if((in = fopen(filename, "rb")))
 	{
 		fseek(in, 0, SEEK_END);
 		length = ftell(in);
@@ -235,6 +242,7 @@ int FileHTAL::read_from_string(char *string)
 	strcpy(this->string, string);
 	length = strlen(string);
 	position = 0;
+return 0;
 }
 
 int FileHTAL::set_shared_string(char *shared_string, long available)
@@ -282,6 +290,7 @@ int HTALTag::reset_tag()     // clear all structures
 	for(int i = 0; i < total_properties; i++) delete tag_properties[i];
 	for(int i = 0; i < total_properties; i++) delete tag_property_values[i];
 	total_properties = 0;
+return 0;
 }
 
 int HTALTag::write_tag()
@@ -586,6 +595,7 @@ int HTALTag::set_property(char *text, long value)
 {
 	sprintf(temp_string, "%ld", value);
 	set_property(text, temp_string);
+return 0;
 }
 
 #if !defined __alpha__ && !defined __ia64__ && !defined __x86_64__ && !defined __powerpc64__
@@ -593,6 +603,7 @@ int HTALTag::set_property(char *text, longest value)
 {
 	sprintf(temp_string, "%lld", value);
 	set_property(text, temp_string);
+return 0;
 }
 #endif
 
@@ -600,12 +611,14 @@ int HTALTag::set_property(char *text, int value)
 {
 	sprintf(temp_string, "%d", value);
 	set_property(text, temp_string);
+return 0;
 }
 
 int HTALTag::set_property(char *text, float value)
 {
 	sprintf(temp_string, "%f", value);
 	set_property(text, temp_string);
+return 0;
 }
 
 int HTALTag::set_property(char *text, char *value)

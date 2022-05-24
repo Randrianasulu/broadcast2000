@@ -69,8 +69,8 @@ public:
 	int terminate_string();         // append the terminal 0
 	int append_newline();       // append a newline to string
 	int append_tag();           // append tag object
-	int append_text(char *text);
-	int append_text(char *text, long len);        // add generic text to the string
+	int append_text(char const *text);
+	int append_text(char const *text, long len);        // add generic text to the string
 
 // Text array is dynamically allocated and deleted when FileHTAL is deleted
 	char* read_text();         // read text, put it in *output, and return it
