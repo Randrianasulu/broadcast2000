@@ -21,7 +21,7 @@ FileHTAL::FileHTAL(char left_delimiter, char right_delimiter)
 
 FileHTAL::~FileHTAL()
 {
-	if(!share_string) delete string;
+	if(!share_string) delete [] string;
 	if(output_length) delete output;
 }
 
@@ -78,7 +78,9 @@ int FileHTAL::reallocate_string(long new_available)
 		available = new_available;
 		delete string;
 		string = new_string;
+		return 0;
 	}
+	return 1;
 }
 
 char* FileHTAL::read_text()
@@ -246,7 +248,9 @@ int FileHTAL::set_shared_string(char *shared_string, long available)
 		this->available = available;
 		length = available;
 		position = 0;
+		return 0;
 	}
+	return 1;
 }
 
 
@@ -269,6 +273,7 @@ int HTALTag::set_delimiters(char left_delimiter, char right_delimiter)
 {
 	this->left_delimiter = left_delimiter;
 	this->right_delimiter = right_delimiter;
+	return 0;
 }
 
 int HTALTag::reset_tag()     // clear all structures
@@ -461,7 +466,8 @@ char* HTALTag::get_title()
 
 int HTALTag::get_title(char *value)
 {
-	if(tag_title[0] != 0) strcpy(value, tag_title);
+	if(tag_title[0] != 0) { strcpy(value, tag_title); return 0; }
+	return 1;
 }
 
 int HTALTag::test_property(char *property, char *value)
@@ -573,6 +579,7 @@ float HTALTag::get_property(char *property, float default_)
 int HTALTag::set_title(char *text)       // set the title field
 {
 	strcpy(tag_title, text);
+	return 0;
 }
 
 int HTALTag::set_property(char *text, long value)
@@ -608,4 +615,5 @@ int HTALTag::set_property(char *text, char *value)
 	tag_property_values[total_properties] = new char[strlen(value) + 1];
 	strcpy(tag_property_values[total_properties], value);
 	total_properties++;
+	return 0;
 }
