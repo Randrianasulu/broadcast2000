@@ -179,10 +179,10 @@ int BezierAutos::get_center(float &x, float &y, float &z,
 		return 0;
 	}
 
-	float x0, x1, x2, x3;
-	float y0, y1, y2, y3;
-	float z0, z1, z2, z3;
-	float frame0, frame1;
+	float x0=0, x1=0, x2=0, x3=0;
+	float y0=0, y1=0, y2=0, y3=0;
+	float z0=0, z1=0, z2=0, z3=0;
+	float frame0=0, frame1=0;
 
 	if(*before)
 	{

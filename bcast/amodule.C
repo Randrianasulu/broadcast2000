@@ -36,7 +36,7 @@ AModule::~AModule()
 int AModule::create_objects(int pixel)
 {
 // get the variables
-	int i, x, y;
+	int i, x=0, y=0;
 	inv = 0;
 	fade = 0;
 	mute = 0;
