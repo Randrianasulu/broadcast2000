@@ -39,7 +39,7 @@ ArrayList<TYPE>::ArrayList()
 template<class TYPE>
 ArrayList<TYPE>::~ArrayList()
 {
-	delete values;
+	delete [] values;
 }
 
 template<class TYPE>
@@ -94,6 +94,7 @@ template<class TYPE>
 int ArrayList<TYPE>::remove()
 {
 	total--;
+	return 0;
 }
 
 template<class TYPE>
@@ -113,6 +114,7 @@ template<class TYPE>
 int ArrayList<TYPE>::remove_all()
 {
 	total = 0;
+	return 0;
 }
 
 template<class TYPE>
