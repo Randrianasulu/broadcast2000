@@ -528,14 +528,14 @@ int BC_Bitmap::transfer_row_raw_scale(unsigned char *output, unsigned char *inpu
 	switch(bits_per_pixel)
 	{
 		case 8:
-			for(register int x = 0; x < w; x++)
+			for( int x = 0; x < w; x++)
 			{
 				transfer_raw_pixel_8(output++, &input[column_table[x]]);
 			}
 			break;
 
 		case 16:
-			for(register int x = 0; x < w; x++)
+			for( int x = 0; x < w; x++)
 			{
 				transfer_raw_pixel_16((unsigned TWO*)output, &input[column_table[x]]);
 				output += 2;
@@ -543,7 +543,7 @@ int BC_Bitmap::transfer_row_raw_scale(unsigned char *output, unsigned char *inpu
 			break;
 
 		case 24:
-			for(register int x = 0; x < w; x++)
+			for( int x = 0; x < w; x++)
 			{
 				transfer_raw_pixel_24(output, &input[column_table[x]]);
 				output += 3;
@@ -552,7 +552,7 @@ int BC_Bitmap::transfer_row_raw_scale(unsigned char *output, unsigned char *inpu
 			break;
 
 		case 32:
-			for(register int x = 0; x < w; x++)
+			for( int x = 0; x < w; x++)
 			{
 				transfer_raw_pixel_24(output, &input[column_table[x]]);
 				output += 4;
@@ -566,12 +566,12 @@ return 0;
 int BC_Bitmap::transfer_row_direct_8(unsigned char *output, VPixel *input, int width, int use_alpha)
 {
 	if(use_alpha)
-		for(register int x = 0; x < width; x++)
+		for( int x = 0; x < width; x++)
 		{
 			transfer_pixel_8_alpha(output++, &input[x]);
 		}
 	else
-		for(register int x = 0; x < width; x++)
+		for( int x = 0; x < width; x++)
 		{
 			transfer_pixel_8(output++, &input[x]);
 		}
@@ -581,12 +581,12 @@ return 0;
 int BC_Bitmap::transfer_row_scale_8(unsigned char *output, VPixel *input, int *column_table, int use_alpha)
 {
 	if(use_alpha)
-		for(register int x = 0; x < w; x++)
+		for( int x = 0; x < w; x++)
 		{
 			transfer_pixel_8_alpha(output++, &input[column_table[x]]);
 		}
 	else
-		for(register int x = 0; x < w; x++)
+		for( int x = 0; x < w; x++)
 		{
 			transfer_pixel_8(output++, &input[column_table[x]]);
 		}
@@ -596,12 +596,12 @@ return 0;
 int BC_Bitmap::transfer_row_direct_16(unsigned TWO *output, VPixel *input, int width, int use_alpha)
 {
 	if(use_alpha)
-		for(register int x = 0; x < width; x++)
+		for( int x = 0; x < width; x++)
 		{
 			transfer_pixel_16_alpha(output++, &input[x]);
 		}
 	else
-		for(register int x = 0; x < width; x++)
+		for( int x = 0; x < width; x++)
 		{
 			transfer_pixel_16(output++, &input[x]);
 		}
@@ -611,12 +611,12 @@ return 0;
 int BC_Bitmap::transfer_row_scale_16(unsigned TWO *output, VPixel *input, int *column_table, int use_alpha)
 {
 	if(use_alpha)
-		for(register int x = 0; x < w; x++)
+		for( int x = 0; x < w; x++)
 		{
 			transfer_pixel_16_alpha(output++, &input[column_table[x]]);
 		}
 	else
-		for(register int x = 0; x < w; x++)
+		for( int x = 0; x < w; x++)
 		{
 			transfer_pixel_16(output++, &input[column_table[x]]);
 		}
@@ -626,12 +626,12 @@ return 0;
 int BC_Bitmap::transfer_row_direct_24(unsigned char *output, VPixel *input, int width, int use_alpha)
 {
 	if(use_alpha)
-		for(register int x = 0; x < width; x++)
+		for( int x = 0; x < width; x++)
 		{
 			transfer_pixel_24_alpha(&output, &input[x]);
 		}
 	else
-		for(register int x = 0; x < width; x++)
+		for( int x = 0; x < width; x++)
 		{
 			transfer_pixel_24(&output, &input[x]);
 		}
@@ -641,12 +641,12 @@ return 0;
 int BC_Bitmap::transfer_row_scale_24(unsigned char *output, VPixel *input, int *column_table, int use_alpha)
 {
 	if(use_alpha)
-		for(register int x = 0; x < w; x++)
+		for( int x = 0; x < w; x++)
 		{
 			transfer_pixel_24_alpha(&output, &input[column_table[x]]);
 		}
 	else
-		for(register int x = 0; x < w; x++)
+		for( int x = 0; x < w; x++)
 		{
 			transfer_pixel_24(&output, &input[column_table[x]]);
 		}
@@ -656,13 +656,13 @@ return 0;
 int BC_Bitmap::transfer_row_direct_32(unsigned char *output, VPixel *input, int width, int use_alpha)
 {
 	if(use_alpha)
-		for(register int x = 0; x < width; x++)
+		for( int x = 0; x < width; x++)
 		{
 			transfer_pixel_24_alpha(&output, &input[x]);
 			output++;
 		}
 	else
-		for(register int x = 0; x < width; x++)
+		for( int x = 0; x < width; x++)
 		{
 			transfer_pixel_24(&output, &input[x]);
 			output++;
@@ -673,13 +673,13 @@ return 0;
 int BC_Bitmap::transfer_row_scale_32(unsigned char *output, VPixel *input, int *column_table, int use_alpha)
 {
 	if(use_alpha)
-		for(register int x = 0; x < w; x++)
+		for( int x = 0; x < w; x++)
 		{
 			transfer_pixel_24_alpha(&output, &input[column_table[x]]);
 			output++;
 		}
 	else
-		for(register int x = 0; x < w; x++)
+		for( int x = 0; x < w; x++)
 		{
 			transfer_pixel_24(&output, &input[column_table[x]]);
 			output++;

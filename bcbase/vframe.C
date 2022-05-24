@@ -253,7 +253,7 @@ return 0;
 
 int VFrame::apply_fade(int alpha)
 {
-	register int i, j, channel;
+	 int i, j, channel;
 
 	if(alpha != VMAX)
 	{
@@ -298,7 +298,7 @@ return 0;
 
 int VFrame::replace_from(VFrame *frame, int alpha, int use_alpha, int use_float)
 {
-	register long i, j;
+	 long i, j;
 
 	if(color_model == VFRAME_VPIXEL && alpha != VMAX)
 	{
