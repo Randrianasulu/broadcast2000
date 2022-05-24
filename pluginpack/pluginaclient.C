@@ -59,8 +59,8 @@ int PluginAClient::delete_buffer_ptrs()
 	}
 	input_ptr_master.remove_all();
 	output_ptr_master.remove_all();
-	delete input_ptr_render;
-	delete output_ptr_render;
+	delete [] input_ptr_render;
+	delete [] output_ptr_render;
 }
 
 int PluginAClient::get_render_ptrs()
