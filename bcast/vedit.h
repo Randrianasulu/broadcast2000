@@ -40,7 +40,7 @@ public:
 				long project_position);
 
 // Read frame into frame buffer
-	int VEdit::read_raw_frame(VFrame *frame, 
+	int read_raw_frame(VFrame *frame, 
 				PluginBuffer *output_buffer, 
 				long output_byte_offset, 
 				long project_position);
