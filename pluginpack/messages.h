@@ -29,7 +29,7 @@ public:
 	int read_message_f(float *value1, float *value2, float *value3);
 	int read_message_f(float *value1, float *value2, float *value3, float *value4);
 
-	int write_message(char *text);
+	int write_message(const char *text);
 	int write_message_raw();                 // send the text currently in the buffer
 	int write_message(int command, char *text);
 	int write_message_flagged(int output_flag, int command);

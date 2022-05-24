@@ -146,7 +146,7 @@ int Messages::read_message(int *command, char *text)
 }
 
 
-int Messages::write_message(char *text)
+int Messages::write_message(const char *text)
 {
 	buffer.mtype = output_flag;
 	strcpy(buffer.text, text);

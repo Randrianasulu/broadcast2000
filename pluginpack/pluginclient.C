@@ -55,6 +55,7 @@ int PluginClient::plugin_exit()
 
 	plugin_cleanup();
 	exit(0);
+return 0;
 }
 
 int PluginClient::plugin_cleanup()
@@ -63,6 +64,7 @@ int PluginClient::plugin_cleanup()
 	total_out_buffers = 0;
 	messages = 0;
 	message_lock = 0;
+return 0;
 }
 
 int PluginClient::plugin_init(int argc, char *argv[])
@@ -94,6 +96,7 @@ int PluginClient::plugin_init(int argc, char *argv[])
 int PluginClient::plugin_get_range()
 {
 	messages->read_message(&start, &end);
+return 0;
 }
 
 // For non realtime plugins, allocate all the buffers.
@@ -337,8 +340,8 @@ int PluginClient::plugin_run()
 	return 0;
 }
 
-int PluginClient::start_realtime() { printf("start_realtime\n"); }
-int PluginClient::stop_realtime() { printf("stop_realtime\n"); }
+int PluginClient::start_realtime() { printf("start_realtime\n"); return 0; }
+int PluginClient::stop_realtime() { printf("stop_realtime\n"); return 0; }
 int PluginClient::plugin_is_realtime() { return 0; }
 int PluginClient::plugin_is_multi_channel() { return 0; }
 int PluginClient::plugin_is_audio() { return 0; }
@@ -346,7 +349,7 @@ int PluginClient::plugin_is_video() { return 0; }
 int PluginClient::plugin_is_fileio() { return 0; }
 int PluginClient::create_buffer_ptrs() { return 0; }
 int PluginClient::delete_buffer_ptrs() { return 0; }
-char* PluginClient::plugin_title() { return "Untitled"; }
+const char* PluginClient::plugin_title() { return "Untitled"; }
 int PluginClient::is_realtime() { return 0; }
 int PluginClient::is_audio() { return 0; }
 int PluginClient::is_video() { return 0; }
@@ -601,11 +604,13 @@ int PluginClient::get_aspect_ratio(float &aspect_w, float &aspect_h)
 int PluginClient::send_completed()
 {
 	messages->write_message(COMPLETED);
+	return 0;
 }
 
 int PluginClient::send_cancelled()
 {
 	messages->write_message(CANCEL);
+	return 0;
 }
 
 int PluginClient::send_hide_gui()
@@ -615,6 +620,7 @@ int PluginClient::send_hide_gui()
 	client_gui_on = 0;
 	gui_messages->write_message(COMPLETED);
 	delete gui_messages;
+	return 0;
 }
 
 int PluginClient::send_configure_change()
@@ -623,6 +629,7 @@ int PluginClient::send_configure_change()
 	gui_messages->write_message(CONFIGURE_CHANGE);
 	save_data(gui_messages->get_message_buffer());         // user puts data directly into buffer
 	gui_messages->write_message_raw();     // send the data
+	return 0;
 }
 
 int PluginClient::read_frames(long start_position, long total_frames)

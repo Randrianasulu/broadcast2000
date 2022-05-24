@@ -39,19 +39,7 @@ public:
 	virtual int is_video();
 	virtual int is_fileio();
 	virtual int is_multichannel();
-	virtual char* plugin_title();   // return the title of the plugin
-
-
-
-
-
-
-
-
-
-
-
-
+	virtual const char* plugin_title();   // return the title of the plugin
 
 
 // Queries for the plugin server.
