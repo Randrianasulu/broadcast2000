@@ -88,6 +88,7 @@ int ArrayList<TYPE>::remove(TYPE value)                   // remove value from a
 		}
 	}
 	total = out;
+	return 0;
 }
 
 template<class TYPE>
@@ -108,6 +109,7 @@ int ArrayList<TYPE>::remove_number(int number)                   // remove value
 		else  in++;       // need to delete it here
 	}
 	total = out;
+	return 0;
 }
 
 template<class TYPE>
@@ -137,6 +139,7 @@ int ArrayList<TYPE>::sort()                    // sort from least to greatest va
 			}
 		}
 	}
+	return 0;
 }
 
 #endif

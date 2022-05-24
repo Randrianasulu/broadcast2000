@@ -154,7 +154,7 @@ int BC_Window::get_atoms()
 	RepeaterXAtom = XInternAtom(display, "BC_REPEAT_EVENT", False);
 //printf("BC_Window::get_atoms %ld\n", RepeaterXAtom);
 	DelWinXAtom = XInternAtom(display, "WM_DELETE_WINDOW", False);
-	if(ProtoXAtom = XInternAtom(display, "WM_PROTOCOLS", False))
+	if((ProtoXAtom = XInternAtom(display, "WM_PROTOCOLS", False)))
 		XChangeProperty(display, win, ProtoXAtom, XA_ATOM, 32, PropModeReplace, (unsigned char *)&DelWinXAtom, True );
 return 0;
 }
@@ -565,11 +565,6 @@ int BC_Window::dispatch_event()
 			event_win = report.xany.window;
 			expose_event_dispatch();
 			break;
-
-
-
-
-
 			
 		case ClientMessage:
 // clear the motion buffer since this can clear the window
@@ -600,13 +595,6 @@ int BC_Window::dispatch_event()
 				}
 			}
 			break;
-
-
-
-
-
-
-
 		case ButtonPress:
 // get location information
 			cursor_x = button_x;
@@ -637,15 +625,6 @@ int BC_Window::dispatch_event()
 			else
 				button_press_dispatch();
 			break;
-
-
-
-
-
-
-
-
-
 		case ButtonRelease:
 // get location information
 			cursor_x = button_x;
@@ -661,15 +640,6 @@ int BC_Window::dispatch_event()
   			else 
   			button_release_dispatch();
 			break;
-
-
-
-
-
-
-
-
-
 		case MotionNotify:
 // Buffer it if it's the first motion from any window.
 // Window can get destroyed after the button release and the motion notify event.
@@ -692,14 +662,6 @@ int BC_Window::dispatch_event()
 				store_motion_event(&report);
 			}
 			break;
-
-
-
-
-
-
-
-
 		case ConfigureNotify:
 		{
 			int cancel_resize = 0;
@@ -730,13 +692,6 @@ int BC_Window::dispatch_event()
 			}
 		}
 			break;
-
-
-
-
-
-
-
 		case KeyPress:
   			KeySym keysym;
   			char keys_return[2];
@@ -805,21 +760,10 @@ int BC_Window::dispatch_event()
 			}
 			break;
 
-
-
-
-
-
-
 		case FocusOut:
 			cursor_x = cursor_y = -1;
 			cursor_left_dispatch();
 			break;
-
-
-
-
-
 
 		case LeaveNotify:
 			event_win = report.xany.window;
@@ -838,13 +782,6 @@ int BC_Window::dispatch_event()
 // dispatch to subwindows
 			cursor_left_dispatch();
 			break;
-
-
-
-
-
-
-
 //		case 65:
 //			printf("BC_Window recieved a ShmCompletion.  Shit!\n");
 //			shm_completions++;
