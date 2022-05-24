@@ -302,7 +302,7 @@ int FileSystem::update(char *new_dir)
 	dirstream = opendir(current_dir);
 	if(!dirstream) return 1;          // failed to open directory
 
-	while(new_filename = readdir64(dirstream))
+	while((new_filename = readdir64(dirstream)))
 	{
 		include_this = 1;
 
@@ -445,7 +445,7 @@ int FileSystem::parse_tildas(char *new_dir)
 			new_user[j] = 0;
       
 			setpwent();
-			while(pw = getpwent())
+			while((pw = getpwent()))
 			{
 // get info for user
 				if(!strcmp(pw->pw_name, new_user))
