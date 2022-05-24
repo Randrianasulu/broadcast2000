@@ -2,7 +2,7 @@
 #include "bcfont.h"
 #include "bcresources.h"
 #include <string.h>
-BC_Button::BC_Button(int x, int y, char *text, int big)
+BC_Button::BC_Button(int x, int y, const char *text, int big)
 	: BC_Tool(x, y, 0, 0)
 {
 	this->text = new char[strlen(text) + 1];
@@ -11,7 +11,7 @@ BC_Button::BC_Button(int x, int y, char *text, int big)
 	down = button_down = cursor_over = highlighted = 0;
 }
 
-BC_Button::BC_Button(int x, int y, int w, char *text, int big)
+BC_Button::BC_Button(int x, int y, int w, const char *text, int big)
 	: BC_Tool(x, y, w, 0)
 {
 	this->text = new char[strlen(text) + 1];

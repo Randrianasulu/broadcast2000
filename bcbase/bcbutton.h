@@ -10,8 +10,8 @@ class BC_Button;
 class BC_Button : public BC_Tool
 {
 public:
-	BC_Button(int x, int y, char *text, int big);
-	BC_Button(int x, int y, int w, char *text, int big);
+	BC_Button(int x, int y, const char *text, int big);
+	BC_Button(int x, int y, int w, const char *text, int big);
 	virtual ~BC_Button();
 	int create_tool_objects();
 	int resize_tool(int x, int y);
