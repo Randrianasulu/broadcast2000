@@ -77,37 +77,31 @@ return 0;
 int bc_enter_shmem_id(int id)
 {
 	return bc_enter_id(&global_shmem_db, id);
-return 0;
 }
 
 int bc_remove_shmem_id(int id)
 {
 	return bc_remove_id(&global_shmem_db, id);
-return 0;
 }
 
 int bc_enter_sema_id(int id)
 {
 	return bc_enter_id(&global_sema_db, id);
-return 0;
 }
 
 int bc_remove_sema_id(int id)
 {
 	return bc_remove_id(&global_sema_db, id);
-return 0;
 }
 
 int bc_enter_msg_id(int id)
 {
 	return bc_enter_id(&global_msg_db, id);
-return 0;
 }
 
 int bc_remove_msg_id(int id)
 {
 	return bc_remove_id(&global_msg_db, id);
-return 0;
 }
 
 int bc_enter_id(ArrayList<int>* list, int id)
@@ -121,7 +115,6 @@ int bc_enter_id(ArrayList<int>* list, int id)
 	if(!result) list->append(id);
 	global_ipc_lock.unlock();
 	return 0;
-return 0;
 }
 
 int bc_remove_id(ArrayList<int>* list, int id)
@@ -134,6 +127,5 @@ int bc_remove_id(ArrayList<int>* list, int id)
 	}
 	global_ipc_lock.unlock();
 	return 0;
-return 0;
 }
 
