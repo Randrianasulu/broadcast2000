@@ -122,7 +122,7 @@ $(OUTPUT): $(OBJS)
 	$(MAKE) -C libraw1394
 	$(MAKE) -C libjpeg-turbo-1.5.3
 	ar rcs $(OUTPUT) $(OBJS) $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
-	g++ -shared -o libquicktime.so  $(OBJS)  $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
+#	g++ -shared -o libquicktime.so  $(OBJS)  $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
 
 qtdump: dump.o $(OUTPUT)
 	$(CC) -o qtdump dump.o $(OUTPUT) -lm -lpng -lz -lpthread -lglib -ldl
