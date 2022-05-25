@@ -184,6 +184,7 @@ OUTPUT = bcast2000
 
 #LINUX
 STATICLIBS = ../pluginpack/sharedpluginobjs.a \
+	../bcbase/libbcbase.a \
 	../quicktime/libquicktime.a \
         ../audiofile/libasound.a \
         ../esound/libesound.a \
@@ -191,7 +192,7 @@ STATICLIBS = ../pluginpack/sharedpluginobjs.a \
 	../quicktime/libjpeg-turbo-1.5.3/.libs/libjpeg.a
 
 # LINUX
-LIBS = -L../bcbase/ -lbcbase $(XLIBS) -lpng -lz -lglib -ldl 
+LIBS =  $(XLIBS) -lpng -lz -lglib -ldl 
 
 CFLAGS += -I../bcbase \
 	-I../pluginpack \

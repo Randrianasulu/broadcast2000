@@ -97,22 +97,22 @@ CFLAGS += -I../ -I../../pluginpack -I../../bcbase -I/usr/local/include
 export CFLAGS
 
 PLUGINAUDIOOBJS = \
-	-L../../bcbase -lbcbase \
 	../../pluginpack/pluginclient.o \
+	../../bcbase/libbcbase.a \
 	../../pluginpack/pluginaclient.o \
 	../../pluginpack/sharedpluginobjs.a \
 	\$(XLIBS)
 
 PLUGINVIDEOOBJS = \
-	-L../../bcbase -lbcbase \
 	../../pluginpack/pluginclient.o \
+	../../bcbase/libbcbase.a \
 	../../pluginpack/pluginvclient.o \
 	../../pluginpack/sharedpluginobjs.a \
 	\$(XLIBS)
 
 PLUGINIOOBJS = \
-	-L../../bcbase -lbcbase \
 	../../pluginpack/pluginclient.o \
+	../../bcbase/libbcbase.a \
 	../../pluginpack/pluginioclient.o \
 	../../pluginpack/sharedpluginobjs.a \
 	\$(XLIBS)
