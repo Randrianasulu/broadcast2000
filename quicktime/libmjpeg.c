@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "colormodels.h"
 #include "libmjpeg.h"
 
@@ -471,6 +472,7 @@ static void new_jpeg_objects(mjpeg_compressor *engine)
 /* Ideally the error handler would be set here but it must be called in a thread */
 	jpeg_create_decompress(&(engine->jpeg_decompress));
 	engine->jpeg_decompress.raw_data_out = TRUE;
+	engine->jpeg_decompress.dct_method = JDCT_IFAST;
 }
 
 static void delete_jpeg_objects(mjpeg_compressor *engine)
@@ -554,20 +556,20 @@ static void decompress_field(mjpeg_compressor *engine)
 	allocate_temps(mjpeg);
 	get_rows(mjpeg, engine);
 
-//printf("decompress_field 1\n");
+printf("decompress_field 1\n");
 	while(engine->jpeg_decompress.output_scanline < engine->jpeg_decompress.output_height)
 	{
-//printf("decompress_field 2 %d\n", engine->jpeg_decompress.output_scanline);
+printf("decompress_field 2 %d\n", engine->jpeg_decompress.output_scanline);
 		get_mcu_rows(mjpeg, engine, engine->jpeg_decompress.output_scanline);
-//printf("decompress_field 3\n");
+printf("decompress_field 3\n");
 
 		jpeg_read_raw_data(&engine->jpeg_decompress, 
 			engine->mcu_rows, 
 			engine->field_h);
-//printf("decompress_field 4\n");
+printf("decompress_field 4\n");
 	}
 	jpeg_finish_decompress(&engine->jpeg_decompress);
-//printf("decompress_field 5\n");
+printf("decompress_field 5\n");
 finish:
 ;
 }
