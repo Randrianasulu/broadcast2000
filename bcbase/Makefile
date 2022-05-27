@@ -1,5 +1,6 @@
 include ../global_config
 export CFLAGS
+CFLAGS += -fPIC
 
 OBJS = \
 	bcbitmap.o \
