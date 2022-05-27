@@ -10,3 +10,5 @@ ffmpeg -i /dev/shm/capture.mov001.mov -c:v dvvideo -c:a pcm_s16be -s 720x480 -pi
  or you can use mjpeg:
  ffmpeg -i 12.ogg -c:v mjpeg -b:v 9M -c:a pcm_s16be -s 1280x720 12.mov
  
+for some reason on another machine I must use -pix_fmt=yuv420p for mjpeg encoding, 
+otherwise Broadcast2000 crashes in libjpeg-turbo
