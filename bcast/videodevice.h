@@ -28,6 +28,10 @@
 // Number of seconds for keepalive to freak out
 #define KEEPALIVE_DELAY 0.5
 
+#ifndef MIN
+#define MIN(a,b) (((a) < (b)) ? (a) : (b))
+#endif
+
 // Structure for video4linux2
 struct tag_vimage
 {
