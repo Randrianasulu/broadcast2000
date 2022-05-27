@@ -1,7 +1,7 @@
 #include <string.h>
 #include "bcresources.h"
 #include "bcscrollbar.h"
-#include <sys/timeb.h>
+//#include <sys/timeb.h>
 
 BC_ScrollBar::BC_ScrollBar(int x_, int y_, int w_, int h_, long length_, long position_, long handlelength_)
 	: BC_Tool(x_, y_, w_, h_)
