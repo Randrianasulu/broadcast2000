@@ -167,19 +167,16 @@ long AudioOSS::device_position()
 int AudioOSS::interrupt_playback()
 {
 	return 0;
-return 0;
 }
 
 int AudioOSS::read_buffer(char *buffer, long size)
 {
 	return read(get_input(), buffer, size);
-return 0;
 }
 
 int AudioOSS::write_buffer(char *buffer, long size)
 {
 	return write(get_output(), buffer, size);
-return 0;
 }
 
 int AudioOSS::flush_device()

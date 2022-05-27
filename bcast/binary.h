@@ -9,6 +9,7 @@ inline int putfourswap(FOUR number, FILE *file){
   fputc((number & 0xff00) >> 8, file);
   fputc((number & 0xff0000) >> 16, file);
   fputc((number & 0xff000000) >> 24, file);
+  return 0;
 }
 
 inline int putfour(FOUR number, FILE *file){
@@ -16,6 +17,7 @@ inline int putfour(FOUR number, FILE *file){
   fputc((number & 0xff0000) >> 16, file);
   fputc((number & 0xff00) >> 8, file);
   fputc(number & 0xff, file);
+  return 0;
 }
 
 inline FOUR getfour(FILE *in){
@@ -49,6 +51,7 @@ inline TWO gettwo(FILE *in){
 inline int puttwo(TWO number, FILE *file){
   fputc((number & 0xff00) >> 8, file);
   fputc(number & 0xff, file);
+  return 0;
 }
 
 #endif

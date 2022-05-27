@@ -55,6 +55,8 @@ int FileBase::transfer_from(VFrame *frame_out, VFrame *frame_in,
 		in_x1, in_y1, in_x2, in_y2,
 		out_x1, out_y1, out_x2, out_y2, 
 		alpha);
+
+	return 0;
 }
 
 // alpha is from 0 to VMAX for frame operations
@@ -225,6 +227,7 @@ int FileBase::raw_to_row_direct(unsigned char *in_buffer, VPixel *out_row,
 			}
 			break;
 	}
+return 0;
 }
 
 #define SCALE_ROW_LOOP_BEGIN \
@@ -320,6 +323,7 @@ int FileBase::raw_to_row_scale(unsigned char *input, VPixel *output,
 				break;
 		}
 	}
+return 0;
 }
 
 
@@ -632,8 +636,6 @@ int FileBase::yuv_to_pixel_int(unsigned char *input, VPixel *output, int pixel)
 	}
 return 0;
 }
-
-
 
 
 
