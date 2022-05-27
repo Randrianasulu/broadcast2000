@@ -919,11 +919,13 @@ int FileMOVThread::stop_encoding()
 	input_lock.unlock();
 	join();
 	if(mjpeg) mjpeg_delete(mjpeg);
+return 0;
 }
 
 int FileMOVThread::encode_buffer()
 {
 	input_lock.unlock();
+return 0;
 }
 
 void FileMOVThread::run()

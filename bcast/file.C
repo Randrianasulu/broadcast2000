@@ -449,7 +449,8 @@ return 0;
 long File::get_memory_usage() 
 { 
 	if(file)
-		return file->get_memory_usage(); 
+		return file->get_memory_usage();
+return 0;
 }
 
 int File::write_samples(float **buffer, 
