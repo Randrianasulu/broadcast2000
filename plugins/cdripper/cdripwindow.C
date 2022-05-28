@@ -57,6 +57,7 @@ int CDRipWindow::create_objects()
 	add_tool(ok = new CDRipWindowOK(this, x, y));
 	x += 300;
 	add_tool(cancel = new CDRipWindowCancel(this, x, y));
+return 0;
 }
 
 
@@ -66,7 +67,7 @@ CDRipWindowOK::CDRipWindowOK(CDRipWindow *window, int x, int y)
  : BC_BigButton(x, y, "OK")
 { this->window = window; }
 
-int CDRipWindowOK::handle_event() { window->set_done(0); }
+int CDRipWindowOK::handle_event() { window->set_done(0); return 0; }
 
 int CDRipWindowOK::keypress_event() 
 { 
@@ -81,7 +82,7 @@ CDRipWindowCancel::CDRipWindowCancel(CDRipWindow *window, int x, int y)
  : BC_BigButton(x, y, "Cancel")
 { this->window = window; }
 
-int CDRipWindowCancel::handle_event() { window->set_done(1); }
+int CDRipWindowCancel::handle_event() { window->set_done(1); return 0; }
 
 int CDRipWindowCancel::keypress_event() 
 { 
@@ -106,6 +107,7 @@ CDRipTextValue::~CDRipTextValue()
 int CDRipTextValue::handle_event()
 {
 	*output = atol(get_text());
+return 0;
 }
 
 CDRipWindowDevice::CDRipWindowDevice(CDRipWindow *window, char *device, int x, int y, int w)
@@ -122,4 +124,5 @@ CDRipWindowDevice::~CDRipWindowDevice()
 int CDRipWindowDevice::handle_event()
 {
 	strcpy(device, get_text());
+return 0;
 }

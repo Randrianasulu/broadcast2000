@@ -28,6 +28,7 @@ CDRipMain::~CDRipMain()
 int CDRipMain::run_client()
 {
 	plugin_exit();
+return 0;
 }
 
 char* CDRipMain::plugin_title() { return "CD Ripper"; }
@@ -68,6 +69,7 @@ int CDRipMain::load_defaults()
 	defaults->get("DEVICE", device);
 	startlba = defaults->get("STARTLBA", 0);
 	endlba = defaults->get("ENDLBA", 0);
+return 0;
 }
 
 int CDRipMain::save_defaults()
@@ -82,6 +84,7 @@ int CDRipMain::save_defaults()
 	defaults->update("STARTLBA", startlba);
 	defaults->update("ENDLBA", endlba);
 	defaults->save();
+return 0;
 }
 
 int CDRipMain::get_parameters()
@@ -342,4 +345,5 @@ int CDRipMain::start_plugin()
 	
 	delete [] buffer_in;
 	delete [] buffer_out;
+return 0;
 }
