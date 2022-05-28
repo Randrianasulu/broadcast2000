@@ -373,7 +373,8 @@ int PluginClient::init_nonrealtime_parameters() { return 0; }
 int PluginClient::delete_nonrealtime_parameters() { return 0; }
 int PluginClient::process_realtime(long size) 
 {
-	printf("No realtime processor defined for this plugin.\n"); 
+	printf("No realtime processor defined for this plugin.\n");
+	return 1;
 }
 
 long PluginClient::get_in_buffers(long recommended_size)

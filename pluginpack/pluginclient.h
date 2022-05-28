@@ -144,7 +144,7 @@ public:
 	int plugin_exit();
 	int plugin_cleanup();
 	int plugin_run();
-	virtual int plugin_command_derived(int plugin_command) {}; // Extension of plugin_run for derived plugins
+	virtual int plugin_command_derived(int plugin_command) { return 0;}; // Extension of plugin_run for derived plugins
 	int plugin_get_range();
 	int plugin_negotiate_buffers();
 	int plugin_start_plugin();    // Run a non realtime plugin
