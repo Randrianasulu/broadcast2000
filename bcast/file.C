@@ -520,11 +520,13 @@ return 0;
 float** File::get_audio_buffer()
 {
 	if(audio_thread) return audio_thread->get_audio_buffer();
+return;
 }
 
 VFrame*** File::get_video_buffer()
 {
 	if(video_thread) return video_thread->get_video_buffer();
+return;
 }
 
 
