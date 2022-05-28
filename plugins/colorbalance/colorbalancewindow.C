@@ -55,12 +55,14 @@ int ColorBalanceWindow::create_objects()
 	add_tool(preserve = new ColorBalancePreserve(client, x + 70, y));
 	y += 25;
 	add_tool(lock_params = new ColorBalanceLock(client, x + 70, y));
+return 0;
 }
 
 int ColorBalanceWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 ColorBalanceSlider::ColorBalanceSlider(ColorBalanceMain *client, float *output, int x, int y)
@@ -79,6 +81,7 @@ int ColorBalanceSlider::handle_event()
 	*output = get_value();
     client->synchronize_params(this, difference);
 	client->send_configure_change();
+return 0;
 }
 
 ColorBalancePreserve::ColorBalancePreserve(ColorBalanceMain *client, int x, int y)
@@ -94,6 +97,7 @@ int ColorBalancePreserve::handle_event()
 {
 	client->preserve = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 ColorBalanceLock::ColorBalanceLock(ColorBalanceMain *client, int x, int y)
@@ -109,4 +113,5 @@ int ColorBalanceLock::handle_event()
 {
 	client->lock_params = get_value();
 	client->send_configure_change();
+return 0;
 }

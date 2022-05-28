@@ -42,10 +42,12 @@ int ColorBalanceMain::start_realtime()
 		highlights_add[i] = highlights_sub[i] = 0.667 * (1 - SQR(((double)i - (VMAX / 2)) / (VMAX / 2)));
     }
     redo_buffers = 1;
+return 0;
 }
 
 int ColorBalanceMain::stop_realtime()
 {
+return 0;
 }
 
 int ColorBalanceMain::reconfigure()
@@ -78,12 +80,14 @@ int ColorBalanceMain::reconfigure()
         b_lookup[i] = b_n;
     }
     redo_buffers = 0;
+return 0;
 }
 
 int ColorBalanceMain::test_boundary(float &value)
 {
 	if(value < -100) value = -100;
     if(value > 100) value = 100;
+return 0;
 }
 
 int ColorBalanceMain::synchronize_params(ColorBalanceSlider *slider, float difference)
@@ -109,14 +113,15 @@ int ColorBalanceMain::synchronize_params(ColorBalanceSlider *slider, float diffe
         	thread->window->yellow->update(yellow);
         }
     }
+return 0;
 }
 
 int ColorBalanceMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
-	register int i, j, k;
+	int i, j, k;
 	VPixel **input_rows, **output_rows;
-	register int r, g, b, r_n, g_n, b_n;
-    register float h, s, v, h_old, s_old, r_f, g_f, b_f;
+	int r, g, b, r_n, g_n, b_n;
+    	float h, s, v, h_old, s_old, r_f, g_f, b_f;
 
 	if(redo_buffers) reconfigure();
 
@@ -171,6 +176,7 @@ int ColorBalanceMain::process_realtime(long size, VFrame **input_ptr, VFrame **o
 			}
 		}
 	}
+return 0;
 }
 
 int ColorBalanceMain::test_clip(int &r, int &g, int &b)
@@ -197,6 +203,7 @@ int ColorBalanceMain::start_gui()
 	thread = new ColorBalanceThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int ColorBalanceMain::stop_gui()
@@ -206,21 +213,25 @@ int ColorBalanceMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int ColorBalanceMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int ColorBalanceMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int ColorBalanceMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int ColorBalanceMain::load_defaults()
@@ -238,6 +249,7 @@ int ColorBalanceMain::load_defaults()
 	yellow = defaults->get("YELLOW", yellow);
 	preserve = defaults->get("PRESERVELUMINOSITY", preserve);
 	lock_params = defaults->get("LOCKPARAMS", lock_params);
+return 0;
 }
 
 int ColorBalanceMain::save_defaults()
@@ -248,6 +260,7 @@ int ColorBalanceMain::save_defaults()
 	defaults->update("PRESERVELUMINOSITY", preserve);
 	defaults->update("LOCKPARAMS", lock_params);
 	defaults->save();
+return 0;
 }
 
 int ColorBalanceMain::save_data(char *text)
@@ -265,6 +278,7 @@ int ColorBalanceMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int ColorBalanceMain::read_data(char *text)
@@ -300,4 +314,5 @@ int ColorBalanceMain::read_data(char *text)
         thread->window->lock_params->update(lock_params);
 	}
     redo_buffers = 1;
+return 0;
 }
