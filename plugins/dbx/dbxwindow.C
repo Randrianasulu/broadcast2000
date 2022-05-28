@@ -75,6 +75,7 @@ int DBXGain::handle_event()
 {
 	plugin->gain = get_value();
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -92,4 +93,5 @@ int DBXWindowPot::handle_event()
 {
 	plugin->window = get_value();
 	plugin->send_configure_change();
+return 0;
 }

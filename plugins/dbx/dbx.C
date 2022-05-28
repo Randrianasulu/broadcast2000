@@ -38,10 +38,12 @@ int DBXMain::start_realtime()
 	rms_position = 0;
 	for(int i = 0; i < RMSLEN; i++)
 		rms_data[i] = 0;
+return 0;
 }
 
 int DBXMain::stop_realtime()
 {
+return 0;
 }
 
 int DBXMain::load_defaults()
@@ -56,6 +58,7 @@ int DBXMain::load_defaults()
 	
 	gain = defaults->get("GAIN", 0.0);
 	window = defaults->get("WINDOW", 1024);
+return 0;
 }
 
 int DBXMain::save_defaults()
@@ -63,6 +66,7 @@ int DBXMain::save_defaults()
 	defaults->update("GAIN", gain);
 	defaults->update("WINDOW", window);
 	defaults->save();
+return 0;
 }
 
 void DBXMain::store_rms_data(float value)
@@ -100,6 +104,7 @@ int DBXMain::start_gui()
 	thread = new DBXThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int DBXMain::stop_gui()
@@ -109,21 +114,25 @@ int DBXMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int DBXMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int DBXMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int DBXMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int DBXMain::save_data(char *text)
@@ -140,6 +149,7 @@ int DBXMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int DBXMain::read_data(char *text)
