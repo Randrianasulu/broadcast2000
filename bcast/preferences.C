@@ -140,6 +140,7 @@ Preferences& Preferences::operator=(Preferences &that)
 		fs.complete_path(local_plugin_dir);
 		fs.add_end_slash(local_plugin_dir);
 	}
+return *this;
 }
 
 int Preferences::load_defaults(Defaults *defaults)

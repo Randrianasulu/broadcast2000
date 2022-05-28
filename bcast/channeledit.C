@@ -487,6 +487,7 @@ char *ChannelEditEditThread::value_to_freqtable(int value)
 			return "PAL_NEWZEALAND";
 			break;
 	}
+return "NTSC_CABLE";
 }
 
 char* ChannelEditEditThread::value_to_norm(int value)
@@ -503,6 +504,7 @@ char* ChannelEditEditThread::value_to_norm(int value)
 			return "SECAM";
 			break;
 	}
+return "NTSC"; //default
 }
 
 char* ChannelEditEditThread::value_to_input(int value)

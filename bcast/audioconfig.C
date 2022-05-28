@@ -45,6 +45,7 @@ AudioConfig& AudioConfig::operator=(AudioConfig &that)
 	CLAMP(oss_in_bits, 8, 32);
 	CLAMP(oss_duplex_channels, 1, MAXCHANNELS);
 	CLAMP(oss_duplex_bits, 8, 32);
+return *this;
 }
 
 int AudioConfig::load_defaults(Defaults *defaults)

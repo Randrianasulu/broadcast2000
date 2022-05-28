@@ -137,6 +137,7 @@ Transition& Transition::operator=(const Transition &that)
 {
 	copy_from(that);
 	AttachmentPoint::copy_from(that);
+return *this;
 }
 
 int Transition::operator==(const Transition &that)

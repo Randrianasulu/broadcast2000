@@ -28,6 +28,7 @@ VideoConfig& VideoConfig::operator=(VideoConfig &that)
 	video_out_driver = that.video_out_driver;
 	strcpy(lml_out_device, that.lml_out_device);
 	CLAMP(capture_length, 1, 1000);
+return *this;
 }
 
 int VideoConfig::load_defaults(Defaults *defaults)

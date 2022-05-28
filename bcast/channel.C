@@ -34,6 +34,7 @@ Channel& Channel::operator=(Channel &channel)
 	this->fine_tune = channel.fine_tune;
 	this->input = channel.input;
 	this->norm = channel.norm;
+return *this;
 }
 
 int Channel::load(FileHTAL *file)

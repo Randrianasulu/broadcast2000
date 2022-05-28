@@ -1034,6 +1034,7 @@ long Tracks::get_feather(long selectionstart, long selectionend, int audio, int 
 			return current_track->get_feather(selectionstart, selectionend);
 		}
 	}
+return 0;
 }
 
 int Tracks::reset_translation(long start, long end)

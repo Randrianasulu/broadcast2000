@@ -911,6 +911,7 @@ int FileMOVThread::start_encoding()
 	Thread::synchronous = 1;
 	input_lock.lock();
 	start();
+return 0;
 }
 
 int FileMOVThread::stop_encoding()

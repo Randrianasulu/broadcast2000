@@ -27,6 +27,7 @@ int FileBase::get_bytes_per_pixel(int color_model)
 			return 4;
 			break;
 	}
+return 4;
 }
 
 
