@@ -61,12 +61,14 @@ int ConvolveWindow::update_gui()
 	automate_level[0]->update(plugin->automated_level[0]);
 	automate_level[1]->update(plugin->automated_level[1]);
 	windowsize->update((int)plugin->engine.window_size);
+return 0;
 }
 
 int ConvolveWindow::close_event()
 {
 	hide_window();
 	plugin->send_hide_gui();
+return 0;
 }
 
 
@@ -91,6 +93,7 @@ int ConvolveAmount::handle_event()
 {
 	plugin->chan_level[number] = get_value();
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -113,6 +116,7 @@ int ConvolveWindowSize::handle_event()
 		plugin->engine.window_size = atol(get_text());
 
 	plugin->send_configure_change();
+return 0;
 }
 
 
