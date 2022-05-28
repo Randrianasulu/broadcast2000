@@ -18,9 +18,9 @@ public:
 	int init_realtime_parameters();
 	int process_realtime(long size);
 // realtime process for a multichannel plugin
-	virtual int process_realtime(long size, float **input_ptr, float **output_ptr) {};
+	virtual int process_realtime(long size, float **input_ptr, float **output_ptr) {return 0;};
 // realtime process for a single channel plugin
-	virtual int process_realtime(long size, float *input_ptr, float *output_ptr) {};
+	virtual int process_realtime(long size, float *input_ptr, float *output_ptr) {return 0;};
 	int plugin_is_audio();
 
 // point to the start of the buffers
