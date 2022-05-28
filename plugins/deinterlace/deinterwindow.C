@@ -60,6 +60,7 @@ int DeInterlaceWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 int DeInterlaceWindow::set_values(int even, int odd, int avg, int swap, int smart)
@@ -75,6 +76,7 @@ int DeInterlaceWindow::set_values(int even, int odd, int avg, int swap, int smar
 	swap_fields->update(swap);
 	smart_fields->update(smart);
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -94,6 +96,7 @@ int DeInterlaceOdd::handle_event()
 		update(1);
 	}
 	window->set_values(0, 1, 0, 0, 0);
+return 0;
 }
 
 DeInterlaceEven::DeInterlaceEven(DeInterlaceMain *client, DeInterlaceWindow *window, int output, int x, int y, char *text)

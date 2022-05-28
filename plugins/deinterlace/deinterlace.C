@@ -33,15 +33,17 @@ int DeInterlaceMain::plugin_is_multi_channel() { return 0; }
 
 int DeInterlaceMain::start_realtime()
 {
+return 0;
 }
 
 int DeInterlaceMain::stop_realtime()
 {
+return 0;
 }
 
 int DeInterlaceMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
-	register int i, j, k, l, m;
+	int i, j, k, l, m;
 	VPixel **input_rows, **output_rows;
 	VPixel *input_row, *output_row;
 
@@ -165,6 +167,7 @@ int DeInterlaceMain::copy_row(VPixel *input_row, VPixel *output_row, int w)
 	{
 		output_row[k] = input_row[k];
 	}
+return 0;
 }
 
 int DeInterlaceMain::swap_row(VPixel *output1, VPixel *output2, VPixel *input1, VPixel *input2, int w)
@@ -176,6 +179,7 @@ int DeInterlaceMain::swap_row(VPixel *output1, VPixel *output2, VPixel *input1, 
 		output2[k] = input1[k];
 		output1[k] = temp;
 	}
+return 0;
 }
 
 int DeInterlaceMain::average_row(VPixel *output1, VPixel *output2, VPixel *input1, VPixel *input2, int w)
@@ -196,6 +200,7 @@ int DeInterlaceMain::average_row(VPixel *output1, VPixel *output2, VPixel *input
 		output1[i].b = output2[i].b = b;
 		output1[i].a = output2[i].a = a;
 	}
+return 0;
 }
 
 int DeInterlaceMain::start_gui()
@@ -203,6 +208,7 @@ int DeInterlaceMain::start_gui()
 	thread = new DeInterlaceThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int DeInterlaceMain::stop_gui()
@@ -211,21 +217,25 @@ int DeInterlaceMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int DeInterlaceMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int DeInterlaceMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int DeInterlaceMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int DeInterlaceMain::save_data(char *text)
