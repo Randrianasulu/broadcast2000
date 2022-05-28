@@ -45,12 +45,14 @@ int BandWipeWin::create_objects()
 	add_tool(total = new BandWipeTotal(client, x, y));
 	y += 35;
 	add_tool(reverse = new BandWipeReverse(client, x, y));
+return 0;
 }
 
 int BandWipeWin::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 BandWipeTotal::BandWipeTotal(BandWipeMain *client, int x, int y)
@@ -65,6 +67,7 @@ int BandWipeTotal::handle_event()
 {
 	client->total_bands = atol(get_text());
 	client->send_configure_change();
+return 0;
 }
 
 BandWipeReverse::BandWipeReverse(BandWipeMain *client, int x, int y)
@@ -79,4 +82,5 @@ int BandWipeReverse::handle_event()
 {
 	client->reverse = get_value();
 	client->send_configure_change();
+return 0;
 }
