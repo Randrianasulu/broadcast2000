@@ -29,10 +29,12 @@ int BandSlideMain::plugin_is_multi_channel() { return 1; }
 
 int BandSlideMain::start_realtime()
 {
+return 0;
 }
 
 int BandSlideMain::stop_realtime()
 {
+return 0;
 }
 
 int BandSlideMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***output_ptr)
@@ -113,6 +115,7 @@ int BandSlideMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***ou
 			}
 		}
 	}
+return 0;
 }
 
 
@@ -122,6 +125,7 @@ int BandSlideMain::start_gui()
 	thread = new BandSlideThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int BandSlideMain::stop_gui()
@@ -130,21 +134,25 @@ int BandSlideMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int BandSlideMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int BandSlideMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int BandSlideMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int BandSlideMain::save_data(char *text)
@@ -166,6 +174,7 @@ int BandSlideMain::save_data(char *text)
 	}
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int BandSlideMain::read_data(char *text)
@@ -199,4 +208,5 @@ int BandSlideMain::read_data(char *text)
 		thread->window->total->update(total_bands);
 		thread->window->reverse->update(reverse);
 	}
+return 0;
 }

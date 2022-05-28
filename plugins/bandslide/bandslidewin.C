@@ -45,12 +45,14 @@ int BandSlideWin::create_objects()
 	add_tool(total = new BandSlideTotal(client, x, y));
 	y += 35;
 	add_tool(reverse = new BandSlideReverse(client, x, y));
+return 0;
 }
 
 int BandSlideWin::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 BandSlideTotal::BandSlideTotal(BandSlideMain *client, int x, int y)
@@ -65,6 +67,7 @@ int BandSlideTotal::handle_event()
 {
 	client->total_bands = atol(get_text());
 	client->send_configure_change();
+return 0;
 }
 
 BandSlideReverse::BandSlideReverse(BandSlideMain *client, int x, int y)
@@ -79,4 +82,5 @@ int BandSlideReverse::handle_event()
 {
 	client->reverse = get_value();
 	client->send_configure_change();
+return 0;
 }
