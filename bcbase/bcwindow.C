@@ -442,6 +442,7 @@ XFontStruct* BC_Window::get_font(int font)
 		case SMALLFONT: return smallfont; break;
 		case LARGEFONT: return largefont; break;
 	}
+return 0;
 }
 
 int BC_Window::set_font(int font)
@@ -461,6 +462,7 @@ BC_Tool* BC_Window::add_tool(BC_Tool *tool)
 {
 	if(!top_level) top_level = this;
 	BC_WindowBase::add_tool(tool);
+return 0;
 }
 
 int BC_Window::add_border(int light, int medium, int dark)
@@ -474,6 +476,7 @@ BC_SubWindow* BC_Window::add_subwindow(BC_SubWindow* subwindow)
 {
 	if(!top_level) top_level = this;
 	BC_WindowBase::add_subwindow(subwindow);
+return 0;
 }
 
 
