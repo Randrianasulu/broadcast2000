@@ -33,11 +33,13 @@ int DelayMain::start_realtime()
 	dsp_in[0] = 0;
 	redo_buffers = 1;
 	dsp_length = 0;
+return 0;
 }
 
 int DelayMain::stop_realtime()
 {
 	delete dsp_in;
+return 0;
 }
 
 int DelayMain::process_realtime(long size, float *input_ptr, float *output_ptr)
@@ -64,7 +66,7 @@ int DelayMain::process_realtime(long size, float *input_ptr, float *output_ptr)
 	}
 //printf("DelayMain::process_realtime 2\n");
 
-	register int i, j;
+	int i, j;
 // copy input to buffer since output is the input
 	for(i = 0, j = dsp_length - in_buffer_size; i < size; i++, j++)
 	{
@@ -81,6 +83,7 @@ int DelayMain::process_realtime(long size, float *input_ptr, float *output_ptr)
 		dsp_in[j] = dsp_in[i];
 	}
 //printf("DelayMain::process_realtime 3\n");
+return 0;
 }
 
 
@@ -89,6 +92,7 @@ int DelayMain::start_gui()
 	thread = new DelayThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int DelayMain::stop_gui()
@@ -97,21 +101,25 @@ int DelayMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int DelayMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int DelayMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int DelayMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int DelayMain::save_data(char *text)
@@ -125,6 +133,7 @@ int DelayMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int DelayMain::read_data(char *text)
@@ -149,4 +158,5 @@ int DelayMain::read_data(char *text)
 		}
 	}
 	if(thread) thread->window->slider->update(duration);
+return 0;
 }

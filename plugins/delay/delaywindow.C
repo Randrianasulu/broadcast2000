@@ -40,12 +40,14 @@ int DelayWindow::create_objects()
 {
 	add_tool(slider = new DelayPot(client));
 	add_tool(new BC_Title(60, 10, "Samples"));
+return 0;
 }
 
 int DelayWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 DelayPot::DelayPot(DelayMain *client)
@@ -60,4 +62,5 @@ int DelayPot::handle_event()
 {
 	client->duration = get_value();
 	client->send_configure_change();
+return 0;
 }
