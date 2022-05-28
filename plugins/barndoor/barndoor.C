@@ -28,10 +28,12 @@ int BarnDoorMain::plugin_is_multi_channel() { return 1; }
 
 int BarnDoorMain::start_realtime()
 {
+return 0;
 }
 
 int BarnDoorMain::stop_realtime()
 {
+return 0;
 }
 
 int BarnDoorMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***output_ptr)
@@ -84,6 +86,7 @@ int BarnDoorMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***out
 			output[i][j] = input1[i][j];
 		}
 	}
+return 0;
 }
 
 
@@ -93,6 +96,7 @@ int BarnDoorMain::start_gui()
 	thread = new BarnDoorThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int BarnDoorMain::stop_gui()
@@ -101,21 +105,25 @@ int BarnDoorMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int BarnDoorMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int BarnDoorMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int BarnDoorMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int BarnDoorMain::save_data(char *text)
@@ -133,6 +141,7 @@ int BarnDoorMain::save_data(char *text)
 	}
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int BarnDoorMain::read_data(char *text)
@@ -160,4 +169,5 @@ int BarnDoorMain::read_data(char *text)
 	{
 		thread->window->reverse->update(reverse);
 	}
+return 0;
 }
