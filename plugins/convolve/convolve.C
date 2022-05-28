@@ -78,7 +78,7 @@ long CrossfadeWindow::get_delay()
 int CrossfadeWindow::reconfigure(int new_channels)
 {
 	int new_size;
-	register int i, j;
+	int i, j;
 	fix_window_size();
 
 	if(first_window)
@@ -382,7 +382,7 @@ int ConvolveEngine::set_plugin(Convolve *plugin)
 
 int ConvolveEngine::signal_process(long size, int channels, double **output, double **input)
 {
-    register int i, j, k;
+    	int i, j, k;
 	double level_offset = 0;
 	long fragment_size, master_fragment_size = (long)(size / total_threads + size / 4.5);
 	DB db;
@@ -493,6 +493,7 @@ int Convolve::redo_buffers_procedure()
 {
 	engine.reconfigure(total_in_buffers);
 	redo_buffers = 0;
+return 0;
 }
 
 int Convolve::load_defaults()
@@ -533,10 +534,12 @@ int Convolve::start_realtime()
 {
 	engine.init_crossfade(in_buffer_size);
 	redo_buffers_procedure();
+return 0;
 }
 
 int Convolve::stop_realtime()
 {
+return 0;
 }
 
 int Convolve::process_realtime(long size, float **input_ptr, float **output_ptr)
@@ -558,6 +561,7 @@ int Convolve::start_gui()
 	thread->gui_started.lock();    // wait for the GUI to start
 
 	update_gui();            // fill GUI with parameters
+return 0;
 }
 
 int Convolve::stop_gui()
@@ -568,21 +572,25 @@ int Convolve::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int Convolve::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int Convolve::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int Convolve::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int Convolve::save_data(char *text)
@@ -601,6 +609,7 @@ int Convolve::save_data(char *text)
 	output.append_newline();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int Convolve::read_data(char *text)
@@ -629,6 +638,7 @@ int Convolve::read_data(char *text)
 
 	redo_buffers = 1;
 	update_gui();
+return 0;
 }
 
 int Convolve::update_gui()
@@ -637,10 +647,12 @@ int Convolve::update_gui()
 	{
 		thread->window->update_gui();
 	}
+return 0;
 }
 
 int Convolve::reset()
 {
 	reset_parameters();
 	update_gui();
+return 0;
 }
