@@ -186,6 +186,7 @@ char* totext(char *text,
 			sprintf(text, "%ld-%ld", feet, (long)(frame - feet * frames_per_foot));
 			break;
 	}
+return text;
 }    // give text representation as time
 
 long fromtext(char *text, 
@@ -295,6 +296,7 @@ long fromtext(char *text,
 			return (long)(((float)feet * frames_per_foot + frames) / frame_rate * samplerate);
 			break;
 	}
+return 0;
 }
 
 

@@ -162,6 +162,7 @@ long AudioOSS::device_position()
 	{
 		return info.bytes / (device->get_obits() / 8) / device->get_ochannels();
 	}
+return 0;
 }
 
 int AudioOSS::interrupt_playback()
