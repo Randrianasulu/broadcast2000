@@ -37,10 +37,12 @@ int DestabilizeMain::start_realtime()
 	y_offset = y_offset1 = y_offset2 = 0;
 	current_position = -100;
 	srand(time(0));
+return 0;
 }
 
 int DestabilizeMain::stop_realtime()
 {
+return 0;
 }
 
 int DestabilizeMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -79,11 +81,14 @@ int DestabilizeMain::process_realtime(long size, VFrame **input_ptr, VFrame **ou
 			offset_frame(input_ptr[i], output_ptr[i], x_offset, y_offset);
 		}
 	}
+
+return 0;
 }
 
 int DestabilizeMain::get_coordinate(int &x, int x1, int x2)
 {
 	x = (int)((x2 - x1) * (current_position / 100) + x1);
+return 0;
 }
 
 int DestabilizeMain::advance_position()
@@ -102,6 +107,7 @@ int DestabilizeMain::advance_position()
 			y_offset2 = (rand() % range - range / 2);
 		}while(x_offset2 == 0 || y_offset2 == 0);
 	}
+return 0;
 }
 
 int DestabilizeMain::offset_frame(VFrame *in, VFrame *out, int x_offset, int y_offset)
@@ -173,12 +179,15 @@ int DestabilizeMain::offset_frame(VFrame *in, VFrame *out, int x_offset, int y_o
 		for( ; j >= 0; j--)
 			clear_row(out_rows[j]);
 	}
+
+return 0;
 }
 
 int DestabilizeMain::clear_row(VPixel *row)
 {
 	for(int i = 0; i < project_frame_w; i++)
 		row[i].r = row[i].g = row[i].b = row[i].a = 0;
+return 0;
 }
 
 
@@ -188,6 +197,7 @@ int DestabilizeMain::start_gui()
 	thread = new DestabilizeThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int DestabilizeMain::stop_gui()
@@ -197,21 +207,25 @@ int DestabilizeMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int DestabilizeMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int DestabilizeMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int DestabilizeMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int DestabilizeMain::load_defaults()
@@ -227,6 +241,7 @@ int DestabilizeMain::load_defaults()
 	range = defaults->get("RANGE", range);
 	accel = defaults->get("ACCEL", accel);
 	speed = defaults->get("SPEED", speed);
+return 0;
 }
 
 int DestabilizeMain::save_defaults()
@@ -235,6 +250,7 @@ int DestabilizeMain::save_defaults()
 	defaults->update("ACCEL", accel);
 	defaults->update("SPEED", speed);
 	defaults->save();
+return 0;
 }
 
 int DestabilizeMain::save_data(char *text)
@@ -250,6 +266,7 @@ int DestabilizeMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int DestabilizeMain::read_data(char *text)
@@ -283,4 +300,5 @@ int DestabilizeMain::read_data(char *text)
 //		thread->window->accel->update(accel);
 		thread->window->speed->update(speed);
 	}
+return 0;
 }
