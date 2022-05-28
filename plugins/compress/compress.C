@@ -59,6 +59,7 @@ int Compress::load_defaults()
 		sprintf(string, "OUTPUT%d", i);
 		output_level[i] = defaults->get(string, input_level[i]);
 	}
+return 0;
 }
 
 int Compress::save_defaults()
@@ -78,6 +79,7 @@ int Compress::save_defaults()
 		defaults->update(string, output_level[i]);
 	}
 	defaults->save();
+return 0;
 }
 
 
@@ -105,6 +107,7 @@ int Compress::start_realtime()
 	peak_value1 = 0;
 	peak_value2 = 0;
 	current_slope = 0;
+return 0;
 }
 
 int Compress::stop_realtime()
@@ -115,6 +118,7 @@ int Compress::stop_realtime()
 		delete dsp_in[i];
 	}
 	delete dsp_in;
+return 0;
 }
 
 int Compress::process_realtime(long size, float **input_ptr, float **output_ptr)
@@ -135,6 +139,7 @@ int Compress::process_realtime(long size, float **input_ptr, float **output_ptr)
 	{
 		export_data(i, size, output_ptr[i]); 
 	}
+return 0;
 }
 
 int Compress::redo_buffers_procedure()
@@ -201,20 +206,23 @@ int Compress::redo_buffers_procedure()
 	}
 	
 	redo_buffers = 0;
+return 0;
 }
 
 int Compress::import_data(int channel, long size, float *input_ptr)
 {
 	float *output = dsp_in[channel];
 	
-	for(register int i = 0, j = readahead_samples; i < size; i++, j++)
+	for( int i = 0, j = readahead_samples; i < size; i++, j++)
 	{ output[j] = input_ptr[i]; }
+return 0;
 }
+
 
 int Compress::export_data(int channel, long size, float *output_ptr)
 {
 	float *input = dsp_in[channel];
-	register int i, j;
+	int i, j;
 	long endpoint = readahead_samples + size;
 
 	for(i = 0; i < size; i++)
@@ -224,6 +232,8 @@ int Compress::export_data(int channel, long size, float *output_ptr)
 
 // must be a seperate step since readahead can be zero when j = size above
 	for(i = 0, j = size; j < endpoint; i++, j++) { input[i] = input[j]; }
+
+return 0;
 }
 
 int Compress::negotiate_coefficients(int channel, long size)
@@ -262,6 +272,7 @@ int Compress::negotiate_coefficients(int channel, long size)
 	}
 	peak_sample1 -= size;
 	peak_sample2 -= size;
+return 0;
 }
 
 float Compress::get_current_value(long sample)
@@ -333,6 +344,7 @@ int Compress::start_gui()
 	thread->synchronous = 1;
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int Compress::stop_gui()
@@ -343,21 +355,25 @@ int Compress::stop_gui()
 	delete thread;
 	thread = 0;
 	save_defaults();
+return 0;
 }
 
 int Compress::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int Compress::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int Compress::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int Compress::save_data(char *text)
@@ -385,6 +401,7 @@ int Compress::save_data(char *text)
 
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int Compress::read_data(char *text)
@@ -424,6 +441,7 @@ int Compress::read_data(char *text)
 	redo_buffers = 1;
 	update_gui();
 //printf("Compress::read_data 2\n");
+return 0;
 }
 
 int Compress::update_gui()
@@ -435,6 +453,7 @@ int Compress::update_gui()
 		thread->window->attack->update(attack);
 		thread->window->channel->update(channel);
 	}
+return 0;
 }
 
 

@@ -78,6 +78,7 @@ int CompressWindow::create_objects()
 	
 	add_tool(clear = new CompressClear(compress, x, y));
 	draw_envelope();
+return 0;
 }
 
 int CompressWindow::get_divisions(int pixels, char **titles, int *title_x)
@@ -106,12 +107,14 @@ int CompressWindow::get_divisions(int pixels, char **titles, int *title_x)
 	
 	sprintf(titles[5], "0");
 	title_x[5] = division - 10;
+return 0;
 }
 
 int CompressWindow::close_event()
 {
 	hide_window();
 	compress->send_hide_gui();
+return 0;
 }
 
 int CompressWindow::draw_envelope()
@@ -138,6 +141,7 @@ int CompressWindow::draw_envelope()
 	y2 = 0;
 	canvas->draw_line(x1, y1, x2, y2);
 	canvas->flash();
+return 0;
 }
 
 
@@ -158,6 +162,7 @@ CompressCanvas::~CompressCanvas()
 
 int CompressCanvas::handle_event()
 {
+return 0;
 }
 
 int CompressCanvas::button_release()
@@ -177,6 +182,7 @@ int CompressCanvas::button_release()
 		selected_point = -1;
 		compress->update_gui();
 	}
+return 0;
 }
 
 int CompressCanvas::button_press()
@@ -211,6 +217,7 @@ int CompressCanvas::cursor_motion()
 		draw_floating(1);
 		compress->send_configure_change();
 	}
+return 0;
 }
 
 int CompressCanvas::test_points()
@@ -314,6 +321,7 @@ int CompressCanvas::insert_point(int number, float input, float output)
 	compress->input_level[number] = input;
 	compress->output_level[number] = output;
 	compress->total_points++;
+return 0;
 }
 
 int CompressCanvas::delete_point(int selected_point)
@@ -324,6 +332,7 @@ int CompressCanvas::delete_point(int selected_point)
 		compress->output_level[j] = compress->output_level[i];
 	}
 	compress->total_points--;
+return 0;
 }
 
 int CompressCanvas::draw_point(int x, int y)
@@ -341,6 +350,7 @@ int CompressCanvas::draw_point(int x, int y)
 	if(y2 > h) y2 = h;
 	
 	draw_box(x1, y1, x2 - x1, y2 - y1);
+return 0;
 }
 
 int CompressCanvas::draw_floating(int flash)
@@ -390,6 +400,7 @@ int CompressCanvas::draw_floating(int flash)
 	draw_text(tx, ty, string);
 	set_opaque();
 	if(flash) CompressCanvas::flash();
+return 0;
 }
 
 CompressReadAhead::CompressReadAhead(Compress *compress, int x, int y)
@@ -404,6 +415,7 @@ int CompressReadAhead::handle_event()
 {
 	compress->readahead = atol(text);
 	compress->send_configure_change();
+return 0;
 }
 
 
@@ -419,6 +431,7 @@ int CompressAttack::handle_event()
 {
 	compress->attack = atol(text);
 	compress->send_configure_change();
+return 0;
 }
 
 
@@ -434,6 +447,7 @@ int CompressChannel::handle_event()
 {
 	compress->channel = atol(get_text());
 	compress->send_configure_change();
+return 0;
 }
 
 CompressClear::CompressClear(Compress *compress, int x, int y)
@@ -449,6 +463,7 @@ int CompressClear::handle_event()
 	compress->total_points = 0;
 	compress->update_gui();
 	compress->send_configure_change();
+return 0;
 }
 
 
@@ -483,6 +498,7 @@ int CompressMenu::create_objects(Defaults *defaults)
 	//filemenu->add_menuitem(set_default = new CompressSetDefault);
 	load_defaults(defaults);
 	prev_load_thread = new CompressLoadPrevThread(compress, this);
+return 0;
 }
 
 int CompressMenu::load_defaults(Defaults *defaults)
@@ -503,6 +519,7 @@ int CompressMenu::load_defaults(Defaults *defaults)
 			filemenu->add_menuitem(prev_load[i] = new CompressLoadPrev(compress, this, filename, path));
 		}
 	}
+return 0;
 }
 
 int CompressMenu::save_defaults(Defaults *defaults)
@@ -518,6 +535,7 @@ int CompressMenu::save_defaults(Defaults *defaults)
 			defaults->update(string, prev_load[i]->path);
 		}
 	}
+return 0;
 }
 
 int CompressMenu::add_load(char *path)
@@ -584,6 +602,7 @@ CompressLoad::~CompressLoad()
 int CompressLoad::handle_event()
 {
 	thread->start();
+return 0;
 }
 
 CompressSave::CompressSave(Compress *compress, CompressMenu *menu)
@@ -600,6 +619,7 @@ CompressSave::~CompressSave()
 int CompressSave::handle_event()
 {
 	thread->start();
+return 0;
 }
 
 CompressSetDefault::CompressSetDefault()
@@ -608,6 +628,7 @@ CompressSetDefault::CompressSetDefault()
 }
 int CompressSetDefault::handle_event()
 {
+return 0;
 }
 
 CompressLoadPrev::CompressLoadPrev(Compress *compress, CompressMenu *menu, char *filename, char *path)
@@ -627,10 +648,12 @@ int CompressLoadPrev::handle_event()
 {
 	menu->prev_load_thread->set_path(path);
 	menu->prev_load_thread->start();
+return 0;
 }
 int CompressLoadPrev::set_path(char *path)
 {
 	strcpy(this->path, path);
+return 0;
 }
 
 
@@ -673,10 +696,12 @@ CompressSaveDialog::~CompressSaveDialog()
 int CompressSaveDialog::ok_event()
 {
 	set_done(0);
+return 0;
 }
 int CompressSaveDialog::cancel_event()
 {
 	set_done(1);
+return 0;
 }
 
 
@@ -732,6 +757,7 @@ void CompressLoadPrevThread::run()
 int CompressLoadPrevThread::set_path(char *path)
 {
 	strcpy(this->path, path);
+return 0;
 }
 
 
@@ -752,9 +778,11 @@ CompressLoadDialog::~CompressLoadDialog()
 int CompressLoadDialog::ok_event()
 {
 	set_done(0);
+return 0;
 }
 int CompressLoadDialog::cancel_event()
 {
 	set_done(1);
+return 0;
 }
 
