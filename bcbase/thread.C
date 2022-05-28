@@ -23,6 +23,7 @@ void* Thread::entrypoint(void *parameters)
 // allow thread to be cancelled in the middle of something
 	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, 0);
 	pt->run();
+return 0;
 }
 
 void Thread::start()
