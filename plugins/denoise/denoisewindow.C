@@ -54,6 +54,7 @@ int DenoiseWindow::create_objects()
 //	y += 40;
 //	add_tool(new BC_Title(x, y, "Quality"));
 //	add_tool(iterations = new DenoiseIterations(plugin, x + 100, y));
+return 0;
 }
 
 int DenoiseWindow::update_gui()
@@ -63,12 +64,14 @@ int DenoiseWindow::update_gui()
 	windowsize->update((int)plugin->window_size);
 //	levels->update(plugin->levels);
 //	iterations->update(plugin->iterations);
+return 0;
 }
 
 int DenoiseWindow::close_event()
 {
 	hide_window();
 	plugin->send_hide_gui();
+return 0;
 }
 
 
@@ -92,6 +95,7 @@ int DenoiseNoiseLevel::handle_event()
 {
 	plugin->noise_level = (float)get_value();
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -111,6 +115,7 @@ int DenoiseOutputLevel::handle_event()
 {
 	plugin->output_level = window->db.fromdb(get_value());
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -129,6 +134,7 @@ int DenoiseWindowSize::handle_event()
 {
 	plugin->window_size = atol(get_text());
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -146,6 +152,7 @@ int DenoiseLevels::handle_event()
 {
 	plugin->levels = get_value();
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -163,6 +170,7 @@ int DenoiseReset::handle_event()
 {
 	plugin->reset();
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -181,6 +189,7 @@ int DenoiseIterations::handle_event()
 {
 	plugin->iterations = get_value();
 	plugin->send_configure_change();
+return 0;
 }
 
 

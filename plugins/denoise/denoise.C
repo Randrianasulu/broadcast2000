@@ -156,6 +156,7 @@ int Denoise::delete_buffers()
 		delete recon_filter;
 	}
 	input_buffer = 0;
+return 0;
 }
 
 
@@ -171,6 +172,7 @@ int Denoise::reset_parameters()
 	levels = 1;
 	iterations = 1;
 	redo_buffers = 1;       // set to redo buffers before the first render
+return 0;
 }
 
 
@@ -179,6 +181,7 @@ int Denoise::init_buffers()
 	first_window = 1;
 	input_buffer = 0;
 	input_size = 0;
+return 0;
 }
 
 int Denoise::redo_buffers_procedure()
@@ -249,6 +252,7 @@ int Denoise::redo_buffers_procedure()
 	in_scale = 65535 / sqrt(window_size) / iterations;
 	out_scale = output_level / 65535 * sqrt(window_size);
 	redo_buffers = 0;
+return 0;
 }
 
 int Denoise::load_defaults()
@@ -267,6 +271,7 @@ int Denoise::load_defaults()
 	window_size = defaults->get("WINDOWSIZE", 4096);
 	levels = defaults->get("LEVELS", 1);
 	iterations = defaults->get("ITERATIONS", 1);
+return 0;
 }
 
 int Denoise::save_defaults()
@@ -277,6 +282,7 @@ int Denoise::save_defaults()
 	defaults->update("LEVELS", levels);
 	defaults->update("ITERATIONS", iterations);
 	defaults->save();
+return 0;
 }
 
 char* Denoise::plugin_title() { return "Denoise"; }
@@ -287,11 +293,13 @@ int Denoise::start_realtime()
 {
 	init_buffers();
 	redo_buffers_procedure();
+return 0;
 }
 
 int Denoise::stop_realtime()
 {
 	delete_buffers();
+return 0;
 }
 
 int Denoise::process_realtime(long size, float *input_ptr, float *output_ptr)
@@ -418,6 +426,8 @@ int Denoise::process_realtime(long size, float *input_ptr, float *output_ptr)
 
 	fragment_out_position += size;
 	if(fragment_out_position >= input_size) fragment_out_position -= input_size;
+
+return 0;
 }
 
 int Denoise::process_window()
@@ -439,6 +449,8 @@ int Denoise::process_window()
 		for(i = 0; i < window_size; i++)
 			dsp_out[i] += dsp_iteration[i];
 	}
+
+return 0;
 }
 
 int Denoise::wavelet_decomposition(double *in_data, long in_length, double **out_data)
@@ -450,6 +462,7 @@ int Denoise::wavelet_decomposition(double *in_data, long in_length, double **out
 
 		in_data = out_data[2 * i];
 	}
+return 0;
 }
 
 long Denoise::decompose_branches(double *in_data, long length, WaveletFilters *decomp_filter, double *out_low, double *out_high)
@@ -496,6 +509,8 @@ int Denoise::convolve_dec_2(double *input_sequence, long length,
 		else
 			*output_sequence++ = dot_product(input_sequence + i, filter, filtlen);
 	}
+
+return 0;
 }
 
 int Denoise::tree_copy(double **output, double **input, int length, int levels)
@@ -524,6 +539,8 @@ int Denoise::tree_copy(double **output, double **input, int length, int levels)
 		output[l][j] = input[l][j];
 		output[m][j] = input[m][j];
 	}
+
+return 0;
 }
 
 int Denoise::threshold(int window_size, double gammas, int levels)
@@ -560,6 +577,8 @@ int Denoise::threshold(int window_size, double gammas, int levels)
 			}
 		}
 	}
+
+return 0;
 }
 
 int Denoise::wavelet_reconstruction(double **in_data, long in_length, double *out_data)
@@ -579,6 +598,8 @@ int Denoise::wavelet_reconstruction(double **in_data, long in_length, double *ou
 
 // destination of the last branch reconstruction is the output data
 	reconstruct_branches(in_data[0], in_data[1], in_length, recon_filter, out_data);
+
+return 0;
 }
 
 long Denoise::reconstruct_branches(double *in_low, double *in_high, long in_length,
@@ -598,7 +619,7 @@ int Denoise::convolve_int_2(double *input_sequence, long length,
 // insert zeros between each element of the input sequence and
 // convolve with the filter to interpolate the data
 {
-	register int i, j;
+	int i, j;
 	int endpoint = length + filtlen - 2;
 
 	if (sum_output)
@@ -625,6 +646,8 @@ int Denoise::convolve_int_2(double *input_sequence, long length,
 
 		*output_sequence++ = dot_product_odd(input_sequence + i, filter, filtlen);
 	}
+
+return 0;
 }
 
 
@@ -659,6 +682,8 @@ int Denoise::start_gui()
 	thread->gui_started.lock();    // wait for the GUI to start
 
 	update_gui();            // fill GUI with parameters
+
+return 0;
 }
 
 int Denoise::stop_gui()
@@ -669,21 +694,25 @@ int Denoise::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int Denoise::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int Denoise::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int Denoise::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int Denoise::save_data(char *text)
@@ -702,6 +731,7 @@ int Denoise::save_data(char *text)
 	output.append_newline();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int Denoise::read_data(char *text)
@@ -730,6 +760,7 @@ int Denoise::read_data(char *text)
 
 	redo_buffers = 1;
 	update_gui();
+return 0;
 }
 
 int Denoise::update_gui()
@@ -738,10 +769,12 @@ int Denoise::update_gui()
 	{
 		thread->window->update_gui();
 	}
+return 0;
 }
 
 int Denoise::reset()
 {
 	reset_parameters();
 	update_gui();
+return 0;
 }
