@@ -45,6 +45,7 @@ int BluescreenMain::start_realtime()
 		engine[i]->start();
 		y1 += y_increment;
 	}
+return 0;
 }
 
 int BluescreenMain::stop_realtime()
@@ -54,6 +55,7 @@ int BluescreenMain::stop_realtime()
 		delete engine[i];
 	}
 	delete engine;
+return 0;
 }
 
 int BluescreenMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -69,6 +71,7 @@ int BluescreenMain::process_realtime(long size, VFrame **input_ptr, VFrame **out
 	{
 		engine[i]->wait_process_frame();
 	}
+return 0;
 }
 
 int BluescreenMain::start_gui()
@@ -80,6 +83,7 @@ int BluescreenMain::start_gui()
 		thread->start();
 		thread->gui_started.lock();
 	}
+return 0;
 }
 
 int BluescreenMain::stop_gui()
@@ -92,21 +96,25 @@ int BluescreenMain::stop_gui()
 		delete thread;
 		thread = 0;
 	}
+return 0;
 }
 
 int BluescreenMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int BluescreenMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int BluescreenMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int BluescreenMain::load_defaults()
@@ -124,6 +132,7 @@ int BluescreenMain::load_defaults()
 	v = defaults->get("VALUE", (float)0);
 	threshold = defaults->get("THRESHOLD", (float)0);
 	feather = defaults->get("FEATHER", (float)0);
+return 0;
 }
 
 int BluescreenMain::save_defaults()
@@ -134,6 +143,7 @@ int BluescreenMain::save_defaults()
 	defaults->update("THRESHOLD", threshold);
 	defaults->update("FEATHER", feather);
 	defaults->save();
+return 0;
 }
 
 int BluescreenMain::save_data(char *text)
@@ -168,6 +178,7 @@ int BluescreenMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int BluescreenMain::read_data(char *text)
@@ -231,6 +242,7 @@ int BluescreenMain::read_data(char *text)
 // update the GUI here
 		update_display();
 	}
+return 0;
 }
 
 int BluescreenMain::update_rgb()
@@ -243,6 +255,7 @@ int BluescreenMain::update_rgb()
 					h, s, v);
 		update_display();
 	}
+return 0;
 }
 
 int BluescreenMain::update_display()
@@ -276,6 +289,7 @@ int BluescreenMain::update_display()
 		thread->window->green->update(g);
 		thread->window->blue->update(b);
 	}
+return 0;
 }
 
 int BluescreenMain::rgb_to_hsv(float r, float g, float b, float &h, float &s, float &v)
@@ -309,6 +323,7 @@ int BluescreenMain::rgb_to_hsv(float r, float g, float b, float &h, float &s, fl
 	h *= 60;                               // degrees
 	if(h < 0)
         h += 360;
+return 0;
 }
 
 int BluescreenMain::hsv_to_rgb(float &r, float &g, float &b, float h, float s, float v)
@@ -363,6 +378,7 @@ int BluescreenMain::hsv_to_rgb(float &r, float &g, float &b, float h, float s, f
             b = q;
             break;
     }
+return 0;
 }
 
 BluescreenEngine::BluescreenEngine(BluescreenMain *plugin, int start_y, int end_y)
@@ -389,11 +405,13 @@ int BluescreenEngine::start_process_frame(VFrame **output, VFrame **input, int s
 	this->input = input;
 	this->size = size;
 	input_lock.unlock();
+return 0;
 }
 
 int BluescreenEngine::wait_process_frame()
 {
 	output_lock.lock();
+return 0;
 }
 
 void BluescreenEngine::run()

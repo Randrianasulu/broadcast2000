@@ -81,12 +81,14 @@ int BlueWindow::create_objects()
 	add_tool(blue = new PaletteBlue(client, x, y));
 //	add_tool(feather = new Feather(client, init_x, y));
 	value_bitmap = new VFrame(0, 40, 130);
+return 0;
 }
 
 int BlueWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 Threshold::Threshold(BluescreenMain *client, int x, int y)
@@ -102,6 +104,7 @@ int Threshold::handle_event()
 {
 	client->threshold = (int)get_value();
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -118,6 +121,7 @@ int Feather::handle_event()
 {
 	client->feather = (int)get_value();
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -214,6 +218,7 @@ int PaletteWheel::initialize()
 	oldsaturation = client->s;
 	draw(oldhue, oldsaturation);
 	flash();
+return 0;
 }
 
 float PaletteWheel::torads(int angle)
@@ -279,6 +284,7 @@ int PaletteWheel::draw(float hue, float saturation)
 	set_color(WHITE);
 	draw_circle(x - 5, y - 5, 10, 10);
 	set_opaque();
+return 0;
 }
 
 int PaletteWheel::get_angle(float x1, float y1, float x2, float y2)
@@ -329,6 +335,7 @@ int PaletteWheelValue::initialize()
 	frame = new VFrame(0, get_w(), get_h());
 	draw(client->h, client->s, client->v);
 	flash();
+return 0;
 }
 
 int PaletteWheelValue::button_press()
@@ -382,6 +389,7 @@ int PaletteWheelValue::draw(float hue, float saturation, float value)
 	draw_bitmap(frame, 0, 0, get_w(), get_h(), 0, 0, get_w(), get_h(), 0);
 	set_color(BLACK);
 	draw_line(0, get_h() - value * get_h(), get_w(), get_h() - value * get_h());
+return 0;
 }
 
 PaletteOutput::PaletteOutput(BluescreenMain *client, int x, int y)
@@ -398,10 +406,12 @@ int PaletteOutput::initialize()
 {
 	draw();
 	flash();
+return 0;
 }
 
 int PaletteOutput::handle_event()
 {
+return 0;
 }
 
 int PaletteOutput::draw()
@@ -411,6 +421,7 @@ int PaletteOutput::draw()
 	client->hsv_to_rgb(r_f, g_f, b_f, client->h, client->s, client->v);
 	set_color(((int)(r_f * 255) << 16) | ((int)(g_f * 255) << 8) | ((int)(b_f * 255)));
 	draw_box(0, 0, get_w(), get_h());
+return 0;
 }
 
 PaletteHue::PaletteHue(BluescreenMain *client, int x, int y)
@@ -427,6 +438,7 @@ int PaletteHue::handle_event()
 	client->h = get_value();
 	client->update_display();
 	client->send_configure_change();
+return 0;
 }
 
 PaletteSaturation::PaletteSaturation(BluescreenMain *client, int x, int y)
@@ -443,6 +455,7 @@ int PaletteSaturation::handle_event()
 	client->s = get_value();
 	client->update_display();
 	client->send_configure_change();
+return 0;
 }
 
 PaletteValue::PaletteValue(BluescreenMain *client, int x, int y)
@@ -459,6 +472,7 @@ int PaletteValue::handle_event()
 	client->v = get_value();
 	client->update_display();
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -475,6 +489,7 @@ int PaletteRed::handle_event()
 {
 	client->update_rgb();
 	client->send_configure_change();
+return 0;
 }
 
 PaletteGreen::PaletteGreen(BluescreenMain *client, int x, int y)
@@ -490,6 +505,7 @@ int PaletteGreen::handle_event()
 {
 	client->update_rgb();
 	client->send_configure_change();
+return 0;
 }
 
 PaletteBlue::PaletteBlue(BluescreenMain *client, int x, int y)
@@ -505,4 +521,5 @@ int PaletteBlue::handle_event()
 {
 	client->update_rgb();
 	client->send_configure_change();
+return 0;
 }

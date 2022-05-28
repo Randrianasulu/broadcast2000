@@ -15,9 +15,9 @@ HSV::~HSV()
 
 int HSV::rgb_to_hsv(float r, float g, float b, float &h, float &s, float &v)
 {
-    register int i;
-	register float min, max, delta;
-	register float f, p, q, t;
+    	int i;
+	float min, max, delta;
+	float f, p, q, t;
 	min = ((r < g) ? r : g) < b ? ((r < g) ? r : g) : b;
 	max = ((r > g) ? r : g) > b ? ((r > g) ? r : g) : b;
 	v = max;                               // v
@@ -46,13 +46,14 @@ int HSV::rgb_to_hsv(float r, float g, float b, float &h, float &s, float &v)
 	h *= 60;                               // degrees
 	if(h < 0)
         h += 360;
+return 0;
 }
 
 int HSV::hsv_to_rgb(float &r, float &g, float &b, float h, float s, float v)
 {
-    register int i;
-	register float min, max, delta;
-	register float f, p, q, t;
+     	int i;
+	float min, max, delta;
+	float f, p, q, t;
     if(s == 0) 
 	{
         // achromatic (grey)
@@ -100,6 +101,7 @@ int HSV::hsv_to_rgb(float &r, float &g, float &b, float h, float s, float v)
             b = q;
             break;
     }
+return 0;
 }
 
 
