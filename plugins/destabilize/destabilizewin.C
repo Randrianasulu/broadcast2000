@@ -48,12 +48,14 @@ int DestabilizeWindow::create_objects()
 	y += 40;
 	add_tool(new BC_Title(x, y + 10, "Speed:"));
 	add_tool(speed = new DestabilizeSpeed(client, x + 100, y));
+return 0;
 }
 
 int DestabilizeWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 DestabilizeRange::DestabilizeRange(DestabilizeMain *client, int x, int y)
@@ -68,6 +70,7 @@ int DestabilizeRange::handle_event()
 {
 	client->range = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 DestabilizeAccel::DestabilizeAccel(DestabilizeMain *client, int x, int y)
@@ -82,6 +85,7 @@ int DestabilizeAccel::handle_event()
 {
 	client->accel = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 DestabilizeSpeed::DestabilizeSpeed(DestabilizeMain *client, int x, int y)
@@ -96,4 +100,5 @@ int DestabilizeSpeed::handle_event()
 {
 	client->speed = get_value();
 	client->send_configure_change();
+return 0;
 }
