@@ -49,10 +49,12 @@ int BlurMain::start_realtime()
 		engine[i]->start();
 		y1 += y_increment;
 	}
+return 0;
 }
 
 int BlurMain::stop_realtime()
 {
+return 0;
 }
 
 int BlurMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -111,6 +113,7 @@ int BlurMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_pt
 		}
 	}
 	radius = old_radius;
+return 0;
 }
 
 int BlurMain::start_gui()
@@ -119,6 +122,7 @@ int BlurMain::start_gui()
 	thread = new BlurThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int BlurMain::stop_gui()
@@ -128,21 +132,25 @@ int BlurMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int BlurMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int BlurMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int BlurMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int BlurMain::load_defaults()
@@ -158,6 +166,7 @@ int BlurMain::load_defaults()
 	vertical = defaults->get("VERTICAL", vertical);
 	horizontal = defaults->get("HORIZONTAL", horizontal);
 	radius = defaults->get("RADIUS", radius);
+return 0;
 }
 
 int BlurMain::save_defaults()
@@ -166,6 +175,7 @@ int BlurMain::save_defaults()
 	defaults->update("HORIZONTAL", horizontal);
 	defaults->update("RADIUS", radius);
 	defaults->save();
+return 0;
 }
 
 int BlurMain::save_data(char *text)
@@ -181,6 +191,7 @@ int BlurMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int BlurMain::read_data(char *text)
@@ -212,6 +223,7 @@ int BlurMain::read_data(char *text)
 		thread->window->radius->update(radius);
 	}
 	redo_buffers = 1;
+return 0;
 }
 
 BlurEngine::BlurEngine(BlurMain *plugin, int start_out, int end_out)
@@ -242,16 +254,18 @@ int BlurEngine::start_process_frame(VFrame **output, VFrame **input, int size)
 	this->input = input;
 	this->size = size;
 	input_lock.unlock();
+return 0;
 }
 
 int BlurEngine::wait_process_frame()
 {
 	output_lock.lock();
+return 0;
 }
 
 void BlurEngine::run()
 {
-	register int i, j, k, l;
+	int i, j, k, l;
 	VPixel **input_rows, **output_rows;
 	int strip_size;
 
@@ -338,6 +352,7 @@ int BlurEngine::reconfigure()
 {
 	std_dev = sqrt(-(double)(plugin->radius * plugin->radius) / (2 * log (1.0 / 255.0)));
 	get_constants();
+return 0;
 }
 
 int BlurEngine::get_constants()
@@ -420,14 +435,15 @@ int BlurEngine::get_constants()
 		bd_p[i] = d_p[i] * a;
 		bd_m[i] = d_m[i] * b;
 	}
+return 0;
 }
 
 #define BOUNDARY(x) if((x) > VMAX) (x) = VMAX; else if((x) < 0) (x) = 0;
 
 int BlurEngine::transfer_pixels(pixel_f *src1, pixel_f *src2, pixel_f *dest, int size)
 {
-	register int i;
-	register float sum;
+	int i;
+	float sum;
 
 	for(i = 0; i < size; i++)
     {
@@ -444,13 +460,14 @@ int BlurEngine::transfer_pixels(pixel_f *src1, pixel_f *src2, pixel_f *dest, int
 		BOUNDARY(sum);
 		dest[i].a = sum;
     }
+return 0;
 }
 
 
 int BlurEngine::multiply_alpha(pixel_f *row, int size)
 {
-	register int i;
-	register float alpha;
+	 int i;
+	 float alpha;
 
 	for(i = 0; i < size; i++)
 	{
@@ -459,13 +476,14 @@ int BlurEngine::multiply_alpha(pixel_f *row, int size)
 		row[i].g *= alpha;
 		row[i].b *= alpha;
 	}
+return 0;
 }
 
 int BlurEngine::seperate_alpha(pixel_f *row, int size)
 {
-	register int i;
-	register float alpha;
-	register float result;
+	 int i;
+	 float alpha;
+	 float result;
 	
 	for(i = 0; i < size; i++)
 	{
@@ -480,6 +498,7 @@ int BlurEngine::seperate_alpha(pixel_f *row, int size)
 			row[i].b = (result > VMAX ? VMAX : result);
 		}
 	}
+return 0;
 }
 
 int BlurEngine::blur_strip(int &j, int &size)
@@ -494,8 +513,8 @@ int BlurEngine::blur_strip(int &j, int &size)
 	initial_p = sp_p[0];
 	initial_m = sp_m[0];
 
-	register int l;
-	for(register int k = 0; k < size; k++)
+	 int l;
+	for( int k = 0; k < size; k++)
 	{
 		terms = (k < 4) ? k : 4;
 		for(l = 0; l <= terms; l++)
@@ -527,5 +546,6 @@ int BlurEngine::blur_strip(int &j, int &size)
 	}
 	transfer_pixels(val_p, val_m, dst, size);
 	seperate_alpha(dst, size);
+return 0;
 }
 

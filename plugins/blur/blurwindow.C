@@ -52,12 +52,14 @@ int BlurWindow::create_objects()
 	add_tool(new BC_Title(x, y, "Radius"));
 	y += 20;
 	add_tool(new BC_Title(x, y, "(Automated)"));
+return 0;
 }
 
 int BlurWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 BlurRadius::BlurRadius(BlurMain *client, int x, int y)
@@ -72,6 +74,7 @@ int BlurRadius::handle_event()
 {
 	client->radius = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 BlurVertical::BlurVertical(BlurMain *client, BlurWindow *window, int x, int y)
@@ -87,6 +90,7 @@ int BlurVertical::handle_event()
 {
 	client->vertical = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 BlurHorizontal::BlurHorizontal(BlurMain *client, BlurWindow *window, int x, int y)
@@ -102,4 +106,5 @@ int BlurHorizontal::handle_event()
 {
 	client->horizontal = get_value();
 	client->send_configure_change();
+return 0;
 }
