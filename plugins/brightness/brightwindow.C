@@ -47,12 +47,14 @@ int BrightWindow::create_objects()
 	add_tool(new BC_Title(x, y, "Contrast"));
 	y += 20;
 	add_tool(contrast_slider = new BrightSlider(client, &(client->contrast), x, y));
+return 0;
 }
 
 int BrightWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 BrightSlider::BrightSlider(BrightnessMain *client, float *output, int x, int y)
@@ -68,4 +70,5 @@ int BrightSlider::handle_event()
 {
 	*output = get_value();
 	client->send_configure_change();
+return 0;
 }

@@ -30,15 +30,17 @@ int BrightnessMain::plugin_is_multi_channel() { return 0; }
 	
 int BrightnessMain::start_realtime()
 {
+return 0;
 }
 
 int BrightnessMain::stop_realtime()
 {
+return 0;
 }
 
 int BrightnessMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
-	register int i, j, k;
+	int i, j, k;
 	VPixel **input_rows, **output_rows;
 	int r, g, b;
 
@@ -154,6 +156,7 @@ num_threads(4) collapse(2)
 			}
 		}
 	}
+return 0;
 }
 
 int BrightnessMain::test_clip(int &r, int &g, int &b)
@@ -180,6 +183,7 @@ int BrightnessMain::start_gui()
 	thread = new BrightThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int BrightnessMain::stop_gui()
@@ -189,21 +193,25 @@ int BrightnessMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int BrightnessMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int BrightnessMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int BrightnessMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int BrightnessMain::load_defaults()
@@ -218,6 +226,7 @@ int BrightnessMain::load_defaults()
 
 	brightness = defaults->get("BRIGHTNESS", (float)0);
 	contrast = defaults->get("CONTRAST", (float)0);
+return 0;
 }
 
 int BrightnessMain::save_defaults()
@@ -225,6 +234,7 @@ int BrightnessMain::save_defaults()
 	defaults->update("BRIGHTNESS", brightness);
 	defaults->update("CONTRAST", contrast);
 	defaults->save();
+return 0;
 }
 
 int BrightnessMain::save_data(char *text)
@@ -241,6 +251,7 @@ int BrightnessMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int BrightnessMain::read_data(char *text)
@@ -277,4 +288,5 @@ int BrightnessMain::read_data(char *text)
 		thread->window->bright_slider->update((int)brightness);
 		thread->window->contrast_slider->update((int)contrast);
 	}
+return 0;
 }
