@@ -125,22 +125,22 @@ $(OUTPUT): $(OBJS)
 #	g++ -shared -o libquicktime.so  $(OBJS)  $(DVOBJS) $(FIREWIREOBJS) $(DVMMXOBJS)
 
 qtdump: dump.o $(OUTPUT)
-	$(CC) -o qtdump dump.o $(OUTPUT) -lm -lpng -lz -lpthread -lglib -ldl
+	$(CC) -o qtdump dump.o $(OUTPUT) -lm -lpng -lz -ljpeg -lpthread -lglib -ldl
 
 make_streamable: make_streamable.o $(OUTPUT)
-	$(CC) -o make_streamable make_streamable.o $(OUTPUT) -lm -lpng -lz -lpthread -lglib -ldl
+	$(CC) -o make_streamable make_streamable.o $(OUTPUT) -lm -lpng -ljpeg -lz -lpthread -lglib -ldl
 
 dechunk: dechunk.o $(OUTPUT)
-	$(CC) -o dechunk dechunk.o $(OUTPUT) -lm -lpng -lz -lpthread -lglib -ldl
+	$(CC) -o dechunk dechunk.o $(OUTPUT) -lm -lpng -ljpeg -lz -lpthread -lglib -ldl
 
 recover: recover.o $(OUTPUT)
-	$(CC) -o recover recover.o $(OUTPUT) -lm -lpng -lz -lpthread -lglib -ldl
+	$(CC) -o recover recover.o $(OUTPUT) -lm -lpng -ljpeg -lz -lpthread -lglib -ldl
 
 yuv4toyuv: yuv4toyuv.o $(OUTPUT)
-	$(CC) -o yuv4toyuv yuv4toyuv.o $(OUTPUT) -lm -lpng -lz -lpthread -lglib -ldl
+	$(CC) -o yuv4toyuv yuv4toyuv.o $(OUTPUT) -lm -lpng -ljpeg -lz -lpthread -lglib -ldl
 
 qtinfo: qtinfo.o
-	$(CC) -o qtinfo qtinfo.o $(OUTPUT) -lm -lpng -lz -lpthread -lglib -ldl
+	$(CC) -o qtinfo qtinfo.o $(OUTPUT) -lm -lpng -lz -lpthread -ljpeg -lglib -ldl
 
 util:  qtdump make_streamable qtinfo dechunk yuv4toyuv recover
 	
