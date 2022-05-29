@@ -71,6 +71,8 @@ int GraphicWindow::create_objects()
 	y += 60;
 	add_tool(new GraphicClear(plugin, x, y));
 	canvas->draw_envelope();
+
+return 0;
 }
 
 int GraphicWindow::get_divisions(int pixels, char **titles, int *title_x)
@@ -89,12 +91,15 @@ printf("GraphicWindow::get_divisions %d %d\n", division_freqs * i, plugin->freq.
 		else 
 			title_x[i] = division_pixels * i - 20;
 	}
+
+return 0;
 }
 
 int GraphicWindow::close_event()
 {
 	hide_window();
 	plugin->send_hide_gui();
+return 0;
 }
 
 
@@ -113,6 +118,7 @@ GraphicCanvas::~GraphicCanvas()
 
 int GraphicCanvas::handle_event()
 {
+return 0;
 }
 
 int GraphicCanvas::button_release()
@@ -132,6 +138,7 @@ int GraphicCanvas::button_release()
 		selected_point = -1;
 		plugin->update_gui();
 	}
+return 0;
 }
 
 int GraphicCanvas::button_press()
@@ -147,6 +154,7 @@ int GraphicCanvas::button_press()
 		draw_floating(1);
 		return 1;
 	}
+return 0;
 }
 
 int GraphicCanvas::cursor_motion()
@@ -165,12 +173,14 @@ int GraphicCanvas::cursor_motion()
 		draw_floating(1);
 		plugin->send_configure_change();
 	}
+return 0;
 }
 
 int GraphicCanvas::get_point(int point, int &x, int &y)
 {
 	x = (int)((float)plugin->freq.fromfreq(plugin->freqs[point]) / TOTALFREQS * get_w());
 	y = (int)((float)get_h() / 2 - plugin->amounts[point] / MAXLEVEL * get_h() / 2);
+return 0;
 }
 
 int GraphicCanvas::get_values(int x, int y, float &amount, long &freq)
@@ -185,6 +195,7 @@ int GraphicCanvas::get_values(int x, int y, float &amount, long &freq)
 	if(amount > MAXLEVEL) amount = MAXLEVEL;
 
 	if(shift_down()) amount = 0;
+return 0;
 }
 
 int GraphicCanvas::test_points()
@@ -283,6 +294,7 @@ int GraphicCanvas::insert_point(int number, float new_amount, long new_freq)
 	plugin->amounts[number] = new_amount;
 	plugin->freqs[number] = new_freq;
 	plugin->total_points++;
+return 0;
 }
 
 int GraphicCanvas::delete_point(int selected_point)
@@ -293,6 +305,7 @@ int GraphicCanvas::delete_point(int selected_point)
 		plugin->freqs[j] = plugin->freqs[i];
 	}
 	plugin->total_points--;
+return 0;
 }
 
 int GraphicCanvas::draw_point(int x, int y)
@@ -310,6 +323,7 @@ int GraphicCanvas::draw_point(int x, int y)
 	if(y2 > h) y2 = h;
 	
 	draw_box(x1, y1, x2 - x1, y2 - y1);
+return 0;
 }
 
 int GraphicCanvas::draw_floating(int flash)
@@ -361,6 +375,7 @@ int GraphicCanvas::draw_floating(int flash)
 	draw_text(tx, ty, string);
 	set_opaque();
 	if(flash) GraphicCanvas::flash();
+return 0;
 }
 
 int GraphicCanvas::draw_envelope()
@@ -387,6 +402,7 @@ int GraphicCanvas::draw_envelope()
 	y2 = get_h() / 2;
 	draw_line(x1, y1, x2, y2);
 	flash();
+return 0;
 }
 
 
@@ -414,6 +430,7 @@ int GraphicWindowSize::handle_event()
 	plugin->fourier.window_size = atol(get_text());
 
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -433,6 +450,7 @@ int GraphicClear::handle_event()
 {
 	plugin->reset();
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -466,6 +484,7 @@ int GraphicMenu::create_objects(Defaults *defaults)
 	//filemenu->add_menuitem(set_default = new GraphicSetDefault);
 	load_defaults(defaults);
 	prev_load_thread = new GraphicLoadPrevThread(plugin, this);
+return 0;
 }
 
 int GraphicMenu::load_defaults(Defaults *defaults)
@@ -486,6 +505,7 @@ int GraphicMenu::load_defaults(Defaults *defaults)
 			filemenu->add_menuitem(prev_load[i] = new GraphicLoadPrev(plugin, this, filename, path));
 		}
 	}
+return 0;
 }
 
 int GraphicMenu::save_defaults(Defaults *defaults)
@@ -501,6 +521,7 @@ int GraphicMenu::save_defaults(Defaults *defaults)
 			defaults->update(string, prev_load[i]->path);
 		}
 	}
+return 0;
 }
 
 int GraphicMenu::add_load(char *path)
@@ -567,6 +588,7 @@ GraphicLoad::~GraphicLoad()
 int GraphicLoad::handle_event()
 {
 	thread->start();
+return 0;
 }
 
 GraphicSave::GraphicSave(Graphic *plugin, GraphicMenu *menu)
@@ -583,6 +605,7 @@ GraphicSave::~GraphicSave()
 int GraphicSave::handle_event()
 {
 	thread->start();
+return 0;
 }
 
 GraphicSetDefault::GraphicSetDefault()
@@ -591,6 +614,7 @@ GraphicSetDefault::GraphicSetDefault()
 }
 int GraphicSetDefault::handle_event()
 {
+return 0;
 }
 
 GraphicLoadPrev::GraphicLoadPrev(Graphic *plugin, GraphicMenu *menu, char *filename, char *path)
@@ -610,10 +634,12 @@ int GraphicLoadPrev::handle_event()
 {
 	menu->prev_load_thread->set_path(path);
 	menu->prev_load_thread->start();
+return 0;
 }
 int GraphicLoadPrev::set_path(char *path)
 {
 	strcpy(this->path, path);
+return 0;
 }
 
 
@@ -656,10 +682,12 @@ GraphicSaveDialog::~GraphicSaveDialog()
 int GraphicSaveDialog::ok_event()
 {
 	set_done(0);
+return 0;
 }
 int GraphicSaveDialog::cancel_event()
 {
 	set_done(1);
+return 0;
 }
 
 
@@ -715,6 +743,7 @@ void GraphicLoadPrevThread::run()
 int GraphicLoadPrevThread::set_path(char *path)
 {
 	strcpy(this->path, path);
+return 0;
 }
 
 
@@ -735,9 +764,11 @@ GraphicLoadDialog::~GraphicLoadDialog()
 int GraphicLoadDialog::ok_event()
 {
 	set_done(0);
+return 0;
 }
 int GraphicLoadDialog::cancel_event()
 {
 	set_done(1);
+return 0;
 }
 

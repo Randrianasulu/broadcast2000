@@ -27,10 +27,12 @@ int FreezeFrameMain::plugin_is_multi_channel() { return 0; }
 int FreezeFrameMain::start_realtime()
 {
 	first_frame = 0;
+return 0;
 }
 
 int FreezeFrameMain::stop_realtime()
 {
+return 0;
 }
 
 int FreezeFrameMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -44,33 +46,41 @@ int FreezeFrameMain::process_realtime(long size, VFrame **input_ptr, VFrame **ou
 	{
 		output_ptr[0]->copy_from(first_frame);
 	}
+return 0;
 }
 
 
 int FreezeFrameMain::start_gui()
 {
+return 0;
 }
 
 int FreezeFrameMain::stop_gui()
 {
+return 0;
 }
 
 int FreezeFrameMain::show_gui()
 {
+return 0;
 }
 
 int FreezeFrameMain::hide_gui()
 {
+return 0;
 }
 
 int FreezeFrameMain::set_string()
 {
+return 0;
 }
 
 int FreezeFrameMain::save_data(char *text)
 {
+return 0;
 }
 
 int FreezeFrameMain::read_data(char *text)
 {
+return 0;
 }

@@ -26,14 +26,15 @@ GraphicEngine::~GraphicEngine()
 int GraphicEngine::set_plugin(Graphic *graphic)
 {
 	this->graphic = graphic;
+return 0;
 }
 
 
 int GraphicEngine::signal_process()
 {
-    register int h = window_size / 2;
-    register int i;
-	register double magnitude, angle;
+    	int h = window_size / 2;
+    	int i;
+	double magnitude, angle;
 
 	for(i = 0; i < h; i++)
 	{
@@ -46,6 +47,7 @@ int GraphicEngine::signal_process()
 		}
 	}
 	symmetry(window_size, freq_real, freq_imag);
+return 0;
 }
 
 
@@ -78,12 +80,14 @@ int Graphic::reset_parameters()
 	fft_coefs = 0;
 	redo_buffers = 1;
 	fourier.reset_fourier();
+return 0;
 }
 
 
 int Graphic::init_buffers()
 {
 	fft_coefs = 0;
+return 0;
 }
 
 int Graphic::delete_buffers()
@@ -91,6 +95,7 @@ int Graphic::delete_buffers()
 	if(fft_coefs) delete fft_coefs;
 
 	fft_coefs = 0;
+return 0;
 }
 
 int Graphic::redo_buffers_procedure()
@@ -106,6 +111,7 @@ int Graphic::redo_buffers_procedure()
 	}
 
 	redo_buffers = 0;
+return 0;
 }
 
 double Graphic::get_coefficient(long freq)
@@ -175,6 +181,7 @@ int Graphic::load_defaults()
 		amounts[i] = defaults->get(string, (float)1);
 	}
 	fourier.window_size = defaults->get("WINDOWSIZE", fourier.window_size);
+return 0;
 }
 
 int Graphic::save_defaults()
@@ -192,6 +199,7 @@ int Graphic::save_defaults()
 	}
 	defaults->update("WINDOWSIZE", fourier.window_size);
 	defaults->save();
+return 0;
 }
 
 char* Graphic::plugin_title() { return "EQ Graphic"; }
@@ -203,11 +211,13 @@ int Graphic::start_realtime()
 	init_buffers();
 	fourier.init_fft(in_buffer_size);
 	redo_buffers_procedure();
+return 0;
 }
 
 int Graphic::stop_realtime()
 {
 	delete_buffers();
+return 0;
 }
 
 int Graphic::process_realtime(long size, float *input_ptr, float *output_ptr)
@@ -228,6 +238,7 @@ int Graphic::start_gui()
 	thread->gui_started.lock();    // wait for the GUI to start
 
 	update_gui();            // fill GUI with parameters
+return 0;
 }
 
 int Graphic::stop_gui()
@@ -238,21 +249,25 @@ int Graphic::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int Graphic::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int Graphic::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int Graphic::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int Graphic::save_data(char *text)
@@ -278,6 +293,7 @@ int Graphic::save_data(char *text)
 
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int Graphic::read_data(char *text)
@@ -311,6 +327,7 @@ int Graphic::read_data(char *text)
 
 	redo_buffers = 1;
 	update_gui();
+return 0;
 }
 
 int Graphic::update_gui()
@@ -320,12 +337,14 @@ int Graphic::update_gui()
 		thread->window->canvas->draw_envelope();
 		thread->window->windowsize->update((int)fourier.window_size);
 	}
+return 0;
 }
 
 int Graphic::reset()
 {
 	reset_parameters();
 	update_gui();
+return 0;
 }
 
 

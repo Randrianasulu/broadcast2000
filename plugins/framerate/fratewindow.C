@@ -18,12 +18,13 @@ int FRateWindow::create_objects(float *output_rate)
 	add_tool(ok = new FRateWindowOK(this));
 	add_tool(cancel = new FRateWindowCancel(this));
 	add_tool(rate_text = new FRateWindowRate(this->output_rate));
+return 0;
 }
 
 FRateWindowOK::FRateWindowOK(FRateWindow *window) : BC_BigButton(10, 80, "OK")
 { this->window = window; }
 
-int FRateWindowOK::handle_event() { window->set_done(0); }
+int FRateWindowOK::handle_event() { window->set_done(0); return 0; }
 
 int FRateWindowOK::keypress_event() 
 { 
@@ -34,7 +35,7 @@ int FRateWindowOK::keypress_event()
 FRateWindowCancel::FRateWindowCancel(FRateWindow *window) : BC_BigButton(200, 80, "Cancel")
 { this->window = window; }
 
-int FRateWindowCancel::handle_event() { window->set_done(1); }
+int FRateWindowCancel::handle_event() { window->set_done(1); return 0; }
 
 int FRateWindowCancel::keypress_event() 
 { 
@@ -54,4 +55,5 @@ FRateWindowRate::~FRateWindowRate()
 int FRateWindowRate::handle_event()
 {
 	*output_rate = atof(get_text());
+return 0;
 }

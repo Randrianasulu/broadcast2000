@@ -23,6 +23,7 @@ FrameRateMain::~FrameRateMain()
 int FrameRateMain::run_client()
 {
 	plugin_exit();
+return 0;
 }
 
 char* FrameRateMain::plugin_title() { return "Reframe"; }
@@ -43,12 +44,14 @@ int FrameRateMain::load_defaults()
 	defaults->load();
 
 	output_rate = defaults->get("OUTPUTRATE", (float)24);
+return 0;
 }
 
 int FrameRateMain::save_defaults()
 {
 	defaults->update("OUTPUTRATE", output_rate);
 	defaults->save();
+return 0;
 }
 
 float FrameRateMain::get_plugin_framerate()
@@ -159,4 +162,5 @@ int FrameRateMain::start_plugin()
 		progress->stop_progress();
 		delete progress;
 	}
+return 0;
 }
