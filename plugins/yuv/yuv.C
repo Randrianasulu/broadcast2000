@@ -47,6 +47,7 @@ int YUVMain::start_realtime()
 		engine[i]->start();
 		y1 += y_increment;
 	}
+return 0;
 }
 
 int YUVMain::stop_realtime()
@@ -56,6 +57,7 @@ int YUVMain::stop_realtime()
 		delete engine[i];
 	}
 	delete engine;
+return 0;
 }
 
 
@@ -65,6 +67,7 @@ int YUVMain::start_gui()
 	thread = new YUVThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int YUVMain::stop_gui()
@@ -74,21 +77,25 @@ int YUVMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int YUVMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int YUVMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int YUVMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int YUVMain::load_defaults()
@@ -105,6 +112,7 @@ int YUVMain::load_defaults()
 	u = defaults->get("U", 0);
 	v = defaults->get("V", 0);
 	automated_function = defaults->get("AUTOMATION", automated_function);
+return 0;
 }
 
 int YUVMain::save_defaults()
@@ -114,6 +122,7 @@ int YUVMain::save_defaults()
 	defaults->update("V", v);
 	defaults->update("AUTOMATION", automated_function);
 	defaults->save();
+return 0;
 }
 
 int YUVMain::save_data(char *text)
@@ -136,6 +145,7 @@ int YUVMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int YUVMain::read_data(char *text)
@@ -183,6 +193,7 @@ int YUVMain::read_data(char *text)
 			thread->window->automation[i]->update(automated_function == i);
 		}
 	}
+return 0;
 }
 
 int YUVMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -230,10 +241,12 @@ int YUVMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr
 	y = old_y;
 	u = old_u;
 	v = old_v;
+return 0;
 }
 
 int YUVMain::reconfigure()
 {
+return 0;
 }
 
 YUVEngine::YUVEngine(YUVMain *plugin, int start_y, int end_y)
@@ -260,11 +273,13 @@ int YUVEngine::start_process_frame(VFrame **output, VFrame **input, int size)
 	this->input = input;
 	this->size = size;
 	input_lock.unlock();
+return 0;
 }
 
 int YUVEngine::wait_process_frame()
 {
 	output_lock.lock();
+return 0;
 }
 
 void YUVEngine::run()
