@@ -60,6 +60,7 @@ int Spectrogram::reset_parameters()
 	allocated_size = 0;
 	w = 320;
 	h = 200;
+return 0;
 }
 
 
@@ -79,6 +80,7 @@ int Spectrogram::redo_buffers_procedure()
 	}
 
 	redo_buffers = 0;
+return 0;
 }
 
 int Spectrogram::get_canvas_w()
@@ -104,6 +106,7 @@ int Spectrogram::load_defaults()
 	w = defaults->get("WIDTH", w);
 	h = defaults->get("HEIGHT", h);
 	window_size = defaults->get("WINDOWSIZE", window_size);
+return 0;
 }
 
 int Spectrogram::save_defaults()
@@ -112,6 +115,7 @@ int Spectrogram::save_defaults()
 	defaults->update("HEIGHT", h);
 	defaults->update("WINDOWSIZE", window_size);
 	defaults->save();
+return 0;
 }
 
 char* Spectrogram::plugin_title() { return "Spectrogram"; }
@@ -129,6 +133,7 @@ int Spectrogram::start_realtime()
 	freq_imag = new double[allocated_size];
 
 	redo_buffers = 1;
+return 0;
 }
 
 int Spectrogram::stop_realtime()
@@ -146,6 +151,7 @@ int Spectrogram::stop_realtime()
 	allocated_size = 0;
 	trigger_id = -1;
 	magnitudes_id = -1;
+return 0;
 }
 
 int Spectrogram::max_window_size(int fragment_size)
@@ -275,6 +281,7 @@ int Spectrogram::load_bitmap(VFrame *bitmap)
 	}
 	delete magnitude;
 	trigger->write_message(COMPLETED);
+return 0;
 }
 
 
@@ -294,6 +301,7 @@ int Spectrogram::start_gui()
 
 	update_gui();             // fill GUI with parameters
 	send_configure_change();  // Propogate new configuration
+return 0;
 }
 
 int Spectrogram::stop_gui()
@@ -304,6 +312,7 @@ int Spectrogram::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int Spectrogram::cleanup_gui()
@@ -324,21 +333,25 @@ int Spectrogram::cleanup_gui()
 	save_defaults();
 	trigger = 0;
 	trigger_thread = 0;
+return 0;
 }
 
 int Spectrogram::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int Spectrogram::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int Spectrogram::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int Spectrogram::save_data(char *text)
@@ -356,6 +369,7 @@ int Spectrogram::save_data(char *text)
 	output.append_newline();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int Spectrogram::read_data(char *text)
@@ -387,6 +401,7 @@ int Spectrogram::read_data(char *text)
 
 	redo_buffers = 1;
 	update_gui();
+return 0;
 }
 
 int Spectrogram::update_gui()
@@ -395,10 +410,12 @@ int Spectrogram::update_gui()
 	{
 		thread->window->update_gui();
 	}
+return 0;
 }
 
 int Spectrogram::reset()
 {
 	reset_parameters();
 	update_gui();
+return 0;
 }

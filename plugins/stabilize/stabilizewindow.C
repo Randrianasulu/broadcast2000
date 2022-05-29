@@ -49,6 +49,7 @@ int StabilizeWindow::create_objects()
 	add_tool(new BC_Title(x, y, "Acceleration:"));
 	add_tool(new BC_Title(x, y + 20, "(Automated)"));
 	add_tool(accel = new StabilizeAccel(client, x + 130, y));
+return 0;
 }
 
 int StabilizeWindow::close_event()
@@ -56,6 +57,7 @@ int StabilizeWindow::close_event()
 	client->save_defaults();
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 StabilizeRange::StabilizeRange(StabilizeMain *client, int x, int y)
@@ -70,6 +72,7 @@ int StabilizeRange::handle_event()
 {
 	client->range = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 StabilizeSize::StabilizeSize(StabilizeMain *client, int x, int y)
@@ -84,6 +87,7 @@ int StabilizeSize::handle_event()
 {
 	client->size = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 StabilizeAccel::StabilizeAccel(StabilizeMain *client, int x, int y)
@@ -98,5 +102,6 @@ int StabilizeAccel::handle_event()
 {
 	client->accel = get_value();
 	client->send_configure_change();
+return 0;
 }
 

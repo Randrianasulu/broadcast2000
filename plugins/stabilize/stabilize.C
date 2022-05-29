@@ -51,6 +51,7 @@ int StabilizeMain::start_realtime()
 	y_offset = 0;
 	block = 0;
 	redo_buffers = 1;
+return 0;
 }
 
 int StabilizeMain::stop_realtime()
@@ -63,6 +64,7 @@ int StabilizeMain::stop_realtime()
 	if(block) delete block;
 	block = 0;
 	redo_buffers = 0;
+return 0;
 }
 
 int StabilizeMain::process_realtime(long frames, VFrame **input_ptr, VFrame **output_ptr)
@@ -147,6 +149,7 @@ int StabilizeMain::process_realtime(long frames, VFrame **input_ptr, VFrame **ou
 			accel = old_accel;
 		}
 	}
+return 0;
 }
 
 int StabilizeMain::get_vector(int block_x, int block_y, VFrame *block, VFrame *input, int &x_offset, int &y_offset)
@@ -200,6 +203,7 @@ int StabilizeMain::get_vector(int block_x, int block_y, VFrame *block, VFrame *i
 	if(y_offset < -range) y_offset = -range;
 	if(x_offset > range) x_offset = range;
 	if(y_offset > range) y_offset = range;
+return 0;
 }
 
 int StabilizeMain::recenter(int &new_x, int &new_y)
@@ -226,6 +230,7 @@ int StabilizeMain::recenter(int &new_x, int &new_y)
 		new_x = 0;
 		new_y = (int)(y_sign * magnitude);
 	}
+return 0;
 }
 
 // int StabilizeMain::three_step_search(int block_x, int block_y, VFrame *block, VFrame *input, int &x_offset, int &y_offset)
@@ -329,6 +334,7 @@ int StabilizeMain::read_block(int x, int y, VFrame *block, VFrame *input)
     }
 	block_randomness = labs(max - min);
 //printf("StabilizeMain::read_block %d\n", block_randomness);
+return 0;
 }
 
 
@@ -337,6 +343,7 @@ int StabilizeMain::clear_row(VPixel *row)
 {
 	for(int i = 0; i < project_frame_w; i++)
 		row[i].r = row[i].g = row[i].b = row[i].a = 0;
+return 0;
 }
 
 int StabilizeMain::offset_frame(VFrame *in, VFrame *out, int x_offset, int y_offset)
@@ -412,6 +419,7 @@ int StabilizeMain::offset_frame(VFrame *in, VFrame *out, int x_offset, int y_off
 	{
 		if(in_rows[0] != out_rows[0]) out->copy_from(in);
 	}
+return 0;
 }
 
 
@@ -421,6 +429,7 @@ int StabilizeMain::start_gui()
 	thread = new StabilizeThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int StabilizeMain::stop_gui()
@@ -430,21 +439,25 @@ int StabilizeMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int StabilizeMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int StabilizeMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int StabilizeMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int StabilizeMain::load_defaults()
@@ -460,6 +473,7 @@ int StabilizeMain::load_defaults()
 	range = defaults->get("RANGE", range);
 	size = defaults->get("SIZE", size);
 	accel = defaults->get("ACCEL", accel);
+return 0;
 }
 
 int StabilizeMain::save_defaults()
@@ -468,6 +482,7 @@ int StabilizeMain::save_defaults()
 	defaults->update("SIZE", size);
 	defaults->update("ACCEL", accel);
 	defaults->save();
+return 0;
 }
 
 int StabilizeMain::save_data(char *text)
@@ -483,6 +498,7 @@ int StabilizeMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int StabilizeMain::read_data(char *text)
@@ -514,6 +530,7 @@ int StabilizeMain::read_data(char *text)
 		thread->window->accel->update(accel);
 	}
 	redo_buffers = 1;
+return 0;
 }
 
 
@@ -545,6 +562,7 @@ int StabilizeEngine::exhaustive_search(int block_x, int block_y, VPixel **block_
 	this->block_x = block_x;
 	this->block_y = block_y;
 	input_lock.unlock();
+return 0;
 }
 
 int StabilizeEngine::wait_completion(long &score, int &x_offset, int &y_offset)
@@ -553,6 +571,7 @@ int StabilizeEngine::wait_completion(long &score, int &x_offset, int &y_offset)
 	score = this->score;
 	x_offset = this->x_offset;
 	y_offset = this->y_offset;
+return 0;
 }
 
 long StabilizeEngine::compare_blocks(int x, int y, VPixel **block_rows, VPixel **input_rows)

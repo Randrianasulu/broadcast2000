@@ -106,6 +106,7 @@ int SpectrogramWindow::create_objects()
 	bitmap = new VFrame(0, plugin->get_canvas_w(), plugin->get_canvas_h());
 	y += canvas->get_h() + 5;
 	add_tool(freq_text = new BC_Title(x, plugin->h - 20, "--"));
+return 0;
 }
 
 int SpectrogramWindow::update_gui()
@@ -118,6 +119,7 @@ int SpectrogramWindow::update_gui()
 	bitmap = new VFrame(0, plugin->get_canvas_w(), plugin->get_canvas_h());
 	freq_text->resize_tool(10, plugin->h - 20);
 	unlock_window();
+return 0;
 }
 
 int SpectrogramWindow::close_event()
@@ -125,6 +127,7 @@ int SpectrogramWindow::close_event()
 	hide_window();
 	plugin->cleanup_gui();
 	plugin->send_hide_gui();
+return 0;
 }
 
 int SpectrogramWindow::resize_event(int w, int h)
@@ -136,6 +139,7 @@ int SpectrogramWindow::resize_event(int w, int h)
 	bitmap = new VFrame(0, plugin->get_canvas_w(), plugin->get_canvas_h());
 	freq_text->resize_tool(10, h - 20);
 	plugin->send_configure_change();
+return 0;
 }
 
 int SpectrogramWindow::update_freq_text(int cursor_x)
@@ -147,6 +151,7 @@ int SpectrogramWindow::update_freq_text(int cursor_x)
 
 	sprintf(string, "%d Hz", freq);
 	freq_text->update(string);
+return 0;
 }
 
 
@@ -170,6 +175,7 @@ int SpectrogramCanvas::cursor_motion()
 {
 	if(get_cursor_x() > 0 && get_cursor_x() < get_w())
 		plugin->thread->window->update_freq_text(get_cursor_x());
+return 0;
 }
 
 
@@ -193,4 +199,5 @@ int SpectrogramWindowSize::handle_event()
 		plugin->window_size = plugin->max_window_size(atol(get_text()));
 
 	plugin->send_configure_change();
+return 0;
 }
