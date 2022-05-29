@@ -28,10 +28,12 @@ int ShiftInterlaceMain::plugin_is_multi_channel() { return 0; }
 
 int ShiftInterlaceMain::start_realtime()
 {
+return 0;
 }
 
 int ShiftInterlaceMain::stop_realtime()
 {
+return 0;
 }
 
 int ShiftInterlaceMain::start_gui()
@@ -44,6 +46,7 @@ printf("ShiftInterlaceMain::start_gui 1\n");
 printf("ShiftInterlaceMain::start_gui 1\n");
 	thread->gui_started.lock();
 printf("ShiftInterlaceMain::start_gui 2\n");
+return 0;
 }
 
 int ShiftInterlaceMain::stop_gui()
@@ -53,24 +56,28 @@ int ShiftInterlaceMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int ShiftInterlaceMain::show_gui()
 {
 	if(thread)
 		thread->window->show_window();
+return 0;
 }
 
 int ShiftInterlaceMain::hide_gui()
 {
 	if(thread)
 		thread->window->hide_window();
+return 0;
 }
 
 int ShiftInterlaceMain::set_string()
 {
 	if(thread)
 		thread->window->set_title(gui_string);
+return 0;
 }
 
 int ShiftInterlaceMain::load_defaults()
@@ -109,6 +116,7 @@ int ShiftInterlaceMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int ShiftInterlaceMain::read_data(char *text)

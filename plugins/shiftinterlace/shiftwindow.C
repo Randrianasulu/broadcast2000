@@ -52,6 +52,7 @@ int ShiftWindow::create_objects()
 	y += 35;
 	add_tool(new BC_Title(x, y, "Odd offset"));
 	add_tool(odd_offset = new ShiftOffset(client, &client->odd_offset, x, y));
+return 0;
 }
 
 int ShiftWindow::close_event()
@@ -59,6 +60,7 @@ int ShiftWindow::close_event()
 	client->save_defaults();
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 ShiftOffset::ShiftOffset(ShiftInterlaceMain *client, int *output, int x, int y)
