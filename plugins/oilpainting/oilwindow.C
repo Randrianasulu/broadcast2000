@@ -47,12 +47,14 @@ int OilWindow::create_objects()
 	y += 50;
 	x = 10;
 	add_tool(use_intensity = new OilIntensity(client, x, y));
+return 0;
 }
 
 int OilWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 OilRadius::OilRadius(OilMain *client, int x, int y)
@@ -67,6 +69,7 @@ int OilRadius::handle_event()
 {
 	client->radius = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -82,6 +85,7 @@ int OilIntensity::handle_event()
 {
 	client->use_intensity = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 
