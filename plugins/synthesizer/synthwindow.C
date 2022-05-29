@@ -94,17 +94,20 @@ int SynthWindow::create_objects()
 	add_tool(new SynthAddOsc(synth, this, x, y));
 	y += 30;
 	add_tool(new SynthDelOsc(synth, this, x, y));
+return 0;
 }
 
 int SynthWindow::load_defaults(Defaults *defaults)
 {
 	canvas_zoom = defaults->get("CANVASZOOM", (float)1);
+return 0;
 }
 
 int SynthWindow::save_defaults(Defaults *defaults)
 {
 	defaults->update("CANVASZOOM", canvas_zoom);
 	menu->save_defaults(defaults);
+return 0;
 }
 
 int SynthWindow::update_gui()
@@ -117,6 +120,7 @@ int SynthWindow::update_gui()
 	waveform->update(string);
 	
 	canvas->update();
+return 0;
 }
 
 int SynthWindow::waveform_to_text(char *text, int waveform)
@@ -130,6 +134,7 @@ int SynthWindow::waveform_to_text(char *text, int waveform)
 		case PULSE:           sprintf(text, "Pulse");       break;
 		case NOISE:           sprintf(text, "Noise");       break;
 	}
+return 0;
 }
 
 
@@ -137,6 +142,7 @@ int SynthWindow::close_event()
 {
 	hide_window();
 	synth->send_hide_gui();
+return 0;
 }
 
 int SynthWindow::resize_event(int w, int h)
@@ -147,6 +153,7 @@ int SynthWindow::resize_event(int w, int h)
 	relocate_oscillators(scroll->get_position());
 	synth->w = w;
 	synth->h = h;
+return 0;
 }
 
 SynthOscGUI* SynthWindow::add_oscillator(SynthOscillator *oscillator, int y)
@@ -162,11 +169,13 @@ int SynthWindow::relocate_oscillators(int position)
 	{
 		synth->oscillators[i]->set_y(i * OSCILLATORHEIGHT - position);
 	}
+return 0;
 }
 
 int SynthWindow::update_scrollbar()
 {
 	scroll->set_position(synth->oscillator_height(), scroll->get_position(), subwindow->get_h());
+return 0;
 }
 
 
@@ -183,6 +192,7 @@ int SynthCanvasZoomin::handle_event()
 {
 	window->canvas_zoom *= 2;
 	window->canvas->update();
+return 0;
 }
 
 
@@ -198,6 +208,7 @@ int SynthCanvasZoomout::handle_event()
 {
 	window->canvas_zoom /= 2;
 	window->canvas->update();
+return 0;
 }
 
 
@@ -221,6 +232,7 @@ int SynthWaveForm::add_items()
 	add_item(new SynthWaveFormItem(synth, "Triangle", TRIANGLE));
 	add_item(new SynthWaveFormItem(synth, "Pulse", PULSE));
 	add_item(new SynthWaveFormItem(synth, "Noise", NOISE));
+return 0;
 }
 
 SynthWaveFormItem::SynthWaveFormItem(Synth *synth, char *text, int value)
@@ -240,6 +252,7 @@ int SynthWaveFormItem::handle_event()
 	update_menu();
 	synth->thread->window->canvas->update();
 	synth->send_configure_change();
+return 0;
 }
 
 
@@ -290,6 +303,7 @@ int SynthCanvas::update()
 		y1 = y2;
 	}
 	flash();
+return 0;
 }
 
 
@@ -320,6 +334,7 @@ int SynthFreqPot::handle_event()
 		freq_text->update(get_value());
 		synth->send_configure_change();
 	}
+return 0;
 }
 
 
@@ -342,6 +357,7 @@ int SynthBaseFreq::handle_event()
 		freq_pot->update(synth->base_freq);
 		synth->send_configure_change();
 	}
+return 0;
 }
 
 
@@ -359,6 +375,7 @@ int SynthClear::handle_event()
 {
 	synth->reset();
 	synth->send_configure_change();
+return 0;
 }
 
 
@@ -381,6 +398,7 @@ SynthScroll::~SynthScroll()
 int SynthScroll::handle_event()
 {
 	window->relocate_oscillators(get_position());
+return 0;
 }
 
 
@@ -411,6 +429,7 @@ int SynthAddOsc::handle_event()
 	synth->add_oscillator();
 	synth->send_configure_change();
 	window->update_scrollbar();
+return 0;
 }
 
 
@@ -432,11 +451,8 @@ int SynthDelOsc::handle_event()
 	window->update_scrollbar();
 	window->canvas->update();
 	synth->send_configure_change();
+return 0;
 }
-
-
-
-
 
 
 
@@ -465,6 +481,7 @@ int SynthOscGUI::create_objects(int view_y)
 	window->subwindow->add_tool(level = new SynthOscGUILevel(oscillator, view_y));
 	window->subwindow->add_tool(phase = new SynthOscGUIPhase(oscillator, view_y));
 	window->subwindow->add_tool(freq = new SynthOscGUIFreq(oscillator, view_y));
+return 0;
 }
 
 
@@ -483,6 +500,7 @@ int SynthOscGUILevel::handle_event()
 	oscillator->level = get_value();
 	oscillator->synth->thread->window->canvas->update();
 	oscillator->synth->send_configure_change();
+return 0;
 }
 
 
@@ -502,6 +520,7 @@ int SynthOscGUIPhase::handle_event()
 	oscillator->phase = (float)get_value() / 360;
 	oscillator->synth->thread->window->canvas->update();
 	oscillator->synth->send_configure_change();
+return 0;
 }
 
 
@@ -521,4 +540,5 @@ int SynthOscGUIFreq::handle_event()
 	oscillator->freq_factor = get_value();
 	oscillator->synth->thread->window->canvas->update();
 	oscillator->synth->send_configure_change();
+return 0;
 }

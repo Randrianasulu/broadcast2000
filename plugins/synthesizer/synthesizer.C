@@ -38,6 +38,7 @@ int Synth::reset_parameters()
 	waveform_length = 0;
 	dsp_buffer = 0;
 	thread = 0;
+return 0;
 }
 
 int Synth::load_defaults()
@@ -63,6 +64,7 @@ int Synth::load_defaults()
 	{
 		oscillators[i]->load_defaults(defaults);
 	}
+return 0;
 }
 
 int Synth::save_defaults()
@@ -81,6 +83,7 @@ int Synth::save_defaults()
 	}
 	if(thread) thread->window->save_defaults(defaults);
 	defaults->save();
+return 0;
 }
 
 int Synth::create_oscillators(int total)
@@ -92,6 +95,7 @@ int Synth::create_oscillators(int total)
 		oscillators[i] = new SynthOscillator(this, i);
 		oscillators[i]->create_objects(i * OSCILLATORHEIGHT);
 	}
+return 0;
 }
 
 int Synth::add_oscillator()
@@ -105,6 +109,7 @@ int Synth::add_oscillator()
 	if(thread) y -= thread->window->scroll->get_position();
 	oscillators[i]->create_objects(y);
 	total_oscillators++;
+return 0;
 }
 
 int Synth::delete_oscillator()
@@ -114,6 +119,7 @@ int Synth::delete_oscillator()
 		delete oscillators[total_oscillators - 1];
 		total_oscillators--;
 	}
+return 0;
 }
 
 
@@ -124,6 +130,7 @@ int Synth::destroy_oscillators()
 		delete oscillators[i];
 	}
 	total_oscillators = 0;
+return 0;
 }
 
 
@@ -141,6 +148,7 @@ int Synth::start_realtime()
 	waveform_length = 0;
 	samples_rendered = 0;
 	srand(time(0));
+return 0;
 }
 
 int Synth::stop_realtime()
@@ -148,6 +156,7 @@ int Synth::stop_realtime()
 // don't delete main_in and main_out since they aren't arrays of pointers to buffers
 	if(dsp_buffer) delete dsp_buffer;
 	destroy_oscillators();
+return 0;
 }
 
 int Synth::process_realtime(long size, float *input_ptr, float *output_ptr)
@@ -164,6 +173,7 @@ int Synth::process_realtime(long size, float *input_ptr, float *output_ptr)
 		
 		fragment_len = overlay_synth(i, fragment_len);
 	}
+return 0;
 }
 
 int Synth::overlay_synth(long start, long length)
@@ -208,6 +218,7 @@ int Synth::redo_buffers_procedure()
 	samples_rendered = 0;     // do some calculations on the next process_realtime
 	redo_buffers = 0;
 	waveform_sample = 0;
+return 0;
 }
 
 int Synth::solve_eqn(double *dsp_buffer, double x1, double x2)
@@ -215,6 +226,7 @@ int Synth::solve_eqn(double *dsp_buffer, double x1, double x2)
 	double normalize_constant = 1 / get_total_power();
 	for(int i = 0; i < total_oscillators; i++)
 		oscillators[i]->solve_eqn(dsp_buffer, x1, x2, normalize_constant);
+return 0;
 }
 
 double Synth::get_point(float x, double normalize_constant)
@@ -240,6 +252,7 @@ int Synth::start_gui()
 		oscillators[i]->load_defaults(defaults);
 	}
 	update_gui();
+return 0;
 }
 
 int Synth::stop_gui()
@@ -255,21 +268,25 @@ int Synth::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int Synth::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int Synth::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int Synth::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int Synth::save_data(char *text)
@@ -292,6 +309,7 @@ int Synth::save_data(char *text)
 
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int Synth::read_data(char *text)
@@ -325,6 +343,7 @@ int Synth::read_data(char *text)
 	}
 	redo_buffers = 1;
 	update_gui();
+return 0;
 }
 
 int Synth::update_gui()
@@ -337,6 +356,7 @@ int Synth::update_gui()
 			oscillators[i]->update_gui();
 		}
 	}
+return 0;
 }
 
 int Synth::reset()
@@ -348,6 +368,7 @@ int Synth::reset()
 		oscillators[i]->reset();
 	}
 	update_gui();
+return 0;
 }
 
 
@@ -462,6 +483,7 @@ int SynthOscillator::create_objects(int y)
 	{
 		gui = synth->thread->window->add_oscillator(this, y);
 	}
+return 0;
 }
 
 int SynthOscillator::set_y(int position)
@@ -473,6 +495,7 @@ int SynthOscillator::set_y(int position)
 		gui->phase->set_y(position);
 		gui->freq->set_y(position);
 	}
+return 0;
 }
 
 int SynthOscillator::update_gui()
@@ -483,6 +506,7 @@ int SynthOscillator::update_gui()
 		gui->phase->update(phase * 360);
 		gui->freq->update(freq_factor);
 	}
+return 0;
 }
 
 int SynthOscillator::reset()
@@ -498,6 +522,7 @@ int SynthOscillator::reset()
 
 	phase = 0;
 	freq_factor = 1;
+return 0;
 }
 
 int SynthOscillator::load_defaults(Defaults *defaults)
@@ -510,6 +535,7 @@ int SynthOscillator::load_defaults(Defaults *defaults)
 	phase = defaults->get(string, 0);
 	sprintf(string, "FREQFACTOR%d", number);
 	freq_factor = defaults->get(string, 1);
+return 0;
 }
 
 int SynthOscillator::read_data(FileHTAL *input)
@@ -517,6 +543,7 @@ int SynthOscillator::read_data(FileHTAL *input)
 	level = input->tag.get_property("LEVEL", level);
 	phase = input->tag.get_property("PHASE", phase);
 	freq_factor = input->tag.get_property("FREQFACTOR", freq_factor);
+return 0;
 }
 
 int SynthOscillator::save_defaults(Defaults *defaults)
@@ -529,6 +556,7 @@ int SynthOscillator::save_defaults(Defaults *defaults)
 	defaults->update(string, phase);
 	sprintf(string, "FREQFACTOR%d", number);
 	defaults->update(string, freq_factor);
+return 0;
 }
 
 int SynthOscillator::save_data(FileHTAL *output)
@@ -539,6 +567,7 @@ int SynthOscillator::save_data(FileHTAL *output)
 	output->tag.set_property("FREQFACTOR", freq_factor);
 	output->append_tag();
 	output->append_newline();
+return 0;
 }
 
 
@@ -547,7 +576,7 @@ double SynthOscillator::solve_eqn(double *output, double x1, double x2, double n
 	if(level <= INFINITYGAIN) return 0;
 
 	double result;
-	register double x;
+	double x;
 	double power = synth->db.fromdb(level) * normalize_constant;
 	double phase_offset = phase * synth->period;
 	double x3 = x1 + phase_offset;
@@ -594,6 +623,7 @@ double SynthOscillator::solve_eqn(double *output, double x1, double x2, double n
 			}
 			break;
 	}
+return 0;
 }
 
 double SynthOscillator::function_square(double x)
@@ -649,4 +679,5 @@ double SynthOscillator::get_point(float x, double normalize_constant)
 			return function_noise() * power;
 			break;
 	}
+return 0;
 }

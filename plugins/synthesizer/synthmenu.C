@@ -58,6 +58,7 @@ int SynthMenu::create_objects(Defaults *defaults)
 	harmonicmenu->add_menuitem(new SynthFreqOdd(synth));
 	harmonicmenu->add_menuitem(new SynthFreqPrime(synth));
 	//harmonicmenu->add_menuitem(new SynthFreqRandom(synth));
+return 0;
 }
 
 int SynthMenu::load_defaults(Defaults *defaults)
@@ -78,6 +79,7 @@ int SynthMenu::load_defaults(Defaults *defaults)
 			filemenu->add_menuitem(prev_load[i] = new SynthLoadPrev(synth, this, filename, path));
 		}
 	}
+return 0;
 }
 
 int SynthMenu::save_defaults(Defaults *defaults)
@@ -94,6 +96,7 @@ int SynthMenu::save_defaults(Defaults *defaults)
 			defaults->update(string, prev_load[i]->path);
 		}
 	}
+return 0;
 }
 
 int SynthMenu::add_load(char *path)
@@ -160,6 +163,7 @@ SynthLoad::~SynthLoad()
 int SynthLoad::handle_event()
 {
 	thread->start();
+return 0;
 }
 
 SynthSave::SynthSave(Synth *synth, SynthMenu *menu)
@@ -176,6 +180,7 @@ SynthSave::~SynthSave()
 int SynthSave::handle_event()
 {
 	thread->start();
+return 0;
 }
 
 SynthLoadPrev::SynthLoadPrev(Synth *synth, SynthMenu *menu, char *filename, char *path)
@@ -195,10 +200,12 @@ int SynthLoadPrev::handle_event()
 {
 	menu->prev_load_thread->set_path(path);
 	menu->prev_load_thread->start();
+return 0;
 }
 int SynthLoadPrev::set_path(char *path)
 {
 	strcpy(this->path, path);
+return 0;
 }
 
 
@@ -241,10 +248,12 @@ SynthSaveDialog::~SynthSaveDialog()
 int SynthSaveDialog::ok_event()
 {
 	set_done(0);
+return 0;
 }
 int SynthSaveDialog::cancel_event()
 {
 	set_done(1);
+return 0;
 }
 
 
@@ -300,6 +309,7 @@ void SynthLoadPrevThread::run()
 int SynthLoadPrevThread::set_path(char *path)
 {
 	strcpy(this->path, path);
+return 0;
 }
 
 
@@ -320,10 +330,12 @@ SynthLoadDialog::~SynthLoadDialog()
 int SynthLoadDialog::ok_event()
 {
 	set_done(0);
+return 0;
 }
 int SynthLoadDialog::cancel_event()
 {
 	set_done(1);
+return 0;
 }
 
 
@@ -341,6 +353,7 @@ int SynthLevelZero::handle_event()
 	}
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthLevelMax::SynthLevelMax(Synth *synth)
@@ -358,6 +371,7 @@ int SynthLevelMax::handle_event()
 	}
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthLevelNormalize::SynthLevelNormalize(Synth *synth)
@@ -391,6 +405,7 @@ int SynthLevelNormalize::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthLevelSlope::SynthLevelSlope(Synth *synth)
@@ -411,6 +426,7 @@ int SynthLevelSlope::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthLevelRandom::SynthLevelRandom(Synth *synth)
@@ -430,6 +446,7 @@ int SynthLevelRandom::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthLevelInvert::SynthLevelInvert(Synth *synth)
@@ -448,6 +465,7 @@ int SynthLevelInvert::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthLevelSine::SynthLevelSine(Synth *synth)
@@ -469,6 +487,7 @@ int SynthLevelSine::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 // ============================ phase calculations
@@ -489,6 +508,7 @@ int SynthPhaseInvert::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthPhaseZero::SynthPhaseZero(Synth *synth)
@@ -507,6 +527,7 @@ int SynthPhaseZero::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthPhaseSine::SynthPhaseSine(Synth *synth)
@@ -528,6 +549,7 @@ int SynthPhaseSine::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthPhaseRandom::SynthPhaseRandom(Synth *synth)
@@ -547,6 +569,7 @@ int SynthPhaseRandom::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 
@@ -569,6 +592,7 @@ int SynthFreqRandom::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthFreqEnum::SynthFreqEnum(Synth *synth)
@@ -587,6 +611,7 @@ int SynthFreqEnum::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthFreqEven::SynthFreqEven(Synth *synth)
@@ -608,6 +633,7 @@ int SynthFreqEven::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthFreqOdd::SynthFreqOdd(Synth *synth)
@@ -626,6 +652,7 @@ int SynthFreqOdd::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthFreqFibonacci::SynthFreqFibonacci(Synth *synth)
@@ -648,6 +675,7 @@ int SynthFreqFibonacci::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 SynthFreqPrime::SynthFreqPrime(Synth *synth)
@@ -668,6 +696,7 @@ int SynthFreqPrime::handle_event()
 
 	synth->update_gui();
 	synth->send_configure_change();
+return 0;
 }
 
 float SynthFreqPrime::get_next_prime(float number)
