@@ -1,5 +1,5 @@
 include ../global_config
-CFLAGS +=
+CFLAGS += -fPIC
 export CFLAGS
 
 
