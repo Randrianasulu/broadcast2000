@@ -37,10 +37,12 @@ int RGB601Main::start_realtime()
 		if(_601_to_rgb_value > VMAX) _601_to_rgb_value = VMAX;
 		_601_to_rgb_table[i] = _601_to_rgb_value;
 	}
+return 0;
 }
 
 int RGB601Main::stop_realtime()
 {
+return 0;
 }
 
 int RGB601Main::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -94,6 +96,7 @@ int RGB601Main::process_realtime(long size, VFrame **input_ptr, VFrame **output_
 			}
 		}
 	}
+return 0;
 }
 
 int RGB601Main::start_gui()
@@ -102,6 +105,7 @@ int RGB601Main::start_gui()
 	thread = new RGB601Thread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int RGB601Main::stop_gui()
@@ -111,27 +115,32 @@ int RGB601Main::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int RGB601Main::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int RGB601Main::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int RGB601Main::cleanup_gui()
 {
 	save_defaults();
+return 0;
 }
 
 
 int RGB601Main::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int RGB601Main::save_data(char *text)
@@ -153,6 +162,7 @@ int RGB601Main::save_data(char *text)
 	}
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int RGB601Main::read_data(char *text)
@@ -190,6 +200,7 @@ int RGB601Main::read_data(char *text)
 		thread->window->rgb_to_601->update(rgb_to_601);
 		thread->window->_601_to_rgb->update(_601_to_rgb);
 	}
+return 0;
 }
 
 
@@ -205,6 +216,7 @@ int RGB601Main::load_defaults()
 
 	rgb_to_601 = defaults->get("RGB601", 0);
 	_601_to_rgb = defaults->get("601RGB", 0);
+return 0;
 }
 
 int RGB601Main::save_defaults()
@@ -212,4 +224,5 @@ int RGB601Main::save_defaults()
 	defaults->update("RGB601", rgb_to_601);
 	defaults->update("601RGB", _601_to_rgb);
 	defaults->save();
+return 0;
 }

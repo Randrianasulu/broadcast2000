@@ -47,6 +47,7 @@ int RGB601Window::create_objects()
 	add_tool(new BC_Title(x, y, "601 -> RGB"));
 	y += 20;
 	add_tool(_601_to_rgb = new _601toRGBToggle(client, this, x, y));
+return 0;
 }
 
 int RGB601Window::close_event()
@@ -54,6 +55,7 @@ int RGB601Window::close_event()
 	client->cleanup_gui();
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 RGBto601Toggle::RGBto601Toggle(RGB601Main *client, RGB601Window *window, int x, int y)
@@ -71,6 +73,7 @@ int RGBto601Toggle::handle_event()
 	client->_601_to_rgb = 0;
 	window->_601_to_rgb->update(0);
 	client->send_configure_change();
+return 0;
 }
 
 _601toRGBToggle::_601toRGBToggle(RGB601Main *client, RGB601Window *window, int x, int y)
@@ -88,4 +91,5 @@ int _601toRGBToggle::handle_event()
 	client->rgb_to_601 = 0;
 	window->rgb_to_601->update(0);
 	client->send_configure_change();
+return 0;
 }
