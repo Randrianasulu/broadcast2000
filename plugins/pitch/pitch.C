@@ -26,6 +26,7 @@ PitchEngine::~PitchEngine()
 int PitchEngine::set_plugin(Pitch *pitch)
 {
 	this->pitch = pitch;
+return 0;
 }
 
 // int PitchEngine::update_buffers()
@@ -132,6 +133,7 @@ int PitchEngine::signal_process()
 
 	symmetry(window_size, freq_real, freq_imag);
 	position += window_size;
+return 0;
 }
 
 
@@ -158,6 +160,7 @@ int Pitch::reset_parameters()
 	freq_offset = 100;
 	redo_buffers = 1;       // set to redo buffers before the first render
 	engine.window_size = 16384;
+return 0;
 }
 
 
@@ -165,6 +168,7 @@ int Pitch::redo_buffers_procedure()
 {
 	engine.reconfigure();
 	redo_buffers = 0;
+return 0;
 }
 
 int Pitch::load_defaults()
@@ -180,6 +184,7 @@ int Pitch::load_defaults()
 
 	freq_offset = defaults->get("OFFSET", 100);
 	engine.window_size = defaults->get("WINDOWSIZE", engine.window_size);
+return 0;
 }
 
 int Pitch::save_defaults()
@@ -187,6 +192,7 @@ int Pitch::save_defaults()
 	defaults->update("OFFSET", freq_offset);
 	defaults->update("WINDOWSIZE", engine.window_size);
 	defaults->save();
+return 0;
 }
 
 char* Pitch::plugin_title() { return "Pitch"; }
@@ -197,10 +203,12 @@ int Pitch::start_realtime()
 {
 	engine.init_fft(in_buffer_size);
 	redo_buffers_procedure();
+return 0;
 }
 
 int Pitch::stop_realtime()
 {
+return 0;
 }
 
 int Pitch::process_realtime(long size, float *input_ptr, float *output_ptr)
@@ -222,6 +230,7 @@ int Pitch::start_gui()
 	thread->gui_started.lock();    // wait for the GUI to start
 
 	update_gui();            // fill GUI with parameters
+return 0;
 }
 
 int Pitch::stop_gui()
@@ -232,21 +241,25 @@ int Pitch::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int Pitch::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int Pitch::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int Pitch::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int Pitch::save_data(char *text)
@@ -262,6 +275,7 @@ int Pitch::save_data(char *text)
 	output.append_newline();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int Pitch::read_data(char *text)
@@ -287,6 +301,7 @@ int Pitch::read_data(char *text)
 
 	redo_buffers = 1;
 	update_gui();
+return 0;
 }
 
 int Pitch::update_gui()
@@ -295,10 +310,12 @@ int Pitch::update_gui()
 	{
 		thread->window->update_gui();
 	}
+return 0;
 }
 
 int Pitch::reset()
 {
 	reset_parameters();
 	update_gui();
+return 0;
 }

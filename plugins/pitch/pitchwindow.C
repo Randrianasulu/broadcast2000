@@ -45,20 +45,22 @@ int PitchWindow::create_objects()
 	add_tool(new BC_Title(x, y, "Frequency change (Automated):"));
 	y += 20;
 	add_tool(freq_offset = new PitchAmount(plugin, x + 150, y));
+return 0;
 }
 
 int PitchWindow::update_gui()
 {
 	freq_offset->update(plugin->freq_offset);
 	windowsize->update((int)plugin->engine.window_size);
+return 0;
 }
 
 int PitchWindow::close_event()
 {
 	hide_window();
 	plugin->send_hide_gui();
+return 0;
 }
-
 
 
 
@@ -80,6 +82,7 @@ int PitchAmount::handle_event()
 {
 	plugin->freq_offset = get_value();
 	plugin->send_configure_change();
+return 0;
 }
 
 
@@ -102,4 +105,5 @@ int PitchWindowSize::handle_event()
 		plugin->engine.window_size = atol(get_text());
 
 	plugin->send_configure_change();
+return 0;
 }

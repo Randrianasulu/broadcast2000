@@ -51,6 +51,7 @@ int ParametricMain::start_realtime()
 			bp_skirt[i][j] = 0;
 		}
 	}
+return 0;
 }
 
 int ParametricMain::stop_realtime()
@@ -58,6 +59,7 @@ int ParametricMain::stop_realtime()
 	delete dsp_buffer;
 	delete dsp_in;
 	delete dsp_out;
+return 0;
 }
 
 int ParametricMain::process_realtime(long size, float *input_ptr, float *output_ptr)
@@ -248,6 +250,7 @@ int ParametricMain::process_realtime(long size, float *input_ptr, float *output_
 				output_ptr[j] += dsp_out[j];
 			}
 	}
+return 0;
 }
 
 int ParametricMain::process_bp_soundtools(double &in_sample3, double &in_sample2, double *dsp_in, long size, double band_width, int center, double scale)
@@ -275,6 +278,7 @@ int ParametricMain::process_bp_soundtools(double &in_sample3, double &in_sample2
 		in_sample2 = *in_sample1;
 		in_sample1++;
 	}
+return 0;
 }
 
 int ParametricMain::process_bp(double &in_sample4, double &in_sample3, double &in_sample2, double *dsp_in, long size, double band_width, double center, double scale)
@@ -299,6 +303,7 @@ int ParametricMain::process_bp(double &in_sample4, double &in_sample3, double &i
 		in_sample2 = *in_sample1;
 		*in_sample1++ = c * in_sample3;
 	}
+return 0;
 }
 
 int ParametricMain::process_low(double &in_sample2, double &in_sample3, double *dsp_in, long size, int center, double scale)
@@ -319,6 +324,7 @@ int ParametricMain::process_low(double &in_sample2, double &in_sample3, double *
 		in_sample2 = *in_sample1;
 		*in_sample1++ = in_sample3 * scale;
 	}
+return 0;
 }
 
 int ParametricMain::process_high(double &in_sample2, double &in_sample3, double *dsp_in, long size, int center, double scale)
@@ -338,6 +344,7 @@ int ParametricMain::process_high(double &in_sample2, double &in_sample3, double 
 		in_sample2 = *in_sample1;
 		*in_sample1++ = in_sample3 * scale;
 	}
+return 0;
 }
 
 float ParametricMain::get_bp_level(float level)
@@ -373,6 +380,7 @@ int ParametricMain::start_gui()
 	thread = new ParametricThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int ParametricMain::stop_gui()
@@ -383,21 +391,25 @@ int ParametricMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int ParametricMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int ParametricMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int ParametricMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int ParametricMain::save_data(char *text)
@@ -418,6 +430,7 @@ int ParametricMain::save_data(char *text)
 	
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int ParametricMain::load_defaults()
@@ -436,6 +449,7 @@ int ParametricMain::load_defaults()
 		units[i]->load_defaults(defaults, i);
 	}
 	if(thread) thread->window->wetness->update(wetness);
+return 0;
 }
 
 int ParametricMain::save_defaults()
@@ -446,6 +460,7 @@ int ParametricMain::save_defaults()
 		units[i]->save_defaults(defaults, i);
 	}
 	defaults->save();
+return 0;
 }
 
 
@@ -478,6 +493,7 @@ int ParametricMain::read_data(char *text)
 	}
 	
 	if(thread) thread->window->wetness->update(wetness);
+return 0;
 }
 
 
@@ -532,6 +548,7 @@ int EQUnit::save(FileHTAL *htal)
 	htal->tag.set_title("/UNIT");
 	htal->append_tag();
 	htal->append_newline();
+return 0;
 }
 
 int EQUnit::load(FileHTAL *htal)
@@ -577,6 +594,7 @@ int EQUnit::load(FileHTAL *htal)
 
 // some are virtual plugins and some have GUIs
 	if(gui_unit) gui_unit->update();
+return 0;
 }
 
 int EQUnit::load_defaults(Defaults *defaults, int number)
@@ -597,6 +615,7 @@ int EQUnit::load_defaults(Defaults *defaults, int number)
 	sprintf(string, "HIGH%d", number);
 	highpass = defaults->get(string, 0);
 	if(gui_unit) gui_unit->update();
+return 0;
 }
 
 int EQUnit::save_defaults(Defaults *defaults, int number)
@@ -616,5 +635,6 @@ int EQUnit::save_defaults(Defaults *defaults, int number)
 	defaults->update(string, lowpass);
 	sprintf(string, "HIGH%d", number);
 	defaults->update(string, highpass);
+return 0;
 }
 

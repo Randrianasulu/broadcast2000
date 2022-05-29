@@ -48,12 +48,14 @@ int ParametricWindow::create_objects()
 	}
 	add_tool(wetness = new EQWetness(client));
 	add_tool(new BC_Title(380, 64, "Wetness"));
+return 0;
 }
 
 int ParametricWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 
@@ -91,6 +93,7 @@ int EQGuiUnit::create_objects()
 	add_tool(new BC_Title(30, 49, "EQ", SMALLFONT, MEYELLOW));
 	add_tool(new BC_Title(55, 49, "L", SMALLFONT, MEYELLOW));
 	add_tool(new BC_Title(75, 49, "H", SMALLFONT, MEYELLOW));
+return 0;
 }
 
 int EQGuiUnit::update()
@@ -103,6 +106,7 @@ int EQGuiUnit::update()
 	eq_toggle->update(unit->eqpass);
 	low_toggle->update(unit->lowpass);
 	high_toggle->update(unit->highpass);
+return 0;
 }
 
 
@@ -116,6 +120,7 @@ int EQLevel::handle_event()
 {
 	unit->level = get_value();
 	unit->client->send_configure_change();
+return 0;
 }
 
 EQFreq::EQFreq(EQUnit *unit)
@@ -128,6 +133,7 @@ int EQFreq::handle_event()
 {
 	unit->frequency = get_value();
 	unit->client->send_configure_change();
+return 0;
 }
 
 EQWidth::EQWidth(EQUnit *unit)
@@ -140,6 +146,7 @@ int EQWidth::handle_event()
 {
 	unit->quality = get_value();
 	unit->client->send_configure_change();
+return 0;
 }
 
 EQBandPass::EQBandPass(EQUnit *unit, EQGuiUnit *gui_unit)
@@ -160,6 +167,7 @@ int EQBandPass::handle_event()
 		gui_unit->high_toggle->update(0);
 	}
 	unit->client->send_configure_change();
+return 0;
 }
 
 
@@ -181,6 +189,7 @@ int EQPass::handle_event()
 		gui_unit->high_toggle->update(0);
 	}
 	unit->client->send_configure_change();
+return 0;
 }
 
 EQLowPass::EQLowPass(EQUnit *unit, EQGuiUnit *gui_unit)
@@ -201,6 +210,7 @@ int EQLowPass::handle_event()
 		gui_unit->high_toggle->update(0);
 	}
 	unit->client->send_configure_change();
+return 0;
 }
 
 EQHighPass::EQHighPass(EQUnit *unit, EQGuiUnit *gui_unit)
@@ -221,6 +231,7 @@ int EQHighPass::handle_event()
 		gui_unit->low_toggle->update(0);
 	}
 	unit->client->send_configure_change();
+return 0;
 }
 
 EQWetness::EQWetness(ParametricMain *client)
@@ -233,4 +244,5 @@ int EQWetness::handle_event()
 {
 	client->wetness = get_value();
 	client->send_configure_change();
+return 0;
 }
