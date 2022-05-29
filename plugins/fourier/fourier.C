@@ -161,6 +161,7 @@ CrossfadeFFT::~CrossfadeFFT()
 int CrossfadeFFT::reset_fourier()
 {
 	window_size = 4096;
+return 0;
 }
 
 int CrossfadeFFT::delete_fourier()
@@ -176,6 +177,7 @@ int CrossfadeFFT::delete_fourier()
 		delete temp_imag;
 	}
 	input_buffer = 0;
+return 0;
 }
 
 int CrossfadeFFT::fix_window_size()
@@ -185,17 +187,20 @@ int CrossfadeFFT::fix_window_size()
 	int new_size = 16;
 	while(new_size < window_size) new_size *= 2;
 	window_size = new_size;
+return 0;
 }
 
 int CrossfadeFFT::init_fft(int fragment_size)
 {
 	this->fragment_size = fragment_size;
 	first_window = 1;
+return 0;
 }
 
 long CrossfadeFFT::get_delay()
 {
 	return window_size + WINDOWBORDER;
+return 0;
 }
 
 int CrossfadeFFT::reconfigure()
@@ -249,6 +254,7 @@ int CrossfadeFFT::reconfigure()
 	temp_imag = new double[window_size];
 	input_buffer = new_input_buffer;
 	output_buffer = new_output_buffer;
+return 0;
 }
 
 int CrossfadeFFT::process_fifo(long size, float *input_ptr, float *output_ptr)
@@ -380,6 +386,7 @@ int CrossfadeFFT::process_fifo(long size, float *input_ptr, float *output_ptr)
 
 	fragment_out_position += size;
 	if(fragment_out_position >= input_size) fragment_out_position -= input_size;
+return 0;
 }
 
 
@@ -409,6 +416,7 @@ SlidingFFT::~SlidingFFT()
 int SlidingFFT::init_fft(int fragment_size)
 {
 	this->fragment_size = fragment_size;
+return 0;
 }
 
 int SlidingFFT::reconfigure()
@@ -449,6 +457,7 @@ int SlidingFFT::reconfigure()
 	}
 	
 	if(!dsp_out) dsp_out = new double[fragment_size];
+return 0;
 }
 
 int SlidingFFT::process_fifo(long size, float *input_ptr, float *output_ptr)

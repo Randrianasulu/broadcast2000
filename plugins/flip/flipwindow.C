@@ -47,12 +47,14 @@ int FlipWindow::create_objects()
 	add_tool(new BC_Title(x, y, "Horizontal"));
 	y += 20;
 	add_tool(flip_horizontal = new FlipToggle(client, &(client->flip_horizontal), x, y));
+return 0;
 }
 
 int FlipWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 FlipToggle::FlipToggle(FlipMain *client, int *output, int x, int y)
@@ -68,4 +70,5 @@ int FlipToggle::handle_event()
 {
 	*output = get_value();
 	client->send_configure_change();
+return 0;
 }

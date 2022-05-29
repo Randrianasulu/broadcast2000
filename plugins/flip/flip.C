@@ -28,10 +28,12 @@ int FlipMain::plugin_is_multi_channel() { return 0; }
 	
 int FlipMain::start_realtime()
 {
+return 0;
 }
 
 int FlipMain::stop_realtime()
 {
+return 0;
 }
 
 int FlipMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -84,6 +86,7 @@ int FlipMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_pt
 			}
 		}
 	}
+return 0;
 }
 
 int FlipMain::swap_pixels(VPixel *in, VPixel *out)
@@ -92,6 +95,7 @@ int FlipMain::swap_pixels(VPixel *in, VPixel *out)
 	temp = *in;
 	*in = *out;
 	*out = temp;
+return 0;
 }
 
 
@@ -100,6 +104,7 @@ int FlipMain::start_gui()
 	thread = new FlipThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int FlipMain::stop_gui()
@@ -108,21 +113,25 @@ int FlipMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int FlipMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int FlipMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int FlipMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int FlipMain::save_data(char *text)
@@ -144,6 +153,7 @@ int FlipMain::save_data(char *text)
 	}
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int FlipMain::read_data(char *text)
@@ -181,4 +191,5 @@ int FlipMain::read_data(char *text)
 		thread->window->flip_vertical->update(flip_vertical);
 		thread->window->flip_horizontal->update(flip_horizontal);
 	}
+return 0;
 }

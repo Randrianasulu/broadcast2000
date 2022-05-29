@@ -39,7 +39,7 @@ public:
 // Process all windows in the input
 	int process_fifo(long size, float *input_ptr, float *output_ptr);
 
-	virtual int signal_process() {};        // Process in the frequency domain
+	virtual int signal_process() {return 0;};        // Process in the frequency domain
 
 // data for fourier
 	long window_size;   // Size of a window.  Automatically fixed to a power of 2
@@ -74,7 +74,7 @@ public:
 	int init_fft(int fragment_size);
 	int reconfigure();
 	int process_fifo(long size, float *input_ptr, float *output_ptr);
-	virtual int signal_process() {};    // user processing here
+	virtual int signal_process() { return 0; };    // user processing here
 
 	int dsp_length;
 	double *dsp_buffer, *dsp_out;
