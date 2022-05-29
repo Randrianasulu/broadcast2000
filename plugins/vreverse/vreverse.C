@@ -83,6 +83,7 @@ int VReverseMain::start_plugin()
 		progress->stop_progress();
 		delete progress;
 	}
+return 0;
 }
 
 int VReverseMain::swap_frames(VFrame *frame1, VFrame *frame2)
