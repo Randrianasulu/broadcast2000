@@ -58,6 +58,7 @@ int HueWindow::create_objects()
 	add_tool(automation[2] = new AutomatedFn(client, this, x + 80, y, 2));
 	y += 20;
 	add_tool(value_slider = new ValueSlider(client, x, y));
+return 0;
 }
 
 int HueWindow::close_event()
@@ -65,6 +66,7 @@ int HueWindow::close_event()
 	client->save_defaults();
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 HueSlider::HueSlider(HueMain *client, int x, int y)
@@ -79,6 +81,7 @@ int HueSlider::handle_event()
 {
 	client->hue = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 SaturationSlider::SaturationSlider(HueMain *client, int x, int y)
@@ -93,6 +96,7 @@ int SaturationSlider::handle_event()
 {
 	client->saturation = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 ValueSlider::ValueSlider(HueMain *client, int x, int y)
@@ -107,6 +111,7 @@ int ValueSlider::handle_event()
 {
 	client->value = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 AutomatedFn::AutomatedFn(HueMain *client, HueWindow *window, int x, int y, int number)
@@ -130,5 +135,6 @@ int AutomatedFn::handle_event()
 	update(1);
 	client->automated_function = number;
 	client->send_configure_change();
+return 0;
 }
 

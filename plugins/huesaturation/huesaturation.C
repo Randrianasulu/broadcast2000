@@ -47,6 +47,7 @@ int HueMain::start_realtime()
 		engine[i]->start();
 		y1 += y_increment;
 	}
+return 0;
 }
 
 int HueMain::stop_realtime()
@@ -56,6 +57,7 @@ int HueMain::stop_realtime()
 		delete engine[i];
 	}
 	delete engine;
+return 0;
 }
 
 
@@ -65,6 +67,7 @@ int HueMain::start_gui()
 	thread = new HueThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int HueMain::stop_gui()
@@ -74,21 +77,25 @@ int HueMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int HueMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int HueMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int HueMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int HueMain::load_defaults()
@@ -105,6 +112,7 @@ int HueMain::load_defaults()
 	saturation = defaults->get("SATURATION", 0);
 	value = defaults->get("VALUE", 0);
 	automated_function = defaults->get("AUTOMATION", automated_function);
+return 0;
 }
 
 int HueMain::save_defaults()
@@ -114,6 +122,7 @@ int HueMain::save_defaults()
 	defaults->update("VALUE", value);
 	defaults->update("AUTOMATION", automated_function);
 	defaults->save();
+return 0;
 }
 
 int HueMain::save_data(char *text)
@@ -136,6 +145,7 @@ int HueMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int HueMain::read_data(char *text)
@@ -183,6 +193,7 @@ int HueMain::read_data(char *text)
 			thread->window->automation[i]->update(automated_function == i);
 		}
 	}
+return 0;
 }
 
 int HueMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -230,10 +241,12 @@ int HueMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr
 	hue = old_hue;
 	saturation = old_saturation;
 	value = old_value;
+return 0;
 }
 
 int HueMain::reconfigure()
 {
+return 0;
 }
 
 HueEngine::HueEngine(HueMain *plugin, int start_y, int end_y)
@@ -260,11 +273,13 @@ int HueEngine::start_process_frame(VFrame **output, VFrame **input, int size)
 	this->input = input;
 	this->size = size;
 	input_lock.unlock();
+return 0;
 }
 
 int HueEngine::wait_process_frame()
 {
 	output_lock.lock();
+return 0;
 }
 
 void HueEngine::run()

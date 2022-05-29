@@ -40,12 +40,14 @@ int InvertWindow::create_objects()
 {
 	add_tool(toggle = new InvertToggle(client));
 	add_tool(new BC_Title(30, 10, "Invert"));
+return 0;
 }
 
 int InvertWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 InvertToggle::InvertToggle(InvertMain *client)
@@ -60,4 +62,5 @@ int InvertToggle::handle_event()
 {
 	client->invert = get_value();
 	client->send_configure_change();
+return 0;
 }

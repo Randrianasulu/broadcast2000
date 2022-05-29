@@ -28,18 +28,21 @@ int InvertMain::plugin_is_multi_channel() { return 0; }
 	
 int InvertMain::start_realtime()
 {
+return 0;
 }
 
 int InvertMain::stop_realtime()
 {
+return 0;
 }
 
 int InvertMain::process_realtime(long size, float *input_ptr, float *output_ptr)
 {
 	if(invert)
-	for(register int j = 0; j < size; j++) output_ptr[j] = input_ptr[j] * -1;
+	for(int j = 0; j < size; j++) output_ptr[j] = input_ptr[j] * -1;
 	else
-	for(register int j = 0; j < size; j++) output_ptr[j] = input_ptr[j];
+	for(int j = 0; j < size; j++) output_ptr[j] = input_ptr[j];
+return 0;
 }
 
 
@@ -48,6 +51,7 @@ int InvertMain::start_gui()
 	thread = new InvertThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int InvertMain::stop_gui()
@@ -56,21 +60,25 @@ int InvertMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int InvertMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int InvertMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int InvertMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int InvertMain::save_data(char *text)
@@ -84,6 +92,7 @@ int InvertMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int InvertMain::read_data(char *text)
@@ -107,4 +116,5 @@ int InvertMain::read_data(char *text)
 		}
 	}
 	if(thread) thread->window->toggle->update(invert);
+return 0;
 }
