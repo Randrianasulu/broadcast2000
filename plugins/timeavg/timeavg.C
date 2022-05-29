@@ -31,6 +31,7 @@ int TimeAvgMain::plugin_is_multi_channel() { return 0; }
 	
 int TimeAvgMain::start_realtime()
 {
+return 0;
 }
 
 int TimeAvgMain::stop_realtime()
@@ -42,6 +43,7 @@ int TimeAvgMain::stop_realtime()
 			delete ring_buffer[i];
 		delete ring_buffer;
 	}
+return 0;
 }
 
 int TimeAvgMain::redo_buffers_procedure()
@@ -66,6 +68,7 @@ int TimeAvgMain::redo_buffers_procedure()
 	ring_buffer = new_frames;
 	if(current_frame >= total_frames) current_frame = 0;
 	redo_buffers = 0;
+return 0;
 }
 
 
@@ -73,7 +76,7 @@ int TimeAvgMain::process_realtime(long size, VFrame **input_ptr, VFrame **output
 {
 	if(redo_buffers) redo_buffers_procedure();
 
-	register int i, j, k, l, m;
+	int i, j, k, l, m;
 	VPixel *input_row, *output_row;
 	typedef struct {
 		int r;
@@ -143,6 +146,7 @@ int TimeAvgMain::process_realtime(long size, VFrame **input_ptr, VFrame **output
 		if(current_frame >= total_frames) current_frame = 0;
 	}
 	delete [] temp_row;
+return 0;
 }
 
 int TimeAvgMain::test_clip(int &r, int &g, int &b, int &a)
@@ -162,6 +166,7 @@ int TimeAvgMain::start_gui()
 	thread = new TimeAvgThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int TimeAvgMain::stop_gui()
@@ -171,21 +176,25 @@ int TimeAvgMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int TimeAvgMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int TimeAvgMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int TimeAvgMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int TimeAvgMain::load_defaults()
@@ -199,12 +208,14 @@ int TimeAvgMain::load_defaults()
 	defaults->load();
 
 	total_frames = defaults->get("TOTAL_FRAMES", total_frames);
+return 0;
 }
 
 int TimeAvgMain::save_defaults()
 {
 	defaults->update("TOTAL_FRAMES", total_frames);
 	defaults->save();
+return 0;
 }
 
 int TimeAvgMain::save_data(char *text)
@@ -218,6 +229,7 @@ int TimeAvgMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int TimeAvgMain::read_data(char *text)
@@ -245,4 +257,5 @@ int TimeAvgMain::read_data(char *text)
 		thread->window->total_frames->update(total_frames);
 	}
 	redo_buffers = 1;
+return 0;
 }

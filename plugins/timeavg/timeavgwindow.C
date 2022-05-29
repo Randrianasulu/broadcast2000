@@ -41,12 +41,14 @@ int TimeAvgWindow::create_objects()
 	add_tool(new BC_Title(x, y, "Frames to average"));
 	y += 20;
 	add_tool(total_frames = new TimeAvgSlider(client, x, y));
+return 0;
 }
 
 int TimeAvgWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 TimeAvgSlider::TimeAvgSlider(TimeAvgMain *client, int x, int y)
@@ -63,4 +65,5 @@ int TimeAvgSlider::handle_event()
 	if(result < 1 || result > 30) result = 1;
 	client->total_frames = result;
 	client->send_configure_change();
+return 0;
 }
