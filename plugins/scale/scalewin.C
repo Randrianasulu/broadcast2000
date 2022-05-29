@@ -54,6 +54,7 @@ int ScaleWin::create_objects()
 	add_tool(height = new ScaleHeight(this, client, x, y, string));
 	y += 35;
 	add_tool(constrain = new ScaleConstrain(client, x, y));
+return 0;
 }
 
 int ScaleWin::close_event()
@@ -61,6 +62,7 @@ int ScaleWin::close_event()
 	hide_window();
 	client->cleanup_gui();
 	client->send_hide_gui();
+return 0;
 }
 
 ScaleWidth::ScaleWidth(ScaleWin *win, ScaleMain *client, int x, int y, char *string)
@@ -86,6 +88,7 @@ int ScaleWidth::handle_event()
 		client->scale_h = client->scale_w;
 	}
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -112,6 +115,7 @@ int ScaleHeight::handle_event()
 		client->scale_w = client->scale_h;
 	}
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -131,4 +135,5 @@ int ScaleConstrain::handle_event()
 {
 	client->constrain = get_value();
 	client->send_configure_change();
+return 0;
 }

@@ -33,10 +33,12 @@ int ScaleMain::plugin_is_multi_channel() { return 0; }
 
 int ScaleMain::start_realtime()
 {
+return 0;
 }
 
 int ScaleMain::stop_realtime()
 {
+return 0;
 }
 
 int ScaleMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -126,6 +128,7 @@ int ScaleMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_p
 			output_ptr[0]->copy_from(output);
 		}
 	}
+return 0;
 }
 
 
@@ -137,6 +140,7 @@ int ScaleMain::start_gui()
 	thread = new ScaleThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int ScaleMain::stop_gui()
@@ -146,26 +150,31 @@ int ScaleMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int ScaleMain::cleanup_gui()
 {
 	save_defaults();
+return 0;
 }
 
 int ScaleMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int ScaleMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int ScaleMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int ScaleMain::load_defaults()
@@ -181,6 +190,7 @@ int ScaleMain::load_defaults()
 	scale_w = defaults->get("WIDTH", (float)1);
 	scale_h = defaults->get("HEIGHT", (float)1);
 	constrain = defaults->get("CONSTRAIN", 1);
+return 0;
 }
 
 int ScaleMain::save_defaults()
@@ -189,6 +199,7 @@ int ScaleMain::save_defaults()
 	defaults->update("HEIGHT", scale_h);
 	defaults->update("CONSTRAIN", constrain);
 	defaults->save();
+return 0;
 }
 
 int ScaleMain::save_data(char *text)
@@ -211,6 +222,7 @@ int ScaleMain::save_data(char *text)
 	}
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int ScaleMain::read_data(char *text)
@@ -249,4 +261,5 @@ int ScaleMain::read_data(char *text)
 		thread->window->height->update(string);
 		thread->window->constrain->update(constrain);
 	}
+return 0;
 }
