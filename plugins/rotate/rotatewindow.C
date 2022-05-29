@@ -60,6 +60,7 @@ int RotateWindow::create_objects()
 	add_tool(new BC_Title(x, y, "Angle"));
 	y += 20;
 	add_tool(new BC_Title(x, y, "(Automated)"));
+return 0;
 }
 
 int RotateWindow::close_event()
@@ -67,17 +68,20 @@ int RotateWindow::close_event()
 	client->save_defaults();
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 int RotateWindow::update_parameters()
 {
 	update_fine();
 	update_toggles();
+return 0;
 }
 
 int RotateWindow::update_fine()
 {
 	fine->update(client->angle);
+return 0;
 }
 
 int RotateWindow::update_toggles()
@@ -86,6 +90,7 @@ int RotateWindow::update_toggles()
 	toggle90->update(client->angle == 90);
 	toggle180->update(client->angle == 180);
 	toggle270->update(client->angle == 270);
+return 0;
 }
 
 RotateToggle::RotateToggle(RotateWindow *window, RotateMain *client, int init_value, int x, int y, int value, char *string)
@@ -101,8 +106,9 @@ RotateToggle::~RotateToggle()
 int RotateToggle::handle_event()
 {
 	client->angle = (float)RotateToggle::value;
-    window->update_parameters();
+    	window->update_parameters();
 	client->send_configure_change();
+return 0;
 }
 
 RotateFine::RotateFine(RotateWindow *window, RotateMain *client, int x, int y)
@@ -110,6 +116,7 @@ RotateFine::RotateFine(RotateWindow *window, RotateMain *client, int x, int y)
 {
 	this->window = window;
 	this->client = client;
+return 0;
 }
 
 RotateFine::~RotateFine()
@@ -121,4 +128,5 @@ int RotateFine::handle_event()
 	client->angle = get_value();
 	window->update_toggles();
 	client->send_configure_change();
+return 0;
 }

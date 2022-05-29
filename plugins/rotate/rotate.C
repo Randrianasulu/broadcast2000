@@ -49,6 +49,7 @@ int RotateMain::start_realtime()
 		engine[i]->start();
 		y1 += y_increment;
 	}
+return 0;
 }
 
 int RotateMain::stop_realtime()
@@ -58,6 +59,7 @@ int RotateMain::stop_realtime()
 		delete engine[i];
 	}
 	delete engine;
+return 0;
 }
 
 int RotateMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -103,6 +105,7 @@ int RotateMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_
 		}
 		angle = old_angle;
 	}
+return 0;
 }
 
 int RotateMain::clear_unused(VPixel **input_rows, VPixel **output_rows, int out_x1, int out_y1, int out_x2, int out_y2)
@@ -136,6 +139,7 @@ int RotateMain::clear_unused(VPixel **input_rows, VPixel **output_rows, int out_
 	        output_rows[i][j].r = output_rows[i][j].g = output_rows[i][j].b = output_rows[i][j].a = 0;
         }
     }
+return 0;
 }
 
 int RotateMain::get_rightdimensions(int &diameter, int &in_x1, int &in_y1, int &in_x2, int &in_y2, int &out_x1, int &out_y1, int &out_x2, int &out_y2)
@@ -145,6 +149,7 @@ int RotateMain::get_rightdimensions(int &diameter, int &in_x1, int &in_y1, int &
     out_x2 = in_x2 = in_x1 + diameter - 1;
     out_y1 = in_y1 = project_frame_h / 2 - diameter / 2;
     out_y2 = in_y2 = in_y1 + diameter - 1;
+return 0;
 }
 
 int RotateMain::rotate_rightangle(VPixel **input_rows, VPixel **output_rows, int angle)
@@ -217,6 +222,7 @@ int RotateMain::rotate_rightangle(VPixel **input_rows, VPixel **output_rows, int
             clear_unused(input_rows, output_rows, out_x1, out_y1, out_x2, out_y2);
         	break;
     }
+return 0;
 }
 
 int RotateMain::rotate_obliqueangle(VPixel **input_rows, VFrame *output, int angle)
@@ -275,6 +281,7 @@ int RotateMain::rotate_obliqueangle(VPixel **input_rows, VFrame *output, int ang
 	}
 	((VPixel**)temp_frame->get_rows())[cen_y][cen_x] = input_rows[cen_y][cen_x];
 	output->copy_from(temp_frame);
+return 0;
 }
 
 int RotateMain::start_gui()
@@ -283,6 +290,7 @@ int RotateMain::start_gui()
 	thread = new RotateThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int RotateMain::stop_gui()
@@ -292,21 +300,25 @@ int RotateMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int RotateMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int RotateMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int RotateMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int RotateMain::load_defaults()
@@ -320,12 +332,14 @@ int RotateMain::load_defaults()
 	defaults->load();
 
 	angle = defaults->get("ANGLE", (float)angle);
+return 0;
 }
 
 int RotateMain::save_defaults()
 {
 	defaults->update("ANGLE", angle);
 	defaults->save();
+return 0;
 }
 
 int RotateMain::save_data(char *text)
@@ -339,6 +353,7 @@ int RotateMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int RotateMain::read_data(char *text)
@@ -365,6 +380,7 @@ int RotateMain::read_data(char *text)
 	{
 		thread->window->update_parameters();
 	}
+return 0;
 }
 
 RotateEngine::RotateEngine(RotateMain *plugin, int row1, int row2) : Thread()
@@ -393,6 +409,7 @@ int RotateEngine::generate_matrix(int interpolate)
 	this->do_matrix = 1;
 	this->interpolate = interpolate;
 	input_lock.unlock();
+return 0;
 }
 
 int RotateEngine::perform_rotation(VPixel **input_rows, VPixel **output_rows, int interpolate)
@@ -402,12 +419,14 @@ int RotateEngine::perform_rotation(VPixel **input_rows, VPixel **output_rows, in
 	this->do_rotation = 1;
 	this->interpolate = interpolate;
 	input_lock.unlock();
+return 0;
 }
 
 
 int RotateEngine::wait_completion()
 {
 	output_lock.lock();
+return 0;
 }
 
 int RotateEngine::coords_to_pixel(int &input_y, int &input_x)
@@ -436,15 +455,16 @@ int RotateEngine::coords_to_pixel(SourceCoord &float_pixel, float &input_y, floa
 	if(input_x >= plugin->project_frame_w) float_pixel.x = -1;
 	else
 	float_pixel.x = input_x;
+return 0;
 }
 
 
 int RotateEngine::create_matrix()
 {
 // Polar coords of pixel
-	register double k, l, magnitude, angle, offset_angle, offset_angle2;
-	register double x_offset, y_offset;
-	register int i, j;
+	double k, l, magnitude, angle, offset_angle, offset_angle2;
+	double x_offset, y_offset;
+	int i, j;
 	int *int_row;
 	SourceCoord *float_row;
 	int input_x_i, input_y_i;
@@ -503,6 +523,7 @@ int RotateEngine::create_matrix()
 //printf("RotateEngine::create_matrix 3\n");
 	}
 //printf("RotateEngine::create_matrix 2\n");
+return 0;
 }
 
 int RotateEngine::perform_rotation()
@@ -585,6 +606,7 @@ int RotateEngine::perform_rotation()
 			}
 		}
 	}
+return 0;
 }
 
 void RotateEngine::run()
