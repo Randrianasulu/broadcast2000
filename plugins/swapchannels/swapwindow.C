@@ -54,12 +54,14 @@ int SwapWindow::create_objects()
 	y += 25;
 	add_tool(new BC_Title(x + 160, y + 5, "-> Alpha"));
 	add_tool(alpha = new SwapMenu(client, &(client->alpha), x, y));
+return 0;
 }
 
 int SwapWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 
@@ -78,6 +80,7 @@ SwapMenu::~SwapMenu()
 int SwapMenu::handle_event()
 {
 	client->send_configure_change();
+return 0;
 }
 
 int SwapMenu::add_items()
@@ -88,6 +91,7 @@ int SwapMenu::add_items()
 	add_item(new SwapItem(this, client->output_to_text(ALPHA_SRC)));
 	add_item(new SwapItem(this, client->output_to_text(NO_SRC)));
 	add_item(new SwapItem(this, client->output_to_text(MAX_SRC)));
+return 0;
 }
 
 
@@ -108,4 +112,5 @@ int SwapItem::handle_event()
 	menu->update(get_text());
 	*(menu->output) = menu->client->text_to_output(get_text());
 	menu->handle_event();
+return 0;
 }

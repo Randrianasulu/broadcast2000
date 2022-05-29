@@ -29,10 +29,12 @@ int SwapMain::plugin_is_multi_channel() { return 0; }
 	
 int SwapMain::start_realtime()
 {
+return 0;
 }
 
 int SwapMain::stop_realtime()
 {
+return 0;
 }
 
 #define MAXMINSRC(src) \
@@ -94,6 +96,7 @@ int SwapMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_pt
 			}
 		}
 	}
+return 0;
 }
 
 
@@ -103,6 +106,7 @@ int SwapMain::start_gui()
 	thread = new SwapThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int SwapMain::stop_gui()
@@ -112,21 +116,25 @@ int SwapMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int SwapMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int SwapMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int SwapMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int SwapMain::load_defaults()
@@ -143,6 +151,7 @@ int SwapMain::load_defaults()
 	green = defaults->get("GREEN", green);
 	blue = defaults->get("BLUE", blue);
 	alpha = defaults->get("ALPHA", alpha);
+return 0;
 }
 
 int SwapMain::save_defaults()
@@ -152,6 +161,7 @@ int SwapMain::save_defaults()
 	defaults->update("BLUE", blue);
 	defaults->update("ALPHA", alpha);
 	defaults->save();
+return 0;
 }
 
 int SwapMain::save_data(char *text)
@@ -168,6 +178,7 @@ int SwapMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int SwapMain::read_data(char *text)
@@ -200,6 +211,7 @@ int SwapMain::read_data(char *text)
 		thread->window->blue->update(output_to_text(blue));
 		thread->window->alpha->update(output_to_text(alpha));
 	}
+return 0;
 }
 
 char* SwapMain::output_to_text(int value)
