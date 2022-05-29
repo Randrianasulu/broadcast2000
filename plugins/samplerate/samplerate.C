@@ -28,6 +28,7 @@ SampleRateMain::~SampleRateMain()
 int SampleRateMain::run_client()
 {
 	plugin_exit();
+return 0;
 }
 
 char* SampleRateMain::plugin_title() { return "Resample"; }
@@ -64,6 +65,7 @@ int SampleRateMain::load_defaults()
 	defaults->load();
 
 	output_rate = defaults->get("OUTPUTRATE", 44100);
+return 0;
 }
 
 int SampleRateMain::save_defaults()
@@ -71,6 +73,7 @@ int SampleRateMain::save_defaults()
 //printf("save_defaults\n");
 	defaults->update("OUTPUTRATE", output_rate);
 	defaults->save();
+return 0;
 }
 
 int SampleRateMain::get_parameters()
@@ -201,6 +204,7 @@ int SampleRateMain::transfer_buffer(double *in, double *out, int len)
 	
 	end = out + len;
 	while(out != end) *out++ = *in++;
+return 0;
 }
 
 int SampleRateMain::apply_filter(register double *dsp_in, register double *coefficient_array, int filter_length, double *dsp_out)
@@ -215,6 +219,7 @@ int SampleRateMain::apply_filter(register double *dsp_in, register double *coeff
 	}
 
 	*dsp_out = result;
+return 0;
 }
 
 int SampleRateMain::process_buffer(double *dsp_in, 
@@ -247,6 +252,7 @@ int SampleRateMain::process_buffer(double *dsp_in,
 		if(!(cycle_counter %= upsampling_factor)) in_start += downsampling_factor;
 		if(!(out_start %= output_size)) return output_size;
 	}
+return 0;
 }
 
 int SampleRateMain::write_dsp(double *dsp_out, long out_buffer_size)

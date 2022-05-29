@@ -18,12 +18,13 @@ int SRateWindow::create_objects(int *output_rate)
 	add_tool(ok = new SRateWindowOK(this));
 	add_tool(cancel = new SRateWindowCancel(this));
 	add_tool(rate_text = new SRateWindowRate(this->output_rate));
+return 0;
 }
 
 SRateWindowOK::SRateWindowOK(SRateWindow *window) : BC_BigButton(10, 80, "OK")
 { this->window = window; }
 
-int SRateWindowOK::handle_event() { window->set_done(0); }
+int SRateWindowOK::handle_event() { window->set_done(0); return 0; }
 
 int SRateWindowOK::keypress_event() 
 { 
@@ -34,7 +35,7 @@ int SRateWindowOK::keypress_event()
 SRateWindowCancel::SRateWindowCancel(SRateWindow *window) : BC_BigButton(200, 80, "Cancel")
 { this->window = window; }
 
-int SRateWindowCancel::handle_event() { window->set_done(1); }
+int SRateWindowCancel::handle_event() { window->set_done(1); return 0; }
 
 int SRateWindowCancel::keypress_event() 
 { 
@@ -54,4 +55,5 @@ SRateWindowRate::~SRateWindowRate()
 int SRateWindowRate::handle_event()
 {
 	*output_rate = atol(get_text());
+return 0;
 }
