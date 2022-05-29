@@ -43,7 +43,7 @@ LIBPREFIX = \$(PREFIX)/lib
 EOF
 
 if test -z "$CFLAGS"; then
-	echo >> global_config "CFLAGS = -O0 -fpermissive -march=i586 -I/usr/local/include"
+	echo >> global_config "CFLAGS = -O3 -fpermissive -march=i586 -I/usr/local/include"
 fi
 
 echo >> global_config "CFLAGS += -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
