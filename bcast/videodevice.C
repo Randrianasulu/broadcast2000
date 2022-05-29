@@ -1135,4 +1135,5 @@ return 0;
 BC_Bitmap* VideoDevice::get_bitmap()
 {
 	if(output_base) return output_base->get_bitmap();
+return;
 }
