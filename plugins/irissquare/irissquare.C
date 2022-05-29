@@ -27,10 +27,12 @@ int IrisSquareMain::plugin_is_multi_channel() { return 1; }
 
 int IrisSquareMain::start_realtime()
 {
+return 0;
 }
 
 int IrisSquareMain::stop_realtime()
 {
+return 0;
 }
 
 int IrisSquareMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***output_ptr)
@@ -102,6 +104,7 @@ int IrisSquareMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***o
 			output[i][j] = input1[i][j];
 		}
 	}
+return 0;
 }
 
 
@@ -111,6 +114,7 @@ int IrisSquareMain::start_gui()
 	thread = new IrisSquareThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int IrisSquareMain::stop_gui()
@@ -119,21 +123,25 @@ int IrisSquareMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int IrisSquareMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int IrisSquareMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int IrisSquareMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int IrisSquareMain::save_data(char *text)
@@ -151,6 +159,7 @@ int IrisSquareMain::save_data(char *text)
 	}
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int IrisSquareMain::read_data(char *text)
@@ -178,4 +187,5 @@ int IrisSquareMain::read_data(char *text)
 	{
 		thread->window->reverse->update(reverse);
 	}
+return 0;
 }

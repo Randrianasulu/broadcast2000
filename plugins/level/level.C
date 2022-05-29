@@ -28,10 +28,12 @@ int LevelMain::plugin_is_multi_channel() { return 0; }
 	
 int LevelMain::start_realtime()
 {
+return 0;
 }
 
 int LevelMain::stop_realtime()
 {
+return 0;
 }
 
 int LevelMain::load_defaults()
@@ -45,12 +47,14 @@ int LevelMain::load_defaults()
 	defaults->load();
 
 	level = defaults->get("LEVEL", (float)0);
+return 0;
 }
 
 int LevelMain::save_defaults()
 {
 	defaults->update("LEVEL", level);
 	defaults->save();
+return 0;
 }
 	
 int LevelMain::process_realtime(long size, float *input_ptr, float *output_ptr)
@@ -71,6 +75,7 @@ int LevelMain::process_realtime(long size, float *input_ptr, float *output_ptr)
 		float scale = db.fromdb(new_level);
 		for(register int j = 0; j < size; j++) output_ptr[j] = input_ptr[j] * scale;
 	}
+return 0;
 }
 
 
@@ -80,6 +85,7 @@ int LevelMain::start_gui()
 	thread = new LevelThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int LevelMain::stop_gui()
@@ -89,21 +95,25 @@ int LevelMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int LevelMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int LevelMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int LevelMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int LevelMain::save_data(char *text)
@@ -117,6 +127,7 @@ int LevelMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int LevelMain::read_data(char *text)
@@ -142,4 +153,5 @@ int LevelMain::read_data(char *text)
 		}
 	}
 	if(thread) thread->window->slider->update(level);
+return 0;
 }

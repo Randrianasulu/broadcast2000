@@ -40,12 +40,14 @@ int IrisSquareWin::create_objects()
 {
 	int x = 10, y = 10;
 	add_tool(reverse = new IrisSquareReverse(client, x, y));
+return 0;
 }
 
 int IrisSquareWin::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 
@@ -64,4 +66,5 @@ int IrisSquareReverse::handle_event()
 {
 	client->reverse = get_value();
 	client->send_configure_change();
+return 0;
 }

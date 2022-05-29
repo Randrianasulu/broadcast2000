@@ -40,12 +40,14 @@ int LevelWindow::create_objects()
 {
 	add_tool(slider = new LevelSlider(client));
 	add_tool(new BC_Title(10, 40, "(Automated)"));
+return 0;
 }
 
 int LevelWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 LevelSlider::LevelSlider(LevelMain *client)
@@ -60,4 +62,5 @@ int LevelSlider::handle_event()
 {
 	client->level = get_value();
 	client->send_configure_change();
+return 0;
 }

@@ -44,15 +44,18 @@ int OilMain::plugin_is_multi_channel() { return 0; }
 int OilMain::start_realtime()
 {
 	redo_buffers = 1;
+return 0;
 }
 
 int OilMain::stop_realtime()
 {
+return 0;
 }
 
 int OilMain::reconfigure()
 {
 	redo_buffers = 0;
+return 0;
 }
 
 int OilMain::oil_rgb(VPixel **in_rows, VPixel **out_rows, int use_intensity)
@@ -154,6 +157,7 @@ int OilMain::oil_rgb(VPixel **in_rows, VPixel **out_rows, int use_intensity)
 			}
 		}
 	}
+return 0;
 }
 
 int OilMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -194,6 +198,7 @@ int OilMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr
 			oil_rgb(input_rows, output_rows, use_intensity);
 		}
 	}
+return 0;
 }
 
 int OilMain::start_gui()
@@ -202,6 +207,7 @@ int OilMain::start_gui()
 	thread = new OilThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int OilMain::stop_gui()
@@ -211,21 +217,25 @@ int OilMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int OilMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int OilMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int OilMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int OilMain::load_defaults()
@@ -240,6 +250,7 @@ int OilMain::load_defaults()
 
 	radius = defaults->get("RADIUS", radius);
 	use_intensity = defaults->get("USEINTENSITY", use_intensity);
+return 0;
 }
 
 int OilMain::save_defaults()
@@ -247,6 +258,7 @@ int OilMain::save_defaults()
 	defaults->update("RADIUS", radius);
 	defaults->update("USEINTENSITY", use_intensity);
 	defaults->save();
+return 0;
 }
 
 int OilMain::save_data(char *text)
@@ -261,6 +273,7 @@ int OilMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int OilMain::read_data(char *text)
@@ -290,4 +303,5 @@ int OilMain::read_data(char *text)
 		thread->window->use_intensity->update(use_intensity);
 	}
 	redo_buffers = 1;
+return 0;
 }

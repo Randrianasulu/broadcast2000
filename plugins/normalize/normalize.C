@@ -25,6 +25,7 @@ NormalizeMain::~NormalizeMain()
 int NormalizeMain::run_client()
 {
 	plugin_exit();
+return 0;
 }
 
 char* NormalizeMain::plugin_title() { return "Normalize"; }
@@ -48,6 +49,7 @@ int NormalizeMain::load_defaults()
 
 	db_over = defaults->get("DBOVER", 0);
 	separate_tracks = defaults->get("SEPERATE_TRACKS", 1);
+return 0;
 }
 
 int NormalizeMain::save_defaults()
@@ -55,6 +57,7 @@ int NormalizeMain::save_defaults()
 	defaults->update("DBOVER", db_over);
 	defaults->update("SEPERATE_TRACKS", separate_tracks);
 	defaults->save();
+return 0;
 }
 
 int NormalizeMain::get_parameters()
@@ -214,4 +217,5 @@ int NormalizeMain::start_plugin()
 	delete [] buffer_in;
 	delete [] buffer_out;
 	delete [] highest_sample;
+return 0;
 }
