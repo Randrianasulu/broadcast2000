@@ -48,12 +48,14 @@ int SlideWin::create_objects()
 	add_tool(right = new SlideDirectionRight(this, client, x, y));
 	y += 35;
 	add_tool(reverse = new SlideReverse(client, x, y));
+return 0;
 }
 
 int SlideWin::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 SlideDirectionLeft::SlideDirectionLeft(SlideWin *win, SlideMain *client, int x, int y)
@@ -72,6 +74,7 @@ int SlideDirectionLeft::handle_event()
 	client->direction = get_value() ? 0 : 1;
 	win->right->update(get_value() ^ 1);
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -91,6 +94,7 @@ int SlideDirectionRight::handle_event()
 	client->direction = get_value() ? 1 : 0;
 	win->left->update(get_value() ^ 1);
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -110,4 +114,5 @@ int SlideReverse::handle_event()
 {
 	client->reverse = get_value();
 	client->send_configure_change();
+return 0;
 }

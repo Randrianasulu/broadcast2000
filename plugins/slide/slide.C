@@ -29,17 +29,19 @@ int SlideMain::plugin_is_multi_channel() { return 1; }
 
 int SlideMain::start_realtime()
 {
+return 0;
 }
 
 int SlideMain::stop_realtime()
 {
+return 0;
 }
 
 int SlideMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***output_ptr)
 {
 	VPixel **input1, **input2, **output;
 	int i, j, k, left;
-	register int in_x1, in_x2, out_x1, out_x2;
+	int in_x1, in_x2, out_x1, out_x2;
 	int band_width;
 
 // Want the top most layer to get the output.
@@ -101,6 +103,7 @@ int SlideMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***output
 			}
 		}
 	}
+return 0;
 }
 
 
@@ -110,6 +113,7 @@ int SlideMain::start_gui()
 	thread = new SlideThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int SlideMain::stop_gui()
@@ -118,21 +122,25 @@ int SlideMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int SlideMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int SlideMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int SlideMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int SlideMain::save_data(char *text)
@@ -154,6 +162,7 @@ int SlideMain::save_data(char *text)
 	}
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int SlideMain::read_data(char *text)
@@ -188,4 +197,5 @@ int SlideMain::read_data(char *text)
 		thread->window->right->update(direction);
 		thread->window->reverse->update(reverse);
 	}
+return 0;
 }
