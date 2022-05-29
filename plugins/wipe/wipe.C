@@ -29,17 +29,19 @@ int WipeMain::plugin_is_multi_channel() { return 1; }
 
 int WipeMain::start_realtime()
 {
+return 0;
 }
 
 int WipeMain::stop_realtime()
 {
+return 0;
 }
 
 int WipeMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***output_ptr)
 {
 	VPixel **input1, **input2, **output;
 	int i, j, k, left;
-	register int in_x1, in_x2;
+	int in_x1, in_x2;
 	int band_width;
 
 // Want the top most layer to get the output.
@@ -105,6 +107,7 @@ int WipeMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***output_
 			}
 		}
 	}
+return 0;
 }
 
 
@@ -114,6 +117,7 @@ int WipeMain::start_gui()
 	thread = new WipeThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int WipeMain::stop_gui()
@@ -122,21 +126,25 @@ int WipeMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int WipeMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int WipeMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int WipeMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int WipeMain::save_data(char *text)
@@ -158,6 +166,7 @@ int WipeMain::save_data(char *text)
 	}
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int WipeMain::read_data(char *text)
@@ -192,4 +201,5 @@ int WipeMain::read_data(char *text)
 		thread->window->right->update(direction);
 		thread->window->reverse->update(reverse);
 	}
+return 0;
 }
