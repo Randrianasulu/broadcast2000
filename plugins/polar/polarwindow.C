@@ -51,6 +51,7 @@ int PolarWindow::create_objects()
 	add_tool(automation[1] = new AutomatedFn(client, this, x + 80, y, 1));
 	y += 20;
 	add_tool(angle_slider = new AngleSlider(client, x, y));
+return 0;
 }
 
 int PolarWindow::close_event()
@@ -58,6 +59,7 @@ int PolarWindow::close_event()
 	client->save_defaults();
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 DepthSlider::DepthSlider(PolarMain *client, int x, int y)
@@ -72,6 +74,7 @@ int DepthSlider::handle_event()
 {
 	client->depth = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 AngleSlider::AngleSlider(PolarMain *client, int x, int y)
@@ -86,6 +89,7 @@ int AngleSlider::handle_event()
 {
 	client->angle = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 AutomatedFn::AutomatedFn(PolarMain *client, PolarWindow *window, int x, int y, int number)
@@ -109,5 +113,6 @@ int AutomatedFn::handle_event()
 	update(1);
 	client->automated_function = number;
 	client->send_configure_change();
+return 0;
 }
 

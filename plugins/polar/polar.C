@@ -53,7 +53,9 @@ int PolarMain::start_realtime()
 		engine[i]->start();
 		y1 += y_increment;
 	}
+return 0;
 }
+
 
 int PolarMain::stop_realtime()
 {
@@ -63,6 +65,7 @@ int PolarMain::stop_realtime()
 	}
 	delete engine;
 	delete temp_frame;
+return 0;
 }
 
 
@@ -72,6 +75,7 @@ int PolarMain::start_gui()
 	thread = new PolarThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int PolarMain::stop_gui()
@@ -81,21 +85,25 @@ int PolarMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int PolarMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int PolarMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int PolarMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int PolarMain::load_defaults()
@@ -111,6 +119,7 @@ int PolarMain::load_defaults()
 	depth = defaults->get("DEPTH", 0);
 	angle = defaults->get("ANGLE", 0);
 	automated_function = defaults->get("AUTOMATION", automated_function);
+return 0;
 }
 
 int PolarMain::save_defaults()
@@ -119,6 +128,7 @@ int PolarMain::save_defaults()
 	defaults->update("ANGLE", angle);
 	defaults->update("AUTOMATION", automated_function);
 	defaults->save();
+return 0;
 }
 
 int PolarMain::save_data(char *text)
@@ -138,6 +148,7 @@ int PolarMain::save_data(char *text)
 	output.append_tag();
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int PolarMain::read_data(char *text)
@@ -179,6 +190,7 @@ int PolarMain::read_data(char *text)
 			thread->window->automation[i]->update(automated_function == i);
 		}
 	}
+return 0;
 }
 
 int PolarMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -226,6 +238,7 @@ int PolarMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_p
 
 int PolarMain::reconfigure()
 {
+return 0;
 }
 
 PolarEngine::PolarEngine(PolarMain *plugin, int start_y, int end_y)
@@ -252,11 +265,13 @@ int PolarEngine::start_process_frame(VFrame **output, VFrame **input, int size)
 	this->input = input;
 	this->size = size;
 	input_lock.unlock();
+return 0;
 }
 
 int PolarEngine::wait_process_frame()
 {
 	output_lock.lock();
+return 0;
 }
 
 int PolarEngine::calc_undistorted_coords(int wx,

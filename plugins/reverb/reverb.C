@@ -64,6 +64,7 @@ int Reverb::load_defaults()
 	defaults->get("CONFIG_DIRECTORY", config_directory);
 	
 //printf("Reverb::load_defaults ref_level2 %f\n", ref_level2);
+return 0;
 }
 
 int Reverb::save_defaults()
@@ -78,6 +79,7 @@ int Reverb::save_defaults()
 	defaults->update("LOWPASS2", lowpass2.freq);
 	defaults->update("CONFIG_DIRECTORY", config_directory);
 	defaults->save();
+return 0;
 }
 
 
@@ -115,6 +117,7 @@ int Reverb::start_realtime()
 		engine[i]->start();
 	}
 	redo_buffers = 1;
+return 0;
 }
 
 int Reverb::stop_realtime()
@@ -142,6 +145,7 @@ int Reverb::stop_realtime()
 		delete engine[i];
 	}
 	delete engine;
+return 0;
 }
 
 int Reverb::process_realtime(long size, float **input_ptr, float **output_ptr)
@@ -253,6 +257,7 @@ int Reverb::process_realtime(long size, float **input_ptr, float **output_ptr)
 		
 		for(; k < dsp_in_length; k++) current_in[k] = 0;
 	}
+return 0;
 }
 
 
@@ -265,6 +270,7 @@ int Reverb::start_gui()
 	thread->synchronous = 1;
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int Reverb::stop_gui()
@@ -275,21 +281,25 @@ int Reverb::stop_gui()
 	delete thread;
 	thread = 0;
 	save_defaults();
+return 0;
 }
 
 int Reverb::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int Reverb::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int Reverb::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int Reverb::save_data(char *text)
@@ -316,6 +326,7 @@ int Reverb::save_data(char *text)
 	
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int Reverb::read_data(char *text)
@@ -344,6 +355,7 @@ int Reverb::read_data(char *text)
 			update_gui();
 		}
 	}
+return 0;
 }
 
 int Reverb::update_gui()
@@ -359,6 +371,7 @@ int Reverb::update_gui()
 		thread->window->lowpass1->update(lowpass1);
 		thread->window->lowpass2->update(lowpass2);
 	}
+return 0;
 }
 
 
@@ -451,11 +464,13 @@ int ReverbEngine::process_overlays(int output_buffer, long size)
 	this->output_buffer = output_buffer;
 	this->size = size;
 	input_lock.unlock();
+return 0;
 }
 
 int ReverbEngine::wait_process_overlays()
 {
 	output_lock.lock();
+return 0;
 }
 	
 int ReverbEngine::process_overlay(float *in, double *out, double &out1, double &out2, double level, long lowpass, long samplerate, long size)
@@ -481,6 +496,7 @@ int ReverbEngine::process_overlay(float *in, double *out, double &out1, double &
 			out[i] += out2 * level;
 		}
 	}
+return 0;
 }
 
 void ReverbEngine::run()
