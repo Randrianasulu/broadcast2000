@@ -25,13 +25,14 @@ int TimeWindow::create_objects(TimeStretch *plugin)
 	add_tool(new BC_Title(10, 60, "Window size:"));
 	sprintf(string, "%ld", plugin->window_size);
 	add_tool(window_size = new TimeWindowWindow(plugin, string));
+return 0;
 }
 
 TimeWindowOK::TimeWindowOK(TimeWindow *window)
  : BC_BigButton(10, 120, "OK")
 { this->window = window; }
 
-int TimeWindowOK::handle_event() { window->set_done(0); }
+int TimeWindowOK::handle_event() { window->set_done(0); return 0; }
 
 int TimeWindowOK::keypress_event() 
 { 
@@ -43,7 +44,7 @@ TimeWindowCancel::TimeWindowCancel(TimeWindow *window)
  : BC_BigButton(200, 120, "Cancel")
 { this->window = window; }
 
-int TimeWindowCancel::handle_event() { window->set_done(1); }
+int TimeWindowCancel::handle_event() { window->set_done(1); return 0; }
 
 int TimeWindowCancel::keypress_event() 
 { 
@@ -64,12 +65,14 @@ TimeWindowAmount::~TimeWindowAmount()
 int TimeWindowAmount::handle_event()
 {
 	plugin->percentage = atof(get_text());
+return 0;
 }
 
 TimeWindowWindow::TimeWindowWindow(TimeStretch *plugin, char *string)
  : BC_TextBox(5, 80, 200, string)
 {
 	this->plugin = plugin;
+return 0;
 }
 
 TimeWindowWindow::~TimeWindowWindow()
@@ -79,4 +82,5 @@ TimeWindowWindow::~TimeWindowWindow()
 int TimeWindowWindow::handle_event()
 {
 	plugin->window_size = atol(get_text());
+return 0;
 }

@@ -89,6 +89,7 @@ int ResampleEngine::build_coeffient_array()
 												 gain);
 		}
 	}
+return 0;
 }
 
 int ResampleEngine::largest_factor(int x, int y)
@@ -112,11 +113,12 @@ int ResampleEngine::transfer_buffer(double *in, double *out, int len)
 	
 	end = out + len;
 	while(out != end) *out++ = *in++;
+return 0;
 }
 
 int ResampleEngine::apply_filter(register double *dsp_in, register double *coefficient_array, int filter_length, double *dsp_out)
 {
-	register double result = 0, *coefficient_end;
+	double result = 0, *coefficient_end;
 	
 	coefficient_end = coefficient_array + filter_length;
 	
@@ -126,6 +128,7 @@ int ResampleEngine::apply_filter(register double *dsp_in, register double *coeff
 	}
 
 	*dsp_out = result;
+return 0;
 }
 
 long ResampleEngine::process_buffer(double *dsp_in, 
@@ -320,7 +323,7 @@ int PitchEngine::signal_process()
 {
     int h = timestretch->window_size / 2;
 	double destination, upper, lower;
-    register int i, dest_i, new_i;
+    int i, dest_i, new_i;
 	double freq_scale = (double)timestretch->percentage / 100;
 
 	if(freq_scale < 1)
@@ -362,6 +365,7 @@ int PitchEngine::signal_process()
 	}
 
 	symmetry(window_size, freq_real, freq_imag);
+return 0;
 }
 
 
@@ -527,6 +531,7 @@ int TimeStretch::load_defaults()
 
 	percentage = defaults->get("PERCENTAGE", percentage);
 	window_size = defaults->get("WINDOWSIZE", window_size);
+return 0;
 }
 
 int TimeStretch::save_defaults()
@@ -534,6 +539,7 @@ int TimeStretch::save_defaults()
 	defaults->update("PERCENTAGE", percentage);
 	defaults->update("WINDOWSIZE", window_size);
 	defaults->save();
+return 0;
 }
 
 int TimeStretch::get_parameters()
