@@ -44,6 +44,7 @@ int SharpenWindow::create_objects()
 	add_tool(sharpen_slider = new SharpenSlider(client, &(client->sharpness), x, y));
 	y += 30;
 	add_tool(sharpen_interlace = new SharpenInterlace(client, x, y));
+return 0;
 }
 
 int SharpenWindow::close_event()
@@ -51,6 +52,7 @@ int SharpenWindow::close_event()
 	hide_window();
 	client->save_defaults();
 	client->send_hide_gui();
+return 0;
 }
 
 SharpenSlider::SharpenSlider(SharpenMain *client, float *output, int x, int y)
@@ -66,6 +68,7 @@ int SharpenSlider::handle_event()
 {
 	*output = get_value();
 	client->send_configure_change();
+return 0;
 }
 
 
@@ -83,5 +86,6 @@ int SharpenInterlace::handle_event()
 {
 	client->interlace = get_value();
 	client->send_configure_change();
+return 0;
 }
 

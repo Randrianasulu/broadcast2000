@@ -37,6 +37,7 @@ int SharpenMain::load_defaults()
 
 	sharpness = defaults->get("SHARPNESS", 50);
 	interlace = defaults->get("INTERLACE", 0);
+return 0;
 }
 
 int SharpenMain::save_defaults()
@@ -44,6 +45,7 @@ int SharpenMain::save_defaults()
 	defaults->update("SHARPNESS", sharpness);
 	defaults->update("INTERLACE", interlace);
 	defaults->save();
+return 0;
 }
 
 int SharpenMain::start_realtime()
@@ -59,6 +61,7 @@ int SharpenMain::start_realtime()
 		engine[i] = new SharpenEngine(this);
 		engine[i]->start();
 	}
+return 0;
 }
 
 int SharpenMain::stop_realtime()
@@ -68,6 +71,7 @@ int SharpenMain::stop_realtime()
 		delete engine[i];
 	}
 	delete engine;
+return 0;
 }
 
 int SharpenMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
@@ -124,6 +128,7 @@ int SharpenMain::process_realtime(long size, VFrame **input_ptr, VFrame **output
 		last_sharpness = sharpness;
 	}
 	sharpness = old_sharpness;
+return 0;
 }
 
 
@@ -138,6 +143,7 @@ int SharpenMain::get_luts(int *pos_lut, int *neg_lut)
 		pos_lut[i] = 800 * i / inv_sharpness;
 		neg_lut[i] = (4 + pos_lut[i] - (i << 3)) >> 3;
 	}
+return 0;
 }
 
 int SharpenMain::start_gui()
@@ -146,6 +152,7 @@ int SharpenMain::start_gui()
 	thread = new SharpenThread(this);
 	thread->start();
 	thread->gui_started.lock();
+return 0;
 }
 
 int SharpenMain::stop_gui()
@@ -155,21 +162,25 @@ int SharpenMain::stop_gui()
 	thread->join();
 	delete thread;
 	thread = 0;
+return 0;
 }
 
 int SharpenMain::show_gui()
 {
 	thread->window->show_window();
+return 0;
 }
 
 int SharpenMain::hide_gui()
 {
 	thread->window->hide_window();
+return 0;
 }
 
 int SharpenMain::set_string()
 {
 	thread->window->set_title(gui_string);
+return 0;
 }
 
 int SharpenMain::save_data(char *text)
@@ -189,6 +200,7 @@ int SharpenMain::save_data(char *text)
 	}
 	output.terminate_string();
 // data is now in *text
+return 0;
 }
 
 int SharpenMain::read_data(char *text)
@@ -226,6 +238,7 @@ int SharpenMain::read_data(char *text)
 		thread->window->sharpen_slider->update((int)sharpness);
 		thread->window->sharpen_interlace->update(interlace);
 	}
+return 0;
 }
 
 
@@ -262,11 +275,13 @@ int SharpenEngine::start_process_frame(VFrame *output, VFrame *input, int field)
 	this->input = input;
 	this->field = field;
 	input_lock.unlock();
+return 0;
 }
 
 int SharpenEngine::wait_process_frame()
 {
 	output_lock.lock();
+return 0;
 }
 
 void SharpenEngine::run()
@@ -398,4 +413,5 @@ int SharpenEngine::filter(register int w, VPixel *src, VPixel *dst,
 	}
 	
 	*dst++ = *src++;
+return 0;
 }
