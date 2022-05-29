@@ -21,6 +21,7 @@ AReverseMain::~AReverseMain()
 int AReverseMain::run_client()
 {
 	plugin_exit();
+return 0;
 }
 
 char* AReverseMain::plugin_title() { return "Reverse Audio"; }
@@ -91,4 +92,5 @@ int AReverseMain::start_plugin()
 		progress->stop_progress();
 		delete progress;
 	}
+return 0;
 }

@@ -21,6 +21,7 @@ OffsetMain::~OffsetMain()
 int OffsetMain::run_client()
 {
 	plugin_exit();
+return 0;
 }
 
 char* OffsetMain::plugin_title() { return "DC Offset"; }
@@ -107,4 +108,5 @@ int OffsetMain::start_plugin()
 		progress->stop_progress();
 		delete progress;
 	}
+return 0;
 }
