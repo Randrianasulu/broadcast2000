@@ -11,19 +11,19 @@ public:
 	PluginMessages(int input_flag, int output_flag, int message_id = -1);
 	~PluginMessages();
 	
-	send_message(char *text);
-	recieve_message(char *text);
+	void send_message(char *text);
+	void recieve_message(char *text);
 	
-	send_message(int command, char *text);      
-	send_message(long command, long value);      
-	send_message(long command, long value1, long value2);      
-	send_message(int command);      
+	void send_message(int command, char *text);      
+	void send_message(long command, long value);      
+	void send_message(long command, long value1, long value2);      
+	void send_message(int command);      
 
-	recieve_message();     // returns the command
-	recieve_message(int *command, char *text);
-	recieve_message(int *command, long *value);
-	recieve_message(long *value1, long *value2);
-	recieve_message(int *command, long *value1, long *value2);
+	void recieve_message();     // returns the command
+	void recieve_message(int *command, char *text);
+	void recieve_message(int *command, long *value);
+	void recieve_message(long *value1, long *value2);
+	void recieve_message(int *command, long *value1, long *value2);
 	
 	Messages *messages;
 	int input_flag, output_flag;
