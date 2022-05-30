@@ -547,21 +547,31 @@ RecordWindow::RecordWindow(Record *record, Asset *asset)
 
 RecordWindow::~RecordWindow()
 {
+	if(format_tools)
 	delete format_tools;
+	if(ok_button)
  	delete ok_button;
+ 	if(cancel_button)
 	delete cancel_button;
-/*
+	if(path_button)
 	delete path_button;
+	if(pathtext_button)
 	delete pathtext_button;
 	//delete channels_button;
-*/
+	if(to_tracks_button)
 	delete to_tracks_button;
-/*	delete format_button;
+	if(format_button)
+	delete format_button;
+	if(bits_button)
 	delete bits_button;
+	if(dither_button)
 	delete dither_button;
+	if(signed_button)
 	delete signed_button;
+	if(hilo_button)
 	delete hilo_button;
-	delete lohi_button; */
+	if(lohi_button)
+	delete lohi_button; 
 }
 
 
