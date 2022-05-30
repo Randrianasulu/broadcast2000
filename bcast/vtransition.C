@@ -121,6 +121,7 @@ return 0;
 long VTrack::samples_to_units(long &samples)
 {
 	samples = toframes_round(samples, mwindow->sample_rate, mwindow->frame_rate);
+return samples;
 }
 
 int VTrack::copy_derived(long start, long end, FileHTAL *htal)
