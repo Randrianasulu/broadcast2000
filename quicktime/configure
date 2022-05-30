@@ -35,7 +35,7 @@ cat > global_config << EOF
 EOF
 
 if test -z "$CFLAGS"; then
-	echo >> global_config "CFLAGS = -O2 -fomit-frame-pointer -march=i486 -I/usr/local/include"
+	echo >> global_config "CFLAGS = -O2 -fomit-frame-pointer -I/usr/local/include"
 fi
 
 if [ ${USE_FIREWIRE} = 1 ]; then
