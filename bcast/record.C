@@ -553,14 +553,14 @@ RecordWindow::~RecordWindow()
  	delete ok_button;
  	if(cancel_button)
 	delete cancel_button;
-	if(path_button)
+/*	if(path_button)
 	delete path_button;
 	if(pathtext_button)
-	delete pathtext_button;
+	delete pathtext_button; */
 	//delete channels_button;
 	if(to_tracks_button)
 	delete to_tracks_button;
-	if(format_button)
+/*	if(format_button)
 	delete format_button;
 	if(bits_button)
 	delete bits_button;
@@ -571,7 +571,7 @@ RecordWindow::~RecordWindow()
 	if(hilo_button)
 	delete hilo_button;
 	if(lohi_button)
-	delete lohi_button; 
+	delete lohi_button; */
 }
 
 
