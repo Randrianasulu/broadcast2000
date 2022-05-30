@@ -13,8 +13,8 @@ public:
 	APluginThread(PluginServer *plugin_server);
 	~APluginThread();
 	
-	attach();
-	detach();
+	void attach();
+	void detach();
 	void run();
 	
 	PluginServer *plugin_server;
