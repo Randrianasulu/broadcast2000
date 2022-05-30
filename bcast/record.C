@@ -174,7 +174,7 @@ void Record::run()
 	frame_w = mwindow->track_w;
 	frame_h = mwindow->track_h;
 	cpus = mwindow->preferences->smp + 1;
-	int result, script_result = 0;
+	int result = 0, script_result = 0;
 	Asset asset("");
 	Asset asset2("");
 
