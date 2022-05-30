@@ -116,7 +116,6 @@ RotateFine::RotateFine(RotateWindow *window, RotateMain *client, int x, int y)
 {
 	this->window = window;
 	this->client = client;
-return 0;
 }
 
 RotateFine::~RotateFine()

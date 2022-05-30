@@ -72,7 +72,6 @@ TimeWindowWindow::TimeWindowWindow(TimeStretch *plugin, char *string)
  : BC_TextBox(5, 80, 200, string)
 {
 	this->plugin = plugin;
-return 0;
 }
 
 TimeWindowWindow::~TimeWindowWindow()
