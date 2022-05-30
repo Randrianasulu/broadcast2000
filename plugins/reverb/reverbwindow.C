@@ -64,12 +64,14 @@ int ReverbWindow::create_objects()
 	add_tool(lowpass1 = new ReverbLowPass1(reverb, x + 35, y)); y += 25;
 	add_tool(new BC_Title(5, y + 10, "End band for lowpass:"));
 	add_tool(lowpass2 = new ReverbLowPass2(reverb, x, y)); y += 40;
+return 0;
 }
 
 int ReverbWindow::close_event()
 {
 	hide_window();
 	reverb->send_hide_gui();
+return 0;
 }
 
 
@@ -86,6 +88,7 @@ int ReverbLevelInit::handle_event()
 {
 	reverb->level_init = get_value();
 	reverb->send_configure_change();
+return 0;
 }
 
 ReverbDelayInit::ReverbDelayInit(Reverb *reverb, int x, int y)
@@ -98,6 +101,7 @@ int ReverbDelayInit::handle_event()
 {
 	reverb->delay_init = get_value();
 	reverb->send_configure_change();
+return 0;
 }
 
 ReverbRefLevel1::ReverbRefLevel1(Reverb *reverb, int x, int y)
@@ -110,6 +114,7 @@ int ReverbRefLevel1::handle_event()
 {
 	reverb->ref_level1 = get_value();
 	reverb->send_configure_change();
+return 0;
 }
 
 
@@ -123,6 +128,7 @@ int ReverbRefLevel2::handle_event()
 {
 	reverb->ref_level2 = get_value();
 	reverb->send_configure_change();
+return 0;
 }
 
 ReverbRefTotal::ReverbRefTotal(Reverb *reverb, int x, int y)
@@ -135,6 +141,7 @@ int ReverbRefTotal::handle_event()
 {
 	reverb->ref_total = get_value();
 	reverb->send_configure_change();
+return 0;
 }
 
 
@@ -148,6 +155,7 @@ int ReverbRefLength::handle_event()
 {
 	reverb->ref_length = get_value();
 	reverb->send_configure_change();
+return 0;
 }
 
 ReverbLowPass1::ReverbLowPass1(Reverb *reverb, int x, int y)
@@ -160,6 +168,7 @@ int ReverbLowPass1::handle_event()
 {
 	reverb->lowpass1 = get_value();
 	reverb->send_configure_change();
+return 0;
 }
 
 ReverbLowPass2::ReverbLowPass2(Reverb *reverb, int x, int y)
@@ -172,6 +181,7 @@ int ReverbLowPass2::handle_event()
 {
 	reverb->lowpass2 = get_value();
 	reverb->send_configure_change();
+return 0;
 }
 
 ReverbMenu::ReverbMenu(Reverb *reverb, ReverbWindow *window)
@@ -201,6 +211,7 @@ int ReverbMenu::create_objects(Defaults *defaults)
 	//filemenu->add_menuitem(set_default = new ReverbSetDefault);
 	load_defaults(defaults);
 	prev_load_thread = new ReverbLoadPrevThread(reverb, this);
+return 0;
 }
 
 int ReverbMenu::load_defaults(Defaults *defaults)
@@ -221,6 +232,7 @@ int ReverbMenu::load_defaults(Defaults *defaults)
 			filemenu->add_menuitem(prev_load[i] = new ReverbLoadPrev(reverb, this, filename, path));
 		}
 	}
+return 0;
 }
 
 int ReverbMenu::save_defaults(Defaults *defaults)
@@ -236,6 +248,7 @@ int ReverbMenu::save_defaults(Defaults *defaults)
 			defaults->update(string, prev_load[i]->path);
 		}
 	}
+return 0;
 }
 
 int ReverbMenu::add_load(char *path)
@@ -302,6 +315,7 @@ ReverbLoad::~ReverbLoad()
 int ReverbLoad::handle_event()
 {
 	thread->start();
+return 0;
 }
 
 ReverbSave::ReverbSave(Reverb *reverb, ReverbMenu *menu)
@@ -318,6 +332,7 @@ ReverbSave::~ReverbSave()
 int ReverbSave::handle_event()
 {
 	thread->start();
+return 0;
 }
 
 ReverbSetDefault::ReverbSetDefault()
@@ -326,6 +341,7 @@ ReverbSetDefault::ReverbSetDefault()
 }
 int ReverbSetDefault::handle_event()
 {
+return 0;
 }
 
 ReverbLoadPrev::ReverbLoadPrev(Reverb *reverb, ReverbMenu *menu, char *filename, char *path)
@@ -345,10 +361,12 @@ int ReverbLoadPrev::handle_event()
 {
 	menu->prev_load_thread->set_path(path);
 	menu->prev_load_thread->start();
+return 0;
 }
 int ReverbLoadPrev::set_path(char *path)
 {
 	strcpy(this->path, path);
+return 0;
 }
 
 
@@ -391,10 +409,12 @@ ReverbSaveDialog::~ReverbSaveDialog()
 int ReverbSaveDialog::ok_event()
 {
 	set_done(0);
+return 0;
 }
 int ReverbSaveDialog::cancel_event()
 {
 	set_done(1);
+return 0;
 }
 
 
@@ -450,6 +470,7 @@ void ReverbLoadPrevThread::run()
 int ReverbLoadPrevThread::set_path(char *path)
 {
 	strcpy(this->path, path);
+return 0;
 }
 
 
@@ -470,9 +491,11 @@ ReverbLoadDialog::~ReverbLoadDialog()
 int ReverbLoadDialog::ok_event()
 {
 	set_done(0);
+return 0;
 }
 int ReverbLoadDialog::cancel_event()
 {
 	set_done(1);
+return 0;
 }
 
