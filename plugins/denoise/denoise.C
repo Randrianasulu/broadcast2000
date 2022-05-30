@@ -188,7 +188,7 @@ int Denoise::redo_buffers_procedure()
 {
 // get the window size
 // window size must be a power of 2
-	int i;
+	int i = 0;
 	int new_size = 16;
 	while(new_size < window_size) new_size *= 2;
 	window_size = new_size;
