@@ -27,7 +27,7 @@ int NormalizeWindow::create_objects(float *db_over, int *separate_tracks)
 NormalizeWindowOK::NormalizeWindowOK(NormalizeWindow *window) : BC_BigButton(10, 80, "OK")
 { this->window = window; }
 
-int NormalizeWindowOK::handle_event() { window->set_done(0); }
+int NormalizeWindowOK::handle_event() { window->set_done(0); return 0; }
 
 int NormalizeWindowOK::keypress_event() 
 { 
@@ -38,7 +38,7 @@ int NormalizeWindowOK::keypress_event()
 NormalizeWindowCancel::NormalizeWindowCancel(NormalizeWindow *window) : BC_BigButton(200, 80, "Cancel")
 { this->window = window; }
 
-int NormalizeWindowCancel::handle_event() { window->set_done(1); }
+int NormalizeWindowCancel::handle_event() { window->set_done(1); return 0; }
 
 int NormalizeWindowCancel::keypress_event() 
 { 
@@ -58,6 +58,7 @@ NormalizeWindowOverload::~NormalizeWindowOverload()
 int NormalizeWindowOverload::handle_event()
 {
 	*db_over = atof(get_text());
+return 0;
 }
 
 
@@ -74,4 +75,5 @@ NormalizeWindowSeparate::~NormalizeWindowSeparate()
 int NormalizeWindowSeparate::handle_event()
 {
 	*separate_tracks = get_value();
+return 0;
 }
