@@ -550,16 +550,18 @@ RecordWindow::~RecordWindow()
 	delete format_tools;
  	delete ok_button;
 	delete cancel_button;
+/*
 	delete path_button;
 	delete pathtext_button;
 	//delete channels_button;
+*/
 	delete to_tracks_button;
-	delete format_button;
+/*	delete format_button;
 	delete bits_button;
 	delete dither_button;
 	delete signed_button;
 	delete hilo_button;
-	delete lohi_button;
+	delete lohi_button; */
 }
 
 
