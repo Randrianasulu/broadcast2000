@@ -279,7 +279,7 @@ return 0;
 
 int StabilizeMain::exhaustive_search(int block_x, int block_y, VFrame *block, VFrame *input, int &x_offset, int &y_offset)
 {
-	long score, lowest_score, i;
+	long score, lowest_score=0, i;
 	int x, y;
 
 	for(i = 0; i < smp; i++)
