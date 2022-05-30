@@ -486,7 +486,7 @@ int MainWindow::paste_automation()
 		result = htal.read_tag();
 	}while(!result && !htal.tag.title_is("AUTOCLIPBOARD"));
 
-	long total_length;
+	long total_length = 0;
 	if(!result)
 	{
 		total_length = htal.tag.get_property("SAMPLES", (long)0);
