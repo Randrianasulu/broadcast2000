@@ -63,4 +63,5 @@ int InvertToggle::handle_event()
 {
 	*output = get_value();
 	client->send_configure_change();
+return 0;
 }
