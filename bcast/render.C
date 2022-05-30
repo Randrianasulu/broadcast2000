@@ -557,9 +557,9 @@ return 0;
 // Return 1 on failure and 0 on success
 int Render::direct_frame_copy(long &render_video_position, File *file)
 {
-	Track *playable_track;
-	Edit *playable_edit;
-	long frame_size;
+	Track *playable_track = 0;
+	Edit *playable_edit= 0;
+	long frame_size = 0;
 	int result = 0;
 
 	if(direct_copy_possible(render_video_position, playable_track, playable_edit, file))
