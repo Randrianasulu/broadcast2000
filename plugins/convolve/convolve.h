@@ -18,7 +18,7 @@ public:
 
 // Process all windows in the input
 	int process_fifo(long size, int new_channels, float **output_ptr, float **input_ptr);
-	virtual int signal_process(long size, int channels, double **output, double **input) {};
+	virtual int signal_process(long size, int channels, double **output, double **input) {return 0;};
 	int reconfigure(int channels);
 	int fix_window_size();
 	int init_crossfade(long fragment_size);
