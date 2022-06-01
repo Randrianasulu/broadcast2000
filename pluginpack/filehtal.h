@@ -36,14 +36,14 @@ public:
 	int get_property(char *property, int default_);
 	float get_property(char *property, float default_);
 
-	int set_title(char *text);       // set the title field
-	int set_property(char *text, char *value);
-	int set_property(char *text, long value);
+	int set_title(const char *text);       // set the title field
+	int set_property(const char *text, char *value);
+	int set_property(const char *text, long value);
 #if !defined __alpha__ && !defined __ia64__ && !defined __x86_64__ && !defined __powerpc64__
-	int set_property(char *text, longest value);
+	int set_property(const char *text, longest value);
 #endif
-	int set_property(char *text, int value);
-	int set_property(char *text, float value);
+	int set_property(const char *text, int value);
+	int set_property(const char *text, float value);
 	int write_tag();
 
 	char tag_title[MAX_TITLE];       // title of this tag

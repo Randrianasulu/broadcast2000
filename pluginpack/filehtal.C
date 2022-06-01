@@ -585,13 +585,13 @@ float HTALTag::get_property(char *property, float default_)
 	else return atof(temp_string);
 }
 
-int HTALTag::set_title(char *text)       // set the title field
+int HTALTag::set_title(const char *text)       // set the title field
 {
 	strcpy(tag_title, text);
 	return 0;
 }
 
-int HTALTag::set_property(char *text, long value)
+int HTALTag::set_property(const char *text, long value)
 {
 	sprintf(temp_string, "%ld", value);
 	set_property(text, temp_string);
@@ -599,7 +599,7 @@ return 0;
 }
 
 #if !defined __alpha__ && !defined __ia64__ && !defined __x86_64__ && !defined __powerpc64__
-int HTALTag::set_property(char *text, longest value)
+int HTALTag::set_property(const char *text, longest value)
 {
 	sprintf(temp_string, "%lld", value);
 	set_property(text, temp_string);
@@ -607,21 +607,21 @@ return 0;
 }
 #endif
 
-int HTALTag::set_property(char *text, int value)
+int HTALTag::set_property(const char *text, int value)
 {
 	sprintf(temp_string, "%d", value);
 	set_property(text, temp_string);
 return 0;
 }
 
-int HTALTag::set_property(char *text, float value)
+int HTALTag::set_property(const char *text, float value)
 {
 	sprintf(temp_string, "%f", value);
 	set_property(text, temp_string);
 return 0;
 }
 
-int HTALTag::set_property(char *text, char *value)
+int HTALTag::set_property(const char *text, char *value)
 {
 	tag_properties[total_properties] = new char[strlen(text) + 1];
 	strcpy(tag_properties[total_properties], text);
