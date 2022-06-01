@@ -4,7 +4,7 @@
 #include "filesystem.h"
 #include "stringfile.h"
 
-Defaults::Defaults(char *filename)
+Defaults::Defaults(const char *filename)
 {
 	strcpy(this->filename, filename);
 	FileSystem directory;
@@ -51,7 +51,7 @@ int Defaults::save()
 return 0;
 }
 
-int Defaults::get(char *name, int default_)
+int Defaults::get(const char *name, int default_)
 {
 	for(int i = 0; i < total; i++)
 	{
@@ -64,7 +64,7 @@ int Defaults::get(char *name, int default_)
 return 0;
 }
 
-long Defaults::get(char *name, long default_)
+long Defaults::get(const char *name, long default_)
 {
 	for(int i = 0; i < total; i++)
 	{
@@ -76,7 +76,7 @@ long Defaults::get(char *name, long default_)
 	return default_;  // failed
 }
 
-float Defaults::get(char *name, float default_)
+float Defaults::get(const char *name, float default_)
 {
 	for(int i = 0; i < total; i++)
 	{
@@ -88,7 +88,7 @@ float Defaults::get(char *name, float default_)
 	return default_;  // failed
 }
 
-char* Defaults::get(char *name, char *default_)
+char* Defaults::get(const char *name, char *default_)
 {
 	for(int i = 0; i < total; i++)
 	{
@@ -101,7 +101,7 @@ char* Defaults::get(char *name, char *default_)
 	return default_;  // failed
 }
 
-int Defaults::update(char *name, float value) // update a value if it exists
+int Defaults::update(const char *name, float value) // update a value if it exists
 {
 	char string[1024];
 	sprintf(string, "%f", value);
@@ -109,7 +109,7 @@ int Defaults::update(char *name, float value) // update a value if it exists
 return 0;
 }
 
-int Defaults::update(char *name, int value) // update a value if it exists
+int Defaults::update(const char *name, int value) // update a value if it exists
 {
 	char string[1024];
 	sprintf(string, "%d", value);
@@ -117,7 +117,7 @@ int Defaults::update(char *name, int value) // update a value if it exists
 return 0;
 }
 
-int Defaults::update(char *name, long value) // update a value if it exists
+int Defaults::update(const char *name, long value) // update a value if it exists
 {
 	char string[1024];
 	sprintf(string, "%ld", value);
@@ -125,7 +125,7 @@ int Defaults::update(char *name, long value) // update a value if it exists
 return 0;
 }
 
-int Defaults::update(char *name, char *value)
+int Defaults::update(const char *name, char *value)
 {
 	for(int i = 0; i < total; i++)
 	{

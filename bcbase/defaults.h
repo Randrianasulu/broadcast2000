@@ -6,21 +6,21 @@
 class Defaults
 {
 public:
-	Defaults(char *filename);
+	Defaults(const char *filename);
 	virtual ~Defaults();
 
 	int load();        // load from disk file
 	int save();        // save to disk file
-	int update(char *name, Freq value); // update a value if it exists
-	int update(char *name, float value); // update a value if it exists
-	int update(char *name, int value); // update a value if it exists
-	int update(char *name, long value); // update a value if it exists
-	int update(char *name, char *value); // create it if it doesn't
+	int update(const char *name, Freq value); // update a value if it exists
+	int update(const char *name, float value); // update a value if it exists
+	int update(const char *name, int value); // update a value if it exists
+	int update(const char *name, long value); // update a value if it exists
+	int update(const char *name, char *value); // create it if it doesn't
 
-	float get(char *name, float default_);   // retrieve a value if it exists
-	int get(char *name, int default_);   // retrieve a value if it exists
-	long get(char *name, long default_);   // retrieve a value if it exists
-	char* get(char *name, char *default_); // return 1 if it doesn't
+	float get(const char *name, float default_);   // retrieve a value if it exists
+	int get(const char *name, int default_);   // retrieve a value if it exists
+	long get(const char *name, long default_);   // retrieve a value if it exists
+	char* get(const char *name, char *default_); // return 1 if it doesn't
 	
 	char *names[1024];  // list of string names
 	char *values[1024];    // list of values
