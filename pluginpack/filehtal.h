@@ -20,21 +20,21 @@ public:
 
 	int read_tag(char *input, long &position, long length);
 
-	int title_is(char *title);        // test against title and return 1 if they match
+	int title_is(const char *title);        // test against title and return 1 if they match
 	char *get_title();
-	int get_title(char *value);
-	int test_property(char *property, char *value);
+	int get_title(const char *value);
+	int test_property(const char *property, char *value);
 	char *get_property_text(int number);
 	int get_property_int(int number);
 	float get_property_float(int number);
-	char *get_property(char *property);
-	int get_property(char *property, char *value);
-	long get_property(char *property, long default_);
+	char *get_property(const char *property);
+	int get_property(const char *property, char *value);
+	long get_property(const char *property, long default_);
 #if !defined __alpha__ && !defined __ia64__ && !defined __x86_64__ && !defined __powerpc64__
-	longest get_property(char *property, longest default_);
+	longest get_property(const char *property, longest default_);
 #endif
-	int get_property(char *property, int default_);
-	float get_property(char *property, float default_);
+	int get_property(const char *property, int default_);
+	float get_property(const char *property, float default_);
 
 	int set_title(const char *text);       // set the title field
 	int set_property(const char *text, char *value);

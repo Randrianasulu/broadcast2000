@@ -462,7 +462,7 @@ int HTALTag::read_tag(char *input, long &position, long length)
 	if(total_properties || tag_title[0]) return 0; else return 1;
 }
 
-int HTALTag::title_is(char *title)
+int HTALTag::title_is(const char *title)
 {
 	if(!strcasecmp(title, tag_title)) return 1;
 	else return 0;
@@ -473,13 +473,13 @@ char* HTALTag::get_title()
 	return tag_title;
 }
 
-int HTALTag::get_title(char *value)
+int HTALTag::get_title(const char *value)
 {
 	if(tag_title[0] != 0) { strcpy(value, tag_title); return 0; }
 	return 1;
 }
 
-int HTALTag::test_property(char *property, char *value)
+int HTALTag::test_property(const char *property, char *value)
 {
 	int i, result;
 	for(i = 0, result = 0; i < total_properties && !result; i++)
@@ -492,7 +492,7 @@ int HTALTag::test_property(char *property, char *value)
 	return 0;
 }
 
-int HTALTag::get_property(char *property, char *value)
+int HTALTag::get_property(const char *property, char *value)
 {
 	int i, result;
 	for(i = 0, result = 0; i < total_properties && !result; i++)
@@ -531,7 +531,7 @@ float HTALTag::get_property_float(int number)
 		return 0;
 }
 
-char* HTALTag::get_property(char *property)
+char* HTALTag::get_property(const char *property)
 {
 	int i, result;
 	for(i = 0, result = 0; i < total_properties && !result; i++)
@@ -545,7 +545,7 @@ char* HTALTag::get_property(char *property)
 }
 
 
-long HTALTag::get_property(char *property, long default_)
+long HTALTag::get_property(const char *property, long default_)
 {
 	temp_string[0] = 0;
 	get_property(property, temp_string);
@@ -554,7 +554,7 @@ long HTALTag::get_property(char *property, long default_)
 }
 
 #if !defined __alpha__ && !defined __ia64__ && !defined __x86_64__ && !defined __powerpc64__
-longest HTALTag::get_property(char *property, longest default_)
+longest HTALTag::get_property(const char *property, longest default_)
 {
 	longest result;
 	temp_string[0] = 0;
@@ -569,7 +569,7 @@ longest HTALTag::get_property(char *property, longest default_)
 }
 #endif
 
-int HTALTag::get_property(char *property, int default_)
+int HTALTag::get_property(const char *property, int default_)
 {
 	temp_string[0] = 0;
 	get_property(property, temp_string);
@@ -577,7 +577,7 @@ int HTALTag::get_property(char *property, int default_)
 	else return atol(temp_string);
 }
 
-float HTALTag::get_property(char *property, float default_)
+float HTALTag::get_property(const char *property, float default_)
 {
 	temp_string[0] = 0;
 	get_property(property, temp_string);
