@@ -303,11 +303,11 @@ int StabilizeMain::exhaustive_search(int block_x, int block_y, VFrame *block, VF
 
 int StabilizeMain::read_block(int x, int y, VFrame *block, VFrame *input)
 {
-	register int in_x, in_y, out_x, out_y;
-	register int max = -1, min = -1;
+	int in_x, in_y, out_x, out_y;
+	int max = -1, min = -1;
     VPixel **in_rows, **out_rows;
 	VPixel *in_row, *out_row;
-	register int intensity;
+	int intensity;
 	block_randomness = 0;
 
 	out_rows = (VPixel**)block->get_rows();
@@ -577,9 +577,9 @@ return 0;
 long StabilizeEngine::compare_blocks(int x, int y, VPixel **block_rows, VPixel **input_rows)
 {
 	VPixel *block_row, *frame_row;
-	register int block_x, block_y, frame_x, frame_y;
-    register long difference;
-    register long result = 0;
+	int block_x, block_y, frame_x, frame_y;
+    	long difference;
+    	long result = 0;
 
 	for(block_y = 0, frame_y = y ; block_y < plugin->size; block_y++, frame_y++)
     {

@@ -155,7 +155,7 @@ int ShiftInterlaceMain::read_data(char *text)
 
 int ShiftInterlaceMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
-	register int i, j, k, l, m;
+	int i, j, k, l, m;
 	VPixel **input_rows, **output_rows;
 	VPixel *input_row, *output_row;
 

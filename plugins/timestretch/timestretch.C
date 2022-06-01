@@ -116,7 +116,7 @@ int ResampleEngine::transfer_buffer(double *in, double *out, int len)
 return 0;
 }
 
-int ResampleEngine::apply_filter(register double *dsp_in, register double *coefficient_array, int filter_length, double *dsp_out)
+int ResampleEngine::apply_filter(double *dsp_in, double *coefficient_array, int filter_length, double *dsp_out)
 {
 	double result = 0, *coefficient_end;
 	

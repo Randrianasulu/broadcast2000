@@ -168,7 +168,7 @@ int Spectrogram::max_window_size(int fragment_size)
 
 int Spectrogram::process_realtime(long size, float **input_ptr, float **output_ptr)
 {
-	register int i, j, k;
+	int i, j, k;
 	int real_window, result;
 
 // Pass buffers through if necessary

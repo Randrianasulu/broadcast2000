@@ -42,10 +42,10 @@ return 0;
 
 int SwapMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
-	register int i, j, k;
+	int i, j, k;
 	VPixel **input_rows, **output_rows;
 	VPixel input_pixel;
-	register VWORD r, g, b, a;
+	VWORD r, g, b, a;
 
 	for(i = 0; i < size; i++)
 	{
