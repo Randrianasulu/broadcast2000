@@ -129,7 +129,7 @@ int BC_FileBox::set_show_all()
 return 0;
 }
 
-int BC_FileBox::submit_file(char *text)
+int BC_FileBox::submit_file(const char *text)
 {
 	if(!text[0]) return 1;   // blank
 

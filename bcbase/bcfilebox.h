@@ -53,7 +53,7 @@ private:
 	int column_width[BC_FILEBOX_TOTAL_COLUMNS];
 
 
-	int submit_file(char *text);       // return 1 if directory 0 if file
+	int submit_file(const char *text);       // return 1 if directory 0 if file
 
 	char directory[1024], filename[1024];
 	int want_directory;
