@@ -64,7 +64,7 @@ return 0;
 
 int RotateMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
-	register int i, j, k;
+	int i, j, k;
 	VPixel **input_rows, **output_rows;
 	int r, g, b;
 	float old_angle = angle;
@@ -533,7 +533,7 @@ int RotateEngine::perform_rotation()
 	if(!interpolate)
 	{
 		int *int_row;
-		register int i, j;
+		int i, j;
 		for(i = row1; i < row2; i++)
 		{
 			int_row = plugin->int_rows[i];
@@ -548,12 +548,12 @@ int RotateEngine::perform_rotation()
 	else
 	{
 		SourceCoord *float_row;
-		register int i, j;
-		register float k, l;
-		register float x_fraction1, x_fraction2, y_fraction1, y_fraction2;
-		register float fraction1, fraction2, fraction3, fraction4;
-		register int x_pixel1, x_pixel2, y_pixel1, y_pixel2;
-		register VPixel *pixel1, *pixel2, *pixel3, *pixel4;
+		int i, j;
+		float k, l;
+		float x_fraction1, x_fraction2, y_fraction1, y_fraction2;
+		float fraction1, fraction2, fraction3, fraction4;
+		int x_pixel1, x_pixel2, y_pixel1, y_pixel2;
+		VPixel *pixel1, *pixel2, *pixel3, *pixel4;
 
 		for(i = row1, k = row1; i < row2; i++, k++)
 		{

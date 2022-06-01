@@ -76,7 +76,7 @@ return 0;
 
 int SharpenMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
-	register int i, j, k;
+	int i, j, k;
 	float old_sharpness = sharpness;
 	VPixel **input_rows, **output_rows;
 
@@ -363,7 +363,7 @@ void SharpenEngine::run()
 	}
 }
 
-int SharpenEngine::filter(register int w, VPixel *src, VPixel *dst,
+int SharpenEngine::filter(int w, VPixel *src, VPixel *dst,
 	int *neg0, int *neg1, int *neg2)
 {
 	int pixel;

@@ -207,9 +207,9 @@ int SampleRateMain::transfer_buffer(double *in, double *out, int len)
 return 0;
 }
 
-int SampleRateMain::apply_filter(register double *dsp_in, register double *coefficient_array, int filter_length, double *dsp_out)
+int SampleRateMain::apply_filter(double *dsp_in, double *coefficient_array, int filter_length, double *dsp_out)
 {
-	register double result = 0, *coefficient_end;
+	double result = 0, *coefficient_end;
 	
 	coefficient_end = coefficient_array + filter_length;
 	

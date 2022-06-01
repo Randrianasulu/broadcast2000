@@ -47,7 +47,7 @@ return 0;
 
 int RGB601Main::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
-	register int i, j, k, l;
+	int i, j, k, l;
 	VPixel **input_rows, **output_rows;
 	VPixel *input_row, *output_row;
 
