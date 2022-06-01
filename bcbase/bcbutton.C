@@ -239,7 +239,7 @@ return 0;
 
 // ===================================================================
 
-BC_BigButton::BC_BigButton(int x, int y, char *text, int big)
+BC_BigButton::BC_BigButton(int x, int y, const char *text, int big)
  : BC_Button(x, y, text, big) { }
 
 int BC_BigButton::create_tool_objects()
@@ -266,10 +266,10 @@ int BC_BigButton::draw()
 return 0;
 }
 
-BC_SmallButton::BC_SmallButton(int x, int y, char *text, int big)
+BC_SmallButton::BC_SmallButton(int x, int y, const char *text, int big)
  : BC_Button(x, y, text, big) { }
 
-BC_SmallButton::BC_SmallButton(int x, int y, int w, char *text, int big)
+BC_SmallButton::BC_SmallButton(int x, int y, int w, const char *text, int big)
  : BC_Button(x, y, w, text, big) { }
 
 int BC_SmallButton::create_tool_objects()

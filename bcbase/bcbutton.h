@@ -79,8 +79,8 @@ public:
 class BC_SmallButton : public BC_Button     // small button
 {
 public:
-	BC_SmallButton(int x, int y, char *text, int big = 0);
-	BC_SmallButton(int x, int y, int w, char *text, int big = 0);
+	BC_SmallButton(int x, int y, const char *text, int big = 0);
+	BC_SmallButton(int x, int y, int w, const char *text, int big = 0);
 	int create_tool_objects();
 	int draw();
 };
@@ -89,7 +89,7 @@ public:
 class BC_BigButton : public BC_Button      // big button
 {
 public:
-	BC_BigButton(int x, int y, char *text, int big = 1);
+	BC_BigButton(int x, int y, const char *text, int big = 1);
 	int create_tool_objects();
 	int draw();
 };
