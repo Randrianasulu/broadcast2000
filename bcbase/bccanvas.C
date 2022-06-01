@@ -261,7 +261,7 @@ int BC_Canvas::draw_3d_line(int x1, int y1, int x2, int y2, int color1, int colo
 return 0;
 }
 
-int BC_Canvas::draw_text(int x_, int y_, char *text) 
+int BC_Canvas::draw_text(int x_, int y_, const char *text) 
 {
 	XDrawString(top_level->display, pixmap, gc, x_, y_, text, strlen(text));
 return 0;

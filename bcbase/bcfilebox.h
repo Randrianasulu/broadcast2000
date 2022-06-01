@@ -49,7 +49,7 @@ private:
 	int create_tables();             // Create information for listbox.
 	int delete_tables();             // Delete all information for listbox.
 	ArrayList<BC_ListBoxItem*> list_column[BC_FILEBOX_TOTAL_COLUMNS];  // Columns of array lists.
-	char *column_titles[BC_FILEBOX_TOTAL_COLUMNS];
+	const char *column_titles[BC_FILEBOX_TOTAL_COLUMNS];
 	int column_width[BC_FILEBOX_TOTAL_COLUMNS];
 
 

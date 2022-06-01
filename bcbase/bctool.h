@@ -133,7 +133,7 @@ public:
 		int light1, int light2, int middle, int shadow1, int shadow2);
 	int draw_3d_small(int x1, int y1, int w, int h, int light, int middle, int shadow);
 	int draw_center_text(int x, int y, char *text, int font, GC *gc = 0);
-	int draw_text(int x_, int y_, char *text);
+	int draw_text(int x_, int y_, const char *text);
 	int draw_vertical_text(int x, int y, char *text, int fgcolor, int bgcolor, GC *gc = 0);
 	int draw_rectangle(int x_, int y_, int w_, int h_);
 	int draw_box(int x_, int y_, int w_, int h_);
@@ -148,7 +148,7 @@ public:
 	int get_text_ascent(int font);
 	int get_text_descent(int font);
 	int set_font(int font);
-	int get_text_width(int font, char *text);
+	int get_text_width(int font, const char *text);
 	int slide_left(int distance);
 	int slide_right(int distance);
 	int slide_up(int distance);

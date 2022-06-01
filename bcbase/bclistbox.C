@@ -53,7 +53,7 @@ BC_ListBoxItem& BC_ListBoxItem::operator=(BC_ListBoxItem& item)
 
 BC_ListBox::BC_ListBox(int x, int y, int w, int h, 
 						ArrayList<BC_ListBoxItem*> *data,
-						char **column_titles,
+						const char **column_titles,
 						int columns,
 						int yposition,
 						int currentitem)
@@ -95,7 +95,7 @@ return 0;
 }
 
 int BC_ListBox::set_contents(ArrayList<BC_ListBoxItem*> *data,
-						char **column_titles,
+						const char **column_titles,
 						int columns,
 						int yposition,
 						int currentitem)
@@ -154,7 +154,7 @@ return 0;
 
 int BC_ListBox::resize(int x, int y, int w, int h,
 						ArrayList<BC_ListBoxItem*> *data,
-						char **column_titles,
+						const char **column_titles,
 						int columns,
 						int yposition,
 						int currentitem)
@@ -449,7 +449,7 @@ int BC_ListBox::get_selection(char *string, int column)
 return 0;
 }
 
-char* BC_ListBox::get_selection(int column)
+const char* BC_ListBox::get_selection(int column)
 {
 	if(currentitem != -1) return data[column].values[currentitem]->text;
 	else return "";

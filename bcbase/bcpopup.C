@@ -64,7 +64,7 @@ BC_Popup::~BC_Popup()
 	}
 }
 
-int BC_Popup::draw_text(int x_, int y_, char *text) 
+int BC_Popup::draw_text(int x_, int y_, const char *text) 
 {
 	XDrawString(top_level->display, pixmap, top_level->gc, x_, y_, text, strlen(text));
 return 0;

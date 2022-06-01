@@ -23,7 +23,7 @@ public:
 	int draw_3d_big(int x1, int y1, int w, int h, int light, int middle, int shadow);
 	int draw_3d_big(int x, int y, int w, int h, 
 		int light1, int light2, int middle, int shadow1, int shadow2);
-	int draw_text(int x_, int y_, char *text);
+	int draw_text(int x_, int y_, const char *text);
 	int draw_line(int x1, int y1, int x2, int y2);
 	int get_text_width(XFontStruct *font, char *text);
 	int resize_window(int x, int y, int w, int h);       // user calls to resize this window

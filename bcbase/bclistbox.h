@@ -57,7 +57,7 @@ public:
 // Content can be specified here or with set_contents.
 	BC_ListBox(int x, int y, int w, int h, 
 						ArrayList<BC_ListBoxItem*> *data = 0, // Each column has an ArrayList of BC_ListBoxItems.
-						char **column_titles = 0, // Titles for columns.  Set to 0 for no titles
+						const char **column_titles = 0, // Titles for columns.  Set to 0 for no titles
 						int columns = 0, // Total columns.
 						int yposition = 0, // Pixel of top of window.
 						int currentitem = -1); // Current selected item.
@@ -72,14 +72,14 @@ public:
 // Put text of current selection in the string.
 	int get_selection(char *string, int column = 0);
 // Get pointer to the text of the selection.
-	char *get_selection(int column = 0);
+	const char *get_selection(int column = 0);
 // Get the number of the item selected or -1 if no selection.
 	int get_selection_number();
 	int get_yposition();
 // change window size and content
 	int resize(int x, int y, int w, int h, 
 						ArrayList<BC_ListBoxItem*> *data,
-						char **column_titles,
+						const char **column_titles,
 						int columns,
 						int yposition = 0,
 						int currentitem = -1);
@@ -87,7 +87,7 @@ public:
 	int set_size(int x, int y, int w, int h);
 // change the contents
 	int set_contents(ArrayList<BC_ListBoxItem*> *data,
-						char **column_titles,
+						const char **column_titles,
 						int columns,
 						int yposition = 0,
 						int currentitem = -1);
@@ -132,7 +132,7 @@ private:
 	BC_ListBoxYScroll *yscrollbar;
 
 	ArrayList<BC_ListBoxItem*> *data;  // Array of lists of pointers to list box items.
-	char **column_titles;      // Array of text strings.
+	const char **column_titles;      // Array of text strings.
 	int *column_width;        // Array of numbers
 	int columns;              // Total members in each array.
 	char query[1024];

@@ -899,7 +899,7 @@ int BC_Tool::draw_bitmap(BC_Bitmap *bitmap,
 return 0;
 }
 
-int BC_Tool::draw_text(int x_, int y_, char *text) 
+int BC_Tool::draw_text(int x_, int y_, const char *text) 
 {
 	XDrawString(top_level->display, pixmap, top_level->gc, x_, y_, text, strlen(text));
 return 0;
@@ -963,7 +963,7 @@ int BC_Tool::set_font(int font)
 return 0;
 };
 
-int BC_Tool::get_text_width(int font, char *text)
+int BC_Tool::get_text_width(int font, const char *text)
 {
 	return XTextWidth(top_level->get_font(font), text, strlen(text));
 return 0;

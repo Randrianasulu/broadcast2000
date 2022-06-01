@@ -53,7 +53,7 @@ public:
 	int draw_disc(int x, int y, int w, int h);
 	int draw_line(int x1, int y1, int x2, int y2);
 	int draw_3d_line(int x1, int y1, int x2, int y2, int color1, int color2);
-	int draw_text(int x_, int y_, char *text);
+	int draw_text(int x_, int y_, const char *text);
 	int draw_vertical_text(int x, int y, char *text, int fgcolor, int bgcolor);
 	int draw_center_text(int x, int y, char *text, int font);
 	int get_text_width(int font, char *text);
