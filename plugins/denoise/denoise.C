@@ -515,7 +515,7 @@ return 0;
 
 int Denoise::tree_copy(double **output, double **input, int length, int levels)
 {
-	register int i, j, k, l, m;
+	 int i, j, k, l, m;
 
 	for(i = 0, k = 1; k < levels; i++, k++)
 	{

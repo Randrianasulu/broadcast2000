@@ -50,7 +50,7 @@ int DelayMain::process_realtime(long size, float *input_ptr, float *output_ptr)
 		long new_dsp_length = in_buffer_size + duration;
 		
 		float *new_dsp = new float[new_dsp_length];
-		register int i;
+		 int i;
 		for(i = 0; i < new_dsp_length && i < dsp_length; i++)
 		{
 			new_dsp[i] = dsp_in[i];

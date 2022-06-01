@@ -96,22 +96,22 @@ int ParametricMain::process_realtime(long size, float *input_ptr, float *output_
 					float level = get_eq_level(units[i]->level);
 
 // copy input into a buffer for mangling
-					for(register int j = 0; j < size; j++) dsp_in[j] = input_ptr[j];
+					for( int j = 0; j < size; j++) dsp_in[j] = input_ptr[j];
 // Perform bandpass
 					process_bp(eq_skirt[i][0], eq_skirt[i][1], eq_skirt[i][2], dsp_in, size, units[i]->quality, units[i]->frequency, level);
 
 // overlay on dsp_out
 					if(count == 0)
-						for(register int j = 0; j < size; j++) dsp_out[j] = dsp_in[j] * level;
+						for( int j = 0; j < size; j++) dsp_out[j] = dsp_in[j] * level;
 					else
-						for(register int j = 0; j < size; j++) dsp_out[j] += dsp_in[j] * level;
+						for( int j = 0; j < size; j++) dsp_out[j] += dsp_in[j] * level;
 
 					count++;
 				}
 			}
 
 // overlay the source signal
-			for(register int j = 0; j < size; j++) dsp_out[j] += input_ptr[j];
+			for( int j = 0; j < size; j++) dsp_out[j] += input_ptr[j];
 			in_output = 1;
 		}
 
@@ -175,9 +175,9 @@ int ParametricMain::process_realtime(long size, float *input_ptr, float *output_
 		{
 // get input from any previous eq
 			if(in_output)
-				for(register int j = 0; j < size; j++) dsp_buffer[j] = dsp_out[j];
+				for( int j = 0; j < size; j++) dsp_buffer[j] = dsp_out[j];
 			else
-				for(register int j = 0; j < size; j++) dsp_buffer[j] = input_ptr[j];
+				for( int j = 0; j < size; j++) dsp_buffer[j] = input_ptr[j];
 
 // process band passes
 			int count = 0;
@@ -188,16 +188,16 @@ int ParametricMain::process_realtime(long size, float *input_ptr, float *output_
 				if(units[i]->bandpass)
 				{
 // get input into a buffer for mangling
-					for(register int j = 0; j < size; j++) dsp_in[j] = dsp_buffer[j];
+					for( int j = 0; j < size; j++) dsp_in[j] = dsp_buffer[j];
 
 // Process bandpass
 					process_bp(bp_skirt[i][0], bp_skirt[i][1], bp_skirt[i][2], dsp_in, size, units[i]->quality, units[i]->frequency, level);
 
 // overlay on output
 					if(count == 0)
-						for(register int j = 0; j < size; j++) dsp_out[j] = dsp_in[j] * level;
+						for( int j = 0; j < size; j++) dsp_out[j] = dsp_in[j] * level;
 					else
-						for(register int j = 0; j < size; j++) dsp_out[j] += dsp_in[j] * level;
+						for( int j = 0; j < size; j++) dsp_out[j] += dsp_in[j] * level;
 					
 					count++;
 				}
@@ -205,16 +205,16 @@ int ParametricMain::process_realtime(long size, float *input_ptr, float *output_
 				if(units[i]->lowpass)
 				{
 // get input into a buffer for mangling
-					for(register int j = 0; j < size; j++) dsp_in[j] = dsp_buffer[j];
+					for( int j = 0; j < size; j++) dsp_in[j] = dsp_buffer[j];
 
 // Process lowpass
 					process_low(bp_skirt[i][0], bp_skirt[i][1], dsp_in, size, units[i]->frequency, level);
 
 // overlay on output
 					if(count == 0)
-						for(register int j = 0; j < size; j++) dsp_out[j] = dsp_in[j];
+						for( int j = 0; j < size; j++) dsp_out[j] = dsp_in[j];
 					else
-						for(register int j = 0; j < size; j++) dsp_out[j] += dsp_in[j];
+						for( int j = 0; j < size; j++) dsp_out[j] += dsp_in[j];
 					
 					count++;
 				}
@@ -222,16 +222,16 @@ int ParametricMain::process_realtime(long size, float *input_ptr, float *output_
 				if(units[i]->highpass)
 				{
 // get input into a buffer for mangling
-					for(register int j = 0; j < size; j++) dsp_in[j] = dsp_buffer[j];
+					for( int j = 0; j < size; j++) dsp_in[j] = dsp_buffer[j];
 
 // Process highpass
 					process_high(bp_skirt[i][0], bp_skirt[i][1], dsp_in, size, units[i]->frequency, level);
 
 // overlay on output
 					if(count == 0)
-						for(register int j = 0; j < size; j++) dsp_out[j] = dsp_in[j];
+						for( int j = 0; j < size; j++) dsp_out[j] = dsp_in[j];
 					else
-						for(register int j = 0; j < size; j++) dsp_out[j] += dsp_in[j];
+						for( int j = 0; j < size; j++) dsp_out[j] += dsp_in[j];
 
 					count++;
 				}
@@ -240,9 +240,9 @@ int ParametricMain::process_realtime(long size, float *input_ptr, float *output_
 
 // final write to 32 bit out
 		if(!bandpass)
-			for(register int j = 0; j < size; j++) output_ptr[j] = dsp_out[j];
+			for( int j = 0; j < size; j++) output_ptr[j] = dsp_out[j];
 		else
-			for(register int j = 0; j < size; j++)
+			for( int j = 0; j < size; j++)
 			{
 // factor in wetness for a bandpass
 				float level = db.fromdb(wetness);

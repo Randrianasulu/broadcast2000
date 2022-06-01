@@ -54,7 +54,7 @@ int PitchEngine::signal_process()
     int h = window_size / 2;
 	float freq_offset = pitch->freq_offset;
 	double destination, upper, lower;
-    register int i, dest_i, new_i;
+     int i, dest_i, new_i;
 	double freq_scale;
 
 	if(pitch->automation_used())

@@ -122,7 +122,7 @@ int NormalizeMain::start_plugin()
 		{
 			buffer_in_number = buffer_in[buffer_number];
 			current_highest = &highest_sample[buffer_number];
-			for(register long buffer_pointer = 0; buffer_pointer < input_advance; buffer_pointer++)
+			for( long buffer_pointer = 0; buffer_pointer < input_advance; buffer_pointer++)
 			{
 				test_sample = fabs(buffer_in_number[buffer_pointer]);
 				if(test_sample > *current_highest) *current_highest = test_sample;
@@ -186,7 +186,7 @@ int NormalizeMain::start_plugin()
 					buffer_in_number = buffer_in[buffer_number];
 					buffer_out_number = buffer_out[buffer_number];
 					current_scale = scale[buffer_number];
-					for(register long buffer_pointer = 0; buffer_pointer < input_advance; buffer_pointer++)
+					for( long buffer_pointer = 0; buffer_pointer < input_advance; buffer_pointer++)
 					{
 						output = &buffer_out_number[buffer_pointer];
 						*output = buffer_in_number[buffer_pointer] * current_scale;

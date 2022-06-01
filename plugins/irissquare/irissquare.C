@@ -39,7 +39,7 @@ int IrisSquareMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***o
 {
 	VPixel **input1, **input2, **output;
 	int i, j, k, left;
-	register int in_x1, in_x2, in_y1, in_y2;
+	 int in_x1, in_x2, in_y1, in_y2;
 	int band_width, band_height;
 
 // Want the top most layer to get the output.

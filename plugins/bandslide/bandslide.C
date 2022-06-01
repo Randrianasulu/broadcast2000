@@ -41,7 +41,7 @@ int BandSlideMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***ou
 {
 	VPixel **input1, **input2, **output;
 	int i, j, k, left;
-	register int in_x1, in_x2, out_x1, out_x2;
+	 int in_x1, in_x2, out_x1, out_x2;
 	int band_height, band_width;
 
 // Want the top most layer to get the output.

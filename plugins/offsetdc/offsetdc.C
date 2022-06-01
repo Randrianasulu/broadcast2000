@@ -69,7 +69,7 @@ int OffsetMain::start_plugin()
 		result = read_samples(input_position, input_advance);
 
 		if(!result)
-		for(register long buffer_pointer = 0; buffer_pointer < input_advance; buffer_pointer++)
+		for( long buffer_pointer = 0; buffer_pointer < input_advance; buffer_pointer++)
 		{
 			total += buffer_in[buffer_pointer];
 		}
@@ -88,7 +88,7 @@ int OffsetMain::start_plugin()
 
 // returns 1 for failure
 			result = read_samples(input_position, input_advance);
-			for(register long buffer_pointer = 0; buffer_pointer < input_advance; buffer_pointer++)
+			for( long buffer_pointer = 0; buffer_pointer < input_advance; buffer_pointer++)
 			{
 				buffer_out[buffer_pointer] = buffer_in[buffer_pointer] - offset;
 			}

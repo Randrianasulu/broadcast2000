@@ -63,8 +63,8 @@ int LevelMain::process_realtime(long size, float *input_ptr, float *output_ptr)
 
 	if(automation_used())
 	{
-		register float scale;
-		for(register int j = 0; j < size; j++)
+		 float scale;
+		for( int j = 0; j < size; j++)
 		{
 			scale = db.fromdb(level + get_automation_value(j) * MAXLEVEL);
 			output_ptr[j] = input_ptr[j] * scale;
@@ -73,7 +73,7 @@ int LevelMain::process_realtime(long size, float *input_ptr, float *output_ptr)
 	else
 	{
 		float scale = db.fromdb(new_level);
-		for(register int j = 0; j < size; j++) output_ptr[j] = input_ptr[j] * scale;
+		for( int j = 0; j < size; j++) output_ptr[j] = input_ptr[j] * scale;
 	}
 return 0;
 }

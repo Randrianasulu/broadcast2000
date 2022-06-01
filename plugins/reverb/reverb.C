@@ -478,15 +478,15 @@ int ReverbEngine::process_overlay(float *in, double *out, double &out1, double &
 	if(lowpass == -1 || lowpass >= plugin->project_sample_rate / 2 - 2500)
 	{
 // no lowpass filter
-		for(register int i = 0; i < size; i++) out[i] += in[i] * level;
+		for( int i = 0; i < size; i++) out[i] += in[i] * level;
 	}
 	else
 	{
-		register double coef = 0.25 * 2.0 * M_PI * (double)lowpass / (double)plugin->project_sample_rate;
-		register double a = coef * 0.25;
-		register double b = coef * 0.50;
+		 double coef = 0.25 * 2.0 * M_PI * (double)lowpass / (double)plugin->project_sample_rate;
+		 double a = coef * 0.25;
+		 double b = coef * 0.50;
 
-		for(register int i = 0; i < size; i++)
+		for( int i = 0; i < size; i++)
 		{
 			out2 += a * (3 * out1 + in[i] - out2);
 			out2 += b * (out1 + in[i] - out2);

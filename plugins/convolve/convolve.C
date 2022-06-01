@@ -154,8 +154,8 @@ int CrossfadeWindow::process_fifo(long size,
 // copy the new fragments into the input_buffers
 	for(i = 0; i < new_channels; i++)
 	{
-		register float *output = &input_buffer[i][fragment_in_position];
-		register float *output_end = output + size;
+		 float *output = &input_buffer[i][fragment_in_position];
+		 float *output_end = output + size;
 		input_buffer_end = input_buffer[i] + input_size;
 
 		if(output_end >= input_buffer_end) output_end -= input_size;
@@ -177,8 +177,8 @@ int CrossfadeWindow::process_fifo(long size,
 // copy a window from input_buffer to the dsp_in
 		for(i = 0; i < new_channels; i++)
 		{
-			register float *input = &input_buffer[i][window_position];
-			register float *input_end = input + window_size;
+			 float *input = &input_buffer[i][window_position];
+			 float *input_end = input + window_size;
 			double *output = dsp_in[i];
 
 			input_buffer_end = input_buffer[i] + input_size;
@@ -199,9 +199,9 @@ int CrossfadeWindow::process_fifo(long size,
 		for(i = 0; i < new_channels; i++)
 		{
 // crossfade first WINDOWBORDER with last WINDOWBORDER of previous window
-			register float *output = &output_buffer[i][window_position];
-			register float *output_end = output + WINDOWBORDER;
-			register double *input = dsp_out[i];
+			 float *output = &output_buffer[i][window_position];
+			 float *output_end = output + WINDOWBORDER;
+			 double *input = dsp_out[i];
 			double input_slope = (WINDOWBORDER > 0) ? (double)1 / WINDOWBORDER : 0;
 			float output_slope = (WINDOWBORDER > 0) ? (double)1 / WINDOWBORDER : 0;
 
@@ -254,7 +254,7 @@ int CrossfadeWindow::process_fifo(long size,
 // Initially the fragment_out_position is < 0
 		if(fragment_out_position < 0)
 		{
-			register float *new_output_end = output_end;
+			 float *new_output_end = output_end;
 
 			if(fragment_out_position + size > 0) new_output_end -= fragment_out_position + size;
 			while(output_ptr[i] < new_output_end)

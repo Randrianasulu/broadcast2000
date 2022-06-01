@@ -19,7 +19,7 @@ int FFT::do_fft(unsigned int samples,  // must be a power of 2
     	double *imag_out)
 {
     unsigned int num_bits;    // Number of bits needed to store indices
-    register unsigned int i, j, k, n;
+     unsigned int i, j, k, n;
     unsigned int block_size, block_end;
 
     double angle_numerator = 2.0 * M_PI;
@@ -110,7 +110,7 @@ int FFT::do_fft(unsigned int samples,  // must be a power of 2
 
 unsigned int FFT::samples_to_bits(unsigned int samples)
 {
-    register unsigned int i;
+     unsigned int i;
 
     for(i = 0; ; i++)
     {
@@ -122,7 +122,7 @@ unsigned int FFT::samples_to_bits(unsigned int samples)
 
 unsigned int FFT::reverse_bits(unsigned int index, unsigned int bits)
 {
-    register unsigned int i, rev;
+     unsigned int i, rev;
 
     for(i = rev = 0; i < bits; i++)
     {
@@ -136,7 +136,7 @@ unsigned int FFT::reverse_bits(unsigned int index, unsigned int bits)
 int FFT::symmetry(int size, double *freq_real, double *freq_imag)
 {
     int h = size / 2;
-    for(register int i = h + 1; i < size; i++)
+    for( int i = h + 1; i < size; i++)
     {
         freq_real[i] = freq_real[size - i];
         freq_imag[i] = -freq_imag[size - i];
@@ -225,7 +225,7 @@ int CrossfadeFFT::reconfigure()
 	float *new_output_buffer = new float[new_size];
 
 // copy data from the old input_buffer and clear the new buffer
-	register int i = 0;
+	 int i = 0;
 	if(input_buffer)
 	{
 		for(; i < input_size; i++)
@@ -264,8 +264,8 @@ int CrossfadeFFT::process_fifo(long size, float *input_ptr, float *output_ptr)
 
 // copy the new fragment into the input_buffer
 	{
-		register float *output = &input_buffer[fragment_in_position];
-		register float *output_end = output + size;
+		 float *output = &input_buffer[fragment_in_position];
+		 float *output_end = output + size;
 		if(output_end >= input_buffer_end) output_end -= input_size;
 
 		while(output != output_end)
@@ -284,8 +284,8 @@ int CrossfadeFFT::process_fifo(long size, float *input_ptr, float *output_ptr)
 	{
 // copy a window from input_buffer to the dsp_in
 		{
-			register float *input = &input_buffer[window_position];
-			register float *input_end = input + window_size;
+			 float *input = &input_buffer[window_position];
+			 float *input_end = input + window_size;
 			if(input_end > input_buffer_end) input_end -= input_size;
 			double *output = dsp_in;
 
@@ -315,9 +315,9 @@ int CrossfadeFFT::process_fifo(long size, float *input_ptr, float *output_ptr)
 // copy from dsp_out into the output_buffer
 		{
 // crossfade first WINDOWBORDER with last WINDOWBORDER of previous window
-			register float *output = &output_buffer[window_position];
-			register float *output_end = output + WINDOWBORDER;
-			register double *input = dsp_out;
+			 float *output = &output_buffer[window_position];
+			 float *output_end = output + WINDOWBORDER;
+			 double *input = dsp_out;
 			double input_slope = (double)1 / WINDOWBORDER;
 			float output_slope = (double)1 / WINDOWBORDER;
 			double scale = 0;
@@ -364,7 +364,7 @@ int CrossfadeFFT::process_fifo(long size, float *input_ptr, float *output_ptr)
 // Initially the fragment_out_position is < 0
 	if(fragment_out_position < 0)
 	{
-		register float *new_output_end = output_end;
+		 float *new_output_end = output_end;
 		if(fragment_out_position + size > 0) new_output_end -= fragment_out_position + size;
 		while(output_ptr < new_output_end)
 		{

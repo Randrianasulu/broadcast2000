@@ -499,7 +499,7 @@ double Denoise::dot_product(double *data, double *filter, char filtlen)
 
 Denoise::tree_copy(double **output, double **input, int length, int levels)
 {
-	register int i, j, k, l, m;
+	 int i, j, k, l, m;
 
 	for(i = 0, k = 1; k < levels; i++, k++)
 	{
@@ -595,7 +595,7 @@ Denoise::convolve_int_2(double *input_sequence, long length,
 // insert zeros between each element of the input sequence and
 // convolve with the filter to interpolate the data
 {
-	register int i, j;
+	 int i, j;
 	int endpoint = length + filtlen - 2;
 
 	if (sum_output)

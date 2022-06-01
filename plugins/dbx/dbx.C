@@ -85,7 +85,7 @@ void DBXMain::store_rms_data(float value)
 int DBXMain::process_realtime(long size, float *input_ptr, float *output_ptr)
 {
 	float level = DB::fromdb(gain);
-	for(register int j = 0; j < size; j++) 
+	for( int j = 0; j < size; j++) 
 	{
 		store_rms_data(input_ptr[j]);
 //		double rms_value = sqrt(rms_total / rms_size);

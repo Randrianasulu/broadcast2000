@@ -284,11 +284,11 @@ return 0;
 
 void HueEngine::run()
 {
-	register int i, j, k;
+	 int i, j, k;
 	VPixel **input_rows, **output_rows;
-	register float r, g, b, h, s, v;
-	register int r_i, g_i, b_i;
-	register float h_offset, s_offset, v_offset;
+	 float r, g, b, h, s, v;
+	 int r_i, g_i, b_i;
+	 float h_offset, s_offset, v_offset;
 
 //printf("HueEngine::run 1\n");
 	while(1)

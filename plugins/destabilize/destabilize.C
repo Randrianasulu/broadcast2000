@@ -48,7 +48,7 @@ return 0;
 int DestabilizeMain::process_realtime(long size, VFrame **input_ptr, VFrame **output_ptr)
 {
 	int i;
-	register int j, k;
+	 int j, k;
 	VPixel **input_rows, **output_rows;
 	int r, g, b;
 

@@ -40,7 +40,7 @@ int BarnDoorMain::process_realtime(long size, VFrame ***input_ptr, VFrame ***out
 {
 	VPixel **input1, **input2, **output;
 	int i, j, k, left;
-	register int in_x1, in_x2;
+	 int in_x1, in_x2;
 	int band_width;
 
 // Want the top most layer to get the output.
