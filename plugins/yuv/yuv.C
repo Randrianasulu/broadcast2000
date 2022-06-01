@@ -284,10 +284,10 @@ return 0;
 
 void YUVEngine::run()
 {
-	register int i, j, k;
+	int i, j, k;
 	VPixel **input_rows, **output_rows;
-	register long y, u, v, r, g, b;
-	register long y_scale, u_scale, v_scale;
+	long y, u, v, r, g, b;
+	long y_scale, u_scale, v_scale;
 
 	while(1)
 	{
