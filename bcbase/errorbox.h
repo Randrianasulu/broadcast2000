@@ -9,7 +9,7 @@ class ErrorBoxOkButton;
 class ErrorBox : public BC_Window
 {
 public:
-	ErrorBox(char *display = "", char *title = "2000: Error");
+	ErrorBox(const char *display = "", const char *title = "2000: Error");
 	virtual ~ErrorBox();
 
 	int create_objects(char *text1, char *text2 = 0, char *text3 = 0, char *text4 = 0);

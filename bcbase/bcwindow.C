@@ -17,7 +17,7 @@
 
 BC_Resources* BC_Window::resources = 0;
 
-BC_Window::BC_Window(char *title, 
+BC_Window::BC_Window(const char *title, 
 			int w, 
 			int h, 
 			int minw, 
@@ -31,9 +31,9 @@ BC_Window::BC_Window(char *title,
 	init_window(display_name, title, hide, private_color, minw, minh);
 }
 
-BC_Window::BC_Window(char *display_name, 
+BC_Window::BC_Window(const char *display_name, 
 					 int color, 
-					 char *title, 
+					 const char *title, 
 					 int w, int h, 
 					 int minw, int minh, 
 					 int private_color, int hide)
@@ -66,8 +66,8 @@ int BC_Window::init_flags()
 return 0;
 }
 
-int BC_Window::init_window(char *display_name, 
-		char *title, 
+int BC_Window::init_window(const char *display_name, 
+		const char *title, 
 		int hide, 
 		int private_color, 
 		int minw, 
@@ -1072,7 +1072,7 @@ int BC_Window::set_done(int return_value)
 return 0;
 }
 
-int BC_Window::set_title(char *title) 
+int BC_Window::set_title(const char *title) 
 { 
 	XSetStandardProperties(display, win, title, title, None, 0, 0, 0); 
 	XFlush(display);

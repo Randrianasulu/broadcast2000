@@ -25,7 +25,7 @@ public:
 	BC_Window() {  };
 
 // build a standalone window
-	BC_Window(char *title, 
+	BC_Window(const char *title, 
 				int w, 
 				int h, 
 				int minw, 
@@ -33,9 +33,9 @@ public:
 				int private_color = 0, 
 				int hide = 0);
 
-	BC_Window(char *display_name, 
+	BC_Window(const char *display_name, 
 				int color,
-				char *title,
+				const char *title,
 				int w, 
 				int h,
 				int minw, 
@@ -77,7 +77,7 @@ public:
 	int arm_repeat(long repeat_id, int interrupt_now);  // repeater is a unique id for the repeat thread
 
 // window title
-	int set_title(char *title);                        // set the title of this standalone window
+	int set_title(const char *title);                        // set the title of this standalone window
 
 
 // ================================= clipboard
@@ -136,7 +136,7 @@ public:
 
 private:
 	int init_flags();
-	int init_window(char *display_name, char *title, int hide, int private_color, int minw, int minh);
+	int init_window(const char *display_name, const char *title, int hide, int private_color, int minw, int minh);
 	int get_atoms();
 	int init_gc();
 	int init_fonts();

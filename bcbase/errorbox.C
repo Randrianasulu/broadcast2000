@@ -1,7 +1,7 @@
 #include <string.h>
 #include "errorbox.h"
 
-ErrorBox::ErrorBox(char *display, char *title)
+ErrorBox::ErrorBox(const char *display, const char *title)
  : BC_Window(display, MEGREY, title, 400, 120, 400, 120)
 {
 }
