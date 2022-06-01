@@ -8,7 +8,7 @@
 class BC_Toggle : public BC_Tool // Base class
 {
 public:
-	BC_Toggle(int x_, int y_, int w_, int h_, int down, char *text = 0);
+	BC_Toggle(int x_, int y_, int w_, int h_, int down, const char *text = 0);
 	int create_tool_objects();
 
 	// update status
@@ -33,13 +33,13 @@ public:
 
 	int highlighted;
 	int down;
-	char *text;
+	const char *text;
 };
 
 class BC_Radial : public BC_Toggle
 {
 public:
-	BC_Radial(int x_, int y_, int w_, int h_, int down, char *text = 0);
+	BC_Radial(int x_, int y_, int w_, int h_, int down, const char *text = 0);
 	int create_tool_objects();
 
 	int draw();
@@ -52,7 +52,7 @@ public:
 class BC_CheckBox : public BC_Toggle
 {
 public:
-	BC_CheckBox(int x_, int y_, int w_, int h_, int down, char *text = 0, char letter = 0);
+	BC_CheckBox(int x_, int y_, int w_, int h_, int down, const char *text = 0, char letter = 0);
 	int create_tool_objects();
 
 	int draw();

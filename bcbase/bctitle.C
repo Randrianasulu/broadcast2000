@@ -2,7 +2,7 @@
 #include "bctitle.h"
 #include "bcwindowbase.h"
 
-BC_Title::BC_Title(int x, int y, char *text, int font, int color)
+BC_Title::BC_Title(int x, int y, const char *text, int font, int color)
  : BC_Tool(x, y, w, h)
 {
 	this->font = font;

@@ -3,7 +3,7 @@
 #include "bcresources.h"
 #include "bctoggles.h"
 
-BC_Toggle::BC_Toggle(int x_, int y_, int w_, int h_, int down_, char *text)
+BC_Toggle::BC_Toggle(int x_, int y_, int w_, int h_, int down_, const char *text)
 	: BC_Tool(x_, y_, w_, h_)
 {
 	down = down_;
@@ -172,7 +172,7 @@ return 0;
 }
 
 
-BC_Radial::BC_Radial(int x_, int y_, int w_, int h_, int down, char *text)
+BC_Radial::BC_Radial(int x_, int y_, int w_, int h_, int down, const char *text)
 	: BC_Toggle(x_, y_, w_, h_, down, text)
 {
 }
@@ -192,7 +192,7 @@ int BC_Radial::draw()
 return 0;
 }
 
-BC_CheckBox::BC_CheckBox(int x_, int y_, int w_, int h_, int down, char *text, char letter)
+BC_CheckBox::BC_CheckBox(int x_, int y_, int w_, int h_, int down, const char *text, char letter)
 	: BC_Toggle(x_, y_, w_, h_, down, text)
 {
 	this->letter = letter;

@@ -9,7 +9,7 @@ class BC_Title : public BC_Tool
 {
 public:
 	BC_Title(int x, int y, 
-					 char *text,          // string to draw
+					 const char *text,          // string to draw
 					 int font = MEDIUMFONT,        // a font macro
 					 int color = BLACK);     // a color macro
 
