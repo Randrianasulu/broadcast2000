@@ -13,7 +13,7 @@ class BC_ProgressBox;
 class BC_ProgressBox : public Thread
 {
 public:
-	BC_ProgressBox(char *display, char *text, long length, int cancel_button = 1);
+	BC_ProgressBox(const char *display, const char *text, long length, int cancel_button = 1);
 	virtual ~BC_ProgressBox();
 	
 	void run();
@@ -35,13 +35,13 @@ class BC_ProgressWindowCancelButton;
 class BC_ProgressWindow : public BC_Window
 {
 public:
-	BC_ProgressWindow(char *display = "", int cancel_button = 1);
+	BC_ProgressWindow(const char *display = "", int cancel_button = 1);
 	virtual ~BC_ProgressWindow();
 
-	int create_objects(char *text, long length);
+	int create_objects(const char *text, long length);
 	int update(long position);    // return 1 if cancelled
 
-	char *text;
+	const char *text;
 	BC_ProgressBar *bar;
 	BC_ProgressWindowCancelButton *cancel;
 	BC_Title *caption;

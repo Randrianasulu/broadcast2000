@@ -15,7 +15,7 @@
 // 24 bpp unpacked:       0bgr
 
 
-BC_Capture::BC_Capture(int w, int h, char *display_text)
+BC_Capture::BC_Capture(int w, int h, const char *display_text)
 {
 	this->w = w;
 	this->h = h;
@@ -35,7 +35,7 @@ BC_Capture::~BC_Capture()
 	delete_data();
 }
 
-int BC_Capture::init_window(char *display_text)
+int BC_Capture::init_window(const char *display_text)
 {
 	if(display_text && display_text[0] == 0) display_text = NULL;
 	if((display = XOpenDisplay(display_text)) == NULL)

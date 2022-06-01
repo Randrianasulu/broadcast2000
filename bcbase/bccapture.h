@@ -22,10 +22,10 @@ typedef struct
 class BC_Capture
 {
 public:
-	BC_Capture(int w, int h, char *display_text = "");
+	BC_Capture(int w, int h, const char *display_text = "");
 	virtual ~BC_Capture();
 
-	int init_window(char *display_text);
+	int init_window(const char *display_text);
 	int capture_frame(VFrame *frame, int x1, int y1);
 	int get_w();
 	int get_h();

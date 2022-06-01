@@ -5,7 +5,7 @@
 #include "bctitle.h"
 #include "bcwindow.h"
 
-BC_ProgressBox::BC_ProgressBox(char *display, char *text, long length, int cancel_button)
+BC_ProgressBox::BC_ProgressBox(const char *display, const char *text, long length, int cancel_button)
  : Thread(1)                    // create synchronous
 {
 	pwindow = new BC_ProgressWindow(display, cancel_button);
@@ -56,7 +56,7 @@ int BC_ProgressBox::stop_progress()
 return 0;
 }
 
-BC_ProgressWindow::BC_ProgressWindow(char *display, int cancel_button)
+BC_ProgressWindow::BC_ProgressWindow(const char *display, int cancel_button)
  : BC_Window(display, MEGREY, "Progress", 340, 120, 340, 120)
 {
 	cancelled = 0;
@@ -69,7 +69,7 @@ BC_ProgressWindow::~BC_ProgressWindow()
 	if(cancel_button) delete cancel;
 }
 
-int BC_ProgressWindow::create_objects(char *text, long length)
+int BC_ProgressWindow::create_objects(const char *text, long length)
 {
 	this->text = text;
 	add_tool(caption = new BC_Title(5, 5, text));
