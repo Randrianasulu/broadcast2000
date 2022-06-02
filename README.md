@@ -14,3 +14,6 @@ for some reason on another machine I must use "-pix_fmt yuv420p" for mjpeg encod
 otherwise Broadcast2000 crashes in libjpeg-turbo
 
 For compiling on x86_64 add "--no-mmx" arg to configure invokation
+
+Requires libxv-dev and glib1.2-dev (glib 1.2.10 need some patching)
+
