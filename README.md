@@ -16,4 +16,9 @@ otherwise Broadcast2000 crashes in libjpeg-turbo
 For compiling on x86_64 add "--no-mmx" arg to configure invokation
 
 Requires libxv-dev and glib1.2-dev (glib 1.2.10 need some patching)
+Nasm required on x86 for libjpeg-turbo
+Autotools required for libjpeg-turbo
+
+You can even capture modern webcam by using v4l1compat:
+LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so /usr/local/bcast/bcast2000.sh
 
