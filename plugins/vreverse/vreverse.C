@@ -23,7 +23,7 @@ int VReverseMain::run_client()
 	plugin_exit();
 }
 
-char* VReverseMain::plugin_title() { return "Reverse Video"; }
+const char* VReverseMain::plugin_title() { return "Reverse Video"; }
 int VReverseMain::plugin_is_realtime() { return 0; }
 int VReverseMain::plugin_is_multi_channel() { return 0; }
 

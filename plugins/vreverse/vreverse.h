@@ -20,7 +20,7 @@ public:
 	int get_parameters(); 
 	int swap_frames(VFrame *frame1, VFrame *frame2);
 
-	char* plugin_title();
+	const char* plugin_title();
 };
 
 

@@ -25,7 +25,7 @@ TimeAvgMain::~TimeAvgMain()
 	if(defaults) delete defaults;
 }
 
-char* TimeAvgMain::plugin_title() { return "Time Average"; }
+const char* TimeAvgMain::plugin_title() { return "Time Average"; }
 int TimeAvgMain::plugin_is_realtime() { return 1; }
 int TimeAvgMain::plugin_is_multi_channel() { return 0; }
 	

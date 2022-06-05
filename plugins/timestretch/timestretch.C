@@ -498,7 +498,7 @@ TimeStretch::~TimeStretch()
 	if(defaults) delete defaults;
 }
 
-char* TimeStretch::plugin_title() { return "Time Stretch"; }
+const char* TimeStretch::plugin_title() { return "Time Stretch"; }
 
 int TimeStretch::plugin_is_realtime() { return 0; }
 

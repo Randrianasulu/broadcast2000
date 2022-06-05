@@ -123,7 +123,7 @@ public:
 	int get_parameters(); 
 
 	Defaults *defaults;
-	char* plugin_title();
+	const char* plugin_title();
 };
 
 
