@@ -83,7 +83,7 @@ return 0;
 }
 
 
-char* Reverb::plugin_title() { return "Reverb"; }
+const char* Reverb::plugin_title() { return "Reverb"; }
 int Reverb::plugin_is_realtime() { return 1; }
 int Reverb::plugin_is_multi_channel() { return 1; }
 

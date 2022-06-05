@@ -195,7 +195,7 @@ int Pitch::save_defaults()
 return 0;
 }
 
-char* Pitch::plugin_title() { return "Pitch"; }
+const char* Pitch::plugin_title() { return "Pitch"; }
 int Pitch::plugin_is_realtime() { return 1; }
 int Pitch::plugin_is_multi_channel() { return 0; }
 

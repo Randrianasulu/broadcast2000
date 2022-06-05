@@ -24,7 +24,7 @@ int OffsetMain::run_client()
 return 0;
 }
 
-char* OffsetMain::plugin_title() { return "DC Offset"; }
+const char* OffsetMain::plugin_title() { return "DC Offset"; }
 int OffsetMain::plugin_is_realtime() { return 0; }
 int OffsetMain::plugin_is_multi_channel() { return 0; }
 

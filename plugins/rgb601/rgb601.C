@@ -22,7 +22,7 @@ RGB601Main::~RGB601Main()
 {
 }
 
-char* RGB601Main::plugin_title() { return "RGB ... 601"; }
+const char* RGB601Main::plugin_title() { return "RGB ... 601"; }
 int RGB601Main::plugin_is_realtime() { return 1; }
 int RGB601Main::plugin_is_multi_channel() { return 0; }
 	

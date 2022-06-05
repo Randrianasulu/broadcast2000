@@ -30,7 +30,7 @@ public:
 
 	Defaults *defaults;
 	int output_rate;
-	char* plugin_title();
+	const char* plugin_title();
 	int project_sample_rate;
 };
 

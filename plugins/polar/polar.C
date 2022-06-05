@@ -32,7 +32,7 @@ PolarMain::~PolarMain()
 	if(defaults) delete defaults;
 }
 
-char* PolarMain::plugin_title() { return "Polarize"; }
+const char* PolarMain::plugin_title() { return "Polarize"; }
 int PolarMain::plugin_is_realtime() { return 1; }
 int PolarMain::plugin_is_multi_channel() { return 0; }
 	

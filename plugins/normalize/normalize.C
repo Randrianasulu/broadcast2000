@@ -28,7 +28,7 @@ int NormalizeMain::run_client()
 return 0;
 }
 
-char* NormalizeMain::plugin_title() { return "Normalize"; }
+const char* NormalizeMain::plugin_title() { return "Normalize"; }
 
 int NormalizeMain::plugin_is_realtime() { return 0; }
 

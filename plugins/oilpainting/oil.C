@@ -37,7 +37,7 @@ OilMain::~OilMain()
 	if(temp_frame) delete temp_frame;
 }
 
-char* OilMain::plugin_title() { return "Oil Painting"; }
+const char* OilMain::plugin_title() { return "Oil Painting"; }
 int OilMain::plugin_is_realtime() { return 1; }
 int OilMain::plugin_is_multi_channel() { return 0; }
 

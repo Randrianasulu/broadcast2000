@@ -32,7 +32,7 @@ ParametricMain::~ParametricMain()
 	}
 }
 
-char* ParametricMain::plugin_title() { return "EQ Parametric"; }
+const char* ParametricMain::plugin_title() { return "EQ Parametric"; }
 int ParametricMain::plugin_is_realtime() { return 1; }
 int ParametricMain::plugin_is_multi_channel() { return 0; }
 	

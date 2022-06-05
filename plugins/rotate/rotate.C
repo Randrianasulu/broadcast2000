@@ -30,7 +30,7 @@ RotateMain::~RotateMain()
 {
 }
 
-char* RotateMain::plugin_title() { return "Rotate"; }
+const char* RotateMain::plugin_title() { return "Rotate"; }
 int RotateMain::plugin_is_realtime() { return 1; }
 int RotateMain::plugin_is_multi_channel() { return 0; }
 
