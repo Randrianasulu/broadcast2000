@@ -58,9 +58,9 @@ MainWindow::~MainWindow()
 
 int MainWindow::create_objects(Defaults *defaults, 
 			ArrayList<PluginServer*> *plugindb, 
-			char *local_plugin_dir, 
-			char *global_plugin_dir, 
-			char *display, 
+			const char *local_plugin_dir, 
+			const char *global_plugin_dir, 
+			const char *display, 
 			int want_gui, 
 			int want_new)
 {
@@ -352,7 +352,7 @@ int MainWindow::load_filenames(ArrayList<char*> *filenames)
 return 0;
 }
 
-int MainWindow::load(char *filename, int import_)
+int MainWindow::load(const char *filename, int import_)
 {
 // get the format
 	File in;
@@ -867,7 +867,7 @@ return 0;
 }
 
 
-int MainWindow::set_filename(char *filename)
+int MainWindow::set_filename(const char *filename)
 {
 	strcpy(this->filename, filename);
 	if(gui)

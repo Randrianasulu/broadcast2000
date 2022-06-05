@@ -36,9 +36,9 @@ public:
 // ======================================== initialization commands
 	int create_objects(Defaults *defaults, 
 		ArrayList<PluginServer*> *plugindb, 
-		char *local_plugin_dir, 
-		char *global_plugin_dir, 
-		char *display, 
+		const char *local_plugin_dir, 
+		const char *global_plugin_dir, 
+		const char *display, 
 		int want_gui, 
 		int want_new);
 	int run_script(FileHTAL *script);
@@ -47,7 +47,7 @@ public:
 
 	int load_defaults();
 	int save_defaults();
-	int set_filename(char *filename);
+	int set_filename(const char *filename);
 	int load_channels();
 	int save_channels();
 
@@ -61,7 +61,7 @@ public:
 // ========================================= file operations
 
 	int load_filenames(ArrayList<char*> *filenames);
-	int load(char *filename, int import_);                     // load a file
+	int load(const char *filename, int import_);                     // load a file
 	int load(FileHTAL *htal, int import_ = 0,       // load from a htal file
 		int edits_only = 0,
 		int patches_only = 0,
