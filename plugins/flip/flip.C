@@ -22,7 +22,7 @@ FlipMain::~FlipMain()
 {
 }
 
-char* FlipMain::plugin_title() { return "Flip"; }
+const char* FlipMain::plugin_title() { return "Flip"; }
 int FlipMain::plugin_is_realtime() { return 1; }
 int FlipMain::plugin_is_multi_channel() { return 0; }
 	

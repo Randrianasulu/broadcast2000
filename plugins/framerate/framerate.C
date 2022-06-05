@@ -26,7 +26,7 @@ int FrameRateMain::run_client()
 return 0;
 }
 
-char* FrameRateMain::plugin_title() { return "Reframe"; }
+const char* FrameRateMain::plugin_title() { return "Reframe"; }
 int FrameRateMain::plugin_is_realtime() { return 0; }
 int FrameRateMain::plugin_is_multi_channel() { return 0; }
 

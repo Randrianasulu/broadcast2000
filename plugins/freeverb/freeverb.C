@@ -61,7 +61,7 @@ int Freeverb::save_defaults()
 }
 
 
-char* Freeverb::plugin_title() { return "Freeverb"; }
+const char* Freeverb::plugin_title() { return "Freeverb"; }
 int Freeverb::plugin_is_realtime() { return 1; }
 int Freeverb::plugin_is_multi_channel() { return 1; }
 

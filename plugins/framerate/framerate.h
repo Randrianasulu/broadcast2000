@@ -25,7 +25,7 @@ public:
 	float get_plugin_framerate();
 
 	int get_parameters(); 
-	char* plugin_title();
+	const char* plugin_title();
 
 	Defaults *defaults;
 	float output_rate;

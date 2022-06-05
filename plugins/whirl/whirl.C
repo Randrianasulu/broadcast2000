@@ -29,7 +29,7 @@ WhirlMain::~WhirlMain()
 	if(defaults) delete defaults;
 }
 
-char* WhirlMain::plugin_title() { return "Whirl"; }
+const char* WhirlMain::plugin_title() { return "Whirl"; }
 int WhirlMain::plugin_is_realtime() { return 1; }
 int WhirlMain::plugin_is_multi_channel() { return 0; }
 	

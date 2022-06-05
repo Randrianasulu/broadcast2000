@@ -20,7 +20,7 @@ FreezeFrameMain::~FreezeFrameMain()
 	if(first_frame) delete first_frame;
 }
 
-char* FreezeFrameMain::plugin_title() { return "FreezeFrame"; }
+const char* FreezeFrameMain::plugin_title() { return "FreezeFrame"; }
 int FreezeFrameMain::plugin_is_realtime() { return 1; }
 int FreezeFrameMain::plugin_is_multi_channel() { return 0; }
 
