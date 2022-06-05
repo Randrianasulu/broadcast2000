@@ -23,7 +23,7 @@ SlideMain::~SlideMain()
 {
 }
 
-char* SlideMain::plugin_title() { return "Slide"; }
+const char* SlideMain::plugin_title() { return "Slide"; }
 int SlideMain::plugin_is_realtime() { return 1; }
 int SlideMain::plugin_is_multi_channel() { return 1; }
 

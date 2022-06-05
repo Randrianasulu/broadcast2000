@@ -21,7 +21,7 @@ SharpenMain::~SharpenMain()
 {
 }
 
-char* SharpenMain::plugin_title() { return "Sharpen"; }
+const char* SharpenMain::plugin_title() { return "Sharpen"; }
 int SharpenMain::plugin_is_realtime() { return 1; }
 int SharpenMain::plugin_is_multi_channel() { return 0; }
 

@@ -118,7 +118,7 @@ int Spectrogram::save_defaults()
 return 0;
 }
 
-char* Spectrogram::plugin_title() { return "Spectrogram"; }
+const char* Spectrogram::plugin_title() { return "Spectrogram"; }
 int Spectrogram::plugin_is_realtime() { return 1; }
 int Spectrogram::plugin_is_multi_channel() { return 1; }
 

@@ -31,7 +31,7 @@ int SampleRateMain::run_client()
 return 0;
 }
 
-char* SampleRateMain::plugin_title() { return "Resample"; }
+const char* SampleRateMain::plugin_title() { return "Resample"; }
 
 int SampleRateMain::plugin_is_realtime() { return 0; }
 

@@ -23,7 +23,7 @@ SwapMain::~SwapMain()
 {
 }
 
-char* SwapMain::plugin_title() { return "Swap channels"; }
+const char* SwapMain::plugin_title() { return "Swap channels"; }
 int SwapMain::plugin_is_realtime() { return 1; }
 int SwapMain::plugin_is_multi_channel() { return 0; }
 	

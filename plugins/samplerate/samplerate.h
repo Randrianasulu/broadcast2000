@@ -74,7 +74,7 @@ public:
 
 	Defaults *defaults;
 	int output_rate;
-	char* plugin_title();
+	const char* plugin_title();
 	int input_sample_rate;
 	float *buffer_in, *buffer_out;
 };

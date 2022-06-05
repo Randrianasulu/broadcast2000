@@ -27,7 +27,7 @@ ScaleMain::~ScaleMain()
 	if(temp_frame) delete temp_frame;
 }
 
-char* ScaleMain::plugin_title() { return "Scale"; }
+const char* ScaleMain::plugin_title() { return "Scale"; }
 int ScaleMain::plugin_is_realtime() { return 1; }
 int ScaleMain::plugin_is_multi_channel() { return 0; }
 

@@ -34,7 +34,7 @@ StabilizeMain::~StabilizeMain()
 	block = 0;
 }
 
-char* StabilizeMain::plugin_title() { return "Stabilize"; }
+const char* StabilizeMain::plugin_title() { return "Stabilize"; }
 int StabilizeMain::plugin_is_realtime() { return 1; }
 int StabilizeMain::plugin_is_multi_channel() { return 0; }
 	

@@ -22,7 +22,7 @@ ShiftInterlaceMain::~ShiftInterlaceMain()
 {
 }
 
-char* ShiftInterlaceMain::plugin_title() { return "Shift Interlace"; }
+const char* ShiftInterlaceMain::plugin_title() { return "Shift Interlace"; }
 int ShiftInterlaceMain::plugin_is_realtime() { return 1; }
 int ShiftInterlaceMain::plugin_is_multi_channel() { return 0; }
 
