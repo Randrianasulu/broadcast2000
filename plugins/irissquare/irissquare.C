@@ -21,7 +21,7 @@ IrisSquareMain::~IrisSquareMain()
 {
 }
 
-char* IrisSquareMain::plugin_title() { return "IrisSquare"; }
+const char* IrisSquareMain::plugin_title() { return "IrisSquare"; }
 int IrisSquareMain::plugin_is_realtime() { return 1; }
 int IrisSquareMain::plugin_is_multi_channel() { return 1; }
 

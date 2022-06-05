@@ -27,7 +27,7 @@ HueMain::~HueMain()
 	if(defaults) delete defaults;
 }
 
-char* HueMain::plugin_title() { return "Hue-Saturation"; }
+const char* HueMain::plugin_title() { return "Hue-Saturation"; }
 int HueMain::plugin_is_realtime() { return 1; }
 int HueMain::plugin_is_multi_channel() { return 0; }
 	

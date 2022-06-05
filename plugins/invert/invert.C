@@ -22,7 +22,7 @@ InvertMain::~InvertMain()
 {
 }
 
-char* InvertMain::plugin_title() { return "Invert"; }
+const char* InvertMain::plugin_title() { return "Invert"; }
 int InvertMain::plugin_is_realtime() { return 1; }
 int InvertMain::plugin_is_multi_channel() { return 0; }
 	

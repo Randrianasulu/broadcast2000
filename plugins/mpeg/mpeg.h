@@ -44,7 +44,7 @@ public:
 // required by the fileio plugin client
 	int plugin_is_audio();              // plugin supports audio/default = 0
 	int plugin_is_video();              // plugin supports video/default = 0
-	char* plugin_title();       // The title is the item appearing in format popups and assets
+	const char* plugin_title();       // The title is the item appearing in format popups and assets
 	int get_audio_parameters();   // Get parameters only for writing
 	int get_video_parameters();   // Get parameters only for writing
 	int interrupt_aparameters();

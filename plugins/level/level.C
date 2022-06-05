@@ -22,7 +22,7 @@ LevelMain::~LevelMain()
 {
 }
 
-char* LevelMain::plugin_title() { return "Gain"; }
+const char* LevelMain::plugin_title() { return "Gain"; }
 int LevelMain::plugin_is_realtime() { return 1; }
 int LevelMain::plugin_is_multi_channel() { return 0; }
 	

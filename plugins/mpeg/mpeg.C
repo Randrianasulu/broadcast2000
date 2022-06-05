@@ -69,7 +69,7 @@ int MpegMain::reset_parameters()
 	return 0;
 }
 
-char* MpegMain::plugin_title() { return "MPEG"; }
+const char* MpegMain::plugin_title() { return "MPEG"; }
 int MpegMain::plugin_is_audio() { return 1; }
 int MpegMain::plugin_is_video() { return 1; }
 

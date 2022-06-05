@@ -21,7 +21,7 @@ InvertMain::~InvertMain()
 {
 }
 
-char* InvertMain::plugin_title() { return "Invert Video"; }
+const char* InvertMain::plugin_title() { return "Invert Video"; }
 int InvertMain::plugin_is_realtime() { return 1; }
 int InvertMain::plugin_is_multi_channel() { return 0; }
 
