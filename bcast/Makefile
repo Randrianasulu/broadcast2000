@@ -200,6 +200,7 @@ CFLAGS += -I../bcbase \
 	-I../quicktime/libdv \
 	-I../audiofile \
 	-I../esound \
+	-I../tiff \
 	$(shell glib-config --cflags)
 
 export CFLAGS
