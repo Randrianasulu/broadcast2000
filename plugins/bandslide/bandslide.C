@@ -23,7 +23,7 @@ BandSlideMain::~BandSlideMain()
 {
 }
 
-char* BandSlideMain::plugin_title() { return "BandSlide"; }
+const char* BandSlideMain::plugin_title() { return "BandSlide"; }
 int BandSlideMain::plugin_is_realtime() { return 1; }
 int BandSlideMain::plugin_is_multi_channel() { return 1; }
 

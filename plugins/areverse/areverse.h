@@ -19,7 +19,7 @@ public:
 
 	int get_parameters(); 
 
-	char* plugin_title();
+	const char* plugin_title();
 };
 
 

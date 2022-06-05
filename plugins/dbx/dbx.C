@@ -27,7 +27,7 @@ DBXMain::~DBXMain()
 {
 }
 
-char* DBXMain::plugin_title() { return "DBX"; }
+const char* DBXMain::plugin_title() { return "DBX"; }
 int DBXMain::plugin_is_realtime() { return 1; }
 int DBXMain::plugin_is_multi_channel() { return 0; }
 	

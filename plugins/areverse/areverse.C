@@ -24,7 +24,7 @@ int AReverseMain::run_client()
 return 0;
 }
 
-char* AReverseMain::plugin_title() { return "Reverse Audio"; }
+const char* AReverseMain::plugin_title() { return "Reverse Audio"; }
 int AReverseMain::plugin_is_realtime() { return 0; }
 int AReverseMain::plugin_is_multi_channel() { return 0; }
 

@@ -23,7 +23,7 @@ WipeMain::~WipeMain()
 {
 }
 
-char* WipeMain::plugin_title() { return "Wipe"; }
+const char* WipeMain::plugin_title() { return "Wipe"; }
 int WipeMain::plugin_is_realtime() { return 1; }
 int WipeMain::plugin_is_multi_channel() { return 1; }
 

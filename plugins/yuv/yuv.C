@@ -27,7 +27,7 @@ YUVMain::~YUVMain()
 	if(defaults) delete defaults;
 }
 
-char* YUVMain::plugin_title() { return "YUV"; }
+const char* YUVMain::plugin_title() { return "YUV"; }
 int YUVMain::plugin_is_realtime() { return 1; }
 int YUVMain::plugin_is_multi_channel() { return 0; }
 	

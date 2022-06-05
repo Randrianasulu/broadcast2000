@@ -28,7 +28,7 @@ ColorBalanceMain::~ColorBalanceMain()
 	if(defaults) delete defaults;
 }
 
-char* ColorBalanceMain::plugin_title() { return "Color Balance"; }
+const char* ColorBalanceMain::plugin_title() { return "Color Balance"; }
 int ColorBalanceMain::plugin_is_realtime() { return 1; }
 int ColorBalanceMain::plugin_is_multi_channel() { return 0; }
 	

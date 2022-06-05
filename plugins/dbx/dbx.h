@@ -24,7 +24,7 @@ public:
 	int process_realtime(long size, float *input_ptr, float *output_ptr);
 	int plugin_is_realtime();
 	int plugin_is_multi_channel();
-	char* plugin_title();
+	const char* plugin_title();
 	int start_realtime();
 	int stop_realtime();
 	int start_gui();

@@ -23,7 +23,7 @@ BandWipeMain::~BandWipeMain()
 {
 }
 
-char* BandWipeMain::plugin_title() { return "BandWipe"; }
+const char* BandWipeMain::plugin_title() { return "BandWipe"; }
 int BandWipeMain::plugin_is_realtime() { return 1; }
 int BandWipeMain::plugin_is_multi_channel() { return 1; }
 

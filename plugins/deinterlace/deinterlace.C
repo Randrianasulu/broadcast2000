@@ -27,7 +27,7 @@ DeInterlaceMain::~DeInterlaceMain()
 	if(test_frame) delete test_frame;
 }
 
-char* DeInterlaceMain::plugin_title() { return "Deinterlace"; }
+const char* DeInterlaceMain::plugin_title() { return "Deinterlace"; }
 int DeInterlaceMain::plugin_is_realtime() { return 1; }
 int DeInterlaceMain::plugin_is_multi_channel() { return 0; }
 

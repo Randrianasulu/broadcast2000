@@ -31,7 +31,7 @@ int CDRipMain::run_client()
 return 0;
 }
 
-char* CDRipMain::plugin_title() { return "CD Ripper"; }
+const char* CDRipMain::plugin_title() { return "CD Ripper"; }
 
 int CDRipMain::plugin_is_realtime() { return 0; }
 
