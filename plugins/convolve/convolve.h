@@ -57,8 +57,8 @@ public:
 
 	inline double dot_product(double *channel1, double level1, double *channel2, double level2, int len)
 	{
-		register int i;
-		register double sum = 0;
+		int i;
+		double sum = 0;
 
 		for(i = 0; i < len; i++)
 			sum += (*channel1++ * level1) * (*channel2-- * level2);
@@ -118,7 +118,7 @@ public:
 	int process_realtime(long size, float **input_ptr, float **output_ptr);
 	int plugin_is_realtime();
 	int plugin_is_multi_channel();
-	char* plugin_title();
+	const char* plugin_title();
 	int start_realtime();
 	int stop_realtime();
 	int start_gui();

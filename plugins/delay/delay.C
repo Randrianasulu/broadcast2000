@@ -23,7 +23,7 @@ DelayMain::~DelayMain()
 {
 }
 
-char* DelayMain::plugin_title() { return "Delay"; }
+const char* DelayMain::plugin_title() { return "Delay"; }
 int DelayMain::plugin_is_realtime() { return 1; }
 int DelayMain::plugin_is_multi_channel() { return 0; }
 	

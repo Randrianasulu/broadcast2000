@@ -27,7 +27,7 @@ DestabilizeMain::~DestabilizeMain()
 	if(defaults) delete defaults;
 }
 
-char* DestabilizeMain::plugin_title() { return "Destabilize"; }
+const char* DestabilizeMain::plugin_title() { return "Destabilize"; }
 int DestabilizeMain::plugin_is_realtime() { return 1; }
 int DestabilizeMain::plugin_is_multi_channel() { return 0; }
 	

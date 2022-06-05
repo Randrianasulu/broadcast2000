@@ -285,7 +285,7 @@ int Denoise::save_defaults()
 return 0;
 }
 
-char* Denoise::plugin_title() { return "Denoise"; }
+const char* Denoise::plugin_title() { return "Denoise"; }
 int Denoise::plugin_is_realtime() { return 1; }
 int Denoise::plugin_is_multi_channel() { return 0; }
 

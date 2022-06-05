@@ -83,7 +83,7 @@ return 0;
 }
 
 
-char* Compress::plugin_title() { return "Compress"; }
+const char* Compress::plugin_title() { return "Compress"; }
 int Compress::plugin_is_realtime() { return 1; }
 int Compress::plugin_is_multi_channel() { return 1; }
 

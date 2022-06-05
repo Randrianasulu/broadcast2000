@@ -526,7 +526,7 @@ int Convolve::save_defaults()
 	return 0;
 }
 
-char* Convolve::plugin_title() { return "Convolve"; }
+const char* Convolve::plugin_title() { return "Convolve"; }
 int Convolve::plugin_is_realtime() { return 1; }
 int Convolve::plugin_is_multi_channel() { return 1; }
 
