@@ -18,11 +18,11 @@ public:
 	int update(const char *name, long value); // update a value if it exists
 	int update(const char *name, char *value); // create it if it doesn't
 
-	double get(char *name, double default_);   // retrieve a value if it exists
-	float get(char *name, float default_);   // retrieve a value if it exists
-	int get(char *name, int default_);   // retrieve a value if it exists
-	long get(char *name, long default_);   // retrieve a value if it exists
-	char* get(char *name, char *default_); // return 1 if it doesn't
+	double get(const char *name, double default_);   // retrieve a value if it exists
+	float get(const char *name, float default_);   // retrieve a value if it exists
+	int get(const char *name, int default_);   // retrieve a value if it exists
+	long get(const char *name, long default_);   // retrieve a value if it exists
+	char* get(const char *name, char *default_); // return 1 if it doesn't
 	
 	char *names[1024];  // list of string names
 	char *values[1024];    // list of values

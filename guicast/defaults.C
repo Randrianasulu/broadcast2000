@@ -51,7 +51,7 @@ int Defaults::save()
 	return 0;
 }
 
-int Defaults::get(char *name, int default_)
+int Defaults::get(const char *name, int default_)
 {
 	for(int i = 0; i < total; i++)
 	{
@@ -63,7 +63,7 @@ int Defaults::get(char *name, int default_)
 	return default_;  // failed
 }
 
-long Defaults::get(char *name, long default_)
+long Defaults::get(const char *name, long default_)
 {
 	for(int i = 0; i < total; i++)
 	{
@@ -75,7 +75,7 @@ long Defaults::get(char *name, long default_)
 	return default_;  // failed
 }
 
-double Defaults::get(char *name, double default_)
+double Defaults::get(const char *name, double default_)
 {
 	for(int i = 0; i < total; i++)
 	{
@@ -87,7 +87,7 @@ double Defaults::get(char *name, double default_)
 	return default_;  // failed
 }
 
-float Defaults::get(char *name, float default_)
+float Defaults::get(const char *name, float default_)
 {
 	for(int i = 0; i < total; i++)
 	{
@@ -99,7 +99,7 @@ float Defaults::get(char *name, float default_)
 	return default_;  // failed
 }
 
-char* Defaults::get(char *name, char *default_)
+char* Defaults::get(const char *name, char *default_)
 {
 	for(int i = 0; i < total; i++)
 	{
