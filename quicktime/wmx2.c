@@ -255,7 +255,7 @@ int wmx2_decode_chunk(quicktime_t *file, int track, long chunk, int channel)
 
 /* =================================== public for wmx2 */
 
-int quicktime_init_codec_wmx2(quicktime_audio_map_t *atrack)
+void quicktime_init_codec_wmx2(quicktime_audio_map_t *atrack)
 {
 	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)atrack->codec)->priv;
 
