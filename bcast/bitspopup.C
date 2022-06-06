@@ -29,7 +29,8 @@ int BitsPopup::add_items()
 	if(asset->format == MOV)
 	{
 		add_item(bits_items[total_items++] = new BitsPopupItem(file.bitstostr(BITSIMA4)));
-		add_item(bits_items[total_items++] = new BitsPopupItem(file.bitstostr(BITSWMX2)));
+		//add_item(bits_items[total_items++] = new BitsPopupItem(file.bitstostr(BITSWMX2)));
+		//add_item(bits_items[total_items++] = new BitsPopupItem(file.bitstostr(BITSSOWT)));
 	}
 
 	update(file.bitstostr(bits));
