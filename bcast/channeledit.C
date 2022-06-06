@@ -449,7 +449,7 @@ int ChannelEditEditThread::edit_channel(Channel *channel, int editing)
 return 0;
 }
 
-char *ChannelEditEditThread::value_to_freqtable(int value)
+const char *ChannelEditEditThread::value_to_freqtable(int value)
 {
 	switch(value)
 	{
@@ -490,7 +490,7 @@ char *ChannelEditEditThread::value_to_freqtable(int value)
 return "NTSC_CABLE";
 }
 
-char* ChannelEditEditThread::value_to_norm(int value)
+const char* ChannelEditEditThread::value_to_norm(int value)
 {
 	switch(value)
 	{
@@ -507,7 +507,7 @@ char* ChannelEditEditThread::value_to_norm(int value)
 return "NTSC"; //default
 }
 
-char* ChannelEditEditThread::value_to_input(int value)
+const char* ChannelEditEditThread::value_to_input(int value)
 {
 	return channel_picker->engine->get_video_inputs()->values[value];
 }
@@ -518,7 +518,7 @@ int ChannelEditEditThread::set_device()
 return 0;
 }
 
-int ChannelEditEditThread::change_source(char *source_name)
+int ChannelEditEditThread::change_source(const char *source_name)
 {
 	int i, result;
 	for(i = 0; i < chanlists[new_channel.freqtable].count; i++)

@@ -28,7 +28,7 @@ public:
 	int create_objects();
 	DeleteAllIndexesOK *ok;
 	DeleteAllIndexesCancel *cancel;
-	char *string;
+	const char *string;
 };
 
 class DeleteAllIndexesOK : public BC_BigButton

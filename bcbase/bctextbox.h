@@ -10,13 +10,13 @@
 class BC_TextBox : public BC_Tool
 {
 public:
-	BC_TextBox(int x, int y, int w, char *text, int has_border = 1);
+	BC_TextBox(int x, int y, int w, const char *text, int has_border = 1);
 	BC_TextBox(int x, int y, int w, int text, int has_border = 1);
 	BC_TextBox(int x, int y, int w, float text, int has_border = 1);
 
 // ====================== user commands
 
-	int update(char *text_);               // set text to a string
+	int update(const char *text_);               // set text to a string
 	int update(int value);                 // set text to a number
 	int update(float value);                 // set text to a number
 	char* get_text();                  // get the string contained in the textbox
@@ -48,7 +48,7 @@ public:
 
 private:
 	int delete_selection();
-	int insert_text(char *string);       // Insert text at the insertion point.
+	int insert_text(const char *string);       // Insert text at the insertion point.
 	int copy_text();               // copy the current selection into the cut buffer
 	int charof(int x);
 	char text[BC_TEXTBOXMAX];

@@ -22,7 +22,7 @@ void DeleteAllIndexes::run()
 	dir.update(pwindow->preferences->index_directory);
 	dir.complete_path(string1);
 // prepare filter
-	char *filter = ".idx";
+	const char *filter = ".idx";
 
 
 	pwindow->disable_window();

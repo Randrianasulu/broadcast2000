@@ -7,7 +7,7 @@
 
 #include <ctype.h>
 
-BC_TextBox::BC_TextBox(int x, int y, int w, char *text, int has_border)
+BC_TextBox::BC_TextBox(int x, int y, int w, const char *text, int has_border)
 	: BC_Tool(x, y, w, 25)
 {
 	strcpy(this->text, text);
@@ -472,7 +472,7 @@ return 0;
 }
 
 
-int BC_TextBox::insert_text(char *string)
+int BC_TextBox::insert_text(const char *string)
 {
 	int len = strlen(string);
 
@@ -527,7 +527,7 @@ char* BC_TextBox::get_text()
 	return text;
 }
 
-int BC_TextBox::update(char *text_)
+int BC_TextBox::update(const char *text_)
 {
 	strcpy(text, text_);
 

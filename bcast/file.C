@@ -719,7 +719,7 @@ char* File::formattostr(ArrayList<PluginServer*> *plugindb, int format)
 	return "";
 }
 
-int File::strtobits(char *bits)
+int File::strtobits(const char *bits)
 {
 	if(!strcmp(bits, "8")) return BITSLINEAR8;
 	if(!strcmp(bits, "16")) return BITSLINEAR16;
@@ -731,7 +731,7 @@ int File::strtobits(char *bits)
 return 0;
 }
 
-char* File::bitstostr(int bits)
+const char* File::bitstostr(int bits)
 {
 //printf("File::bitstostr\n");
 	switch(bits)
@@ -773,7 +773,7 @@ char* File::bitstostr(int bits)
 #define MJPA_NAME "Motion JPEG A"
 
 
-char* File::strtocompression(char *string)
+const char* File::strtocompression(const char *string)
 {
 	if(!strcmp(string, DV_NAME)) return QUICKTIME_DV;
 	if(!strcmp(string, PNG_NAME)) return QUICKTIME_PNG;
@@ -787,7 +787,7 @@ char* File::strtocompression(char *string)
 	return QUICKTIME_RAW;
 }
 
-char* File::compressiontostr(char *string)
+const char* File::compressiontostr(const char *string)
 {
 	if(!strcmp(string, QUICKTIME_YUV4)) return "YUV 4:2:0 Packed";
 	if(!strcmp(string, QUICKTIME_YUV420)) return YUV420_NAME;

@@ -82,7 +82,7 @@ public:
 	~ChannelEditList();
 	int handle_event();
 	ChannelEditWindow *window;
-	static char *column_titles[2];
+	static const char *column_titles[2];
 };
 
 class ChannelEditMoveUp : public BC_BigButton
@@ -145,15 +145,15 @@ public:
 	void run();
 	int edit_channel(Channel *channel, int editing);
 	int set_device();       // Set the device to the new channel
-	int change_source(char *source_name);   // Change to the source matching the name
+	int change_source(const char *source_name);   // Change to the source matching the name
 	int source_up();
 	int source_down();
 	int set_input(int value);
 	int set_norm(int value);
 	int set_freqtable(int value);
-	char* value_to_freqtable(int value);
-	char* value_to_norm(int value);
-	char* value_to_input(int value);
+	const char* value_to_freqtable(int value);
+	const char* value_to_norm(int value);
+	const char* value_to_input(int value);
 	int close_threads();
 
 	Channel new_channel;

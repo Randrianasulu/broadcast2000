@@ -161,10 +161,10 @@ public:
 	int supports_audio(ArrayList<PluginServer*> *plugindb, char *format);
 	int strtoformat(ArrayList<PluginServer*> *plugindb, char *format);
 	char* formattostr(ArrayList<PluginServer*> *plugindb, int format);
-	int strtobits(char *bits);
-	char* bitstostr(int bits);
-	static char *strtocompression(char *string);
-	static char *compressiontostr(char *string);
+	int strtobits(const char *bits);
+	const char* bitstostr(int bits);
+	static const char *strtocompression(const char *string);
+	static const char *compressiontostr(const char *string);
 	int bytes_per_sample(int bits); // Convert the bit descriptor into a byte count.
 
 	Asset *asset;
