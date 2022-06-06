@@ -42,12 +42,14 @@ int InvertWindow::create_objects()
 	add_tool(new BC_Title(x, y, "Invert"));
 	y += 20;
 	add_tool(invert = new InvertToggle(client, &(client->invert), x, y));
+return 0;
 }
 
 int InvertWindow::close_event()
 {
 	hide_window();
 	client->send_hide_gui();
+return 0;
 }
 
 InvertToggle::InvertToggle(InvertMain *client, int *output, int x, int y)
