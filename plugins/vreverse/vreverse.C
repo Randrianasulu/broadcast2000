@@ -21,6 +21,7 @@ VReverseMain::~VReverseMain()
 int VReverseMain::run_client()
 {
 	plugin_exit();
+return 0;
 }
 
 const char* VReverseMain::plugin_title() { return "Reverse Video"; }
