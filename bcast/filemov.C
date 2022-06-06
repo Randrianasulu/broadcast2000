@@ -57,7 +57,7 @@ int FileMOV::open_file(int rd, int wr)
 
 	if(wr)
 	{
-		char audio_codec[5];
+		char audio_codec[6];
 // Fix up the Quicktime file.
 		quicktime_set_copyright(file, "Made with Broadcast 2000 for Linux");
 		quicktime_set_info(file, "Quicktime for Linux");
@@ -89,6 +89,11 @@ int FileMOV::open_file(int rd, int wr)
 			strcpy(audio_codec, QUICKTIME_TWOS);
 			asset->signed_ = 1;
 			use_bcast_audio = 1;
+		}
+		else
+		if(asset->bits == BITSWMX2)
+		{
+			strcpy(audio_codec, QUICKTIME_WMX2);
 		}
 
 		if(asset->video_data)
