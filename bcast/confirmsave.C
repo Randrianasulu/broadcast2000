@@ -10,7 +10,7 @@ ConfirmSave::~ConfirmSave()
 {
 }
 
-int ConfirmSave::test_file(char *display, char *path)
+int ConfirmSave::test_file(const char *display, const char *path)
 {
 	FILE *in;
 	if(in = fopen(path, "rb"))
@@ -30,7 +30,7 @@ return 0;
 
 
 
-ConfirmSaveWindow::ConfirmSaveWindow(char *display, char *filename)
+ConfirmSaveWindow::ConfirmSaveWindow(const char *display, char *filename)
  : BC_Window(display, MEGREY, ICONNAME ": File Exists", 375, 160, 375, 160)
 {
 	this->filename = filename;

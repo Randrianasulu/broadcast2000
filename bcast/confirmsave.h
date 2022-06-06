@@ -12,13 +12,13 @@ public:
 	ConfirmSave();
 	~ConfirmSave();
 	
-	int test_file(char *display, char *path);    // return 1 if user cancels save
+	int test_file(const char *display, const char *path);    // return 1 if user cancels save
 };
 
 class ConfirmSaveWindow : public BC_Window
 {
 public:
-	ConfirmSaveWindow(char *display, char *filename);
+	ConfirmSaveWindow(const char *display, char *filename);
 	~ConfirmSaveWindow();
 	
 	int create_objects();

@@ -2,7 +2,7 @@
 #include "confirmquit.h"
 #include "mainwindow.inc"
 
-ConfirmQuitWindow::ConfirmQuitWindow(char *display)
+ConfirmQuitWindow::ConfirmQuitWindow(const char *display)
  : BC_Window(display, MEGREY, ICONNAME ": Question", 375, 160, 375, 160)
 {
 }
@@ -14,7 +14,7 @@ ConfirmQuitWindow::~ConfirmQuitWindow()
 	delete cancel;
 }
 
-int ConfirmQuitWindow::create_objects(char *string)
+int ConfirmQuitWindow::create_objects(const char *string)
 {
 	add_tool(new BC_Title(5, 5, string));
 	add_tool(new BC_Title(25, 30, "( Answering ""No"" will destroy changes )"));

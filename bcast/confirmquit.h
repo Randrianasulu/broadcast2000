@@ -10,10 +10,10 @@ class ConfirmQuitCancelButton;
 class ConfirmQuitWindow : public BC_Window
 {
 public:
-	ConfirmQuitWindow(char *display);
+	ConfirmQuitWindow(const char *display);
 	~ConfirmQuitWindow();
 
-	int create_objects(char *string);
+	int create_objects(const char *string);
 	ConfirmQuitYesButton *yes; 
 	ConfirmQuitNoButton *no;
 	ConfirmQuitCancelButton *cancel;

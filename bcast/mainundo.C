@@ -12,49 +12,49 @@ MainUndo::~MainUndo()
 {
 }
 
-int MainUndo::update_undo_all(char *description, int after)
+int MainUndo::update_undo_all(const char *description, int after)
 {
 	update_undo(description, "ALL", after);
 return 0;
 }
 
-int MainUndo::update_undo_audio(char *description, int after)
+int MainUndo::update_undo_audio(const char *description, int after)
 {
 	update_undo(description, "AUDIO", after);
 return 0;
 }
 
-int MainUndo::update_undo_edits(char *description, int after)
+int MainUndo::update_undo_edits(const char *description, int after)
 {
 	update_undo(description, "EDITS", after);
 return 0;
 }
 
-int MainUndo::update_undo_patches(char *description, int after)
+int MainUndo::update_undo_patches(const char *description, int after)
 {
 	update_undo(description, "PATCHES", after);
 return 0;
 }
 
-int MainUndo::update_undo_console(char *description, int after)
+int MainUndo::update_undo_console(const char *description, int after)
 {
 	update_undo(description, "CONSOLE", after);
 return 0;
 }
 
-int MainUndo::update_undo_timebar(char *description, int after)
+int MainUndo::update_undo_timebar(const char *description, int after)
 {
 	update_undo(description, "TIMEBAR", after);
 return 0;
 }
 
-int MainUndo::update_undo_automation(char *description, int after)
+int MainUndo::update_undo_automation(const char *description, int after)
 {
 	update_undo(description, "AUTOMATION", after);
 return 0;
 }
 
-int MainUndo::update_undo(char *description, char *type, int after)
+int MainUndo::update_undo(const char *description, const char *type, int after)
 {
 	FileHTAL htal;
 	mwindow->save(&htal, 0);
@@ -141,7 +141,7 @@ return 0;
 }
 
 
-int MainUndo::load_from_undo(FileHTAL *htal, char *type)
+int MainUndo::load_from_undo(FileHTAL *htal, const char *type)
 {
 	mwindow->interrupt_indexes();
 	if(!strcmp(type, "ALL"))
