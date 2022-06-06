@@ -4,6 +4,7 @@
 #define WMX_CHUNK_FRAMES 50
 
 #include "yuv.h"
+#include "quicktime.h"
 
 typedef struct
 {

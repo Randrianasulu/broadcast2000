@@ -82,6 +82,8 @@ extern "C" {
 /* Sowt compliment 8, 16, 24 */
 #define QUICKTIME_SOWT "sowt"
 
+#define QUICKTIME_WMX2 "wmx2"
+
 /* =========================== public interface ========================= // */
 
 /* return 1 if the file is a quicktime file */
