@@ -4,7 +4,7 @@
 #include "bcpopupmenu.h"
 #include "bcresources.h"
 
-BC_PopupMenu::BC_PopupMenu(int x, int y, int w, char *text, int small, int floating)
+BC_PopupMenu::BC_PopupMenu(int x, int y, int w, const char *text, int small, int floating)
  : BC_Tool(x, y, w, 25)
 {
 	highlighted = popup_down = 0;
@@ -336,7 +336,7 @@ return 0;
 
 // ================================== popup item
 
-BC_PopupItem::BC_PopupItem(char *text, int checked)
+BC_PopupItem::BC_PopupItem(const char *text, int checked)
  : BC_MenuItem(text)
 {
 	set_checked(checked);

@@ -19,7 +19,7 @@ PluginPopup::~PluginPopup()
 	delete out;
 }
 
-int PluginPopup::update(int in, int out, char* title)
+int PluginPopup::update(int in, int out, const char* title)
 {
 	if(title)
 		BC_PopupMenu::update(title);

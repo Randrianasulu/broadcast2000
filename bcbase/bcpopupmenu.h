@@ -17,7 +17,7 @@ class BC_PopupMenu : public BC_Tool
 {
 public:
 // Set floating if no title is desired
-	BC_PopupMenu(int x, int y, int w, char *text, int small = 0, int floating = 0);
+	BC_PopupMenu(int x, int y, int w, const char *text, int small = 0, int floating = 0);
 	virtual ~BC_PopupMenu();
 
 // User commands
@@ -61,7 +61,7 @@ public:
 class BC_PopupItem : public BC_MenuItem
 {
 public:
-	BC_PopupItem(char *text, int checked = 0);
+	BC_PopupItem(const char *text, int checked = 0);
 	virtual ~BC_PopupItem();
 
 // User commands

@@ -51,7 +51,7 @@ Plugin::~Plugin()
 //	plugin_server = 0;
 }
 
-char* Plugin::default_title()
+const char* Plugin::default_title()
 {
 	return "Plugin";
 }

@@ -49,7 +49,7 @@ public:
 class BC_Menu
 {
 public:
-	BC_Menu(char *text);
+	BC_Menu(const char *text);
 	virtual ~BC_Menu();
 
 // Called by user.
@@ -91,21 +91,21 @@ public:
 class BC_MenuItem
 {
 public:
-	BC_MenuItem(char *text, char *hotkey_text, int hotkey = 0);
-	BC_MenuItem(char *text);
+	BC_MenuItem(const char *text, char *hotkey_text, int hotkey = 0);
+	BC_MenuItem(const char *text);
 	virtual ~BC_MenuItem();
 
 // User functions
 	virtual int handle_event() {return 0;};
 
 	int set_done(int return_value);    // Tell the top level window to quit.
-	int set_text(char *text);
+	int set_text(const char *text);
 	int set_checked(int value = 1);
 	int set_shift(int value = 1);   // whether or not the hotkey requires shift
 	int get_checked();
 	int add_submenu(BC_SubMenu *submenu);
 	int update_menu();      // Set the menu title to the value of this text
-	char* get_text();
+	const char* get_text();
 
 // Tool functions
 	int reset_parameters();

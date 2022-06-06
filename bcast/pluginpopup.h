@@ -17,7 +17,7 @@ public:
 	PluginPopup(Plugin *plugin, int x, int y);
 	~PluginPopup();
 
-	int update(int in, int out, /*int thru, */char* title);
+	int update(int in, int out, /*int thru, */ const char* title);
 	int add_items();  // called by BC_PopupMenu
 	int handle_event();
 

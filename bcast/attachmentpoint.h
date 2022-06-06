@@ -65,7 +65,7 @@ public:
 	int set_show(int value);
 	virtual int set_show_derived(int value) { return 0; };
 // Default title when nothing is attached;
-	virtual char* default_title() { return ""; };
+	virtual const char* default_title() { return ""; };
 
 
 // The track offset sets the first track number when importing a shared module or plugin.
@@ -108,7 +108,7 @@ public:
 	int in, out, show, on;
 	int plugin_type;       // 0: none  1: executable   2: shared plugin   3: module
 	char plugin_data[MESSAGESIZE];     // configuration data for the plugin
-	char plugin_title[1024];    // title of plugin
+	const char plugin_title[1024];    // title of plugin
 	MainWindow *mwindow;
 
 // Only used by operator= and copy constructor

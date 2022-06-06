@@ -15,7 +15,7 @@ public:
 	int update(const char *name, float value); // update a value if it exists
 	int update(const char *name, int value); // update a value if it exists
 	int update(const char *name, long value); // update a value if it exists
-	int update(const char *name, char *value); // create it if it doesn't
+	int update(const char *name, const char *value); // create it if it doesn't
 
 	float get(const char *name, float default_);   // retrieve a value if it exists
 	int get(const char *name, int default_);   // retrieve a value if it exists

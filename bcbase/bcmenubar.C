@@ -221,7 +221,7 @@ return 0;
 
 // ======================================== Menu
 
-BC_Menu::BC_Menu(char *text)
+BC_Menu::BC_Menu(const char *text)
 {
 	active = 0;
 	strcpy(this->text, text);
@@ -491,7 +491,7 @@ return 0;
 
 // ========================================== menu item
 
-BC_MenuItem::BC_MenuItem(char *text, char *hotkey_text, int hotkey)
+BC_MenuItem::BC_MenuItem(const char *text, char *hotkey_text, int hotkey)
 {
 	strcpy(this->text, text);
 	strcpy(this->hotkey_text, hotkey_text);
@@ -505,7 +505,7 @@ BC_MenuItem::~BC_MenuItem()
 	menu_popup->menu_items.remove(this); // remove from arraylist
 }
 
-BC_MenuItem::BC_MenuItem(char *text)
+BC_MenuItem::BC_MenuItem(const char *text)
 {
 	strcpy(this->text, text);
 	this->hotkey_text[0] = 0;
@@ -745,7 +745,7 @@ int BC_MenuItem::set_done(int return_value)
 return 0;
 }
 
-int BC_MenuItem::set_text(char *text)
+int BC_MenuItem::set_text(const char *text)
 {
 	strcpy(this->text, text);
 return 0;
@@ -770,7 +770,7 @@ int BC_MenuItem::get_checked()
 return 0;
 }
 
-char* BC_MenuItem::get_text()
+const char* BC_MenuItem::get_text()
 {
 	return text;
 }

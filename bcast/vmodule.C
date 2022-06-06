@@ -214,7 +214,7 @@ int VModule::load(FileHTAL *htal, int track_offset)
 return 0;
 }
 
-int VModule::set_title(char *text)
+int VModule::set_title(const char *text)
 {
 	strcpy(title, text);
 	if(gui) gui->title->update(text);
@@ -490,7 +490,7 @@ return 0;
 }
 
 
-char* VModuleMode::mode_to_text(int mode)
+const char* VModuleMode::mode_to_text(int mode)
 {
 	switch(mode)
 	{
@@ -520,7 +520,7 @@ char* VModuleMode::mode_to_text(int mode)
 	}
 }
 
-VModuleModeItem::VModuleModeItem(VModuleMode *popup, char *text, int mode)
+VModuleModeItem::VModuleModeItem(VModuleMode *popup, const char *text, int mode)
  : BC_PopupItem(text)
 {
 	this->popup = popup;

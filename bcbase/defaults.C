@@ -125,7 +125,7 @@ int Defaults::update(const char *name, long value) // update a value if it exist
 return 0;
 }
 
-int Defaults::update(const char *name, char *value)
+int Defaults::update(const char *name, const char *value)
 {
 	for(int i = 0; i < total; i++)
 	{

@@ -42,7 +42,7 @@ public:
 
 // synchronization with tracks
 	FloatAutos* get_fade_automation();       // get the fade automation for this module
-	int set_title(char *text);
+	int set_title(const char *text);
 
 // Method of alpha channel calculation
 	int mode;
@@ -111,7 +111,7 @@ public:
 
 	int handle_event();
 	int add_items();         // add initial items
-	char* mode_to_text(int mode);
+	const char* mode_to_text(int mode);
 
 	Console *console;
 	VModule *module;
@@ -120,7 +120,7 @@ public:
 class VModuleModeItem : public BC_PopupItem
 {
 public:
-	VModuleModeItem(VModuleMode *popup, char *text, int mode);
+	VModuleModeItem(VModuleMode *popup, const char *text, int mode);
 	~VModuleModeItem();
 
 	int handle_event();

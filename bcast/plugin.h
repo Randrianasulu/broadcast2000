@@ -35,7 +35,7 @@ public:
 	int resize_plugin(int x, int y);
 // Update the widgets after loading
 	int update_display();
-	char* default_title();
+	const char* default_title();
 
 // settings for plugin
 	int plugin_number;          // number of this plugin in the module starting with 1
