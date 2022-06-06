@@ -9,7 +9,7 @@
 #include "transition.h"
 
 
-PluginDialogThread::PluginDialogThread(MainWindow *mwindow, Plugin *plugin, Transition *transition, char *title)
+PluginDialogThread::PluginDialogThread(MainWindow *mwindow, Plugin *plugin, Transition *transition, const char *title)
  : Thread()
 {
 	this->mwindow = mwindow;

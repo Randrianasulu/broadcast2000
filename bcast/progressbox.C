@@ -2,7 +2,7 @@
 #include "mainwindow.inc"
 #include "progressbox.h"
 
-ProgressBox::ProgressBox(char *display, char *text, long length, int cancel_button)
+ProgressBox::ProgressBox(const char *display, const char *text, long length, int cancel_button)
  : Thread(1)                    // create synchronous
 {
 	pwindow = new ProgressWindow(display, cancel_button);
@@ -53,7 +53,7 @@ int ProgressBox::cancelled()
 return 0;
 }
 
-ProgressWindow::ProgressWindow(char *display, int cancel_button)
+ProgressWindow::ProgressWindow(const char *display, int cancel_button)
  : BC_Window(display, MEGREY, ICONNAME ": Progress", 340, 120, 340, 120)
 {
 	cancelled = 0;
@@ -66,7 +66,7 @@ ProgressWindow::~ProgressWindow()
 //	if(cancel_button) delete cancel;
 }
 
-int ProgressWindow::create_objects(char *text, long length)
+int ProgressWindow::create_objects(const char *text, long length)
 {
 	this->text = text;
 	add_tool(title = new BC_Title(5, 5, text));

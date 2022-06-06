@@ -401,7 +401,7 @@ int AttachmentPoint::attach(int is_loading)
 return 0;
 }
 
-int AttachmentPoint::update(int plugin_type, int in, int out, char* title, SharedPluginLocation *shared_plugin_location, SharedModuleLocation *shared_module_location)
+int AttachmentPoint::update(int plugin_type, int in, int out, const char* title, SharedPluginLocation *shared_plugin_location, SharedModuleLocation *shared_module_location)
 {
 	this->in = in; this->out = out;
 	this->plugin_type = plugin_type;

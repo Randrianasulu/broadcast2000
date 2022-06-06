@@ -29,7 +29,7 @@ public:
 	virtual int add_items() { return 0; };    // Called automatically during creation.
 	int resize_tool(int x, int y, int w, int h);
 	int resize_tool(int x, int y);
-	int update(char *text);               // change title string
+	int update(const char *text);               // change title string
 
 // Tool commands
 	int create_tool_objects();

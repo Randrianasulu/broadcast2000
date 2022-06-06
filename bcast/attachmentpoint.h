@@ -51,7 +51,7 @@ public:
 	int render_stop(int duplicate);
 
 // Set up a plugin before attaching
-	int update(int plugin_type, int in, int out, char* title, SharedPluginLocation *shared_plugin_location, SharedModuleLocation *shared_module_location);
+	int update(int plugin_type, int in, int out, const char* title, SharedPluginLocation *shared_plugin_location, SharedModuleLocation *shared_module_location);
 // Plugin updates its title
 	virtual int update_derived() { return 0; };
 // Attach a new plugin

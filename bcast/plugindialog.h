@@ -25,7 +25,7 @@ class PluginDialogThru;
 class PluginDialogThread : public Thread
 {
 public:
-	PluginDialogThread(MainWindow *mwindow, Plugin *plugin, Transition *transition, char *title = "2000: Attach Plugin");
+	PluginDialogThread(MainWindow *mwindow, Plugin *plugin, Transition *transition, const char *title = "2000: Attach Plugin");
 	~PluginDialogThread();
 
 // Set up parameters for a transition menu.

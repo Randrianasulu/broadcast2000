@@ -85,7 +85,7 @@ int BC_PopupMenu::resize_tool(int x, int y)
 return 0;
 }
 
-int BC_PopupMenu::update(char *text)
+int BC_PopupMenu::update(const char *text)
 {
 	if(!floating)
 	{

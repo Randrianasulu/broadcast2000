@@ -8,7 +8,7 @@
 class ProgressBox : public Thread
 {
 public:
-	ProgressBox(char *display, char *text, long length, int cancel_button = 1);
+	ProgressBox(const char *display, const char *text, long length, int cancel_button = 1);
 	~ProgressBox();
 
 	void run();
@@ -30,10 +30,10 @@ class ProgressWindowCancelButton;
 class ProgressWindow : public BC_Window
 {
 public:
-	ProgressWindow(char *display = "", int cancel_button = 1);
+	ProgressWindow(const char *display = "", int cancel_button = 1);
 	~ProgressWindow();
 
-	int create_objects(char *text, long length);
+	int create_objects(const char *text, long length);
 	int update(long position);    // return 1 if cancelled
 
 	char *text;
