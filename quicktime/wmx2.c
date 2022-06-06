@@ -253,41 +253,7 @@ int wmx2_decode_chunk(quicktime_t *file, int track, long chunk, int channel)
 }
 
 
-/* =================================== public for wmx2 */
 
-void quicktime_init_codec_wmx2(quicktime_audio_map_t *atrack)
-{
-	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)atrack->codec)->priv;
-
-	codec->write_buffer = 0;
-	codec->read_buffer = 0;
-	codec->chunk = 0;
-	codec->buffer_channel = 0;
-	codec->write_size = 0;
-	codec->read_size = 0;
-	codec->last_samples = 0;
-	codec->last_indexes = 0;
-/*printf("quicktime_init_codec_wmx2 1 %x %x %x\n", atrack, codec, codec->work_buffer); */
-	return 0;
-}
-
-int quicktime_delete_codec_wmx2(quicktime_audio_map_t *atrack)
-{
-	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)atrack->codec)->priv;
-	if(codec->write_buffer) free(codec->write_buffer);
-	if(codec->read_buffer) free(codec->read_buffer);
-	if(codec->last_samples) free(codec->last_samples);
-	if(codec->last_indexes) free(codec->last_indexes);
-	codec->last_samples = 0;
-	codec->last_indexes = 0;
-	codec->read_buffer = 0;
-	codec->write_buffer = 0;
-	codec->chunk = 0;
-	codec->buffer_channel = 0; /* Channel of work buffer */
-	codec->write_size = 0;          /* Size of work buffer */
-	codec->read_size = 0;
-	return 0;
-}
 
 int quicktime_decode_wmx2(quicktime_t *file, 
 					int16_t *output_i, 
@@ -473,3 +439,47 @@ int quicktime_encode_wmx2(quicktime_t *file,
 
 	return result;
 }
+
+/* =================================== public for wmx2 */
+int quicktime_delete_codec_wmx2(quicktime_audio_map_t *atrack)
+{
+	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)atrack->codec)->priv;
+	if(codec->write_buffer) free(codec->write_buffer);
+	if(codec->read_buffer) free(codec->read_buffer);
+	if(codec->last_samples) free(codec->last_samples);
+	if(codec->last_indexes) free(codec->last_indexes);
+	codec->last_samples = 0;
+	codec->last_indexes = 0;
+	codec->read_buffer = 0;
+	codec->write_buffer = 0;
+	codec->chunk = 0;
+	codec->buffer_channel = 0; /* Channel of work buffer */
+	codec->write_size = 0;          /* Size of work buffer */
+	codec->read_size = 0;
+	return 0;
+}
+
+void quicktime_init_codec_wmx2(quicktime_audio_map_t *atrack)
+{
+	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)atrack->codec)->priv;
+/* Init public items */
+	((quicktime_codec_t*)atrack->codec)->priv = calloc(1, sizeof(quicktime_wmx2_codec_t));
+	((quicktime_codec_t*)atrack->codec)->delete_acodec = quicktime_delete_codec_wmx2;
+	((quicktime_codec_t*)atrack->codec)->decode_video = 0;
+	((quicktime_codec_t*)atrack->codec)->encode_video = 0;
+	((quicktime_codec_t*)atrack->codec)->decode_audio = quicktime_decode_wmx2;
+	((quicktime_codec_t*)atrack->codec)->encode_audio = quicktime_encode_wmx2;
+
+
+	codec->write_buffer = 0;
+	codec->read_buffer = 0;
+	codec->chunk = 0;
+	codec->buffer_channel = 0;
+	codec->write_size = 0;
+	codec->read_size = 0;
+	codec->last_samples = 0;
+	codec->last_indexes = 0;
+/*printf("quicktime_init_codec_wmx2 1 %x %x %x\n", atrack, codec, codec->work_buffer); */
+	return 0;
+}
+

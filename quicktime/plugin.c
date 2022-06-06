@@ -239,7 +239,7 @@ void quicktime_register_internal_acodec()
 	quicktime_register_acodec(QUICKTIME_IMA4, quicktime_init_codec_ima4);
 	quicktime_register_acodec(QUICKTIME_ULAW, quicktime_init_codec_ulaw);
 	quicktime_register_acodec(QUICKTIME_SOWT, quicktime_init_codec_sowt);
-	quicktime_register_acodec(QUICKTIME_SOWT, quicktime_init_codec_wmx2);
+	quicktime_register_acodec(QUICKTIME_WMX2, quicktime_init_codec_wmx2);
 }
 
 void quicktime_register_internal_vcodec()
