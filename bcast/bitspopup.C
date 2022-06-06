@@ -54,7 +54,7 @@ int BitsPopup::get_bits()
 return 0;
 }
 
-BitsPopupItem::BitsPopupItem(char *text)
+BitsPopupItem::BitsPopupItem(const char *text)
  : BC_PopupItem(text)
 {
 }

@@ -53,17 +53,17 @@ public:
 	int save_defaults(Defaults *defaults);
 
 // most recent loads
-	int add_load(char *path);
+	int add_load(const char *path);
 	int init_loads(Defaults *defaults);
 	int save_loads(Defaults *defaults);
 
 // most recent effects
 	int init_aeffects(Defaults *defaults);
 	int save_aeffects(Defaults *defaults);
-	int add_aeffect(char *title);
+	int add_aeffect(const char *title);
 	int init_veffects(Defaults *defaults);
 	int save_veffects(Defaults *defaults);
-	int add_veffect(char *title);
+	int add_veffect(const char *title);
 
 	int change_channels(int old_channels, int new_channels);
 
@@ -123,7 +123,7 @@ class Undo : public BC_MenuItem
 public:
 	Undo(MainWindow *mwindow);
 	int handle_event();
-	int update_caption(char *new_caption = "");
+	int update_caption(const char *new_caption = "");
 	MainWindow *mwindow;
 };
 
@@ -158,7 +158,7 @@ class Redo : public BC_MenuItem
 public:
 	Redo(MainWindow *mwindow);
 	int handle_event();
-	int update_caption(char *new_caption = "");
+	int update_caption(const char *new_caption = "");
 	MainWindow *mwindow;
 };
 
@@ -530,7 +530,7 @@ public:
 class PluginItem : public BC_SubMenuItem
 {
 public:
-	PluginItem(MainWindow *mwindow, char *text, int number);
+	PluginItem(MainWindow *mwindow, const char *text, int number);
 	int handle_event();
 	MainWindow *mwindow;
 	int number;

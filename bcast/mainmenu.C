@@ -338,7 +338,7 @@ return 0;
 
 // =================================== add most recent
 
-int MainMenu::add_aeffect(char *title)
+int MainMenu::add_aeffect(const char *title)
 {
 // add bar for first effect
 	if(total_aeffects == 0)
@@ -380,7 +380,7 @@ int MainMenu::add_aeffect(char *title)
 return 0;
 }
 
-int MainMenu::add_veffect(char *title)
+int MainMenu::add_veffect(const char *title)
 {
 // add bar for first effect
 	if(total_veffects == 0)
@@ -422,7 +422,7 @@ int MainMenu::add_veffect(char *title)
 return 0;
 }
 
-int MainMenu::add_load(char *path)
+int MainMenu::add_load(const char *path)
 {
 	if(total_loads == 0)
 	{
@@ -550,7 +550,7 @@ int Undo::handle_event()
 	mwindow->console->gui->unlock_window();
 return 0;
 }
-int Undo::update_caption(char *new_caption)
+int Undo::update_caption(const char *new_caption)
 {
 	char string[1024];
 	sprintf(string, "Undo %s", new_caption);
@@ -570,7 +570,7 @@ int Redo::handle_event()
 	mwindow->console->gui->unlock_window();
 return 0;
 }
-int Redo::update_caption(char *new_caption)
+int Redo::update_caption(const char *new_caption)
 {
 	char string[1024];
 	sprintf(string, "Redo %s", new_caption);
@@ -1207,7 +1207,7 @@ return 0;
 
 PluginMenu::PluginMenu() : BC_SubMenu() {}
 
-PluginItem::PluginItem(MainWindow *mwindow, char *text, int number)
+PluginItem::PluginItem(MainWindow *mwindow, const char *text, int number)
  : BC_SubMenuItem(text) 
 {
 	this->mwindow = mwindow; 

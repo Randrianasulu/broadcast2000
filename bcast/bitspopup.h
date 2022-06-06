@@ -25,7 +25,7 @@ public:
 class BitsPopupItem : public BC_PopupItem
 {
 public:
-	BitsPopupItem(char *text);
+	BitsPopupItem(const char *text);
 	~BitsPopupItem();
 	
 	int handle_event();
