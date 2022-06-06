@@ -1,4 +1,5 @@
-#include "quicktime.h"
+#include "funcprotos.h"
+#include "wmx2.h"
 
 static int quicktime_wmx2_step[89] = 
 {
@@ -30,7 +31,7 @@ int wmx2_decode_block(quicktime_audio_map_t *atrack, int16_t *output, unsigned c
 	int i, nibble, nibble_count, block_size;
 	unsigned char *block_ptr;
 	int16_t *output_end = output + samples;
-	quicktime_wmx2_codec_t *codec = &(atrack->codecs.wmx2_codec);
+	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)atrack->codec)->priv;
 
 /* Get the chunk header */
 	predictor = *input++ << 8;
@@ -95,7 +96,7 @@ int wmx2_decode_sample(int *predictor, int *nibble, int *index, int *step)
 
 int wmx2_encode_block(quicktime_audio_map_t *atrack, unsigned char *output, int16_t *input, int step, int channel, int samples)
 {
-	quicktime_wmx2_codec_t *codec = &(atrack->codecs.wmx2_codec);
+	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)atrack->codec)->priv;
 	int i, nibble_count = 0, nibble, header;
 
 /* Get a fake starting sample */
@@ -194,7 +195,7 @@ int wmx2_decode_chunk(quicktime_t *file, int track, long chunk, int channel)
 	long chunk_samples, chunk_bytes;
 	unsigned char *chunk_ptr, *block_ptr;
 	quicktime_trak_t *trak = file->atracks[track].track;
-	quicktime_wmx2_codec_t *codec = &(file->atracks[track].codecs.wmx2_codec);
+	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)file->atracks[track].codec)->priv;
 
 /* Get the byte count to read. */
 	chunk_samples = quicktime_chunk_samples(trak, chunk);
@@ -256,7 +257,7 @@ int wmx2_decode_chunk(quicktime_t *file, int track, long chunk, int channel)
 
 int quicktime_init_codec_wmx2(quicktime_audio_map_t *atrack)
 {
-	quicktime_wmx2_codec_t *codec = &(atrack->codecs.wmx2_codec);
+	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)atrack->codec)->priv;
 
 	codec->write_buffer = 0;
 	codec->read_buffer = 0;
@@ -272,7 +273,7 @@ int quicktime_init_codec_wmx2(quicktime_audio_map_t *atrack)
 
 int quicktime_delete_codec_wmx2(quicktime_audio_map_t *atrack)
 {
-	quicktime_wmx2_codec_t *codec = &(atrack->codecs.wmx2_codec);
+	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)atrack->codec)->priv;
 	if(codec->write_buffer) free(codec->write_buffer);
 	if(codec->read_buffer) free(codec->read_buffer);
 	if(codec->last_samples) free(codec->last_samples);
@@ -300,7 +301,7 @@ int quicktime_decode_wmx2(quicktime_t *file,
 	long chunk, chunk_sample, chunk_bytes, chunk_samples;
 	long i, chunk_start, chunk_end;
 	quicktime_trak_t *trak = file->atracks[track].track;
-	quicktime_wmx2_codec_t *codec = &(file->atracks[track].codecs.wmx2_codec);
+	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)file->atracks[track].codec)->priv;
 
 /* Get the first chunk with this routine and then increase the chunk number. */
 	quicktime_chunk_of_sample(&chunk_sample, &chunk, trak, file->atracks[track].current_position);
@@ -363,7 +364,7 @@ int quicktime_encode_wmx2(quicktime_t *file,
 	long chunk_bytes;
 	long offset;
 	quicktime_audio_map_t *track_map = &(file->atracks[track]);
-	quicktime_wmx2_codec_t *codec = &(track_map->codecs.wmx2_codec);
+	quicktime_wmx2_codec_t *codec = ((quicktime_codec_t*)track_map->codec)->priv;
 	int16_t *input_ptr;
 	unsigned char *output_ptr;
 

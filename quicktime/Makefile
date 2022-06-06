@@ -45,6 +45,7 @@ OBJS = \
 	ulaw.o \
 	util.o \
 	vmhd.o \
+	wmx2.o \
 	yuv2.o \
 	yuv4.o \
 	yv12.o
