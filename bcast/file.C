@@ -727,6 +727,7 @@ int File::strtobits(const char *bits)
 	if(!strcmp(bits, "ULAW")) return BITSULAW;
 	if(!strcmp(bits, "IMA4")) return BITSIMA4;
 	if(!strcmp(bits, "WMX2")) return BITSWMX2;
+	if(!strcmp(bits, "SOWT")) return BITSSOWT;
 	return 0;
 return 0;
 }
@@ -753,6 +754,9 @@ const char* File::bitstostr(int bits)
 			break;
 		case BITSWMX2:
 			return "WMX2";
+			break;
+		case BITSSOWT:
+			return "SOWT";
 			break;
 	}
 	return "";

@@ -57,7 +57,7 @@ int FileMOV::open_file(int rd, int wr)
 
 	if(wr)
 	{
-		char audio_codec[6];
+		char audio_codec[7];
 // Fix up the Quicktime file.
 		quicktime_set_copyright(file, "Made with Broadcast 2000 for Linux");
 		quicktime_set_info(file, "Quicktime for Linux");
@@ -94,6 +94,11 @@ int FileMOV::open_file(int rd, int wr)
 		if(asset->bits == BITSWMX2)
 		{
 			strcpy(audio_codec, QUICKTIME_WMX2);
+		}
+		else
+		if(asset->bits == BITSSOWT)
+		{
+			strcpy(audio_codec, QUICKTIME_SOWT);
 		}
 
 		if(asset->video_data)
@@ -282,6 +287,8 @@ int FileMOV::read_header()
 		if(match4(compressor, QUICKTIME_ULAW)) asset->bits = BITSULAW;
 		else
 		if(match4(compressor, QUICKTIME_IMA4)) asset->bits = BITSIMA4;
+		else
+		if(match4(compressor, QUICKTIME_SOWT)) asset->bits = BITSSOWT;
 		//else
 		//printf("FileMOV::read_header: unsupported audio codec\n");
 	}
