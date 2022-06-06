@@ -22,6 +22,7 @@ int NormalizeWindow::create_objects(float *db_over, int *separate_tracks)
 	add_tool(overload_text = new NormalizeWindowOverload(this->db_over));
 	add_tool(new BC_Title(40, 60, "Treat tracks independantly"));
 	add_tool(separate_tracks_toggle = new NormalizeWindowSeparate(this->separate_tracks));
+return 0;
 }
 
 NormalizeWindowOK::NormalizeWindowOK(NormalizeWindow *window) : BC_BigButton(10, 80, "OK")
