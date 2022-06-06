@@ -568,10 +568,10 @@ int File::read_raw_frame(VFrame *frame, PluginBuffer *buffer, long byte_offset)
 	{
 // If the file can't produce an RGB frame we do a dual copy playback.
 		VFrame *file_output = file->read_frame(0, 0);
-		register int i;
+		int i;
 		long length = frame->get_w() * frame->get_h();
-		register unsigned char *output = frame->get_data();
-		register VPixel *input = ((VPixel**)file_output->get_rows())[0];
+		unsigned char *output = frame->get_data();
+		VPixel *input = ((VPixel**)file_output->get_rows())[0];
 
 		for(i = 0; i < length; i++)
 		{
