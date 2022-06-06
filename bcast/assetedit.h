@@ -53,7 +53,7 @@ public:
 class AssetEditPath : public BrowseButton
 {
 public:
-	AssetEditPath(AssetEditWindow *fwindow, int y, BC_TextBox *textbox, char *text, char *window_title = "2000: Path", char *window_caption = "Select a file");
+	AssetEditPath(AssetEditWindow *fwindow, int y, BC_TextBox *textbox, const char *text, const char *window_title = "2000: Path", const char *window_caption = "Select a file");
 	~AssetEditPath();
 	
 	AssetEditWindow *fwindow;
@@ -75,7 +75,7 @@ public:
 class AssetEditFormat : public FormatPopup
 {
 public:
-	AssetEditFormat(AssetEditWindow *fwindow, char* default_, int y);
+	AssetEditFormat(AssetEditWindow *fwindow, const char* default_, int y);
 	~AssetEditFormat();
 	
 	int handle_event();
@@ -108,7 +108,7 @@ public:
 class AssetEditChannels : public BC_TextBox
 {
 public:
-	AssetEditChannels(AssetEditWindow *fwindow, char *text, int y);
+	AssetEditChannels(AssetEditWindow *fwindow, const char *text, int y);
 	
 	int handle_event();
 	
@@ -118,7 +118,7 @@ public:
 class AssetEditRate : public BC_TextBox
 {
 public:
-	AssetEditRate(AssetEditWindow *fwindow, char *text, int x, int y);
+	AssetEditRate(AssetEditWindow *fwindow, const char *text, int x, int y);
 	
 	int handle_event();
 	
@@ -128,7 +128,7 @@ public:
 class AssetEditFRate : public BC_TextBox
 {
 public:
-	AssetEditFRate(AssetEditWindow *fwindow, char *text, int x, int y);
+	AssetEditFRate(AssetEditWindow *fwindow, const char *text, int x, int y);
 	
 	int handle_event();
 	
@@ -138,7 +138,7 @@ public:
 class AssetEditBits : public BitsPopup
 {
 public:
-	AssetEditBits(AssetEditWindow *fwindow, char *text, int y);
+	AssetEditBits(AssetEditWindow *fwindow, const char *text, int y);
 	
 	int handle_event();
 	
@@ -148,7 +148,7 @@ public:
 class AssetEditHeader : public BC_TextBox
 {
 public:
-	AssetEditHeader(AssetEditWindow *fwindow, char *text, int x, int y);
+	AssetEditHeader(AssetEditWindow *fwindow, const char *text, int x, int y);
 	
 	int handle_event();
 	

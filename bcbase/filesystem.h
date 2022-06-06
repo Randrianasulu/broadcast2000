@@ -41,7 +41,7 @@ public:
 
 	int move_up();
 	char *get_current_dir();
-	int set_filter(char *new_filter);
+	int set_filter(const char *new_filter);
 	char* get_filter();
 	int set_show_all();     // show hidden files
 	int set_want_directory();

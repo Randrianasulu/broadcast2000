@@ -66,7 +66,7 @@ char* AudioDriverMenu::adriver_to_string(int driver)
 
 
 
-AudioDriverItem::AudioDriverItem(AudioDriverMenu *popup, char *text, int driver)
+AudioDriverItem::AudioDriverItem(AudioDriverMenu *popup, const char *text, int driver)
  : BC_PopupItem(text)
 {
 	this->popup = popup;

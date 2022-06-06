@@ -268,7 +268,7 @@ int AssetEditCancelButton::keypress_event()
 return 0;
 }
 
-AssetEditChannels::AssetEditChannels(AssetEditWindow *fwindow, char *text, int y)
+AssetEditChannels::AssetEditChannels(AssetEditWindow *fwindow, const char *text, int y)
  : BC_TextBox(90, y, 50, text)
 {
 	this->fwindow = fwindow;
@@ -280,7 +280,7 @@ int AssetEditChannels::handle_event()
 return 0;
 }
 
-AssetEditRate::AssetEditRate(AssetEditWindow *fwindow, char *text, int x, int y)
+AssetEditRate::AssetEditRate(AssetEditWindow *fwindow, const char *text, int x, int y)
  : BC_TextBox(x, y, 100, text)
 {
 	this->fwindow = fwindow;
@@ -292,7 +292,7 @@ int AssetEditRate::handle_event()
 return 0;
 }
 
-AssetEditFRate::AssetEditFRate(AssetEditWindow *fwindow, char *text, int x, int y)
+AssetEditFRate::AssetEditFRate(AssetEditWindow *fwindow, const char *text, int x, int y)
  : BC_TextBox(x, y, 100, text)
 {
 	this->fwindow = fwindow;
@@ -304,7 +304,7 @@ int AssetEditFRate::handle_event()
 return 0;
 }
 
-AssetEditBits::AssetEditBits(AssetEditWindow *fwindow, char *text, int y)
+AssetEditBits::AssetEditBits(AssetEditWindow *fwindow, const char *text, int y)
  : BitsPopup(90, y, fwindow->asset)
 {
 	this->fwindow = fwindow;
@@ -317,7 +317,7 @@ int AssetEditBits::handle_event()
 return 0;
 }
 
-AssetEditHeader::AssetEditHeader(AssetEditWindow *fwindow, char *text, int x, int y)
+AssetEditHeader::AssetEditHeader(AssetEditWindow *fwindow, const char *text, int x, int y)
  : BC_TextBox(x, y, 100, text)
 {
 	this->fwindow = fwindow;
@@ -382,7 +382,7 @@ int AssetEditPathText::handle_event()
 return 0;
 }
 
-AssetEditPath::AssetEditPath(AssetEditWindow *fwindow, int y, BC_TextBox *textbox, char *text, char *window_title, char *window_caption)
+AssetEditPath::AssetEditPath(AssetEditWindow *fwindow, int y, BC_TextBox *textbox, const char *text, const char *window_title, const char *window_caption)
  : BrowseButton(310, y, textbox, text, window_title, window_caption, 0) 
 { this->fwindow = fwindow; }
 AssetEditPath::~AssetEditPath() {}
@@ -392,7 +392,7 @@ AssetEditPath::~AssetEditPath() {}
 
 
 
-AssetEditFormat::AssetEditFormat(AssetEditWindow *fwindow, char* default_, int y)
+AssetEditFormat::AssetEditFormat(AssetEditWindow *fwindow, const char* default_, int y)
  : FormatPopup(fwindow->mwindow->plugindb, 90, y, default_)
 { this->fwindow = fwindow; }
 AssetEditFormat::~AssetEditFormat() {}

@@ -197,7 +197,7 @@ int FormatPathText::handle_event()
 return 0;
 }
 
-FormatPathButton::FormatPathButton(int x, int y, FormatTools *format, BC_TextBox *textbox, char *text)
+FormatPathButton::FormatPathButton(int x, int y, FormatTools *format, BC_TextBox *textbox, const char *text)
  : BrowseButton(x, y, textbox, text, "Output to file", "Select a file to write to:", 0) 
 { this->format = format; }
 FormatPathButton::~FormatPathButton() {}
@@ -229,7 +229,7 @@ return 0;
 
 
 
-FormatFormat::FormatFormat(int x, int y, FormatTools *format, Asset *asset, char* default_)
+FormatFormat::FormatFormat(int x, int y, FormatTools *format, Asset *asset, const char* default_)
  : FormatPopup(format->plugindb, x, y, default_)
 { this->format = format; this->asset = asset; }
 FormatFormat::~FormatFormat() {}

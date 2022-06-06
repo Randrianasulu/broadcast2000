@@ -68,7 +68,7 @@ public:
 class FormatPathButton : public BrowseButton
 {
 public:
-	FormatPathButton(int x, int y, FormatTools *format, BC_TextBox *textbox, char *text);
+	FormatPathButton(int x, int y, FormatTools *format, BC_TextBox *textbox, const char *text);
 	~FormatPathButton();
 
 	FormatTools *format;
@@ -92,7 +92,7 @@ public:
 class FormatFormat : public FormatPopup
 {
 public:
-	FormatFormat(int x, int y, FormatTools *format, Asset *asset, char* default_);
+	FormatFormat(int x, int y, FormatTools *format, Asset *asset, const char* default_);
 	~FormatFormat();
 	
 	int handle_event();

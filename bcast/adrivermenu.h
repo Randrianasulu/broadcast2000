@@ -32,7 +32,7 @@ private:
 class AudioDriverItem : public BC_PopupItem
 {
 public:
-	AudioDriverItem(AudioDriverMenu *popup, char *text, int driver);
+	AudioDriverItem(AudioDriverMenu *popup, const char *text, int driver);
 	~AudioDriverItem();
 
 	int handle_event();
